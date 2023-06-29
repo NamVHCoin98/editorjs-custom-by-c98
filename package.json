@@ -1,5 +1,5 @@
 {
-  "name": "@editorjs/editorjs",
+  "name": "editorjs-custom-by-c98",
   "version": "2.27.2",
   "description": "Editor.js — Native JS, based on API and Open Source",
   "main": "dist/editorjs.umd.js",
@@ -72,5 +72,14 @@
   "collective": {
     "type": "opencollective",
     "url": "https://opencollective.com/editorjs"
+  },
+  "bugs": {
+    "url": "https://github.com/codex-team/editor.js/issues"
+  },
+  "homepage": "https://github.com/codex-team/editor.js#readme",
+  "directories": {
+    "doc": "docs",
+    "example": "example",
+    "test": "test"
   }
 }
