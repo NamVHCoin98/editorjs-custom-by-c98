@@ -811,7 +811,7 @@ export default class UI extends Module<UINodes> {
        * @todo Make this method more straightforward
        */
       if (!Selection.range) {
-        this.Editor.InlineToolbar.close();
+        // this.Editor.InlineToolbar.close();
       }
 
       return;
@@ -828,7 +828,7 @@ export default class UI extends Module<UINodes> {
        * If new selection is not on Inline Toolbar, we need to close it
        */
       if (!this.Editor.InlineToolbar.containsNode(focusedElement)) {
-        this.Editor.InlineToolbar.close();
+        
       }
 
       /**

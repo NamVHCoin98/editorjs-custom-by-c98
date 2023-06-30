@@ -376,7 +376,7 @@ export default class RectangleSelection extends Module {
     // For case, when rect is out from blocks
     this.inverseSelection();
 
-    SelectionUtils.get().removeAllRanges();
+    // SelectionUtils.get().removeAllRanges();
   }
 
   /**

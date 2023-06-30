@@ -1,7 +1,7 @@
-import Module from '../__module';
-import Block from '../block';
-import SelectionUtils from '../selection';
-import * as _ from '../utils';
+import Module from "../__module";
+import Block from "../block";
+import SelectionUtils from "../selection";
+import * as _ from "../utils";
 
 /**
  *
@@ -23,7 +23,7 @@ export default class CrossBlockSelection extends Module {
    * @returns {Promise}
    */
   public async prepare(): Promise<void> {
-    this.listeners.on(document, 'mousedown', (event: MouseEvent) => {
+    this.listeners.on(document, "mousedown", (event: MouseEvent) => {
       this.enableCrossBlockSelection(event);
     });
   }
@@ -40,19 +40,21 @@ export default class CrossBlockSelection extends Module {
 
     const { BlockManager } = this.Editor;
 
-    this.firstSelectedBlock = BlockManager.getBlock(event.target as HTMLElement);
+    console.log(BlockManager.getBlock(event.target as HTMLElement));
+    this.firstSelectedBlock = BlockManager.getBlock(
+      event.target as HTMLElement
+    );
     this.lastSelectedBlock = this.firstSelectedBlock;
 
-    this.listeners.on(document, 'mouseover', this.onMouseOver);
-    this.listeners.on(document, 'mouseup', this.onMouseUp);
+    this.listeners.on(document, "mouseover", this.onMouseOver);
+    this.listeners.on(document, "mouseup", this.onMouseUp);
   }
 
   /**
    * return boolean is cross block selection started
    */
   public get isCrossBlockSelectionStarted(): boolean {
-    return !!this.firstSelectedBlock &&
-      !!this.lastSelectedBlock;
+    return !!this.firstSelectedBlock && !!this.lastSelectedBlock;
   }
 
   /**
@@ -65,7 +67,8 @@ export default class CrossBlockSelection extends Module {
     const { BlockManager, BlockSelection } = this.Editor;
 
     if (!this.lastSelectedBlock) {
-      this.lastSelectedBlock = this.firstSelectedBlock = BlockManager.currentBlock;
+      this.lastSelectedBlock = this.firstSelectedBlock =
+        BlockManager.currentBlock;
     }
 
     if (this.firstSelectedBlock === this.lastSelectedBlock) {
@@ -75,7 +78,8 @@ export default class CrossBlockSelection extends Module {
       SelectionUtils.get().removeAllRanges();
     }
 
-    const nextBlockIndex = BlockManager.blocks.indexOf(this.lastSelectedBlock) + (next ? 1 : -1);
+    const nextBlockIndex =
+      BlockManager.blocks.indexOf(this.lastSelectedBlock) + (next ? 1 : -1);
     const nextBlock = BlockManager.blocks[nextBlockIndex];
 
     if (!nextBlock) {
@@ -95,10 +99,10 @@ export default class CrossBlockSelection extends Module {
     this.lastSelectedBlock = nextBlock;
 
     /** close InlineToolbar when Blocks selected */
-    this.Editor.InlineToolbar.close();
+    // this.Editor.InlineToolbar.close();
 
     nextBlock.holder.scrollIntoView({
-      block: 'nearest',
+      block: "nearest",
     });
   }
 
@@ -120,21 +124,33 @@ export default class CrossBlockSelection extends Module {
         switch (reason.keyCode) {
           case _.keyCodes.DOWN:
           case _.keyCodes.RIGHT:
-            Caret.setToBlock(BlockManager.blocks[Math.max(fIndex, lIndex)], Caret.positions.END);
+            Caret.setToBlock(
+              BlockManager.blocks[Math.max(fIndex, lIndex)],
+              Caret.positions.END
+            );
             break;
 
           case _.keyCodes.UP:
           case _.keyCodes.LEFT:
-            Caret.setToBlock(BlockManager.blocks[Math.min(fIndex, lIndex)], Caret.positions.START);
+            Caret.setToBlock(
+              BlockManager.blocks[Math.min(fIndex, lIndex)],
+              Caret.positions.START
+            );
             break;
           default:
-            Caret.setToBlock(BlockManager.blocks[Math.max(fIndex, lIndex)], Caret.positions.END);
+            Caret.setToBlock(
+              BlockManager.blocks[Math.max(fIndex, lIndex)],
+              Caret.positions.END
+            );
         }
       } else {
         /**
          * By default set caret at the end of the last selected block
          */
-        Caret.setToBlock(BlockManager.blocks[Math.max(fIndex, lIndex)], Caret.positions.END);
+        Caret.setToBlock(
+          BlockManager.blocks[Math.max(fIndex, lIndex)],
+          Caret.positions.END
+        );
       }
     }
 
@@ -153,7 +169,7 @@ export default class CrossBlockSelection extends Module {
      * Each mouse down on must disable selectAll state
      */
     if (!SelectionUtils.isCollapsed) {
-      this.Editor.BlockSelection.clearSelection(event);
+      // this.Editor.BlockSelection.clearSelection(event);
     }
 
     /**
@@ -165,7 +181,7 @@ export default class CrossBlockSelection extends Module {
       /**
        * Otherwise, clear selection
        */
-      this.Editor.BlockSelection.clearSelection(event);
+      // this.Editor.BlockSelection.clearSelection(event);
     }
   }
 
@@ -174,8 +190,8 @@ export default class CrossBlockSelection extends Module {
    * Removes the listeners
    */
   private onMouseUp = (): void => {
-    this.listeners.off(document, 'mouseover', this.onMouseOver);
-    this.listeners.off(document, 'mouseup', this.onMouseUp);
+    this.listeners.off(document, "mouseover", this.onMouseOver);
+    this.listeners.off(document, "mouseup", this.onMouseUp);
   };
 
   /**
@@ -187,7 +203,9 @@ export default class CrossBlockSelection extends Module {
   private onMouseOver = (event: MouseEvent): void => {
     const { BlockManager, BlockSelection } = this.Editor;
 
-    const relatedBlock = BlockManager.getBlockByChildNode(event.relatedTarget as Node) || this.lastSelectedBlock;
+    const relatedBlock =
+      BlockManager.getBlockByChildNode(event.relatedTarget as Node) ||
+      this.lastSelectedBlock;
     const targetBlock = BlockManager.getBlockByChildNode(event.target as Node);
 
     if (!relatedBlock || !targetBlock) {
@@ -199,7 +217,7 @@ export default class CrossBlockSelection extends Module {
     }
 
     if (relatedBlock === this.firstSelectedBlock) {
-      SelectionUtils.get().removeAllRanges();
+      // SelectionUtils.get().removeAllRanges();
 
       relatedBlock.selected = true;
       targetBlock.selected = true;
@@ -218,7 +236,7 @@ export default class CrossBlockSelection extends Module {
       return;
     }
 
-    this.Editor.InlineToolbar.close();
+    // this.Editor.InlineToolbar.close();
 
     this.toggleBlocksSelectedState(relatedBlock, targetBlock);
     this.lastSelectedBlock = targetBlock;
