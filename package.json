@@ -1,6 +1,6 @@
 {
-  "name": "editorjs-custom-by-c98",
-  "version": "2.27.2",
+  "name": "@namtoonix/editorjs-custom-multiple-selected",
+  "version": "1.0.6",
   "description": "Editor.js — Native JS, based on API and Open Source",
   "main": "dist/editorjs.umd.js",
   "module": "dist/editorjs.mjs",

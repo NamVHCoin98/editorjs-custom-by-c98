@@ -40,7 +40,6 @@ export default class CrossBlockSelection extends Module {
 
     const { BlockManager } = this.Editor;
 
-    console.log(BlockManager.getBlock(event.target as HTMLElement));
     this.firstSelectedBlock = BlockManager.getBlock(
       event.target as HTMLElement
     );
