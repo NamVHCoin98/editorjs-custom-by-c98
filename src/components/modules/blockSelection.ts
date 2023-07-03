@@ -408,13 +408,13 @@ export default class BlockSelection extends Module {
      * If Block has more than one editable element allow native selection
      * Second cmd+a will select whole Block
      */
-    if (inputs.length > 1 && !this.readyToBlockSelection) {
+    if (inputs?.length > 1 && !this.readyToBlockSelection) {
       this.readyToBlockSelection = true;
 
       return;
     }
 
-    if (inputs.length === 1 && !this.needToSelectAll) {
+    if (inputs?.length === 1 && !this.needToSelectAll) {
       this.needToSelectAll = true;
 
       return;
