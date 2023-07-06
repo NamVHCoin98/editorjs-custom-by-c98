@@ -98,7 +98,7 @@ export default class CrossBlockSelection extends Module {
     this.lastSelectedBlock = nextBlock;
 
     /** close InlineToolbar when Blocks selected */
-    // this.Editor.InlineToolbar.close();
+    this.Editor.InlineToolbar.close();
 
     nextBlock.holder.scrollIntoView({
       block: "nearest",
@@ -168,7 +168,7 @@ export default class CrossBlockSelection extends Module {
      * Each mouse down on must disable selectAll state
      */
     if (!SelectionUtils.isCollapsed) {
-      // this.Editor.BlockSelection.clearSelection(event);
+      this.Editor.BlockSelection.clearSelection(event);
     }
 
     /**
@@ -180,7 +180,7 @@ export default class CrossBlockSelection extends Module {
       /**
        * Otherwise, clear selection
        */
-      // this.Editor.BlockSelection.clearSelection(event);
+      this.Editor.BlockSelection.clearSelection(event);
     }
   }
 
@@ -216,7 +216,7 @@ export default class CrossBlockSelection extends Module {
     }
 
     if (relatedBlock === this.firstSelectedBlock) {
-      // SelectionUtils.get().removeAllRanges();
+      SelectionUtils.get().removeAllRanges();
 
       relatedBlock.selected = true;
       targetBlock.selected = true;
@@ -235,7 +235,7 @@ export default class CrossBlockSelection extends Module {
       return;
     }
 
-    // this.Editor.InlineToolbar.close();
+    this.Editor.InlineToolbar.close();
 
     this.toggleBlocksSelectedState(relatedBlock, targetBlock);
     this.lastSelectedBlock = targetBlock;
