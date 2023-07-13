@@ -475,6 +475,9 @@ export default class BlockSelection extends Module {
     this.allBlocksSelected = true;
 
     /** close InlineToolbar if we selected all Blocks */
-    this.Editor.InlineToolbar.close();
+    /**
+     * Custom by c98
+     */
+    // this.Editor.InlineToolbar.close();
   }
 }

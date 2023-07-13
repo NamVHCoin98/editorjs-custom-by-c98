@@ -722,6 +722,21 @@ export default class UI extends Module<UINodes> {
     /**
      * Clear Selection if user clicked somewhere
      */
+
+    /**
+     * Start custom by c98
+     */
+    const isClickedInsideInlineToolbar =
+      this.Editor.InlineToolbar.nodes.wrapper.contains(target);
+
+    if (isClickedInsideInlineToolbar) {
+      return;
+    }
+
+    /**
+     * End custom by c98
+     */
+
     this.Editor.BlockSelection.clearSelection(event);
   }
 
@@ -885,9 +900,12 @@ export default class UI extends Module<UINodes> {
        *
        * @todo Make this method more straightforward
        */
-      if (!Selection.range) {
-        this.Editor.InlineToolbar.close();
-      }
+      /**
+       * Custom by c98
+       */
+      // if (!Selection.range) {
+      //   this.Editor.InlineToolbar.close();
+      // }
 
       return;
     }

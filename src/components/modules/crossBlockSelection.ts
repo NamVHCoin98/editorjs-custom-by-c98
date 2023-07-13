@@ -235,7 +235,10 @@ export default class CrossBlockSelection extends Module {
       return;
     }
 
-    this.Editor.InlineToolbar.close();
+    /**
+     * Custom by c98
+     */
+    // this.Editor.InlineToolbar.close();
 
     this.toggleBlocksSelectedState(relatedBlock, targetBlock);
     this.lastSelectedBlock = targetBlock;

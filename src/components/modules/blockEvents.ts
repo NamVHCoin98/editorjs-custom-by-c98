@@ -1,10 +1,10 @@
 /**
  * Contains keyboard and mouse events bound on each Block by Block Manager
  */
-import Module from '../__module';
-import * as _ from '../utils';
-import SelectionUtils from '../selection';
-import Flipper from '../flipper';
+import Module from "../__module";
+import * as _ from "../utils";
+import SelectionUtils from "../selection";
+import Flipper from "../flipper";
 
 /**
  *
@@ -77,7 +77,8 @@ export default class BlockEvents extends Module {
        *
        * @type {boolean}
        */
-      const isShortcut = event.ctrlKey || event.metaKey || event.altKey || event.shiftKey;
+      const isShortcut =
+        event.ctrlKey || event.metaKey || event.altKey || event.shiftKey;
 
       if (!isShortcut) {
         this.Editor.BlockManager.clearFocused();
@@ -128,7 +129,8 @@ export default class BlockEvents extends Module {
     const isEmptyBlock = currentBlock.isEmpty;
     const canOpenToolbox = currentBlock.tool.isDefault && isEmptyBlock;
     const conversionToolbarOpened = !isEmptyBlock && ConversionToolbar.opened;
-    const inlineToolbarOpened = !isEmptyBlock && !SelectionUtils.isCollapsed && InlineToolbar.opened;
+    const inlineToolbarOpened =
+      !isEmptyBlock && !SelectionUtils.isCollapsed && InlineToolbar.opened;
     const canOpenBlockTunes = !conversionToolbarOpened && !inlineToolbarOpened;
 
     /**
@@ -147,7 +149,9 @@ export default class BlockEvents extends Module {
    * @param {DragEvent} event - drag over event
    */
   public dragOver(event: DragEvent): void {
-    const block = this.Editor.BlockManager.getBlockByChildNode(event.target as Node);
+    const block = this.Editor.BlockManager.getBlockByChildNode(
+      event.target as Node
+    );
 
     block.dropTarget = true;
   }
@@ -158,7 +162,9 @@ export default class BlockEvents extends Module {
    * @param {DragEvent} event - drag leave event
    */
   public dragLeave(event: DragEvent): void {
-    const block = this.Editor.BlockManager.getBlockByChildNode(event.target as Node);
+    const block = this.Editor.BlockManager.getBlockByChildNode(
+      event.target as Node
+    );
 
     block.dropTarget = false;
   }
@@ -198,7 +204,10 @@ export default class BlockEvents extends Module {
       /**
        * Insert default block in place of removed ones
        */
-      const insertedBlock = BlockManager.insertDefaultBlockAtIndex(selectionPositionIndex, true);
+      const insertedBlock = BlockManager.insertDefaultBlockAtIndex(
+        selectionPositionIndex,
+        true
+      );
 
       Caret.setToBlock(insertedBlock, Caret.positions.START);
 
@@ -244,15 +253,22 @@ export default class BlockEvents extends Module {
     /**
      * If enter has been pressed at the start of the text, just insert paragraph Block above
      */
-    if (this.Editor.Caret.isAtStart && !this.Editor.BlockManager.currentBlock.hasMedia) {
-      this.Editor.BlockManager.insertDefaultBlockAtIndex(this.Editor.BlockManager.currentBlockIndex);
+    if (
+      this.Editor.Caret.isAtStart &&
+      !this.Editor.BlockManager.currentBlock.hasMedia
+    ) {
+      this.Editor.BlockManager.insertDefaultBlockAtIndex(
+        this.Editor.BlockManager.currentBlockIndex
+      );
 
-    /**
-     * If caret is at very end of the block, just append the new block without splitting
-     * to prevent unnecessary dom mutation observing
-     */
+      /**
+       * If caret is at very end of the block, just append the new block without splitting
+       * to prevent unnecessary dom mutation observing
+       */
     } else if (this.Editor.Caret.isAtEnd) {
-      newCurrent = this.Editor.BlockManager.insertDefaultBlockAtIndex(this.Editor.BlockManager.currentBlockIndex + 1);
+      newCurrent = this.Editor.BlockManager.insertDefaultBlockAtIndex(
+        this.Editor.BlockManager.currentBlockIndex + 1
+      );
     } else {
       /**
        * Split the Current Block into two blocks
@@ -284,12 +300,19 @@ export default class BlockEvents extends Module {
     /**
      * Check if Block should be removed by current Backspace keydown
      */
-    if (currentBlock.selected || (currentBlock.isEmpty && currentBlock.currentInput === currentBlock.firstInput)) {
+    if (
+      currentBlock.selected ||
+      (currentBlock.isEmpty &&
+        currentBlock.currentInput === currentBlock.firstInput)
+    ) {
       event.preventDefault();
 
       const index = BlockManager.currentBlockIndex;
 
-      if (BlockManager.previousBlock && BlockManager.previousBlock.inputs.length === 0) {
+      if (
+        BlockManager.previousBlock &&
+        BlockManager.previousBlock.inputs.length === 0
+      ) {
         /** If previous block doesn't contain inputs, remove it */
         BlockManager.removeBlock(index - 1);
       } else {
@@ -322,7 +345,8 @@ export default class BlockEvents extends Module {
     }
 
     const isFirstBlock = BlockManager.currentBlockIndex === 0;
-    const canMergeBlocks = Caret.isAtStart &&
+    const canMergeBlocks =
+      Caret.isAtStart &&
       SelectionUtils.isCollapsed &&
       currentBlock.currentInput === currentBlock.firstInput &&
       !isFirstBlock;
@@ -374,13 +398,12 @@ export default class BlockEvents extends Module {
     }
 
     Caret.createShadow(targetBlock.pluginsContent);
-    BlockManager.mergeBlocks(targetBlock, blockToMerge)
-      .then(() => {
-        /** Restore caret position after merge */
-        Caret.restoreCaret(targetBlock.pluginsContent as HTMLElement);
-        targetBlock.pluginsContent.normalize();
-        Toolbar.close();
-      });
+    BlockManager.mergeBlocks(targetBlock, blockToMerge).then(() => {
+      /** Restore caret position after merge */
+      Caret.restoreCaret(targetBlock.pluginsContent as HTMLElement);
+      targetBlock.pluginsContent.normalize();
+      Toolbar.close();
+    });
   }
 
   /**
@@ -389,7 +412,8 @@ export default class BlockEvents extends Module {
    * @param {KeyboardEvent} event - keyboard event
    */
   private arrowRightAndDown(event: KeyboardEvent): void {
-    const isFlipperCombination = Flipper.usedKeys.includes(event.keyCode) &&
+    const isFlipperCombination =
+      Flipper.usedKeys.includes(event.keyCode) &&
       (!event.shiftKey || event.keyCode === _.keyCodes.TAB);
 
     /**
@@ -406,16 +430,25 @@ export default class BlockEvents extends Module {
     this.Editor.BlockManager.clearFocused();
     this.Editor.Toolbar.close();
 
-    const shouldEnableCBS = this.Editor.Caret.isAtEnd || this.Editor.BlockSelection.anyBlockSelected;
+    const shouldEnableCBS =
+      this.Editor.Caret.isAtEnd || this.Editor.BlockSelection.anyBlockSelected;
 
-    if (event.shiftKey && event.keyCode === _.keyCodes.DOWN && shouldEnableCBS) {
+    if (
+      event.shiftKey &&
+      event.keyCode === _.keyCodes.DOWN &&
+      shouldEnableCBS
+    ) {
       this.Editor.CrossBlockSelection.toggleBlockSelectedState();
 
       return;
     }
 
-    const navigateNext = event.keyCode === _.keyCodes.DOWN || (event.keyCode === _.keyCodes.RIGHT && !this.isRtl);
-    const isNavigated = navigateNext ? this.Editor.Caret.navigateNext() : this.Editor.Caret.navigatePrevious();
+    const navigateNext =
+      event.keyCode === _.keyCodes.DOWN ||
+      (event.keyCode === _.keyCodes.RIGHT && !this.isRtl);
+    const isNavigated = navigateNext
+      ? this.Editor.Caret.navigateNext()
+      : this.Editor.Caret.navigatePrevious();
 
     if (isNavigated) {
       /**
@@ -431,7 +464,7 @@ export default class BlockEvents extends Module {
         if (this.Editor.BlockManager.currentBlock) {
           this.Editor.BlockManager.currentBlock.updateCurrentInput();
         }
-      // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
       }, 20)();
     }
 
@@ -452,7 +485,10 @@ export default class BlockEvents extends Module {
      * Check for Flipper.usedKeys to allow navigate by UP and disallow by LEFT
      */
     if (this.Editor.UI.someToolbarOpened) {
-      if (Flipper.usedKeys.includes(event.keyCode) && (!event.shiftKey || event.keyCode === _.keyCodes.TAB)) {
+      if (
+        Flipper.usedKeys.includes(event.keyCode) &&
+        (!event.shiftKey || event.keyCode === _.keyCodes.TAB)
+      ) {
         return;
       }
 
@@ -465,7 +501,9 @@ export default class BlockEvents extends Module {
     this.Editor.BlockManager.clearFocused();
     this.Editor.Toolbar.close();
 
-    const shouldEnableCBS = this.Editor.Caret.isAtStart || this.Editor.BlockSelection.anyBlockSelected;
+    const shouldEnableCBS =
+      this.Editor.Caret.isAtStart ||
+      this.Editor.BlockSelection.anyBlockSelected;
 
     if (event.shiftKey && event.keyCode === _.keyCodes.UP && shouldEnableCBS) {
       this.Editor.CrossBlockSelection.toggleBlockSelectedState(false);
@@ -473,8 +511,12 @@ export default class BlockEvents extends Module {
       return;
     }
 
-    const navigatePrevious = event.keyCode === _.keyCodes.UP || (event.keyCode === _.keyCodes.LEFT && !this.isRtl);
-    const isNavigated = navigatePrevious ? this.Editor.Caret.navigatePrevious() : this.Editor.Caret.navigateNext();
+    const navigatePrevious =
+      event.keyCode === _.keyCodes.UP ||
+      (event.keyCode === _.keyCodes.LEFT && !this.isRtl);
+    const isNavigated = navigatePrevious
+      ? this.Editor.Caret.navigatePrevious()
+      : this.Editor.Caret.navigateNext();
 
     if (isNavigated) {
       /**
@@ -490,7 +532,7 @@ export default class BlockEvents extends Module {
         if (this.Editor.BlockManager.currentBlock) {
           this.Editor.BlockManager.currentBlock.updateCurrentInput();
         }
-      // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
       }, 20)();
     }
 
@@ -506,11 +548,17 @@ export default class BlockEvents extends Module {
    * @param {KeyboardEvent} event - keyboard event
    */
   private needToolbarClosing(event: KeyboardEvent): boolean {
-    const toolboxItemSelected = (event.keyCode === _.keyCodes.ENTER && this.Editor.Toolbar.toolbox.opened),
-        blockSettingsItemSelected = (event.keyCode === _.keyCodes.ENTER && this.Editor.BlockSettings.opened),
-        inlineToolbarItemSelected = (event.keyCode === _.keyCodes.ENTER && this.Editor.InlineToolbar.opened),
-        conversionToolbarItemSelected = (event.keyCode === _.keyCodes.ENTER && this.Editor.ConversionToolbar.opened),
-        flippingToolbarItems = event.keyCode === _.keyCodes.TAB;
+    const toolboxItemSelected =
+        event.keyCode === _.keyCodes.ENTER &&
+        this.Editor.Toolbar.toolbox.opened,
+      blockSettingsItemSelected =
+        event.keyCode === _.keyCodes.ENTER && this.Editor.BlockSettings.opened,
+      inlineToolbarItemSelected =
+        event.keyCode === _.keyCodes.ENTER && this.Editor.InlineToolbar.opened,
+      conversionToolbarItemSelected =
+        event.keyCode === _.keyCodes.ENTER &&
+        this.Editor.ConversionToolbar.opened,
+      flippingToolbarItems = event.keyCode === _.keyCodes.TAB;
 
     /**
      * Do not close Toolbar in cases:
@@ -518,7 +566,8 @@ export default class BlockEvents extends Module {
      * 2. When Toolbar is opened and Tab leafs its Tools
      * 3. When Toolbar's component is opened and some its item selected
      */
-    return !(event.shiftKey ||
+    return !(
+      event.shiftKey ||
       flippingToolbarItems ||
       toolboxItemSelected ||
       blockSettingsItemSelected ||
