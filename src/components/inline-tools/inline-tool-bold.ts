@@ -109,7 +109,9 @@ export default class BoldInlineTool implements InlineTool {
               ?.replace(/<\/b>/g, "")}</b>`,
           };
 
-          await this.api.blocks.update(block.id, newData);
+          await this.api.blocks.update(block.id, newData, {
+            reSelectedAfterUpdate: true,
+          });
         } else {
           await this.api.blocks.update(block.id, data);
         }
@@ -133,7 +135,9 @@ export default class BoldInlineTool implements InlineTool {
             text: data.text?.replace(/<b>/g, "")?.replace(/<\/b>/g, ""),
           };
 
-          await this.api.blocks.update(block.id, newData);
+          await this.api.blocks.update(block.id, newData, {
+            reSelectedAfterUpdate: true,
+          });
         } else {
           await this.api.blocks.update(block.id, data);
         }

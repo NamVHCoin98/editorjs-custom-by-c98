@@ -332,7 +332,7 @@ export default class BlocksAPI extends Module {
       index: blockIndex,
       replace: true,
       tunes: block.tunes,
-      removeSelectedAfterUpdate: config?.removeSelectedAfterUpdate || true,
+      reSelectedAfterUpdate: config?.reSelectedAfterUpdate || false,
     });
   };
 }

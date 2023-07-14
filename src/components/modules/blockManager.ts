@@ -279,7 +279,7 @@ export default class BlockManager extends Module {
     needToFocus = true,
     replace = false,
     tunes = {},
-    removeSelectedAfterUpdate = true,
+    reSelectedAfterUpdate = false,
   }: {
     id?: string;
     tool?: string;
@@ -288,7 +288,7 @@ export default class BlockManager extends Module {
     needToFocus?: boolean;
     replace?: boolean;
     tunes?: { [name: string]: BlockTuneData };
-    removeSelectedAfterUpdate?: boolean;
+    reSelectedAfterUpdate?: boolean;
   } = {}): Block {
     let newIndex = index;
 
@@ -335,7 +335,7 @@ export default class BlockManager extends Module {
     /**
      * Custom by c98
      */
-    if (!removeSelectedAfterUpdate) {
+    if (reSelectedAfterUpdate) {
       block.selected = true;
     }
 

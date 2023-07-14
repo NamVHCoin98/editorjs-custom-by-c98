@@ -79,7 +79,6 @@ Cypress.Commands.add('copy', { prevSubject: true }, (subject) => {
   }), {
     clipboardData: {
       setData: (type: string, data: any): void => {
-        console.log(type, data);
         clipboardData[type] = data;
       },
     },
@@ -105,7 +104,6 @@ Cypress.Commands.add('cut', { prevSubject: true }, (subject) => {
   }), {
     clipboardData: {
       setData: (type: string, data: any): void => {
-        console.log(type, data);
         clipboardData[type] = data;
       },
     },
