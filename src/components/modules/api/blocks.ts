@@ -313,7 +313,7 @@ export default class BlocksAPI extends Module {
    * @param id - id of the block to update
    * @param data - the new data
    */
-  public update = (id: string, data: BlockToolData): void => {
+  public update = (id: string, data: BlockToolData, config: any): void => {
     const { BlockManager } = this.Editor;
     const block = BlockManager.getBlockById(id);
 
@@ -332,6 +332,7 @@ export default class BlocksAPI extends Module {
       index: blockIndex,
       replace: true,
       tunes: block.tunes,
+      removeSelectedAfterUpdate: config?.removeSelectedAfterUpdate || true,
     });
   };
 }
