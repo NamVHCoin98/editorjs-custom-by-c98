@@ -14,7 +14,11 @@
   &--showed {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%)
+    transform: translateX(-50%);
+  }
+
+  &--fixed {
+    position: fixed !important;
   }
 
   &--left-oriented {
@@ -93,7 +97,6 @@
   border-radius: 0;
   line-height: normal;
 
-
   &--link {
     .icon--unlink {
       display: none;
@@ -121,11 +124,11 @@
     box-sizing: border-box;
     display: none;
     font-weight: 500;
-    border-top: 1px solid rgba(201,201,204,.48);
+    border-top: 1px solid rgba(201, 201, 204, 0.48);
     -webkit-appearance: none;
     font-family: inherit;
 
-    @media (--mobile){
+    @media (--mobile) {
       font-size: 15px;
       font-weight: 500;
     }

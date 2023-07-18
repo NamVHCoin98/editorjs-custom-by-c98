@@ -43,6 +43,7 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
   public CSS = {
     inlineToolbar: "ce-inline-toolbar",
     inlineToolbarShowed: "ce-inline-toolbar--showed",
+    inlineToolbarFixed: "ce-inline-toolbar--fixed",
     inlineToolbarLeftOriented: "ce-inline-toolbar--left-oriented",
     inlineToolbarRightOriented: "ce-inline-toolbar--right-oriented",
     inlineToolbarShortcut: "ce-inline-toolbar__shortcut",
@@ -166,6 +167,7 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
   public move(mouseEvent = null): void {
     const selectionRect = SelectionUtils.rect as DOMRect;
     const wrapperOffset = this.Editor.UI.nodes.wrapper.getBoundingClientRect();
+    console.log(wrapperOffset.top);
     const newCoords = {
       x: selectionRect.x - wrapperOffset.left,
       y:
@@ -177,7 +179,7 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
 
     if (mouseEvent) {
       newCoords.y = mouseEvent.clientY;
-      newCoords.x = mouseEvent.clientX - wrapperOffset.left;
+      newCoords.x = mouseEvent.clientX;
     }
 
     /**
@@ -224,6 +226,10 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
     }
 
     this.nodes.wrapper.classList.remove(this.CSS.inlineToolbarShowed);
+
+    if (this.nodes.wrapper.classList.contains(this.CSS.inlineToolbarFixed)) {
+      this.nodes.wrapper.classList.remove(this.CSS.inlineToolbarFixed);
+    }
     Array.from(this.toolsInstances.entries()).forEach(
       ([name, toolInstance]) => {
         const shortcut = this.getToolShortcut(name);
@@ -266,6 +272,10 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
      * Show Inline Toolbar
      */
     this.nodes.wrapper.classList.add(this.CSS.inlineToolbarShowed);
+
+    if (isSelectedAll) {
+      this.nodes.wrapper.classList.add(this.CSS.inlineToolbarFixed);
+    }
 
     this.buttonsList = this.nodes.buttons.querySelectorAll(
       `.${this.CSS.inlineToolButton}`
