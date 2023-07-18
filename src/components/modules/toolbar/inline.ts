@@ -177,8 +177,12 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
     };
 
     if (mouseEvent) {
-      newCoords.y = mouseEvent.clientY;
-      newCoords.x = mouseEvent.clientX;
+      // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+      newCoords.y = mouseEvent.clientY < 300 ? 300 : mouseEvent.clientY;
+      newCoords.x =
+        mouseEvent.clientX < wrapperOffset.left
+          ? wrapperOffset.left
+          : mouseEvent.clientX;
     }
 
     /**

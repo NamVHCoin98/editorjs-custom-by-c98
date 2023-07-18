@@ -310,7 +310,7 @@ export default class RectangleSelection extends Module {
      * Custom by c98
      */
 
-    if (this.Editor.BlockSelection.selectedBlocks.length > 0) {
+    if (this.Editor.BlockSelection.selectedBlocks.length > 1) {
       this.Editor.InlineToolbar.tryToShow(false, true, event);
     }
   }
