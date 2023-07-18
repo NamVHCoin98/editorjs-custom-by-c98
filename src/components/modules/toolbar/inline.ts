@@ -276,7 +276,7 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
      */
     this.nodes.wrapper.classList.add(this.CSS.inlineToolbarShowed);
 
-    if (isSelectedAll) {
+    if (isSelectedAll || this.Editor.BlockSelection.selectedBlocks.length > 1) {
       this.nodes.wrapper.classList.add(this.CSS.inlineToolbarFixed);
     }
 
