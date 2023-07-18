@@ -167,7 +167,6 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
   public move(mouseEvent = null): void {
     const selectionRect = SelectionUtils.rect as DOMRect;
     const wrapperOffset = this.Editor.UI.nodes.wrapper.getBoundingClientRect();
-    console.log(wrapperOffset.top);
     const newCoords = {
       x: selectionRect.x - wrapperOffset.left,
       y:

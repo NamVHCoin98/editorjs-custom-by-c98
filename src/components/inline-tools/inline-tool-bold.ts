@@ -93,8 +93,6 @@ export default class BoldInlineTool implements InlineTool {
   }
 
   public wrap(): void {
-    console.log("wrap");
-
     const blocks = this.api.blocks.getBlockSelected();
     // eslint-disable-next-line padding-line-between-statements
     if (blocks.length > 1) {
@@ -122,7 +120,6 @@ export default class BoldInlineTool implements InlineTool {
   }
 
   public unwrap(): void {
-    console.log("unwrap");
     const blocks = this.api.blocks.getBlockSelected();
 
     if (blocks.length > 1) {
