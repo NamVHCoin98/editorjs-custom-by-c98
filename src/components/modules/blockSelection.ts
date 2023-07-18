@@ -478,6 +478,9 @@ export default class BlockSelection extends Module {
     /**
      * Custom by c98
      */
+
+    this.Editor.InlineToolbar.open(true, true);
+
     // this.Editor.InlineToolbar.close();
   }
 }

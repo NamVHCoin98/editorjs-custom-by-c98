@@ -671,7 +671,7 @@ export default class UI extends Module<UINodes> {
    *
    * @param {MouseEvent} event - Click event
    */
-  private documentClicked(event: MouseEvent): void {
+  private documentClicked(event: MouseEvent): Promise<void> {
     /**
      * Sometimes we emulate click on some UI elements, for example by Enter on Block Settings button
      * We don't need to handle such events, because they handled in other place.
@@ -732,7 +732,6 @@ export default class UI extends Module<UINodes> {
     if (isClickedInsideInlineToolbar) {
       return;
     }
-
     /**
      * End custom by c98
      */

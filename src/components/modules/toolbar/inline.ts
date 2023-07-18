@@ -143,9 +143,10 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
    */
   public tryToShow(
     needToClose = false,
-    needToShowConversionToolbar = true
+    needToShowConversionToolbar = true,
+    mouseEvent = null
   ): void {
-    if (!this.allowedToShow()) {
+    if (!this.allowedToShow() && !mouseEvent) {
       if (needToClose) {
         this.close();
       }
@@ -153,15 +154,16 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
       return;
     }
 
-    this.move();
-    this.open(needToShowConversionToolbar);
+    this.move(mouseEvent);
+
+    this.open(needToShowConversionToolbar, !!mouseEvent);
     this.Editor.Toolbar.close();
   }
 
   /**
    * Move Toolbar to the selected text
    */
-  public move(): void {
+  public move(mouseEvent = null): void {
     const selectionRect = SelectionUtils.rect as DOMRect;
     const wrapperOffset = this.Editor.UI.nodes.wrapper.getBoundingClientRect();
     const newCoords = {
@@ -169,10 +171,14 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
       y:
         selectionRect.y +
         selectionRect.height -
-        // + window.scrollY
         wrapperOffset.top +
         this.toolbarVerticalMargin,
     };
+
+    if (mouseEvent) {
+      newCoords.y = mouseEvent.clientY;
+      newCoords.x = mouseEvent.clientX - wrapperOffset.left;
+    }
 
     /**
      * If we know selections width, place InlineToolbar to center
@@ -246,14 +252,15 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
    *
    * @param [needToShowConversionToolbar] - pass false to not to show Conversion Toolbar
    */
-  public open(needToShowConversionToolbar = true): void {
+  public open(needToShowConversionToolbar = true, isSelectedAll = false): void {
     if (this.opened) {
       return;
     }
+
     /**
      * Filter inline-tools and show only allowed by Block's Tool
      */
-    this.addToolsFiltered();
+    this.addToolsFiltered(isSelectedAll);
 
     /**
      * Show Inline Toolbar
@@ -552,11 +559,29 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
   /**
    * Append only allowed Tools
    */
-  private addToolsFiltered(): void {
+  private addToolsFiltered(isSelectedAll = false): void {
     const currentSelection = SelectionUtils.get();
-    const currentBlock = this.Editor.BlockManager.getBlock(
-      currentSelection.anchorNode as HTMLElement
+
+    /**
+     * Custom by c98
+     */
+
+    const firstTextIndex = this.Editor.BlockManager.blocks.findIndex(
+      (it) => it.name === "paragraph"
     );
+
+    let currentBlock = this.Editor.BlockManager.blocks[firstTextIndex];
+
+    if (!isSelectedAll) {
+      currentBlock = this.Editor.BlockManager.getBlock(
+        currentSelection.anchorNode as HTMLElement
+      );
+    } else {
+      this.move({
+        clientX: this.Editor.RectangleSelection.getMousePosition().x,
+        clientY: this.Editor.RectangleSelection.getMousePosition().y,
+      });
+    }
 
     /**
      * Clear buttons list
@@ -572,6 +597,7 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
     /**
      * Recalculate width because some buttons can be hidden
      */
+
     this.recalculateWidth();
   }
 

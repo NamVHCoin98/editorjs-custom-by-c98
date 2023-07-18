@@ -30,6 +30,9 @@ export default class RectangleSelection extends Module {
     };
   }
 
+  public clientX = 0;
+  public clientY = 0;
+
   /**
    * Using the selection rectangle
    *
@@ -185,6 +188,16 @@ export default class RectangleSelection extends Module {
   }
 
   /**
+   * Custom by c98
+   */
+  public getMousePosition(): any {
+    return {
+      x: this.clientX,
+      y: this.clientY,
+    };
+  }
+
+  /**
    * Sets Module necessary event handlers
    */
   private enableModuleBindings(): void {
@@ -230,8 +243,8 @@ export default class RectangleSelection extends Module {
     this.listeners.on(
       document.body,
       "mouseup",
-      () => {
-        this.processMouseUp();
+      (e) => {
+        this.processMouseUp(e);
       },
       false
     );
@@ -265,6 +278,8 @@ export default class RectangleSelection extends Module {
    * @param {MouseEvent} mouseEvent - mouse event payload
    */
   private processMouseMove(mouseEvent: MouseEvent): void {
+    this.clientX = mouseEvent.clientX;
+    this.clientY = mouseEvent.clientY;
     this.changingRectangle(mouseEvent);
     this.scrollByZones(mouseEvent.clientY);
   }
@@ -287,9 +302,17 @@ export default class RectangleSelection extends Module {
   /**
    * Handle mouse up
    */
-  private processMouseUp(): void {
+  private processMouseUp(event: any): void {
     this.clearSelection();
     this.endSelection();
+
+    /**
+     * Custom by c98
+     */
+
+    if (this.Editor.BlockSelection.selectedBlocks.length > 0) {
+      this.Editor.InlineToolbar.tryToShow(false, true, event);
+    }
   }
 
   /**
