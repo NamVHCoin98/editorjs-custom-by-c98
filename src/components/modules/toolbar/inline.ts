@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
 import Module from "../../__module";
 import $ from "../../dom";
 import SelectionUtils from "../../selection";
@@ -157,7 +158,7 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
 
     this.move(mouseEvent);
 
-    this.open(needToShowConversionToolbar, !!mouseEvent);
+    this.open(needToShowConversionToolbar);
     this.Editor.Toolbar.close();
   }
 
@@ -177,11 +178,14 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
     };
 
     if (mouseEvent) {
-      // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+      this.nodes.wrapper.classList.add(this.CSS.inlineToolbarFixed);
+    }
+
+    if (mouseEvent) {
       newCoords.y = mouseEvent.clientY < 300 ? 300 : mouseEvent.clientY;
       newCoords.x =
-        mouseEvent.clientX < wrapperOffset.left
-          ? wrapperOffset.left
+        mouseEvent.clientX < wrapperOffset.left + 30
+          ? wrapperOffset.left + 30
           : mouseEvent.clientX;
     }
 
@@ -275,10 +279,6 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
      * Show Inline Toolbar
      */
     this.nodes.wrapper.classList.add(this.CSS.inlineToolbarShowed);
-
-    if (isSelectedAll || this.Editor.BlockSelection.selectedBlocks.length > 1) {
-      this.nodes.wrapper.classList.add(this.CSS.inlineToolbarFixed);
-    }
 
     this.buttonsList = this.nodes.buttons.querySelectorAll(
       `.${this.CSS.inlineToolButton}`
@@ -572,7 +572,7 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
   /**
    * Append only allowed Tools
    */
-  private addToolsFiltered(isSelectedAll = false): void {
+  private addToolsFiltered(isFollowMousePosition = false): void {
     const currentSelection = SelectionUtils.get();
 
     /**
@@ -585,7 +585,7 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
 
     let currentBlock = this.Editor.BlockManager.blocks[firstTextIndex];
 
-    if (!isSelectedAll) {
+    if (!isFollowMousePosition && currentSelection.anchorNode) {
       currentBlock = this.Editor.BlockManager.getBlock(
         currentSelection.anchorNode as HTMLElement
       );
