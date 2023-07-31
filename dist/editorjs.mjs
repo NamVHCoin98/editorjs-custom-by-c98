@@ -41,7 +41,7 @@ Element.prototype.scrollIntoViewIfNeeded || (Element.prototype.scrollIntoViewIfN
   const e = this.parentNode, t = window.getComputedStyle(e, null), o = parseInt(t.getPropertyValue("border-top-width")), i = parseInt(t.getPropertyValue("border-left-width")), n = this.offsetTop - e.offsetTop < e.scrollTop, r = this.offsetTop - e.offsetTop + this.clientHeight - o > e.scrollTop + e.clientHeight, a = this.offsetLeft - e.offsetLeft < e.scrollLeft, l = this.offsetLeft - e.offsetLeft + this.clientWidth - i > e.scrollLeft + e.clientWidth, c = n && !r;
   (n || r) && s && (e.scrollTop = this.offsetTop - e.offsetTop - e.clientHeight / 2 - o + this.clientHeight / 2), (a || l) && s && (e.scrollLeft = this.offsetLeft - e.offsetLeft - e.clientWidth / 2 - i + this.clientWidth / 2), (n || r || a || l) && !s && this.scrollIntoView(c);
 });
-let Ot = (s = 21) => crypto.getRandomValues(new Uint8Array(s)).reduce((e, t) => (t &= 63, t < 36 ? e += t.toString(36) : t < 62 ? e += (t - 26).toString(36).toUpperCase() : t > 62 ? e += "-" : e += "_", e), "");
+let At = (s = 21) => crypto.getRandomValues(new Uint8Array(s)).reduce((e, t) => (t &= 63, t < 36 ? e += t.toString(36) : t < 62 ? e += (t - 26).toString(36).toUpperCase() : t > 62 ? e += "-" : e += "_", e), "");
 var et = /* @__PURE__ */ ((s) => (s.VERBOSE = "VERBOSE", s.INFO = "INFO", s.WARN = "WARN", s.ERROR = "ERROR", s))(et || {});
 const B = {
   BACKSPACE: 8,
@@ -58,7 +58,7 @@ const B = {
   RIGHT: 39,
   DELETE: 46,
   META: 91
-}, At = {
+}, Ot = {
   LEFT: 0,
   WHEEL: 1,
   RIGHT: 2,
@@ -220,7 +220,7 @@ function Ht(s) {
   return s.substring(0, 2) === "//" ? window.location.protocol + s : window.location.origin + s;
 }
 function zt() {
-  return Ot(10);
+  return At(10);
 }
 function jt(s) {
   window.open(s, "_blank");
@@ -1102,7 +1102,7 @@ class C {
     return this.config.i18n.direction === "rtl";
   }
 }
-class k {
+class m {
   constructor() {
     this.instance = null, this.selection = null, this.savedSelectionRange = null, this.isFakeBackgroundEnabled = !1, this.commandBackground = "backColor", this.commandRemoveFormat = "removeFormat";
   }
@@ -1164,7 +1164,7 @@ class k {
    * @returns {boolean}
    */
   static get isAtEditor() {
-    return this.isSelectionAtEditor(k.get());
+    return this.isSelectionAtEditor(m.get());
   }
   /**
    * Check if passed selection is at Editor's zone
@@ -1177,7 +1177,7 @@ class k {
     let t = e.anchorNode || e.focusNode;
     t && t.nodeType === Node.TEXT_NODE && (t = t.parentNode);
     let o = null;
-    return t && t instanceof Element && (o = t.closest(`.${k.CSS.editorZone}`)), o ? o.nodeType === Node.ELEMENT_NODE : !1;
+    return t && t instanceof Element && (o = t.closest(`.${m.CSS.editorZone}`)), o ? o.nodeType === Node.ELEMENT_NODE : !1;
   }
   /**
    * Check if passed range at Editor zone
@@ -1190,13 +1190,13 @@ class k {
     let t = e.startContainer;
     t && t.nodeType === Node.TEXT_NODE && (t = t.parentNode);
     let o = null;
-    return t && t instanceof Element && (o = t.closest(`.${k.CSS.editorZone}`)), o ? o.nodeType === Node.ELEMENT_NODE : !1;
+    return t && t instanceof Element && (o = t.closest(`.${m.CSS.editorZone}`)), o ? o.nodeType === Node.ELEMENT_NODE : !1;
   }
   /**
    * Methods return boolean that true if selection exists on the page
    */
   static get isSelectionExists() {
-    return !!k.get().anchorNode;
+    return !!m.get().anchorNode;
   }
   /**
    * Return first range
@@ -1277,14 +1277,14 @@ class k {
    * @param container - where range should be
    */
   static isRangeInsideContainer(e) {
-    const t = k.range;
+    const t = m.range;
     return t === null ? !1 : e.contains(t.startContainer);
   }
   /**
    * Adds fake cursor to the current range
    */
   static addFakeCursor() {
-    const e = k.range;
+    const e = m.range;
     if (e === null)
       return;
     const t = d.make("span", "codex-editor__fake-cursor");
@@ -1323,7 +1323,7 @@ class k {
    * Save SelectionUtils's range
    */
   save() {
-    this.savedSelectionRange = k.range;
+    this.savedSelectionRange = m.range;
   }
   /**
    * Restore saved SelectionUtils's range
@@ -1419,11 +1419,11 @@ class F extends we {
       !c && !u && this.detectToolRootChange(l);
       let h;
       c || u ? h = !0 : h = !(l.length > 0 && l.every((v) => {
-        const { addedNodes: p, removedNodes: m, target: A } = v;
+        const { addedNodes: p, removedNodes: k, target: O } = v;
         return [
           ...Array.from(p),
-          ...Array.from(m),
-          A
+          ...Array.from(k),
+          O
         ].some((_) => d.isElement(_) ? _.dataset.mutationFree === "true" : !1);
       })), h && (this.dropInputsCache(), this.updateCurrentInput(), this.call(
         "updated"
@@ -1584,8 +1584,8 @@ class F extends we {
   set selected(e) {
     var i, n;
     this.holder.classList.toggle(F.CSS.selected, e);
-    const t = e === !0 && k.isRangeInsideContainer(this.holder), o = e === !1 && k.isFakeCursorInsideContainer(this.holder);
-    (t || o) && ((i = this.editorEventBus) == null || i.emit(ct, { state: e }), t ? k.addFakeCursor() : k.removeFakeCursor(this.holder), (n = this.editorEventBus) == null || n.emit(dt, { state: e }));
+    const t = e === !0 && m.isRangeInsideContainer(this.holder), o = e === !1 && m.isFakeCursorInsideContainer(this.holder);
+    (t || o) && ((i = this.editorEventBus) == null || i.emit(ct, { state: e }), t ? m.addFakeCursor() : m.removeFakeCursor(this.holder), (n = this.editorEventBus) == null || n.emit(dt, { state: e }));
   }
   /**
    * Returns True if it is Selected
@@ -1726,7 +1726,7 @@ class F extends we {
    * Update current input index with selection anchor node
    */
   updateCurrentInput() {
-    this.currentInput = d.isNativeInput(document.activeElement) || !k.anchorNode ? document.activeElement : k.anchorNode;
+    this.currentInput = d.isNativeInput(document.activeElement) || !m.anchorNode ? document.activeElement : m.anchorNode;
   }
   /**
    * Allows to say Editor that Block was changed. Used to manually trigger Editor's 'onChange' callback
@@ -2366,8 +2366,8 @@ var Le = {}, to = {
               if (!h)
                 return u;
               if (c && typeof btoa == "function") {
-                var f = (p = h, "/*# sourceMappingURL=data:application/json;charset=utf-8;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(p)))) + " */"), v = h.sources.map(function(m) {
-                  return "/*# sourceURL=" + h.sourceRoot + m + " */";
+                var f = (p = h, "/*# sourceMappingURL=data:application/json;charset=utf-8;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(p)))) + " */"), v = h.sources.map(function(k) {
+                  return "/*# sourceURL=" + h.sourceRoot + k + " */";
                 });
                 return [u].concat(v).concat([f]).join(`
 `);
@@ -2401,8 +2401,8 @@ var Le = {}, to = {
           if (typeof E == "function")
             return E();
           if (g[E] === void 0) {
-            var S = function(O) {
-              return document.querySelector(O);
+            var S = function(A) {
+              return document.querySelector(A);
             }.call(this, E);
             if (window.HTMLIFrameElement && S instanceof window.HTMLIFrameElement)
               try {
@@ -2417,13 +2417,13 @@ var Le = {}, to = {
       }(), u = null, h = 0, f = [], v = i(5);
       function p(b, g) {
         for (var E = 0; E < b.length; E++) {
-          var S = b[E], O = a[S.id];
-          if (O) {
-            O.refs++;
-            for (var I = 0; I < O.parts.length; I++)
-              O.parts[I](S.parts[I]);
+          var S = b[E], A = a[S.id];
+          if (A) {
+            A.refs++;
+            for (var I = 0; I < A.parts.length; I++)
+              A.parts[I](S.parts[I]);
             for (; I < S.parts.length; I++)
-              O.parts.push(x(S.parts[I], g));
+              A.parts.push(x(S.parts[I], g));
           } else {
             var H = [];
             for (I = 0; I < S.parts.length; I++)
@@ -2432,14 +2432,14 @@ var Le = {}, to = {
           }
         }
       }
-      function m(b, g) {
-        for (var E = [], S = {}, O = 0; O < b.length; O++) {
-          var I = b[O], H = g.base ? I[0] + g.base : I[0], L = { css: I[1], media: I[2], sourceMap: I[3] };
+      function k(b, g) {
+        for (var E = [], S = {}, A = 0; A < b.length; A++) {
+          var I = b[A], H = g.base ? I[0] + g.base : I[0], L = { css: I[1], media: I[2], sourceMap: I[3] };
           S[H] ? S[H].parts.push(L) : E.push(S[H] = { id: H, parts: [L] });
         }
         return E;
       }
-      function A(b, g) {
+      function O(b, g) {
         var E = c(b.insertInto);
         if (!E)
           throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
@@ -2456,8 +2456,8 @@ var Le = {}, to = {
  Must be 'top', 'bottom', or Object.
  (https://github.com/webpack-contrib/style-loader#insertat)
 `);
-          var O = c(b.insertInto + " " + b.insertAt.before);
-          E.insertBefore(g, O);
+          var A = c(b.insertInto + " " + b.insertAt.before);
+          E.insertBefore(g, A);
         }
       }
       function N(b) {
@@ -2469,7 +2469,7 @@ var Le = {}, to = {
       }
       function _(b) {
         var g = document.createElement("style");
-        return b.attrs.type === void 0 && (b.attrs.type = "text/css"), y(g, b.attrs), A(b, g), g;
+        return b.attrs.type === void 0 && (b.attrs.type = "text/css"), y(g, b.attrs), O(b, g), g;
       }
       function y(b, g) {
         Object.keys(g).forEach(function(E) {
@@ -2477,7 +2477,7 @@ var Le = {}, to = {
         });
       }
       function x(b, g) {
-        var E, S, O, I;
+        var E, S, A, I;
         if (g.transform && b.css) {
           if (!(I = g.transform(b.css)))
             return function() {
@@ -2486,18 +2486,18 @@ var Le = {}, to = {
         }
         if (g.singleton) {
           var H = h++;
-          E = u || (u = _(g)), S = R.bind(null, E, H, !1), O = R.bind(null, E, H, !0);
+          E = u || (u = _(g)), S = R.bind(null, E, H, !1), A = R.bind(null, E, H, !0);
         } else
           b.sourceMap && typeof URL == "function" && typeof URL.createObjectURL == "function" && typeof URL.revokeObjectURL == "function" && typeof Blob == "function" && typeof btoa == "function" ? (E = function(L) {
             var W = document.createElement("link");
-            return L.attrs.type === void 0 && (L.attrs.type = "text/css"), L.attrs.rel = "stylesheet", y(W, L.attrs), A(L, W), W;
+            return L.attrs.type === void 0 && (L.attrs.type = "text/css"), L.attrs.rel = "stylesheet", y(W, L.attrs), O(L, W), W;
           }(g), S = function(L, W, le) {
             var Q = le.css, Ee = le.sourceMap, It = W.convertToAbsoluteUrls === void 0 && Ee;
             (W.convertToAbsoluteUrls || It) && (Q = v(Q)), Ee && (Q += `
 /*# sourceMappingURL=data:application/json;base64,` + btoa(unescape(encodeURIComponent(JSON.stringify(Ee)))) + " */");
             var Mt = new Blob([Q], { type: "text/css" }), Xe = L.href;
             L.href = URL.createObjectURL(Mt), Xe && URL.revokeObjectURL(Xe);
-          }.bind(null, E, g), O = function() {
+          }.bind(null, E, g), A = function() {
             N(E), E.href && URL.revokeObjectURL(E.href);
           }) : (E = _(g), S = function(L, W) {
             var le = W.css, Q = W.media;
@@ -2508,7 +2508,7 @@ var Le = {}, to = {
                 L.removeChild(L.firstChild);
               L.appendChild(document.createTextNode(le));
             }
-          }.bind(null, E), O = function() {
+          }.bind(null, E), A = function() {
             N(E);
           });
         return S(b), function(L) {
@@ -2517,22 +2517,22 @@ var Le = {}, to = {
               return;
             S(b = L);
           } else
-            O();
+            A();
         };
       }
       t.exports = function(b, g) {
         if (typeof DEBUG < "u" && DEBUG && typeof document != "object")
           throw new Error("The style-loader cannot be used in a non-browser environment");
         (g = g || {}).attrs = typeof g.attrs == "object" ? g.attrs : {}, g.singleton || typeof g.singleton == "boolean" || (g.singleton = l()), g.insertInto || (g.insertInto = "head"), g.insertAt || (g.insertAt = "bottom");
-        var E = m(b, g);
+        var E = k(b, g);
         return p(E, g), function(S) {
-          for (var O = [], I = 0; I < E.length; I++) {
+          for (var A = [], I = 0; I < E.length; I++) {
             var H = E[I];
-            (L = a[H.id]).refs--, O.push(L);
+            (L = a[H.id]).refs--, A.push(L);
           }
-          for (S && p(m(S, g), g), I = 0; I < O.length; I++) {
+          for (S && p(k(S, g), g), I = 0; I < A.length; I++) {
             var L;
-            if ((L = O[I]).refs === 0) {
+            if ((L = A[I]).refs === 0) {
               for (var W = 0; W < L.parts.length; W++)
                 L.parts[W]();
               delete a[L.id];
@@ -2545,11 +2545,11 @@ var Le = {}, to = {
 `);
       });
       function R(b, g, E, S) {
-        var O = E ? "" : S.css;
+        var A = E ? "" : S.css;
         if (b.styleSheet)
-          b.styleSheet.cssText = M(g, O);
+          b.styleSheet.cssText = M(g, A);
         else {
-          var I = document.createTextNode(O), H = b.childNodes;
+          var I = document.createTextNode(A), H = b.childNodes;
           H[g] && b.removeChild(H[g]), H.length ? b.insertBefore(I, H[g]) : b.appendChild(I);
         }
       }
@@ -2573,16 +2573,16 @@ var Le = {}, to = {
     }, function(t, o, i) {
       var n, r, a, l, c, u, h, f, v;
       t.exports = (n = "cdx-notifies", r = "cdx-notify", a = "cdx-notify__cross", l = "cdx-notify__button--confirm", c = "cdx-notify__button--cancel", u = "cdx-notify__input", h = "cdx-notify__button", f = "cdx-notify__btns-wrapper", { alert: v = function(p) {
-        var m = document.createElement("DIV"), A = document.createElement("DIV"), N = p.message, _ = p.style;
-        return m.classList.add(r), _ && m.classList.add(r + "--" + _), m.innerHTML = N, A.classList.add(a), A.addEventListener("click", m.remove.bind(m)), m.appendChild(A), m;
+        var k = document.createElement("DIV"), O = document.createElement("DIV"), N = p.message, _ = p.style;
+        return k.classList.add(r), _ && k.classList.add(r + "--" + _), k.innerHTML = N, O.classList.add(a), O.addEventListener("click", k.remove.bind(k)), k.appendChild(O), k;
       }, confirm: function(p) {
-        var m = v(p), A = document.createElement("div"), N = document.createElement("button"), _ = document.createElement("button"), y = m.querySelector("." + a), x = p.cancelHandler, w = p.okHandler;
-        return A.classList.add(f), N.innerHTML = p.okText || "Confirm", _.innerHTML = p.cancelText || "Cancel", N.classList.add(h), _.classList.add(h), N.classList.add(l), _.classList.add(c), x && typeof x == "function" && (_.addEventListener("click", x), y.addEventListener("click", x)), w && typeof w == "function" && N.addEventListener("click", w), N.addEventListener("click", m.remove.bind(m)), _.addEventListener("click", m.remove.bind(m)), A.appendChild(N), A.appendChild(_), m.appendChild(A), m;
+        var k = v(p), O = document.createElement("div"), N = document.createElement("button"), _ = document.createElement("button"), y = k.querySelector("." + a), x = p.cancelHandler, w = p.okHandler;
+        return O.classList.add(f), N.innerHTML = p.okText || "Confirm", _.innerHTML = p.cancelText || "Cancel", N.classList.add(h), _.classList.add(h), N.classList.add(l), _.classList.add(c), x && typeof x == "function" && (_.addEventListener("click", x), y.addEventListener("click", x)), w && typeof w == "function" && N.addEventListener("click", w), N.addEventListener("click", k.remove.bind(k)), _.addEventListener("click", k.remove.bind(k)), O.appendChild(N), O.appendChild(_), k.appendChild(O), k;
       }, prompt: function(p) {
-        var m = v(p), A = document.createElement("div"), N = document.createElement("button"), _ = document.createElement("input"), y = m.querySelector("." + a), x = p.cancelHandler, w = p.okHandler;
-        return A.classList.add(f), N.innerHTML = p.okText || "Ok", N.classList.add(h), N.classList.add(l), _.classList.add(u), p.placeholder && _.setAttribute("placeholder", p.placeholder), p.default && (_.value = p.default), p.inputType && (_.type = p.inputType), x && typeof x == "function" && y.addEventListener("click", x), w && typeof w == "function" && N.addEventListener("click", function() {
+        var k = v(p), O = document.createElement("div"), N = document.createElement("button"), _ = document.createElement("input"), y = k.querySelector("." + a), x = p.cancelHandler, w = p.okHandler;
+        return O.classList.add(f), N.innerHTML = p.okText || "Ok", N.classList.add(h), N.classList.add(l), _.classList.add(u), p.placeholder && _.setAttribute("placeholder", p.placeholder), p.default && (_.value = p.default), p.inputType && (_.type = p.inputType), x && typeof x == "function" && y.addEventListener("click", x), w && typeof w == "function" && N.addEventListener("click", function() {
           w(_.value);
-        }), N.addEventListener("click", m.remove.bind(m)), A.appendChild(_), A.appendChild(N), m.appendChild(A), m;
+        }), N.addEventListener("click", k.remove.bind(k)), O.appendChild(_), O.appendChild(N), k.appendChild(O), k;
       }, getWrapper: function() {
         var p = document.createElement("DIV");
         return p.classList.add(n), p;
@@ -2659,12 +2659,12 @@ class so extends C {
     return this.Editor.ReadOnly.isEnabled;
   }
 }
-var Oe = {}, ro = {
+var Ae = {}, ro = {
   get exports() {
-    return Oe;
+    return Ae;
   },
   set exports(s) {
-    Oe = s;
+    Ae = s;
   }
 };
 (function(s, e) {
@@ -2672,10 +2672,10 @@ var Oe = {}, ro = {
     s.exports = o();
   })(Lt, function() {
     function t(h) {
-      var f = h.tags, v = Object.keys(f), p = v.map(function(m) {
-        return typeof f[m];
-      }).every(function(m) {
-        return m === "object" || m === "boolean" || m === "function";
+      var f = h.tags, v = Object.keys(f), p = v.map(function(k) {
+        return typeof f[k];
+      }).every(function(k) {
+        return k === "object" || k === "boolean" || k === "function";
       });
       if (!p)
         throw new Error("The configuration was invalid");
@@ -2706,9 +2706,9 @@ var Oe = {}, ro = {
             f.removeChild(p), this._sanitize(h, f);
             break;
           }
-          var m = r(p), A;
-          m && (A = Array.prototype.some.call(p.childNodes, i));
-          var N = !!f.parentNode, _ = i(f) && i(p) && N, y = p.nodeName.toLowerCase(), x = l(this.config, y, p), w = m && A;
+          var k = r(p), O;
+          k && (O = Array.prototype.some.call(p.childNodes, i));
+          var N = !!f.parentNode, _ = i(f) && i(p) && N, y = p.nodeName.toLowerCase(), x = l(this.config, y, p), w = k && O;
           if (w || c(p, x) || !this.config.keepNestedBlockElements && _) {
             if (!(p.nodeName === "SCRIPT" || p.nodeName === "STYLE"))
               for (; p.childNodes.length > 0; )
@@ -2744,7 +2744,7 @@ var Oe = {}, ro = {
     return t;
   });
 })(ro);
-const ao = Oe;
+const ao = Ae;
 function ht(s, e) {
   return s.map((t) => {
     const o = D(e) ? e(t.tool) : e;
@@ -2842,7 +2842,7 @@ class go extends C {
    * @returns {HTMLElement|null}
    */
   findParentTag(e, t) {
-    return new k().findParentTag(e, t);
+    return new m().findParentTag(e, t);
   }
   /**
    * Expand selection to passed tag
@@ -2850,7 +2850,7 @@ class go extends C {
    * @param {HTMLElement} node - tag that should contain selection
    */
   expandToTag(e) {
-    new k().expandToTag(e);
+    new m().expandToTag(e);
   }
 }
 class bo extends C {
@@ -2933,12 +2933,12 @@ class mo extends C {
     e ?? !this.Editor.Toolbar.toolbox.opened ? (this.Editor.Toolbar.moveAndOpen(), this.Editor.Toolbar.toolbox.open()) : this.Editor.Toolbar.toolbox.close();
   }
 }
-var Ae = {}, ko = {
+var Oe = {}, ko = {
   get exports() {
-    return Ae;
+    return Oe;
   },
   set exports(s) {
-    Ae = s;
+    Oe = s;
   }
 };
 /*!
@@ -3095,7 +3095,7 @@ var Ae = {}, ko = {
     }]).default;
   });
 })(ko);
-const vo = /* @__PURE__ */ xe(Ae);
+const vo = /* @__PURE__ */ xe(Oe);
 class Fe {
   constructor() {
     this.lib = new vo();
@@ -3238,7 +3238,7 @@ function yo(s, e) {
     i !== void 0 ? t[i] = s[o] : t[o] = s[o];
   }), t;
 }
-const Eo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 12L9 7.1C9 7.04477 9.04477 7 9.1 7H10.4C11.5 7 14 7.1 14 9.5C14 9.5 14 12 11 12M9 12V16.8C9 16.9105 9.08954 17 9.2 17H12.5C14 17 15 16 15 14.5C15 11.7046 11 12 11 12M9 12H11"/></svg>', pt = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 10L11.8586 14.8586C11.9367 14.9367 12.0633 14.9367 12.1414 14.8586L17 10"/></svg>', Bo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 15L11.8586 10.1414C11.9367 10.0633 12.0633 10.0633 12.1414 10.1414L17 15"/></svg>', So = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 8L12 12M12 12L16 16M12 12L16 8M12 12L8 16"/></svg>', To = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/></svg>', Co = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M13.34 10C12.4223 12.7337 11 17 11 17"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M14.21 7H14.2"/></svg>', qe = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7.69998 12.6L7.67896 12.62C6.53993 13.7048 6.52012 15.5155 7.63516 16.625V16.625C8.72293 17.7073 10.4799 17.7102 11.5712 16.6314L13.0263 15.193C14.0703 14.1609 14.2141 12.525 13.3662 11.3266L13.22 11.12"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M16.22 11.12L16.3564 10.9805C17.2895 10.0265 17.3478 8.5207 16.4914 7.49733V7.49733C15.5691 6.39509 13.9269 6.25143 12.8271 7.17675L11.3901 8.38588C10.0935 9.47674 9.95706 11.4241 11.0888 12.6852L11.12 12.72"/></svg>', Io = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 7.29999H9.4"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 7.29999H14.59"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.30999 12H9.3"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 12H14.59"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 16.7H9.4"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 16.7H14.59"/></svg>', Mo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M12 7V12M12 17V12M17 12H12M12 12H7"/></svg>', Lo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5" stroke="currentColor" stroke-width="2"/><line x1="15.4142" x2="19" y1="15" y2="18.5858" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>', Oo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M15.7795 11.5C15.7795 11.5 16.053 11.1962 16.5497 10.6722C17.4442 9.72856 17.4701 8.2475 16.5781 7.30145V7.30145C15.6482 6.31522 14.0873 6.29227 13.1288 7.25073L11.8796 8.49999"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8.24517 12.3883C8.24517 12.3883 7.97171 12.6922 7.47504 13.2161C6.58051 14.1598 6.55467 15.6408 7.44666 16.5869V16.5869C8.37653 17.5731 9.93744 17.5961 10.8959 16.6376L12.1452 15.3883"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M17.7802 15.1032L16.597 14.9422C16.0109 14.8624 15.4841 15.3059 15.4627 15.8969L15.4199 17.0818"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6.39064 9.03238L7.58432 9.06668C8.17551 9.08366 8.6522 8.58665 8.61056 7.99669L8.5271 6.81397"/><line x1="12.1142" x2="11.7" y1="12.2" y2="11.7858" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>';
+const Eo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 12L9 7.1C9 7.04477 9.04477 7 9.1 7H10.4C11.5 7 14 7.1 14 9.5C14 9.5 14 12 11 12M9 12V16.8C9 16.9105 9.08954 17 9.2 17H12.5C14 17 15 16 15 14.5C15 11.7046 11 12 11 12M9 12H11"/></svg>', pt = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 10L11.8586 14.8586C11.9367 14.9367 12.0633 14.9367 12.1414 14.8586L17 10"/></svg>', Bo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 15L11.8586 10.1414C11.9367 10.0633 12.0633 10.0633 12.1414 10.1414L17 15"/></svg>', So = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 8L12 12M12 12L16 16M12 12L16 8M12 12L8 16"/></svg>', To = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/></svg>', Co = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M13.34 10C12.4223 12.7337 11 17 11 17"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M14.21 7H14.2"/></svg>', qe = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7.69998 12.6L7.67896 12.62C6.53993 13.7048 6.52012 15.5155 7.63516 16.625V16.625C8.72293 17.7073 10.4799 17.7102 11.5712 16.6314L13.0263 15.193C14.0703 14.1609 14.2141 12.525 13.3662 11.3266L13.22 11.12"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M16.22 11.12L16.3564 10.9805C17.2895 10.0265 17.3478 8.5207 16.4914 7.49733V7.49733C15.5691 6.39509 13.9269 6.25143 12.8271 7.17675L11.3901 8.38588C10.0935 9.47674 9.95706 11.4241 11.0888 12.6852L11.12 12.72"/></svg>', Io = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 7.29999H9.4"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 7.29999H14.59"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.30999 12H9.3"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 12H14.59"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 16.7H9.4"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 16.7H14.59"/></svg>', Mo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M12 7V12M12 17V12M17 12H12M12 12H7"/></svg>', Lo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5" stroke="currentColor" stroke-width="2"/><line x1="15.4142" x2="19" y1="15" y2="18.5858" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>', Ao = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M15.7795 11.5C15.7795 11.5 16.053 11.1962 16.5497 10.6722C17.4442 9.72856 17.4701 8.2475 16.5781 7.30145V7.30145C15.6482 6.31522 14.0873 6.29227 13.1288 7.25073L11.8796 8.49999"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8.24517 12.3883C8.24517 12.3883 7.97171 12.6922 7.47504 13.2161C6.58051 14.1598 6.55467 15.6408 7.44666 16.5869V16.5869C8.37653 17.5731 9.93744 17.5961 10.8959 16.6376L12.1452 15.3883"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M17.7802 15.1032L16.597 14.9422C16.0109 14.8624 15.4841 15.3059 15.4627 15.8969L15.4199 17.0818"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6.39064 9.03238L7.58432 9.06668C8.17551 9.08366 8.6522 8.58665 8.61056 7.99669L8.5271 6.81397"/><line x1="12.1142" x2="11.7" y1="12.2" y2="11.7858" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>';
 class P {
   /**
    * Constructs popover item instance
@@ -3486,7 +3486,7 @@ const ce = class {
     if (this.items.length === 0)
       return this.cursor;
     let e = this.cursor;
-    return e === -1 ? e = s === ce.directions.RIGHT ? -1 : 0 : this.items[e].classList.remove(this.focusedCssClass), s === ce.directions.RIGHT ? e = (e + 1) % this.items.length : e = (this.items.length + e - 1) % this.items.length, d.canSetCaret(this.items[e]) && oe(() => k.setCursor(this.items[e]), 50)(), this.items[e].classList.add(this.focusedCssClass), e;
+    return e === -1 ? e = s === ce.directions.RIGHT ? -1 : 0 : this.items[e].classList.remove(this.focusedCssClass), s === ce.directions.RIGHT ? e = (e + 1) % this.items.length : e = (this.items.length + e - 1) % this.items.length, d.canSetCaret(this.items[e]) && oe(() => m.setCursor(this.items[e]), 50)(), this.items[e].classList.add(this.focusedCssClass), e;
   }
 };
 let ne = ce;
@@ -3755,10 +3755,10 @@ ft.CSS = {
   scrollLocked: "ce-scroll-locked",
   scrollLockedHard: "ce-scroll-locked--hard"
 };
-var Ao = Object.defineProperty, _o = Object.getOwnPropertyDescriptor, No = (s, e, t, o) => {
+var Oo = Object.defineProperty, _o = Object.getOwnPropertyDescriptor, No = (s, e, t, o) => {
   for (var i = o > 1 ? void 0 : o ? _o(e, t) : e, n = s.length - 1, r; n >= 0; n--)
     (r = s[n]) && (i = (o ? r(e, t, i) : r(i)) || i);
-  return o && i && Ao(e, t, i), i;
+  return o && i && Oo(e, t, i), i;
 }, fe = /* @__PURE__ */ ((s) => (s.Close = "close", s))(fe || {});
 const z = class extends we {
   /**
@@ -3977,7 +3977,7 @@ No([
 ], He.prototype, "height", 1);
 class Ro extends C {
   constructor() {
-    super(...arguments), this.opened = !1, this.selection = new k(), this.onPopoverClose = () => {
+    super(...arguments), this.opened = !1, this.selection = new m(), this.onPopoverClose = () => {
       this.close();
     };
   }
@@ -4053,7 +4053,7 @@ class Ro extends C {
    * Close Block Settings pane
    */
   close() {
-    this.opened = !1, k.isAtEditor || this.selection.restore(), this.selection.clearSaved(), !this.Editor.CrossBlockSelection.isCrossBlockSelectionStarted && this.Editor.BlockManager.currentBlock && (this.Editor.BlockManager.currentBlock.selected = !1), this.eventsDispatcher.emit(this.events.closed), this.popover && (this.popover.off(fe.Close, this.onPopoverClose), this.popover.destroy(), this.popover.getElement().remove(), this.popover = null);
+    this.opened = !1, m.isAtEditor || this.selection.restore(), this.selection.clearSaved(), !this.Editor.CrossBlockSelection.isCrossBlockSelectionStarted && this.Editor.BlockManager.currentBlock && (this.Editor.BlockManager.currentBlock.selected = !1), this.eventsDispatcher.emit(this.events.closed), this.popover && (this.popover.off(fe.Close, this.onPopoverClose), this.popover.destroy(), this.popover.getElement().remove(), this.popover = null);
   }
   /**
    * Returns list of buttons and inputs inside specified container
@@ -4671,8 +4671,12 @@ class jo extends C {
    */
   get blockTunesToggler() {
     return {
-      hide: () => this.nodes.settingsToggler.classList.add(this.CSS.settingsTogglerHidden),
-      show: () => this.nodes.settingsToggler.classList.remove(this.CSS.settingsTogglerHidden)
+      hide: () => this.nodes.settingsToggler.classList.add(
+        this.CSS.settingsTogglerHidden
+      ),
+      show: () => this.nodes.settingsToggler.classList.remove(
+        this.CSS.settingsTogglerHidden
+      )
     };
   }
   /**
@@ -4692,7 +4696,10 @@ class jo extends C {
     if (this.toolboxInstance.opened && this.toolboxInstance.close(), this.Editor.BlockSettings.opened && this.Editor.BlockSettings.close(), !e)
       return;
     this.hoveredBlock = e;
-    const t = e.holder, { isMobile: o } = this.Editor.UI, i = e.pluginsContent, n = window.getComputedStyle(i), r = parseInt(n.paddingTop, 10), a = t.offsetHeight;
+    const t = e.holder, { isMobile: o } = this.Editor.UI, i = e.pluginsContent, n = window.getComputedStyle(i), r = parseInt(
+      n.paddingTop,
+      10
+    ), a = t.offsetHeight;
     let l;
     o ? l = t.offsetTop + a : l = t.offsetTop + r, this.nodes.wrapper.style.top = `${Math.floor(l)}px`, this.Editor.BlockManager.blocks.length === 1 && e.isEmpty ? this.blockTunesToggler.hide() : this.blockTunesToggler.show(), this.open();
   }
@@ -4721,13 +4728,22 @@ class jo extends C {
       this.nodes[t] = d.make("div", this.CSS[t]);
     }), d.append(this.nodes.wrapper, this.nodes.content), d.append(this.nodes.content, this.nodes.actions), this.nodes.plusButton = d.make("div", this.CSS.plusButton, {
       innerHTML: Mo
-    }), d.append(this.nodes.actions, this.nodes.plusButton), this.readOnlyMutableListeners.on(this.nodes.plusButton, "click", () => {
-      this.tooltip.hide(!0), this.plusButtonClicked();
-    }, !1);
+    }), d.append(this.nodes.actions, this.nodes.plusButton), this.readOnlyMutableListeners.on(
+      this.nodes.plusButton,
+      "click",
+      () => {
+        this.tooltip.hide(!0), this.plusButtonClicked();
+      },
+      !1
+    );
     const e = d.make("div");
-    e.appendChild(document.createTextNode($.ui(X.ui.toolbar.toolbox, "Add"))), e.appendChild(d.make("div", this.CSS.plusButtonShortcut, {
-      textContent: "⇥ Tab"
-    })), this.tooltip.onHover(this.nodes.plusButton, e, {
+    e.appendChild(
+      document.createTextNode($.ui(X.ui.toolbar.toolbox, "Add"))
+    ), e.appendChild(
+      d.make("div", this.CSS.plusButtonShortcut, {
+        textContent: "⇥ Tab"
+      })
+    ), this.tooltip.onHover(this.nodes.plusButton, e, {
       hidingDelay: 400
     }), this.nodes.settingsToggler = d.make("span", this.CSS.settingsToggler, {
       innerHTML: Io
@@ -4751,9 +4767,13 @@ class jo extends C {
         nothingFound: $.ui(X.ui.popover, "Nothing found")
       }
     }), this.toolboxInstance.on(be.Opened, () => {
-      this.Editor.UI.nodes.wrapper.classList.add(this.CSS.openedToolboxHolderModifier);
+      this.Editor.UI.nodes.wrapper.classList.add(
+        this.CSS.openedToolboxHolderModifier
+      );
     }), this.toolboxInstance.on(be.Closed, () => {
-      this.Editor.UI.nodes.wrapper.classList.remove(this.CSS.openedToolboxHolderModifier);
+      this.Editor.UI.nodes.wrapper.classList.remove(
+        this.CSS.openedToolboxHolderModifier
+      );
     }), this.toolboxInstance.on(be.BlockAdded, ({ block: e }) => {
       const { BlockManager: t, Caret: o } = this.Editor, i = t.getBlockById(e.id);
       i.inputs.length === 0 && (i === t.lastBlock ? (t.insertAtEnd(), o.setToBlock(t.lastBlock)) : o.setToBlock(t.nextBlock));
@@ -4763,15 +4783,20 @@ class jo extends C {
    * Handler for Plus Button
    */
   plusButtonClicked() {
-    this.Editor.BlockManager.currentBlock = this.hoveredBlock, this.toolboxInstance.toggle();
+    m.get().removeAllRanges(), this.Editor.BlockManager.currentBlock = this.hoveredBlock, this.toolboxInstance.toggle(), this.Editor.InlineToolbar.opened && this.Editor.InlineToolbar.close();
   }
   /**
    * Enable bindings
    */
   enableModuleBindings() {
-    this.readOnlyMutableListeners.on(this.nodes.settingsToggler, "mousedown", (e) => {
-      e.stopPropagation(), this.settingsTogglerClicked(), this.toolboxInstance.opened && this.toolboxInstance.close(), this.tooltip.hide(!0);
-    }, !0), ee() || this.eventsDispatcher.on(mt, (e) => {
+    this.readOnlyMutableListeners.on(
+      this.nodes.settingsToggler,
+      "mousedown",
+      (e) => {
+        e.stopPropagation(), this.settingsTogglerClicked(), this.tooltip.hide(!0);
+      },
+      !0
+    ), ee() || this.eventsDispatcher.on(mt, (e) => {
       this.Editor.BlockSettings.opened || this.toolboxInstance.opened || this.moveAndOpen(e.block);
     });
   }
@@ -4785,7 +4810,7 @@ class jo extends C {
    * Clicks on the Block Settings toggler
    */
   settingsTogglerClicked() {
-    this.Editor.BlockManager.currentBlock = this.hoveredBlock, this.Editor.BlockSettings.opened ? this.Editor.BlockSettings.close() : this.Editor.BlockSettings.open(this.hoveredBlock);
+    m.get().removeAllRanges(), this.Editor.BlockManager.currentBlock = this.hoveredBlock, this.Editor.BlockSettings.opened ? this.Editor.BlockSettings.close() : this.Editor.BlockSettings.open(this.hoveredBlock), this.Editor.InlineToolbar.opened && this.Editor.InlineToolbar.close();
   }
   /**
    * Draws Toolbar UI
@@ -4931,22 +4956,22 @@ class Uo extends C {
    *                                  Avoid to use it just for closing IT, better call .close() clearly.
    * @param [needToShowConversionToolbar] - pass false to not to show Conversion Toolbar
    */
-  tryToShow(e = !1, t = !0, o = null) {
+  tryToShow(e = !1, t = !0, o = null, i = !1) {
     if (!this.allowedToShow() && !o) {
       e && this.close();
       return;
     }
-    this.move(o), this.open(t), this.Editor.Toolbar.close();
+    i || this.move(o), this.open(t, !1, i), this.Editor.Toolbar.close();
   }
   /**
    * Move Toolbar to the selected text
    */
   move(e = null) {
-    const t = k.rect, o = this.Editor.UI.nodes.wrapper.getBoundingClientRect(), i = {
+    const t = m.rect, o = this.Editor.UI.nodes.wrapper.getBoundingClientRect(), i = {
       x: t.x - o.left,
       y: t.y + t.height - o.top + this.toolbarVerticalMargin
     };
-    e && this.nodes.wrapper.classList.add(this.CSS.inlineToolbarFixed), e && (i.y = e.clientY < 300 ? 300 : e.clientY, i.x = e.clientX < o.left + 30 ? o.left + 30 : e.clientX), t.width && (i.x += Math.floor(t.width / 2));
+    e && (this.nodes.wrapper.classList.add(this.CSS.inlineToolbarFixed), i.y = e.clientY < 300 ? 300 : e.clientY, i.x = e.clientX < o.left + 30 ? o.left + 30 : e.clientX), t.width && (i.x += Math.floor(t.width / 2));
     const n = i.x - this.width / 2, r = i.x + this.width / 2;
     this.nodes.wrapper.classList.toggle(
       this.CSS.inlineToolbarLeftOriented,
@@ -4972,14 +4997,14 @@ class Uo extends C {
    *
    * @param [needToShowConversionToolbar] - pass false to not to show Conversion Toolbar
    */
-  open(e = !0, t = !1) {
+  open(e = !0, t = !1, o = !1) {
     if (this.opened)
       return;
-    this.addToolsFiltered(t), this.nodes.wrapper.classList.add(this.CSS.inlineToolbarShowed), this.buttonsList = this.nodes.buttons.querySelectorAll(
+    this.addToolsFiltered(t, o), this.nodes.wrapper.classList.add(this.CSS.inlineToolbarShowed), this.buttonsList = this.nodes.buttons.querySelectorAll(
       `.${this.CSS.inlineToolButton}`
     ), this.opened = !0, e && this.Editor.ConversionToolbar.hasTools() ? this.setConversionTogglerContent() : this.nodes.conversionToggler.hidden = !0;
-    let o = Array.from(this.buttonsList);
-    o.unshift(this.nodes.conversionToggler), o = o.filter((i) => !i.hidden), this.flipper.activate(o);
+    let i = Array.from(this.buttonsList);
+    i.unshift(this.nodes.conversionToggler), i = i.filter((n) => !n.hidden), this.flipper.activate(i);
   }
   /**
    * Check if node is contained by Inline Toolbar
@@ -5018,7 +5043,7 @@ class Uo extends C {
    * Need to show Inline Toolbar or not
    */
   allowedToShow() {
-    const e = ["IMG", "INPUT"], t = k.get(), o = k.text;
+    const e = ["IMG", "INPUT"], t = m.get(), o = m.text;
     if (!t || !t.anchorNode || t.isCollapsed || o.length < 1)
       return !1;
     const i = d.isElement(t.anchorNode) ? t.anchorNode : t.anchorNode.parentElement;
@@ -5090,18 +5115,18 @@ class Uo extends C {
   /**
    * Append only allowed Tools
    */
-  addToolsFiltered(e = !1) {
-    const t = k.get(), o = this.Editor.BlockManager.blocks.findIndex(
-      (n) => n.name === "paragraph"
+  addToolsFiltered(e = !1, t = !1) {
+    const o = m.get(), i = this.Editor.BlockManager.blocks.findIndex(
+      (r) => r.name === "paragraph"
     );
-    let i = this.Editor.BlockManager.blocks[o];
-    !e && t.anchorNode ? i = this.Editor.BlockManager.getBlock(
-      t.anchorNode
-    ) : this.move({
+    let n = this.Editor.BlockManager.blocks[i];
+    !e && o.anchorNode ? n = this.Editor.BlockManager.getBlock(
+      o.anchorNode
+    ) : t || this.move({
       clientX: this.Editor.RectangleSelection.getMousePosition().x,
       clientY: this.Editor.RectangleSelection.getMousePosition().y
-    }), this.nodes.buttons.innerHTML = "", this.nodes.actions.innerHTML = "", this.toolsInstances = /* @__PURE__ */ new Map(), Array.from(i.tool.inlineTools.values()).forEach((n) => {
-      this.addTool(n);
+    }), this.nodes.buttons.innerHTML = "", this.nodes.actions.innerHTML = "", this.toolsInstances = /* @__PURE__ */ new Map(), Array.from(n.tool.inlineTools.values()).forEach((r) => {
+      this.addTool(r);
     }), this.recalculateWidth();
   }
   /**
@@ -5139,7 +5164,7 @@ class Uo extends C {
     ), ee() === !1 && this.tooltip.onHover(o, n, {
       placement: "top",
       hidingDelay: 100
-    }), t.checkState(k.get());
+    }), t.checkState(m.get());
   }
   /**
    * Get shortcut name for tool
@@ -5172,7 +5197,7 @@ class Uo extends C {
    * @param {InlineTool} tool - Tool's instance
    */
   toolClicked(e) {
-    const t = k.range;
+    const t = m.range;
     e.surround(t), this.checkToolsState(), e.renderActions !== void 0 && this.flipper.deactivate();
   }
   /**
@@ -5180,7 +5205,7 @@ class Uo extends C {
    */
   checkToolsState() {
     this.toolsInstances.forEach((e) => {
-      e.checkState(k.get());
+      e.checkState(m.get());
     });
   }
   /**
@@ -5261,7 +5286,7 @@ class $o extends C {
     const { BlockManager: t, InlineToolbar: o, ConversionToolbar: i } = this.Editor, n = t.currentBlock;
     if (!n)
       return;
-    const r = n.isEmpty, a = n.tool.isDefault && r, l = !r && i.opened, c = !r && !k.isCollapsed && o.opened;
+    const r = n.isEmpty, a = n.tool.isDefault && r, l = !r && i.opened, c = !r && !m.isCollapsed && o.opened;
     a ? this.activateToolbox() : !l && !c && this.activateBlockSettings();
   }
   /**
@@ -5346,7 +5371,7 @@ class $o extends C {
     if (r.isLineBreaksEnabled && !i.isAtStart)
       return;
     const a = t.currentBlockIndex === 0;
-    i.isAtStart && k.isCollapsed && n.currentInput === n.firstInput && !a && (e.preventDefault(), this.mergeBlocks());
+    i.isAtStart && m.isCollapsed && n.currentInput === n.firstInput && !a && (e.preventDefault(), this.mergeBlocks());
   }
   /**
    * Merge current and previous Blocks if they have the same type
@@ -6234,7 +6259,7 @@ class Xo extends C {
    * to select all and copy them
    */
   prepare() {
-    this.selection = new k(), re.add({
+    this.selection = new m(), re.add({
       name: "CMD+A",
       handler: (e) => {
         const { BlockManager: t, ReadOnly: o } = this.Editor;
@@ -6254,7 +6279,7 @@ class Xo extends C {
    *  - Unselect all Blocks
    */
   toggleReadOnly() {
-    k.get().removeAllRanges(), this.allBlocksSelected = !1;
+    m.get().removeAllRanges(), this.allBlocksSelected = !1;
   }
   /**
    * Remove selection of Block
@@ -6276,7 +6301,7 @@ class Xo extends C {
     const { BlockManager: o, Caret: i, RectangleSelection: n } = this.Editor;
     this.needToSelectAll = !1, this.nativeInputSelected = !1, this.readyToBlockSelection = !1;
     const r = e && e instanceof KeyboardEvent, a = r && tt(e.keyCode);
-    if (this.anyBlockSelected && r && a && !k.isSelectionExists) {
+    if (this.anyBlockSelected && r && a && !m.isSelectionExists) {
       const l = o.removeSelectedBlocks();
       o.insertDefaultBlockAtIndex(l, !0), i.setToBlock(o.currentBlock), oe(() => {
         const c = e.key;
@@ -6326,7 +6351,7 @@ class Xo extends C {
     const { BlockManager: t } = this.Editor;
     t.clearFocused();
     let o;
-    isNaN(e) ? o = t.currentBlock : o = t.getBlockByIndex(e), this.selection.save(), k.get().removeAllRanges(), o.selected = !0, this.clearCache(), this.Editor.InlineToolbar.close();
+    isNaN(e) ? o = t.currentBlock : o = t.getBlockByIndex(e), this.selection.save(), m.get().removeAllRanges(), o.selected = !0, this.clearCache();
   }
   /**
    * Clear anyBlockSelected cache
@@ -6370,7 +6395,7 @@ class Xo extends C {
    * Each Block has selected setter that makes Block copyable
    */
   selectAllBlocks() {
-    this.selection.save(), k.get().removeAllRanges(), this.allBlocksSelected = !0, this.Editor.InlineToolbar.open(!0, !0);
+    this.selection.save(), m.get().removeAllRanges(), this.allBlocksSelected = !0, this.Editor.InlineToolbar.open(!0, !0);
   }
 }
 class ve extends C {
@@ -6401,7 +6426,7 @@ class ve extends C {
    * @returns {boolean}
    */
   get isAtStart() {
-    const e = k.get(), t = d.getDeepestNode(this.Editor.BlockManager.currentBlock.currentInput);
+    const e = m.get(), t = d.getDeepestNode(this.Editor.BlockManager.currentBlock.currentInput);
     let o = e.focusNode;
     if (d.isNativeInput(t))
       return t.selectionEnd === 0;
@@ -6421,7 +6446,7 @@ class ve extends C {
    * @returns {boolean}
    */
   get isAtEnd() {
-    const e = k.get();
+    const e = m.get();
     let t = e.focusNode;
     const o = d.getDeepestNode(this.Editor.BlockManager.currentBlock.currentInput, !0);
     if (d.isNativeInput(o))
@@ -6506,7 +6531,7 @@ class ve extends C {
    * @param {number} offset - offset
    */
   set(e, t = 0) {
-    const { top: o, bottom: i } = k.setCursor(e, t), { innerHeight: n } = window;
+    const { top: o, bottom: i } = m.setCursor(e, t), { innerHeight: n } = window;
     o < 0 && window.scrollBy(0, o), i > n && window.scrollBy(0, i - n);
   }
   /**
@@ -6527,7 +6552,7 @@ class ve extends C {
    * Extract content fragment of current Block from Caret position to the end of the Block
    */
   extractFragmentFromCaretPosition() {
-    const e = k.get();
+    const e = m.get();
     if (e.rangeCount) {
       const t = e.getRangeAt(0), o = this.Editor.BlockManager.currentBlock.currentInput;
       if (t.deleteContents(), o)
@@ -6589,7 +6614,7 @@ class ve extends C {
     const t = e.querySelector(`.${ve.CSS.shadowCaret}`);
     if (!t)
       return;
-    new k().expandToTag(t), setTimeout(() => {
+    new m().expandToTag(t), setTimeout(() => {
       const i = document.createRange();
       i.selectNode(t), i.extractContents();
     }, 50);
@@ -6600,7 +6625,7 @@ class ve extends C {
    * @param {string} content - content to insert
    */
   insertContentAtCaretPosition(e) {
-    const t = document.createDocumentFragment(), o = document.createElement("div"), i = k.get(), n = k.range;
+    const t = document.createDocumentFragment(), o = document.createElement("div"), i = m.get(), n = m.range;
     o.innerHTML = e, Array.from(o.childNodes).forEach((l) => t.appendChild(l)), t.childNodes.length === 0 && t.appendChild(new Text());
     const r = t.lastChild;
     n.deleteContents(), n.insertNode(t);
@@ -6644,7 +6669,7 @@ class Vo extends C {
       const { BlockManager: t, BlockSelection: o } = this.Editor, i = t.getBlockByChildNode(e.relatedTarget) || this.lastSelectedBlock, n = t.getBlockByChildNode(e.target);
       if (!(!i || !n) && n !== i) {
         if (i === this.firstSelectedBlock) {
-          k.get().removeAllRanges(), i.selected = !0, n.selected = !0, o.clearCache();
+          m.get().removeAllRanges(), i.selected = !0, n.selected = !0, o.clearCache();
           return;
         }
         if (n === this.firstSelectedBlock) {
@@ -6671,7 +6696,7 @@ class Vo extends C {
    * @param {MouseEvent} event - mouse down event
    */
   watchSelection(e) {
-    if (e.button !== At.LEFT)
+    if (e.button !== Ot.LEFT)
       return;
     const { BlockManager: t } = this.Editor;
     this.firstSelectedBlock = t.getBlock(
@@ -6692,7 +6717,7 @@ class Vo extends C {
    */
   toggleBlockSelectedState(e = !0) {
     const { BlockManager: t, BlockSelection: o } = this.Editor;
-    this.lastSelectedBlock || (this.lastSelectedBlock = this.firstSelectedBlock = t.currentBlock), this.firstSelectedBlock === this.lastSelectedBlock && (this.firstSelectedBlock.selected = !0, o.clearCache(), k.get().removeAllRanges());
+    this.lastSelectedBlock || (this.lastSelectedBlock = this.firstSelectedBlock = t.currentBlock), this.firstSelectedBlock === this.lastSelectedBlock && (this.firstSelectedBlock.selected = !0, o.clearCache(), m.get().removeAllRanges());
     const i = t.blocks.indexOf(this.lastSelectedBlock) + (e ? 1 : -1), n = t.blocks[i];
     n && (this.lastSelectedBlock.selected !== n.selected ? (n.selected = !0, o.clearCache()) : (this.lastSelectedBlock.selected = !1, o.clearCache()), this.lastSelectedBlock = n, this.Editor.InlineToolbar.close(), n.holder.scrollIntoView({
       block: "nearest"
@@ -6742,7 +6767,7 @@ class Vo extends C {
    */
   enableCrossBlockSelection(e) {
     const { UI: t } = this.Editor;
-    k.isCollapsed || this.Editor.BlockSelection.clearSelection(e), t.nodes.redactor.contains(e.target) ? this.watchSelection(e) : this.Editor.BlockSelection.clearSelection(e);
+    m.isCollapsed || this.Editor.BlockSelection.clearSelection(e), t.nodes.redactor.contains(e.target) ? this.watchSelection(e) : this.Editor.BlockSelection.clearSelection(e);
   }
   /**
    * Change blocks selection state between passed two blocks.
@@ -6808,7 +6833,7 @@ class Zo extends C {
     } = this.Editor;
     e.preventDefault(), t.blocks.forEach((r) => {
       r.dropTarget = !1;
-    }), k.isAtEditor && !k.isCollapsed && this.isStartedAtEditor && document.execCommand("delete"), this.isStartedAtEditor = !1;
+    }), m.isAtEditor && !m.isCollapsed && this.isStartedAtEditor && document.execCommand("delete"), this.isStartedAtEditor = !1;
     const n = t.setCurrentBlockByChildNode(e.target);
     if (n)
       this.Editor.Caret.setToBlock(n, o.positions.END);
@@ -6822,7 +6847,7 @@ class Zo extends C {
    * Handle drag start event
    */
   processDragStart() {
-    k.isAtEditor && !k.isCollapsed && (this.isStartedAtEditor = !0), this.Editor.InlineToolbar.close();
+    m.isAtEditor && !m.isCollapsed && (this.isStartedAtEditor = !0), this.Editor.InlineToolbar.close();
   }
   /**
    * @param {DragEvent} dragEvent - drag event
@@ -7131,9 +7156,9 @@ const xt = class extends C {
           n = i, a = !0, this.toolsTags[n.tagName] && (r = this.toolsTags[n.tagName].tool);
           break;
       }
-      const { tags: l } = r.pasteConfig || { tags: [] }, c = l.reduce((f, v) => (this.collectTagNames(v).forEach((m) => {
-        const A = j(v) ? v[m] : null;
-        f[m.toLowerCase()] = A || {};
+      const { tags: l } = r.pasteConfig || { tags: [] }, c = l.reduce((f, v) => (this.collectTagNames(v).forEach((k) => {
+        const O = j(v) ? v[k] : null;
+        f[k.toLowerCase()] = O || {};
       }), f), {}), u = Object.assign({}, c, r.baseSanitizeConfig);
       if (n.tagName.toLowerCase() === "table") {
         const f = Z(n.outerHTML, u);
@@ -7538,7 +7563,16 @@ class pe extends C {
    * Handle mouse up
    */
   processMouseUp(e) {
-    this.clearSelection(), this.endSelection(), this.Editor.BlockSelection.selectedBlocks.length > 1 && this.Editor.InlineToolbar.tryToShow(!1, !0, e);
+    this.clearSelection(), this.endSelection();
+    const t = this.Editor.InlineToolbar.containsNode(
+      e.target
+    );
+    this.Editor.BlockSelection.selectedBlocks.length > 1 && this.Editor.InlineToolbar.tryToShow(
+      !1,
+      !0,
+      e,
+      t
+    );
   }
   /**
    * Scroll If mouse in scroll zone
@@ -7593,7 +7627,7 @@ class pe extends C {
       return;
     e.pageY !== void 0 && (this.mouseX = e.pageX, this.mouseY = e.pageY);
     const { rightPos: t, leftPos: o, index: i } = this.genInfoForMouseSelection(), n = this.startX > t && this.mouseX > t, r = this.startX < o && this.mouseX < o;
-    this.rectCrossesBlocks = !(n || r), this.isRectSelectionActivated || (this.rectCrossesBlocks = !1, this.isRectSelectionActivated = !0, this.shrinkRectangleToPoint(), this.overlayRectangle.style.display = "block"), this.updateRectangleSize(), this.Editor.Toolbar.close(), i !== void 0 && (this.trySelectNextBlock(i), this.inverseSelection(), k.get().removeAllRanges());
+    this.rectCrossesBlocks = !(n || r), this.isRectSelectionActivated || (this.rectCrossesBlocks = !1, this.isRectSelectionActivated = !0, this.shrinkRectangleToPoint(), this.overlayRectangle.style.display = "block"), this.updateRectangleSize(), this.Editor.Toolbar.close(), i !== void 0 && (this.trySelectNextBlock(i), this.inverseSelection(), m.get().removeAllRanges());
   }
   /**
    * Shrink rect to singular point
@@ -7663,14 +7697,14 @@ class pe extends C {
     o > 1 && (l = a ? i : n);
     const c = e > this.stackOfSelected[o - 1] && l === i, u = e < this.stackOfSelected[o - 1] && l === n, f = !(c || u || l === r);
     if (!f && (e > this.stackOfSelected[o - 1] || this.stackOfSelected[o - 1] === void 0)) {
-      let m = this.stackOfSelected[o - 1] + 1 || e;
-      for (m; m <= e; m++)
-        this.addBlockInSelection(m);
+      let k = this.stackOfSelected[o - 1] + 1 || e;
+      for (k; k <= e; k++)
+        this.addBlockInSelection(k);
       return;
     }
     if (!f && e < this.stackOfSelected[o - 1]) {
-      for (let m = this.stackOfSelected[o - 1] - 1; m >= e; m--)
-        this.addBlockInSelection(m);
+      for (let k = this.stackOfSelected[o - 1] - 1; k >= e; k--)
+        this.addBlockInSelection(k);
       return;
     }
     if (!f)
@@ -7913,8 +7947,8 @@ var Ne = {}, ei = {
         for (var w = {}, M = [], R = 0; R < y.length; R++) {
           var b = y[R], g = x.base ? b[0] + x.base : b[0], E = w[g] || 0, S = "".concat(g, " ").concat(E);
           w[g] = E + 1;
-          var O = c(S), I = { css: b[1], media: b[2], sourceMap: b[3] };
-          O !== -1 ? (l[O].references++, l[O].updater(I)) : l.push({ identifier: S, updater: _(I, x), references: 1 }), M.push(S);
+          var A = c(S), I = { css: b[1], media: b[2], sourceMap: b[3] };
+          A !== -1 ? (l[A].references++, l[A].updater(I)) : l.push({ identifier: S, updater: _(I, x), references: 1 }), M.push(S);
         }
         return M;
       }
@@ -7949,7 +7983,7 @@ var Ne = {}, ei = {
           g[x] && y.removeChild(g[x]), g.length ? y.insertBefore(b, g[x]) : y.appendChild(b);
         }
       }
-      function m(y, x, w) {
+      function k(y, x, w) {
         var M = w.css, R = w.media, b = w.sourceMap;
         if (R ? y.setAttribute("media", R) : y.removeAttribute("media"), b && btoa && (M += `
 /*# sourceMappingURL=data:application/json;base64,`.concat(btoa(unescape(encodeURIComponent(JSON.stringify(b)))), " */")), y.styleSheet)
@@ -7960,14 +7994,14 @@ var Ne = {}, ei = {
           y.appendChild(document.createTextNode(M));
         }
       }
-      var A = null, N = 0;
+      var O = null, N = 0;
       function _(y, x) {
         var w, M, R;
         if (x.singleton) {
           var b = N++;
-          w = A || (A = h(x)), M = p.bind(null, w, b, !1), R = p.bind(null, w, b, !0);
+          w = O || (O = h(x)), M = p.bind(null, w, b, !1), R = p.bind(null, w, b, !0);
         } else
-          w = h(x), M = m.bind(null, w, x), R = function() {
+          w = h(x), M = k.bind(null, w, x), R = function() {
             (function(g) {
               if (g.parentNode === null)
                 return !1;
@@ -8041,13 +8075,13 @@ var Ne = {}, ei = {
               if (!f)
                 return h;
               if (u && typeof btoa == "function") {
-                var v = (m = f, A = btoa(unescape(encodeURIComponent(JSON.stringify(m)))), N = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(A), "/*# ".concat(N, " */")), p = f.sources.map(function(_) {
+                var v = (k = f, O = btoa(unescape(encodeURIComponent(JSON.stringify(k)))), N = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(O), "/*# ".concat(N, " */")), p = f.sources.map(function(_) {
                   return "/*# sourceURL=".concat(f.sourceRoot || "").concat(_, " */");
                 });
                 return [h].concat(p).concat([v]).join(`
 `);
               }
-              var m, A, N;
+              var k, O, N;
               return [h].join(`
 `);
             }(a, n);
@@ -8091,8 +8125,8 @@ var Ne = {}, ei = {
       var a = function() {
         function l(c) {
           var u = c.data, h = c.config, f = c.api, v = c.readOnly;
-          (function(p, m) {
-            if (!(p instanceof m))
+          (function(p, k) {
+            if (!(p instanceof k))
               throw new TypeError("Cannot call a class as a function");
           })(this, l), this.api = f, this.readOnly = v, this._CSS = { block: this.api.styles.block, wrapper: "ce-paragraph" }, this.readOnly || (this.onKeyUp = this.onKeyUp.bind(this)), this._placeholder = h.placeholder ? h.placeholder : l.DEFAULT_PLACEHOLDER, this._data = {}, this._element = this.drawView(), this._preserveBlank = h.preserveBlank !== void 0 && h.preserveBlank, this.data = u;
         }
@@ -8287,7 +8321,7 @@ class Ye {
     }, this.nodes = {
       button: null,
       input: null
-    }, this.inputOpened = !1, this.toolbar = e.toolbar, this.inlineToolbar = e.inlineToolbar, this.notifier = e.notifier, this.i18n = e.i18n, this.selection = new k();
+    }, this.inputOpened = !1, this.toolbar = e.toolbar, this.inlineToolbar = e.inlineToolbar, this.notifier = e.notifier, this.i18n = e.i18n, this.selection = new m();
   }
   /**
    * Sanitizer Rule
@@ -8340,7 +8374,7 @@ class Ye {
   checkState() {
     const e = this.selection.findParentTag("A");
     if (e) {
-      this.nodes.button.innerHTML = Oo, this.nodes.button.classList.add(this.CSS.buttonUnlink), this.nodes.button.classList.add(this.CSS.buttonActive), this.openActions();
+      this.nodes.button.innerHTML = Ao, this.nodes.button.classList.add(this.CSS.buttonUnlink), this.nodes.button.classList.add(this.CSS.buttonActive), this.openActions();
       const t = e.getAttribute("href");
       this.nodes.input.value = t !== "null" ? t : "", this.selection.save();
     } else
@@ -8379,7 +8413,7 @@ class Ye {
    */
   closeActions(e = !0) {
     if (this.selection.isFakeBackgroundEnabled) {
-      const t = new k();
+      const t = new m();
       t.save(), this.selection.restore(), this.selection.removeFakeBackground(), t.restore();
     }
     this.nodes.input.classList.remove(this.CSS.inputShowed), this.nodes.input.value = "", e && this.selection.clearSaved(), this.inputOpened = !1;
@@ -9350,7 +9384,7 @@ class hi extends C {
    */
   backspacePressed(e) {
     const { BlockManager: t, BlockSelection: o, Caret: i } = this.Editor;
-    if (o.anyBlockSelected && !k.isSelectionExists) {
+    if (o.anyBlockSelected && !m.isSelectionExists) {
       const n = t.removeSelectedBlocks();
       i.setToBlock(
         t.insertDefaultBlockAtIndex(n, !0),
@@ -9374,7 +9408,7 @@ class hi extends C {
    */
   enterPressed(e) {
     const { BlockManager: t, BlockSelection: o } = this.Editor, i = t.currentBlockIndex >= 0;
-    if (o.anyBlockSelected && !k.isSelectionExists) {
+    if (o.anyBlockSelected && !m.isSelectionExists) {
       o.clearSelection(e), e.preventDefault(), e.stopImmediatePropagation(), e.stopPropagation();
       return;
     }
@@ -9393,7 +9427,7 @@ class hi extends C {
     if (!e.isTrusted)
       return;
     const t = e.target;
-    this.nodes.holder.contains(t) || k.isAtEditor || (this.Editor.BlockManager.dropPointer(), this.Editor.Toolbar.close());
+    this.nodes.holder.contains(t) || m.isAtEditor || (this.Editor.BlockManager.dropPointer(), this.Editor.Toolbar.close());
     const i = this.Editor.BlockSettings.nodes.wrapper.contains(t), n = this.Editor.Toolbar.nodes.settingsToggler.contains(t), r = i || n;
     if (this.Editor.BlockSettings.opened && !r) {
       this.Editor.BlockSettings.close();
@@ -9437,7 +9471,7 @@ class hi extends C {
    */
   redactorClicked(e) {
     const { BlockSelection: t } = this.Editor;
-    if (!k.isCollapsed)
+    if (!m.isCollapsed)
       return;
     const o = () => {
       e.stopImmediatePropagation(), e.stopPropagation();
@@ -9466,15 +9500,19 @@ class hi extends C {
    * Uses for showing the Inline Toolbar
    */
   selectionChanged() {
-    const { CrossBlockSelection: e, BlockSelection: t } = this.Editor, o = k.anchorElement;
-    if (e.isCrossBlockSelectionStarted && t.anyBlockSelected && k.get().removeAllRanges(), !o)
+    const { CrossBlockSelection: e, BlockSelection: t } = this.Editor, o = m.anchorElement;
+    if (e.isCrossBlockSelectionStarted && t.anyBlockSelected && m.get().removeAllRanges(), !o)
       return;
     const i = o.closest(`.${F.CSS.content}`) === null;
-    if (i && (this.Editor.InlineToolbar.containsNode(o) || this.Editor.InlineToolbar.close(), !(o.dataset.inlineToolbar === "true")))
+    if (i && (this.Editor.InlineToolbar.containsNode(o) || this.Editor.BlockSelection.anyBlockSelected || this.Editor.InlineToolbar.close(), !(o.dataset.inlineToolbar === "true")))
       return;
     this.Editor.BlockManager.currentBlock || this.Editor.BlockManager.setCurrentBlockByChildNode(o);
     const n = i !== !0;
-    this.Editor.InlineToolbar.tryToShow(!0, n);
+    this.Editor.InlineToolbar.tryToShow(
+      !0,
+      n,
+      null
+    );
   }
 }
 const ui = {

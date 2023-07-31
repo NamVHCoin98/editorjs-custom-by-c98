@@ -146,7 +146,8 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
   public tryToShow(
     needToClose = false,
     needToShowConversionToolbar = true,
-    mouseEvent = null
+    mouseEvent = null,
+    isFixedToolbarPosition = false
   ): void {
     if (!this.allowedToShow() && !mouseEvent) {
       if (needToClose) {
@@ -156,9 +157,11 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
       return;
     }
 
-    this.move(mouseEvent);
+    if (!isFixedToolbarPosition) {
+      this.move(mouseEvent);
+    }
 
-    this.open(needToShowConversionToolbar);
+    this.open(needToShowConversionToolbar, false, isFixedToolbarPosition);
     this.Editor.Toolbar.close();
   }
 
@@ -179,9 +182,6 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
 
     if (mouseEvent) {
       this.nodes.wrapper.classList.add(this.CSS.inlineToolbarFixed);
-    }
-
-    if (mouseEvent) {
       newCoords.y = mouseEvent.clientY < 300 ? 300 : mouseEvent.clientY;
       newCoords.x =
         mouseEvent.clientX < wrapperOffset.left + 30
@@ -265,7 +265,11 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
    *
    * @param [needToShowConversionToolbar] - pass false to not to show Conversion Toolbar
    */
-  public open(needToShowConversionToolbar = true, isSelectedAll = false): void {
+  public open(
+    needToShowConversionToolbar = true,
+    isSelectedAll = false,
+    isFixedToolbarPosition = false
+  ): void {
     if (this.opened) {
       return;
     }
@@ -273,7 +277,7 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
     /**
      * Filter inline-tools and show only allowed by Block's Tool
      */
-    this.addToolsFiltered(isSelectedAll);
+    this.addToolsFiltered(isSelectedAll, isFixedToolbarPosition);
 
     /**
      * Show Inline Toolbar
@@ -572,7 +576,10 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
   /**
    * Append only allowed Tools
    */
-  private addToolsFiltered(isFollowMousePosition = false): void {
+  private addToolsFiltered(
+    isFollowMousePosition = false,
+    isFixedToolbarPosition = false
+  ): void {
     const currentSelection = SelectionUtils.get();
 
     /**
@@ -590,10 +597,12 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
         currentSelection.anchorNode as HTMLElement
       );
     } else {
-      this.move({
-        clientX: this.Editor.RectangleSelection.getMousePosition().x,
-        clientY: this.Editor.RectangleSelection.getMousePosition().y,
-      });
+      if (!isFixedToolbarPosition) {
+        this.move({
+          clientX: this.Editor.RectangleSelection.getMousePosition().x,
+          clientY: this.Editor.RectangleSelection.getMousePosition().y,
+        });
+      }
     }
 
     /**

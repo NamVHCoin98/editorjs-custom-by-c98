@@ -921,7 +921,9 @@ export default class UI extends Module<UINodes> {
        * If new selection is not on Inline Toolbar, we need to close it
        */
       if (!this.Editor.InlineToolbar.containsNode(focusedElement)) {
-        this.Editor.InlineToolbar.close();
+        if (!this.Editor.BlockSelection.anyBlockSelected) {
+          this.Editor.InlineToolbar.close();
+        }
       }
 
       /**
@@ -949,6 +951,10 @@ export default class UI extends Module<UINodes> {
     /**
      * @todo add debounce
      */
-    this.Editor.InlineToolbar.tryToShow(true, isNeedToShowConversionToolbar);
+    this.Editor.InlineToolbar.tryToShow(
+      true,
+      isNeedToShowConversionToolbar,
+      null
+    );
   }
 }

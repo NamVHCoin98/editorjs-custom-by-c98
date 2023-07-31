@@ -310,8 +310,17 @@ export default class RectangleSelection extends Module {
      * Custom by c98
      */
 
+    const isFixedToolbarPosition = this.Editor.InlineToolbar.containsNode(
+      event.target
+    );
+
     if (this.Editor.BlockSelection.selectedBlocks.length > 1) {
-      this.Editor.InlineToolbar.tryToShow(false, true, event);
+      this.Editor.InlineToolbar.tryToShow(
+        false,
+        true,
+        event,
+        isFixedToolbarPosition
+      );
     }
   }
 

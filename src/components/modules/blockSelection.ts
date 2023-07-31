@@ -363,7 +363,7 @@ export default class BlockSelection extends Module {
     this.clearCache();
 
     /** close InlineToolbar when we selected any Block */
-    this.Editor.InlineToolbar.close();
+    // this.Editor.InlineToolbar.close();
   }
 
   /**
