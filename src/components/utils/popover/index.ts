@@ -127,6 +127,7 @@ export default class Popover extends EventsDispatcher<PopoverEventMap> {
     items: string;
     overlay: string;
     overlayHidden: string;
+    titleType: string;
     } {
     return {
       popover: 'ce-popover',
@@ -140,6 +141,7 @@ export default class Popover extends EventsDispatcher<PopoverEventMap> {
       items: 'ce-popover__items',
       overlay: 'ce-popover__overlay',
       overlayHidden: 'ce-popover__overlay--hidden',
+      titleType: 'ce-popover__title-type',
     };
   }
 
@@ -177,7 +179,6 @@ export default class Popover extends EventsDispatcher<PopoverEventMap> {
    */
   constructor(params: PopoverParams) {
     super();
-
     this.items = params.items.map(item => new PopoverItem(item));
 
     if (params.scopeElement !== undefined) {
@@ -201,9 +202,10 @@ export default class Popover extends EventsDispatcher<PopoverEventMap> {
       this.addCustomContent(params.customContent);
     }
 
-    if (params.searchable) {
-      this.addSearch();
-    }
+    // Custom by c98
+    // if (params.searchable) {
+    //   this.addSearch();
+    // }
 
 
     this.initializeFlipper();
@@ -294,7 +296,18 @@ export default class Popover extends EventsDispatcher<PopoverEventMap> {
     this.nodes.popover.appendChild(this.nodes.nothingFoundMessage);
     this.nodes.items = Dom.make('div', [ Popover.CSS.items ]);
 
-    this.items.forEach(item => {
+    this.items.forEach((item, index) => {
+      // Custom by c98
+      if (index === 0 || index === 7) {
+        const titleType = Dom.make('div', [ Popover.CSS.titleType ]);
+        titleType.innerHTML = index === 0 ? "Text Blocks" : "Media";
+        if (index === 7) {
+          titleType.classList.add("divider");
+        }
+
+        this.nodes.items.appendChild(titleType);
+      }
+      
       this.nodes.items.appendChild(item.getElement());
     });
 

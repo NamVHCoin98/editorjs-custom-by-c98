@@ -3,24 +3,24 @@
  */
 .ce-popover {
   --border-radius: 6px;
-  --width: 200px;
-  --max-height: 270px;
-  --padding: 6px;
+  --width: 400px;
+  --max-height: 600px;
+  --padding: 8px;
   --offset-from-target: 8px;
   --color-border: #e8e8eb;
-  --color-shadow: rgba(13,20,33,0.13);
+  --color-shadow: rgba(13, 20, 33, 0.13);
   --color-background: white;
   --color-text-primary: black;
-  --color-text-secondary: #707684;
+  --color-text-secondary: #808080;
   --color-border-icon: rgb(201 201 204 / 48%);
-  --color-border-icon-disabled: #EFF0F1;
-  --color-text-icon-active: #388AE5;
+  --color-border-icon-disabled: #eff0f1;
+  --color-text-icon-active: #388ae5;
   --color-background-icon-active: rgba(56, 138, 229, 0.1);
   --color-background-item-focus: rgba(34, 186, 255, 0.08);
   --color-shadow-item-focus: rgba(7, 161, 227, 0.08);
-  --color-background-item-hover: #eff2f5;
-  --color-background-item-confirm: #E24A4A;
-  --color-background-item-confirm-hover: #CE4343;
+  --color-background-item-hover: #fafafa;
+  --color-background-item-confirm: #e24a4a;
+  --color-background-item-confirm-hover: #ce4343;
 
   min-width: var(--width);
   width: var(--width);
@@ -28,7 +28,8 @@
   border-radius: var(--border-radius);
   overflow: hidden;
   box-sizing: border-box;
-  box-shadow: 0 3px 15px -3px var(--color-shadow);
+  box-shadow: 0px 10px 10px -1px rgba(0, 0, 0, 0.11),
+    0px 0px 4px 0px rgba(0, 0, 0, 0.05);
   position: absolute;
   left: 0;
   top: calc(100% + var(--offset-from-target));
@@ -40,7 +41,6 @@
   opacity: 0;
   max-height: 0;
   pointer-events: none;
-  padding: 0;
   border: none;
 
   &--opened {
@@ -102,7 +102,8 @@
     }
   }
 
-  &__search, &__custom-content:not(:empty) {
+  &__search,
+  &__custom-content:not(:empty) {
     margin-bottom: 5px;
   }
 
@@ -134,15 +135,28 @@
   &__custom-content--hidden {
     display: none;
   }
-}
 
+  &__title-type {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+    padding: 8px;
+    color: #999999;
+
+    &.divider {
+      border-top: 1px solid #d9d9d9;
+      margin-top: 8px;
+      padding-top: 16px;
+    }
+  }
+}
 
 /** 
  * Popover item styles
  */
 .ce-popover-item {
   --border-radius: 6px;
-  --icon-size: 20px;
+  --icon-size: 48px;
   --icon-size-mobile: 28px;
 
   border-radius: var(--border-radius);
@@ -162,21 +176,14 @@
 
   &__icon {
     border-radius: 5px;
-    width: 26px;
-    height: 26px;
-    box-shadow: 0 0 0 1px var(--color-border-icon);
-    background: #fff;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 10px;
+    margin-right: 16px;
 
-    svg {
-      width: var(--icon-size);
-      height: var(--icon-size);
-    }
-
-    @media (--mobile){
+    @media (--mobile) {
       width: 36px;
       height: 36px;
       border-radius: 8px;
@@ -190,7 +197,7 @@
 
   &__title {
     font-size: 14px;
-    line-height: 20px;
+    line-height: 1.5;
     font-weight: 500;
 
     overflow: hidden;
@@ -205,14 +212,11 @@
   &__secondary-title {
     color: var(--color-text-secondary);
     font-size: 12px;
-    margin-left: auto;
+    font-weight: 400;
     white-space: nowrap;
-    letter-spacing: -0.1em;
-    padding-right: 5px;
-    margin-bottom: -2px;
-    opacity: 0.6;
+    margin-top: 4px;
 
-    @media (--mobile){
+    @media (--mobile) {
       display: none;
     }
   }
@@ -250,7 +254,7 @@
   @media (--can-hover) {
     &:hover {
       cursor: pointer;
-      
+
       &:not(.ce-popover-item--no-hover) {
         background-color: var(--color-background-item-hover);
       }
@@ -287,16 +291,16 @@
         background: var(--color-background-item-confirm-hover) !important;
       }
     }
-
   }
 
-  &--confirmation, &--active, &--focused {
+  &--confirmation,
+  &--active,
+  &--focused {
     .ce-popover-item__icon {
       box-shadow: none;
     }
   }
 }
-
 
 /** 
  * Animations
@@ -313,7 +317,6 @@
   }
 
   to {
-
     transform: translateY(0);
   }
 }
@@ -330,11 +333,9 @@
   }
 
   to {
-
     transform: translateY(0);
   }
 }
-
 
 .wobble {
   animation-name: wobble;
