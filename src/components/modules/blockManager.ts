@@ -395,7 +395,8 @@ export default class BlockManager extends Module {
    * @returns {Block} inserted Block
    */
   public insertDefaultBlockAtIndex(index: number, needToFocus = false): Block {
-    const block = this.composeBlock({ tool: this.config.defaultBlock });
+    const newBlockType = this.blocks[index - 1].name === 'list' ? 'list' : this.config.defaultBlock;
+    const block = this.composeBlock({ tool: newBlockType });
 
     this._blocks[index] = block;
 

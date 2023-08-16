@@ -44,7 +44,6 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
   public CSS = {
     inlineToolbar: "ce-inline-toolbar",
     inlineToolbarShowed: "ce-inline-toolbar--showed",
-    inlineToolbarFixed: "ce-inline-toolbar--fixed",
     inlineToolbarLeftOriented: "ce-inline-toolbar--left-oriented",
     inlineToolbarRightOriented: "ce-inline-toolbar--right-oriented",
     inlineToolbarShortcut: "ce-inline-toolbar__shortcut",
@@ -161,7 +160,7 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
       this.move(mouseEvent);
     }
 
-    this.open(needToShowConversionToolbar, false, isFixedToolbarPosition);
+    this.open(needToShowConversionToolbar, false);
     this.Editor.Toolbar.close();
   }
 
@@ -169,8 +168,13 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
    * Move Toolbar to the selected text
    */
   public move(mouseEvent = null): void {
-    const selectionRect = SelectionUtils.rect as DOMRect;
+    let selectionRect = SelectionUtils.rect as DOMRect;
     const wrapperOffset = this.Editor.UI.nodes.wrapper.getBoundingClientRect();
+
+    if (mouseEvent) {
+      selectionRect = mouseEvent.target.getBoundingClientRect();
+    }
+
     const newCoords = {
       x: selectionRect.x - wrapperOffset.left,
       y:
@@ -179,15 +183,6 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
         wrapperOffset.top +
         this.toolbarVerticalMargin,
     };
-
-    if (mouseEvent) {
-      this.nodes.wrapper.classList.add(this.CSS.inlineToolbarFixed);
-      newCoords.y = mouseEvent.clientY < 300 ? 300 : mouseEvent.clientY;
-      newCoords.x =
-        mouseEvent.clientX < wrapperOffset.left + 30
-          ? wrapperOffset.left + 30
-          : mouseEvent.clientX;
-    }
 
     /**
      * If we know selections width, place InlineToolbar to center
@@ -234,9 +229,6 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
 
     this.nodes.wrapper.classList.remove(this.CSS.inlineToolbarShowed);
 
-    if (this.nodes.wrapper.classList.contains(this.CSS.inlineToolbarFixed)) {
-      this.nodes.wrapper.classList.remove(this.CSS.inlineToolbarFixed);
-    }
     Array.from(this.toolsInstances.entries()).forEach(
       ([name, toolInstance]) => {
         const shortcut = this.getToolShortcut(name);
@@ -267,8 +259,8 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
    */
   public open(
     needToShowConversionToolbar = true,
-    isSelectedAll = false,
-    isFixedToolbarPosition = false
+    isSelectedAll = false
+    // isFixedToolbarPosition = false
   ): void {
     if (this.opened) {
       return;
@@ -277,7 +269,7 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
     /**
      * Filter inline-tools and show only allowed by Block's Tool
      */
-    this.addToolsFiltered(isSelectedAll, isFixedToolbarPosition);
+    this.addToolsFiltered(isSelectedAll);
 
     /**
      * Show Inline Toolbar
@@ -577,8 +569,8 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
    * Append only allowed Tools
    */
   private addToolsFiltered(
-    isFollowMousePosition = false,
-    isFixedToolbarPosition = false
+    isFollowMousePosition = false
+    // isFixedToolbarPosition = false
   ): void {
     const currentSelection = SelectionUtils.get();
 
@@ -596,13 +588,6 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
       currentBlock = this.Editor.BlockManager.getBlock(
         currentSelection.anchorNode as HTMLElement
       );
-    } else {
-      if (!isFixedToolbarPosition) {
-        this.move({
-          clientX: this.Editor.RectangleSelection.getMousePosition().x,
-          clientY: this.Editor.RectangleSelection.getMousePosition().y,
-        });
-      }
     }
 
     /**

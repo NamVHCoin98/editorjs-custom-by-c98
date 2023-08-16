@@ -104,7 +104,7 @@ ge.logLevel = "VERBOSE";
 function _t(s) {
   ge.logLevel = s;
 }
-const T = ge.bind(window, !1), K = ge.bind(window, !0);
+const S = ge.bind(window, !1), K = ge.bind(window, !0);
 function te(s) {
   return Object.prototype.toString.call(s).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
 }
@@ -174,7 +174,7 @@ function Pt(s, e, t) {
     window.clearTimeout(o), o = window.setTimeout(r, e), a && s.apply(n, i);
   };
 }
-function Te(s, e, t = void 0) {
+function Se(s, e, t = void 0) {
   let o, i, n, r = null, a = 0;
   t || (t = {});
   const l = function() {
@@ -1229,9 +1229,9 @@ class m {
     if (e && e.type !== "Control")
       return e = e, t = e.createRange(), o.x = t.boundingLeft, o.y = t.boundingTop, o.width = t.boundingWidth, o.height = t.boundingHeight, o;
     if (!window.getSelection)
-      return T("Method window.getSelection is not supported", "warn"), o;
+      return S("Method window.getSelection is not supported", "warn"), o;
     if (e = window.getSelection(), e.rangeCount === null || isNaN(e.rangeCount))
-      return T("Method SelectionUtils.rangeCount is not supported", "warn"), o;
+      return S("Method SelectionUtils.rangeCount is not supported", "warn"), o;
     if (e.rangeCount === 0)
       return o;
     if (t = e.getRangeAt(0).cloneRange(), t.getBoundingClientRect && (o = t.getBoundingClientRect()), o.x === 0 && o.y === 0) {
@@ -1637,14 +1637,14 @@ class F extends we {
    */
   call(e, t) {
     if (D(this.toolInstance[e])) {
-      e === "appendCallback" && T(
+      e === "appendCallback" && S(
         "`appendCallback` hook is deprecated and will be removed in the next major release. Use `rendered` hook instead",
         "warn"
       );
       try {
         this.toolInstance[e].call(this.toolInstance, t);
       } catch (o) {
-        T(`Error during '${e}' call: ${o.message}`, "error");
+        S(`Error during '${e}' call: ${o.message}`, "error");
       }
     }
   }
@@ -1674,7 +1674,7 @@ class F extends we {
         try {
           t[n] = r.save();
         } catch (a) {
-          T(
+          S(
             `Tune ${r.constructor.name} save method throws an Error %o`,
             "warn",
             a
@@ -1690,7 +1690,7 @@ class F extends we {
       tunes: t,
       time: i - o
     })).catch((n) => {
-      T(
+      S(
         `Saving process for ${this.name} tool failed due to the ${n}`,
         "log",
         "red"
@@ -1769,7 +1769,7 @@ class F extends we {
         try {
           i = n.wrap(i);
         } catch (r) {
-          T(
+          S(
             `Tune ${n.constructor.name} wrap method throws an Error %o`,
             "warn",
             r
@@ -1881,7 +1881,7 @@ class Zt extends C {
     }, this.update = (e, t, o) => {
       const { BlockManager: i } = this.Editor, n = i.getBlockById(e);
       if (!n) {
-        T("blocks.update(): Block with passed id was not found", "warn");
+        S("blocks.update(): Block with passed id was not found", "warn");
         return;
       }
       const r = i.getBlockIndex(n);
@@ -1994,7 +1994,7 @@ class Zt extends C {
    * @deprecated — use 'move' instead
    */
   swap(e, t) {
-    T(
+    S(
       "`blocks.swap()` method is deprecated and will be removed in the next major release. Use `block.move()` method instead",
       "info"
     ), this.Editor.BlockManager.swap(e, t);
@@ -2068,7 +2068,7 @@ class Zt extends C {
    * @deprecated with insert() method
    */
   insertNewBlock() {
-    T(
+    S(
       "Method blocks.insertNewBlock() is deprecated and it will be removed in the next major release. Use blocks.insert() instead.",
       "warn"
     ), this.insert();
@@ -2401,41 +2401,41 @@ var Le = {}, to = {
           if (typeof E == "function")
             return E();
           if (g[E] === void 0) {
-            var S = function(A) {
+            var T = function(A) {
               return document.querySelector(A);
             }.call(this, E);
-            if (window.HTMLIFrameElement && S instanceof window.HTMLIFrameElement)
+            if (window.HTMLIFrameElement && T instanceof window.HTMLIFrameElement)
               try {
-                S = S.contentDocument.head;
+                T = T.contentDocument.head;
               } catch {
-                S = null;
+                T = null;
               }
-            g[E] = S;
+            g[E] = T;
           }
           return g[E];
         };
       }(), u = null, h = 0, f = [], v = i(5);
       function p(b, g) {
         for (var E = 0; E < b.length; E++) {
-          var S = b[E], A = a[S.id];
+          var T = b[E], A = a[T.id];
           if (A) {
             A.refs++;
             for (var I = 0; I < A.parts.length; I++)
-              A.parts[I](S.parts[I]);
-            for (; I < S.parts.length; I++)
-              A.parts.push(x(S.parts[I], g));
+              A.parts[I](T.parts[I]);
+            for (; I < T.parts.length; I++)
+              A.parts.push(x(T.parts[I], g));
           } else {
             var H = [];
-            for (I = 0; I < S.parts.length; I++)
-              H.push(x(S.parts[I], g));
-            a[S.id] = { id: S.id, refs: 1, parts: H };
+            for (I = 0; I < T.parts.length; I++)
+              H.push(x(T.parts[I], g));
+            a[T.id] = { id: T.id, refs: 1, parts: H };
           }
         }
       }
       function k(b, g) {
-        for (var E = [], S = {}, A = 0; A < b.length; A++) {
+        for (var E = [], T = {}, A = 0; A < b.length; A++) {
           var I = b[A], H = g.base ? I[0] + g.base : I[0], L = { css: I[1], media: I[2], sourceMap: I[3] };
-          S[H] ? S[H].parts.push(L) : E.push(S[H] = { id: H, parts: [L] });
+          T[H] ? T[H].parts.push(L) : E.push(T[H] = { id: H, parts: [L] });
         }
         return E;
       }
@@ -2443,9 +2443,9 @@ var Le = {}, to = {
         var E = c(b.insertInto);
         if (!E)
           throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
-        var S = f[f.length - 1];
+        var T = f[f.length - 1];
         if (b.insertAt === "top")
-          S ? S.nextSibling ? E.insertBefore(g, S.nextSibling) : E.appendChild(g) : E.insertBefore(g, E.firstChild), f.push(g);
+          T ? T.nextSibling ? E.insertBefore(g, T.nextSibling) : E.appendChild(g) : E.insertBefore(g, E.firstChild), f.push(g);
         else if (b.insertAt === "bottom")
           E.appendChild(g);
         else {
@@ -2477,7 +2477,7 @@ var Le = {}, to = {
         });
       }
       function x(b, g) {
-        var E, S, A, I;
+        var E, T, A, I;
         if (g.transform && b.css) {
           if (!(I = g.transform(b.css)))
             return function() {
@@ -2486,12 +2486,12 @@ var Le = {}, to = {
         }
         if (g.singleton) {
           var H = h++;
-          E = u || (u = _(g)), S = R.bind(null, E, H, !1), A = R.bind(null, E, H, !0);
+          E = u || (u = _(g)), T = R.bind(null, E, H, !1), A = R.bind(null, E, H, !0);
         } else
           b.sourceMap && typeof URL == "function" && typeof URL.createObjectURL == "function" && typeof URL.revokeObjectURL == "function" && typeof Blob == "function" && typeof btoa == "function" ? (E = function(L) {
             var W = document.createElement("link");
             return L.attrs.type === void 0 && (L.attrs.type = "text/css"), L.attrs.rel = "stylesheet", y(W, L.attrs), O(L, W), W;
-          }(g), S = function(L, W, le) {
+          }(g), T = function(L, W, le) {
             var Q = le.css, Ee = le.sourceMap, It = W.convertToAbsoluteUrls === void 0 && Ee;
             (W.convertToAbsoluteUrls || It) && (Q = v(Q)), Ee && (Q += `
 /*# sourceMappingURL=data:application/json;base64,` + btoa(unescape(encodeURIComponent(JSON.stringify(Ee)))) + " */");
@@ -2499,7 +2499,7 @@ var Le = {}, to = {
             L.href = URL.createObjectURL(Mt), Xe && URL.revokeObjectURL(Xe);
           }.bind(null, E, g), A = function() {
             N(E), E.href && URL.revokeObjectURL(E.href);
-          }) : (E = _(g), S = function(L, W) {
+          }) : (E = _(g), T = function(L, W) {
             var le = W.css, Q = W.media;
             if (Q && L.setAttribute("media", Q), L.styleSheet)
               L.styleSheet.cssText = le;
@@ -2511,11 +2511,11 @@ var Le = {}, to = {
           }.bind(null, E), A = function() {
             N(E);
           });
-        return S(b), function(L) {
+        return T(b), function(L) {
           if (L) {
             if (L.css === b.css && L.media === b.media && L.sourceMap === b.sourceMap)
               return;
-            S(b = L);
+            T(b = L);
           } else
             A();
         };
@@ -2525,12 +2525,12 @@ var Le = {}, to = {
           throw new Error("The style-loader cannot be used in a non-browser environment");
         (g = g || {}).attrs = typeof g.attrs == "object" ? g.attrs : {}, g.singleton || typeof g.singleton == "boolean" || (g.singleton = l()), g.insertInto || (g.insertInto = "head"), g.insertAt || (g.insertAt = "bottom");
         var E = k(b, g);
-        return p(E, g), function(S) {
+        return p(E, g), function(T) {
           for (var A = [], I = 0; I < E.length; I++) {
             var H = E[I];
             (L = a[H.id]).refs--, A.push(L);
           }
-          for (S && p(k(S, g), g), I = 0; I < A.length; I++) {
+          for (T && p(k(T, g), g), I = 0; I < A.length; I++) {
             var L;
             if ((L = A[I]).refs === 0) {
               for (var W = 0; W < L.parts.length; W++)
@@ -2544,8 +2544,8 @@ var Le = {}, to = {
         return w[b] = g, w.filter(Boolean).join(`
 `);
       });
-      function R(b, g, E, S) {
-        var A = E ? "" : S.css;
+      function R(b, g, E, T) {
+        var A = E ? "" : T.css;
         if (b.styleSheet)
           b.styleSheet.cssText = M(g, A);
         else {
@@ -3238,7 +3238,7 @@ function yo(s, e) {
     i !== void 0 ? t[i] = s[o] : t[o] = s[o];
   }), t;
 }
-const Eo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 12L9 7.1C9 7.04477 9.04477 7 9.1 7H10.4C11.5 7 14 7.1 14 9.5C14 9.5 14 12 11 12M9 12V16.8C9 16.9105 9.08954 17 9.2 17H12.5C14 17 15 16 15 14.5C15 11.7046 11 12 11 12M9 12H11"/></svg>', pt = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 10L11.8586 14.8586C11.9367 14.9367 12.0633 14.9367 12.1414 14.8586L17 10"/></svg>', Bo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 15L11.8586 10.1414C11.9367 10.0633 12.0633 10.0633 12.1414 10.1414L17 15"/></svg>', So = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 8L12 12M12 12L16 16M12 12L16 8M12 12L8 16"/></svg>', To = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/></svg>', Co = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M13.34 10C12.4223 12.7337 11 17 11 17"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M14.21 7H14.2"/></svg>', qe = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7.69998 12.6L7.67896 12.62C6.53993 13.7048 6.52012 15.5155 7.63516 16.625V16.625C8.72293 17.7073 10.4799 17.7102 11.5712 16.6314L13.0263 15.193C14.0703 14.1609 14.2141 12.525 13.3662 11.3266L13.22 11.12"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M16.22 11.12L16.3564 10.9805C17.2895 10.0265 17.3478 8.5207 16.4914 7.49733V7.49733C15.5691 6.39509 13.9269 6.25143 12.8271 7.17675L11.3901 8.38588C10.0935 9.47674 9.95706 11.4241 11.0888 12.6852L11.12 12.72"/></svg>', Io = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 7.29999H9.4"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 7.29999H14.59"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.30999 12H9.3"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 12H14.59"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 16.7H9.4"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 16.7H14.59"/></svg>', Mo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M12 7V12M12 17V12M17 12H12M12 12H7"/></svg>', Lo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5" stroke="currentColor" stroke-width="2"/><line x1="15.4142" x2="19" y1="15" y2="18.5858" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>', Ao = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M15.7795 11.5C15.7795 11.5 16.053 11.1962 16.5497 10.6722C17.4442 9.72856 17.4701 8.2475 16.5781 7.30145V7.30145C15.6482 6.31522 14.0873 6.29227 13.1288 7.25073L11.8796 8.49999"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8.24517 12.3883C8.24517 12.3883 7.97171 12.6922 7.47504 13.2161C6.58051 14.1598 6.55467 15.6408 7.44666 16.5869V16.5869C8.37653 17.5731 9.93744 17.5961 10.8959 16.6376L12.1452 15.3883"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M17.7802 15.1032L16.597 14.9422C16.0109 14.8624 15.4841 15.3059 15.4627 15.8969L15.4199 17.0818"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6.39064 9.03238L7.58432 9.06668C8.17551 9.08366 8.6522 8.58665 8.61056 7.99669L8.5271 6.81397"/><line x1="12.1142" x2="11.7" y1="12.2" y2="11.7858" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>';
+const Eo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 12L9 7.1C9 7.04477 9.04477 7 9.1 7H10.4C11.5 7 14 7.1 14 9.5C14 9.5 14 12 11 12M9 12V16.8C9 16.9105 9.08954 17 9.2 17H12.5C14 17 15 16 15 14.5C15 11.7046 11 12 11 12M9 12H11"/></svg>', pt = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 10L11.8586 14.8586C11.9367 14.9367 12.0633 14.9367 12.1414 14.8586L17 10"/></svg>', Bo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 15L11.8586 10.1414C11.9367 10.0633 12.0633 10.0633 12.1414 10.1414L17 15"/></svg>', To = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 8L12 12M12 12L16 16M12 12L16 8M12 12L8 16"/></svg>', So = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/></svg>', Co = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M13.34 10C12.4223 12.7337 11 17 11 17"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M14.21 7H14.2"/></svg>', qe = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7.69998 12.6L7.67896 12.62C6.53993 13.7048 6.52012 15.5155 7.63516 16.625V16.625C8.72293 17.7073 10.4799 17.7102 11.5712 16.6314L13.0263 15.193C14.0703 14.1609 14.2141 12.525 13.3662 11.3266L13.22 11.12"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M16.22 11.12L16.3564 10.9805C17.2895 10.0265 17.3478 8.5207 16.4914 7.49733V7.49733C15.5691 6.39509 13.9269 6.25143 12.8271 7.17675L11.3901 8.38588C10.0935 9.47674 9.95706 11.4241 11.0888 12.6852L11.12 12.72"/></svg>', Io = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 7.29999H9.4"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 7.29999H14.59"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.30999 12H9.3"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 12H14.59"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 16.7H9.4"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 16.7H14.59"/></svg>', Mo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M12 7V12M12 17V12M17 12H12M12 12H7"/></svg>', Lo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5" stroke="currentColor" stroke-width="2"/><line x1="15.4142" x2="19" y1="15" y2="18.5858" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>', Ao = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M15.7795 11.5C15.7795 11.5 16.053 11.1962 16.5497 10.6722C17.4442 9.72856 17.4701 8.2475 16.5781 7.30145V7.30145C15.6482 6.31522 14.0873 6.29227 13.1288 7.25073L11.8796 8.49999"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8.24517 12.3883C8.24517 12.3883 7.97171 12.6922 7.47504 13.2161C6.58051 14.1598 6.55467 15.6408 7.44666 16.5869V16.5869C8.37653 17.5731 9.93744 17.5961 10.8959 16.6376L12.1452 15.3883"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M17.7802 15.1032L16.597 14.9422C16.0109 14.8624 15.4841 15.3059 15.4627 15.8969L15.4199 17.0818"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6.39064 9.03238L7.58432 9.06668C8.17551 9.08366 8.6522 8.58665 8.61056 7.99669L8.5271 6.81397"/><line x1="12.1142" x2="11.7" y1="12.2" y2="11.7858" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>';
 class P {
   /**
    * Constructs popover item instance
@@ -3364,7 +3364,7 @@ class P {
   make(e) {
     const t = d.make("div", P.CSS.container);
     return e.name && (t.dataset.itemName = e.name), this.nodes.icon = d.make("div", P.CSS.icon, {
-      innerHTML: e.icon || To
+      innerHTML: e.icon || So
     }), t.appendChild(this.nodes.icon), t.appendChild(d.make("div", P.CSS.title, {
       innerHTML: e.title || ""
     })), e.secondaryLabel && t.appendChild(d.make("div", P.CSS.secondaryTitle, {
@@ -4159,7 +4159,7 @@ class Y extends C {
     else if (J(l))
       a = n[l];
     else {
-      T("Conversion «export» property must be a string or function. String means key of saved data object to export. Function should export processed string to export.");
+      S("Conversion «export» property must be a string or function. String means key of saved data object to export. Function should export processed string to export.");
       return;
     }
     const c = Z(
@@ -4173,7 +4173,7 @@ class Y extends C {
     else if (J(h))
       u[h] = c;
     else {
-      T("Conversion «import» property must be a string or function. String means key of tool data to import. Function accepts a imported string and return composed tool data.");
+      S("Conversion «import» property must be a string or function. String means key of tool data to import. Function accepts a imported string and return composed tool data.");
       return;
     }
     t && (u = Object.assign(u, t)), this.Editor.BlockManager.replace({
@@ -4921,7 +4921,6 @@ class Uo extends C {
     }), this.CSS = {
       inlineToolbar: "ce-inline-toolbar",
       inlineToolbarShowed: "ce-inline-toolbar--showed",
-      inlineToolbarFixed: "ce-inline-toolbar--fixed",
       inlineToolbarLeftOriented: "ce-inline-toolbar--left-oriented",
       inlineToolbarRightOriented: "ce-inline-toolbar--right-oriented",
       inlineToolbarShortcut: "ce-inline-toolbar__shortcut",
@@ -4961,17 +4960,20 @@ class Uo extends C {
       e && this.close();
       return;
     }
-    i || this.move(o), this.open(t, !1, i), this.Editor.Toolbar.close();
+    i || this.move(o), this.open(t, !1), this.Editor.Toolbar.close();
   }
   /**
    * Move Toolbar to the selected text
    */
   move(e = null) {
-    const t = m.rect, o = this.Editor.UI.nodes.wrapper.getBoundingClientRect(), i = {
+    let t = m.rect;
+    const o = this.Editor.UI.nodes.wrapper.getBoundingClientRect();
+    e && (t = e.target.getBoundingClientRect());
+    const i = {
       x: t.x - o.left,
       y: t.y + t.height - o.top + this.toolbarVerticalMargin
     };
-    e && (this.nodes.wrapper.classList.add(this.CSS.inlineToolbarFixed), i.y = e.clientY < 300 ? 300 : e.clientY, i.x = e.clientX < o.left + 30 ? o.left + 30 : e.clientX), t.width && (i.x += Math.floor(t.width / 2));
+    t.width && (i.x += Math.floor(t.width / 2));
     const n = i.x - this.width / 2, r = i.x + this.width / 2;
     this.nodes.wrapper.classList.toggle(
       this.CSS.inlineToolbarLeftOriented,
@@ -4985,7 +4987,7 @@ class Uo extends C {
    * Hides Inline Toolbar
    */
   close() {
-    this.opened && (this.Editor.ReadOnly.isEnabled || (this.nodes.wrapper.classList.remove(this.CSS.inlineToolbarShowed), this.nodes.wrapper.classList.contains(this.CSS.inlineToolbarFixed) && this.nodes.wrapper.classList.remove(this.CSS.inlineToolbarFixed), Array.from(this.toolsInstances.entries()).forEach(
+    this.opened && (this.Editor.ReadOnly.isEnabled || (this.nodes.wrapper.classList.remove(this.CSS.inlineToolbarShowed), Array.from(this.toolsInstances.entries()).forEach(
       ([e, t]) => {
         const o = this.getToolShortcut(e);
         o && re.remove(this.Editor.UI.nodes.redactor, o), D(t.clear) && t.clear();
@@ -4997,14 +4999,14 @@ class Uo extends C {
    *
    * @param [needToShowConversionToolbar] - pass false to not to show Conversion Toolbar
    */
-  open(e = !0, t = !1, o = !1) {
+  open(e = !0, t = !1) {
     if (this.opened)
       return;
-    this.addToolsFiltered(t, o), this.nodes.wrapper.classList.add(this.CSS.inlineToolbarShowed), this.buttonsList = this.nodes.buttons.querySelectorAll(
+    this.addToolsFiltered(t), this.nodes.wrapper.classList.add(this.CSS.inlineToolbarShowed), this.buttonsList = this.nodes.buttons.querySelectorAll(
       `.${this.CSS.inlineToolButton}`
     ), this.opened = !0, e && this.Editor.ConversionToolbar.hasTools() ? this.setConversionTogglerContent() : this.nodes.conversionToggler.hidden = !0;
-    let i = Array.from(this.buttonsList);
-    i.unshift(this.nodes.conversionToggler), i = i.filter((n) => !n.hidden), this.flipper.activate(i);
+    let o = Array.from(this.buttonsList);
+    o.unshift(this.nodes.conversionToggler), o = o.filter((i) => !i.hidden), this.flipper.activate(o);
   }
   /**
    * Check if node is contained by Inline Toolbar
@@ -5115,18 +5117,15 @@ class Uo extends C {
   /**
    * Append only allowed Tools
    */
-  addToolsFiltered(e = !1, t = !1) {
-    const o = m.get(), i = this.Editor.BlockManager.blocks.findIndex(
-      (r) => r.name === "paragraph"
+  addToolsFiltered(e = !1) {
+    const t = m.get(), o = this.Editor.BlockManager.blocks.findIndex(
+      (n) => n.name === "paragraph"
     );
-    let n = this.Editor.BlockManager.blocks[i];
-    !e && o.anchorNode ? n = this.Editor.BlockManager.getBlock(
-      o.anchorNode
-    ) : t || this.move({
-      clientX: this.Editor.RectangleSelection.getMousePosition().x,
-      clientY: this.Editor.RectangleSelection.getMousePosition().y
-    }), this.nodes.buttons.innerHTML = "", this.nodes.actions.innerHTML = "", this.toolsInstances = /* @__PURE__ */ new Map(), Array.from(n.tool.inlineTools.values()).forEach((r) => {
-      this.addTool(r);
+    let i = this.Editor.BlockManager.blocks[o];
+    !e && t.anchorNode && (i = this.Editor.BlockManager.getBlock(
+      t.anchorNode
+    )), this.nodes.buttons.innerHTML = "", this.nodes.actions.innerHTML = "", this.toolsInstances = /* @__PURE__ */ new Map(), Array.from(i.tool.inlineTools.values()).forEach((n) => {
+      this.addTool(n);
     }), this.recalculateWidth();
   }
   /**
@@ -5137,7 +5136,7 @@ class Uo extends C {
   addTool(e) {
     const t = e.create(), o = t.render();
     if (!o) {
-      T("Render method must return an instance of Node", "warn", e.name);
+      S("Render method must return an instance of Node", "warn", e.name);
       return;
     }
     if (o.dataset.tool = e.name, this.nodes.buttons.appendChild(o), this.toolsInstances.set(e.name, t), D(t.renderActions)) {
@@ -5362,7 +5361,7 @@ class $o extends C {
     if (n.selected || n.isEmpty && n.currentInput === n.firstInput) {
       e.preventDefault();
       const c = t.currentBlockIndex;
-      t.previousBlock && t.previousBlock.inputs.length === 0 ? t.removeBlock(c - 1) : t.removeBlock(), i.setToBlock(
+      t.previousBlock && t.previousBlock.inputs.length === 0 || t.previousBlock.name === "image" || t.previousBlock.name === "gallery" ? t.removeBlock(c - 1) : t.removeBlock(), i.setToBlock(
         t.currentBlock,
         c ? i.positions.END : i.positions.START
       ), this.Editor.Toolbar.close(), o.clearSelection(e);
@@ -5452,7 +5451,7 @@ class $o extends C {
     this.Editor.Toolbar.opened || (this.Editor.BlockManager.currentBlock.focused = !0, this.Editor.Toolbar.moveAndOpen()), this.Editor.BlockSettings.opened || this.Editor.BlockSettings.open();
   }
 }
-class Se {
+class Te {
   /**
    * @class
    * @param {HTMLElement} workingArea — editor`s working node
@@ -5734,10 +5733,10 @@ class Ko extends C {
    * Define this._blocks property
    */
   prepare() {
-    const e = new Se(this.Editor.UI.nodes.redactor);
+    const e = new Te(this.Editor.UI.nodes.redactor);
     this._blocks = new Proxy(e, {
-      set: Se.set,
-      get: Se.get
+      set: Te.set,
+      get: Te.get
     }), this.listeners.on(
       document,
       "copy",
@@ -5857,7 +5856,7 @@ class Ko extends C {
     try {
       i.call(q.ON_PASTE, t);
     } catch (n) {
-      T(`${e}: onPaste callback call is failed`, "error", n);
+      S(`${e}: onPaste callback call is failed`, "error", n);
     }
     return i;
   }
@@ -6055,11 +6054,11 @@ class Ko extends C {
    */
   move(e, t = this.currentBlockIndex) {
     if (isNaN(e) || isNaN(t)) {
-      T("Warning during 'move' call: incorrect indices provided.", "warn");
+      S("Warning during 'move' call: incorrect indices provided.", "warn");
       return;
     }
     if (!this.validateIndex(e) || !this.validateIndex(t)) {
-      T(
+      S(
         "Warning during 'move' call: indices cannot be lower than 0 or greater than the amount of blocks.",
         "warn"
       );
@@ -6933,7 +6932,7 @@ const xt = class extends C {
           return;
         this.getTagsConfig(s), this.getFilesConfig(s), this.getPatternsConfig(s);
       } catch (e) {
-        T(
+        S(
           `Paste handling for «${s.name}» Tool hasn't been set up because of the error`,
           "warn",
           e
@@ -7042,7 +7041,7 @@ const xt = class extends C {
       const i = this.collectTagNames(o);
       t.push(...i), i.forEach((n) => {
         if (Object.prototype.hasOwnProperty.call(this.toolsTags, n)) {
-          T(
+          S(
             `Paste handler for «${s.name}» Tool on «${n}» tag is skipped because it is already used by «${this.toolsTags[n].tool.name}» Tool.`,
             "warn"
           );
@@ -7066,7 +7065,7 @@ const xt = class extends C {
       return;
     const { files: e = {} } = s.pasteConfig;
     let { extensions: t, mimeTypes: o } = e;
-    !t && !o || (t && !Array.isArray(t) && (T(`«extensions» property of the onDrop config for «${s.name}» Tool should be an array`), t = []), o && !Array.isArray(o) && (T(`«mimeTypes» property of the onDrop config for «${s.name}» Tool should be an array`), o = []), o && (o = o.filter((i) => Dt(i) ? !0 : (T(`MIME type value «${i}» for the «${s.name}» Tool is not a valid MIME type`, "warn"), !1))), this.toolsFiles[s.name] = {
+    !t && !o || (t && !Array.isArray(t) && (S(`«extensions» property of the onDrop config for «${s.name}» Tool should be an array`), t = []), o && !Array.isArray(o) && (S(`«mimeTypes» property of the onDrop config for «${s.name}» Tool should be an array`), o = []), o && (o = o.filter((i) => Dt(i) ? !0 : (S(`MIME type value «${i}» for the «${s.name}» Tool is not a valid MIME type`, "warn"), !1))), this.toolsFiles[s.name] = {
       extensions: t || [],
       mimeTypes: o || []
     });
@@ -7078,7 +7077,7 @@ const xt = class extends C {
    */
   getPatternsConfig(s) {
     s.pasteConfig === !1 || !s.pasteConfig.patterns || V(s.pasteConfig.patterns) || Object.entries(s.pasteConfig.patterns).forEach(([e, t]) => {
-      t instanceof RegExp || T(
+      t instanceof RegExp || S(
         `Pattern ${t} for «${s.name}» Tool is skipped because it should be a Regexp instance.`,
         "warn"
       ), this.toolsPatterns.push({
@@ -7503,7 +7502,7 @@ class pe extends C {
     ), this.listeners.on(
       document.body,
       "mousemove",
-      Te((t) => {
+      Se((t) => {
         this.processMouseMove(t);
       }, 10),
       {
@@ -7514,7 +7513,7 @@ class pe extends C {
     }), this.listeners.on(
       window,
       "scroll",
-      Te((t) => {
+      Se((t) => {
         this.processScroll(t);
       }, 10),
       {
@@ -7773,7 +7772,7 @@ class Jo extends C {
           tunes: r
         });
       } catch (c) {
-        throw T(`Block «${i}» skipped because of plugins error`, "warn", {
+        throw S(`Block «${i}» skipped because of plugins error`, "warn", {
           data: n,
           error: c
         }), Error(c);
@@ -7796,7 +7795,7 @@ class Jo extends C {
         tool: t.stubTool,
         data: c
       });
-      u.stretched = !0, T(`Tool «${i}» is not found. Check 'tools' property at your initial Editor.js config.`, "warn");
+      u.stretched = !0, S(`Tool «${i}» is not found. Check 'tools' property at your initial Editor.js config.`, "warn");
     }
   }
 }
@@ -7840,11 +7839,11 @@ class Qo extends C {
   makeOutput(e) {
     let t = 0;
     const o = [];
-    return T("[Editor.js saving]:", "groupCollapsed"), e.forEach(({ id: i, tool: n, data: r, tunes: a, time: l, isValid: c }) => {
-      if (t += l, T(`${n.charAt(0).toUpperCase() + n.slice(1)}`, "group"), c)
-        T(r), T(void 0, "groupEnd");
+    return S("[Editor.js saving]:", "groupCollapsed"), e.forEach(({ id: i, tool: n, data: r, tunes: a, time: l, isValid: c }) => {
+      if (t += l, S(`${n.charAt(0).toUpperCase() + n.slice(1)}`, "group"), c)
+        S(r), S(void 0, "groupEnd");
       else {
-        T(`Block «${n}» skipped because saved data is invalid`), T(void 0, "groupEnd");
+        S(`Block «${n}» skipped because saved data is invalid`), S(void 0, "groupEnd");
         return;
       }
       if (n === this.Editor.Tools.stubTool) {
@@ -7860,7 +7859,7 @@ class Qo extends C {
         }
       };
       o.push(u);
-    }), T("Total", "log", t), T(void 0, "groupEnd"), {
+    }), S("Total", "log", t), S(void 0, "groupEnd"), {
       time: +/* @__PURE__ */ new Date(),
       blocks: o,
       version: "1.0.12"
@@ -7945,10 +7944,10 @@ var Ne = {}, ei = {
       }
       function u(y, x) {
         for (var w = {}, M = [], R = 0; R < y.length; R++) {
-          var b = y[R], g = x.base ? b[0] + x.base : b[0], E = w[g] || 0, S = "".concat(g, " ").concat(E);
+          var b = y[R], g = x.base ? b[0] + x.base : b[0], E = w[g] || 0, T = "".concat(g, " ").concat(E);
           w[g] = E + 1;
-          var A = c(S), I = { css: b[1], media: b[2], sourceMap: b[3] };
-          A !== -1 ? (l[A].references++, l[A].updater(I)) : l.push({ identifier: S, updater: _(I, x), references: 1 }), M.push(S);
+          var A = c(T), I = { css: b[1], media: b[2], sourceMap: b[3] };
+          A !== -1 ? (l[A].references++, l[A].updater(I)) : l.push({ identifier: T, updater: _(I, x), references: 1 }), M.push(T);
         }
         return M;
       }
@@ -8027,8 +8026,8 @@ var Ne = {}, ei = {
               l[b].references--;
             }
             for (var g = u(M, x), E = 0; E < w.length; E++) {
-              var S = c(w[E]);
-              l[S].references === 0 && (l[S].updater(), l.splice(S, 1));
+              var T = c(w[E]);
+              l[T].references === 0 && (l[T].updater(), l.splice(T, 1));
             }
             w = g;
           }
@@ -8433,7 +8432,7 @@ class Ye {
       this.notifier.show({
         message: "Pasted link is not valid.",
         style: "error"
-      }), T("Incorrect Link pasted", "warn", t);
+      }), S("Incorrect Link pasted", "warn", t);
       return;
     }
     t = this.prepareLink(t), this.selection.restore(), this.selection.removeFakeBackground(), this.insertLink(t), e.preventDefault(), e.stopPropagation(), e.stopImmediatePropagation(), this.selection.collapseToEnd(), this.inlineToolbar.close();
@@ -8798,7 +8797,7 @@ class Bt {
   }
 }
 Bt.isTune = !0;
-class St {
+class Tt {
   /**
    * DeleteTune constructor
    *
@@ -8812,7 +8811,7 @@ class St {
    */
   render() {
     return {
-      icon: So,
+      icon: To,
       title: this.api.i18n.t("Delete"),
       name: "delete",
       confirmation: {
@@ -8828,8 +8827,8 @@ class St {
     this.api.blocks.delete();
   }
 }
-St.isTune = !0;
-class Tt {
+Tt.isTune = !0;
+class St {
   /**
    * MoveUpTune constructor
    *
@@ -8863,7 +8862,7 @@ class Tt {
     a.top > 0 ? l = Math.abs(r.top) - Math.abs(a.top) : l = Math.abs(r.top) + a.height, window.scrollBy(0, -1 * l), this.api.blocks.move(e - 1), this.api.toolbar.toggleBlockSettings(!0);
   }
 }
-Tt.isTune = !0;
+St.isTune = !0;
 var ai = Object.defineProperty, li = Object.getOwnPropertyDescriptor, ci = (s, e, t, o) => {
   for (var i = o > 1 ? void 0 : o ? li(e, t) : e, n = s.length - 1, r; n >= 0; n--)
     (r = s[n]) && (i = (o ? r(e, t, i) : r(i)) || i);
@@ -8978,11 +8977,11 @@ class Ct extends C {
         isInternal: !0
       },
       moveUp: {
-        class: Tt,
+        class: St,
         isInternal: !0
       },
       delete: {
-        class: St,
+        class: Tt,
         isInternal: !0
       },
       moveDown: {
@@ -9001,7 +9000,7 @@ class Ct extends C {
     if (t.isInline()) {
       const i = ["render", "surround", "checkState"].filter((n) => !t.create()[n]);
       if (i.length) {
-        T(
+        S(
           `Incorrect Inline Tool: ${t.name}. Some of required methods is not implemented %o`,
           "warn",
           i
@@ -9320,7 +9319,7 @@ class hi extends C {
     this.readOnlyMutableListeners.on(
       this.nodes.redactor,
       "mousemove",
-      Te((t) => {
+      Se((t) => {
         const o = t.target.closest(".ce-block");
         this.Editor.BlockSelection.anyBlockSelected || o && e !== o && (e = o, this.eventsDispatcher.emit(mt, {
           block: this.Editor.BlockManager.getBlockByChildNode(o)
@@ -9572,7 +9571,7 @@ class pi {
         this.moduleInstances.UI.removeLoader(), t();
       }, 500);
     }).catch((i) => {
-      T(`Editor.js is not ready because of ${i}`, "error"), o(i);
+      S(`Editor.js is not ready because of ${i}`, "error"), o(i);
     });
   }
   /**
@@ -9653,7 +9652,7 @@ class pi {
         } catch (i) {
           if (i instanceof at)
             throw new Error(i.message);
-          T(`Module ${o} was skipped because of %o`, "warn", i);
+          S(`Module ${o} was skipped because of %o`, "warn", i);
         }
       }),
       Promise.resolve()
@@ -9676,7 +9675,7 @@ class pi {
           eventsDispatcher: this.eventsDispatcher
         });
       } catch (o) {
-        T("[constructModules]", `Module ${e} skipped because`, "error", o);
+        S("[constructModules]", `Module ${e} skipped because`, "error", o);
       }
     });
   }

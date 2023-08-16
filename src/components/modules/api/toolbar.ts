@@ -1,6 +1,6 @@
 import { Toolbar } from '../../../../types/api';
 import Module from '../../__module';
-import * as _ from './../../utils';
+import * as _ from '../../utils';
 /**
  * @class ToolbarAPI
  * Provides methods for working with the Toolbar
