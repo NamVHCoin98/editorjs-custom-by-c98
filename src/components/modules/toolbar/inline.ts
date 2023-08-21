@@ -161,6 +161,7 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
     }
 
     this.open(needToShowConversionToolbar, false);
+    this.checkToolsState();
     this.Editor.Toolbar.close();
   }
 
@@ -643,7 +644,7 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
     if (shortcut) {
       try {
         this.enableShortcuts(instance, shortcut);
-      } catch (e) {}
+      } catch (e) { }
     }
 
     /**

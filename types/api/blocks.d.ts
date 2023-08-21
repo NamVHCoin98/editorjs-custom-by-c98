@@ -69,8 +69,8 @@ export interface Blocks {
   /**
    * Start ustom by c98
    */
-  getBlockSelected(): void;
-  getEditor(): void;
+  getBlockSelected(): BlockToolData[] | [];
+  getEditor(): any;
   /**
    * End custom by c98
    */
@@ -137,5 +137,5 @@ export interface Blocks {
    * @param id - id of the block to update
    * @param data - the new data
    */
-  update(id: string, data: BlockToolData): void;
+  update(id: string, data: BlockToolData, config?: any): void;
 }

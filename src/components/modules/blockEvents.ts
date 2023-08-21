@@ -6,6 +6,7 @@ import * as _ from "../utils";
 import SelectionUtils from "../selection";
 import Flipper from "../flipper";
 
+export const DEFAULT_TYPE_ACCEPT = ['paragraph', 'list', 'header', 'header01', 'header02', 'header03'];
 /**
  *
  */
@@ -274,7 +275,9 @@ export default class BlockEvents extends Module {
        * Split the Current Block into two blocks
        * Renew local current node after split
        */
-      newCurrent = this.Editor.BlockManager.split();
+      const newBlockType = BlockManager.blocks[BlockManager.currentBlockIndex].name;
+
+      newCurrent = this.Editor.BlockManager.split(DEFAULT_TYPE_ACCEPT.includes(newBlockType) ? newBlockType : 'paragraph');
     }
 
     this.Editor.Caret.setToBlock(newCurrent);
@@ -309,11 +312,12 @@ export default class BlockEvents extends Module {
 
       const index = BlockManager.currentBlockIndex;
 
+
       if (
-        (BlockManager.previousBlock &&
-          BlockManager.previousBlock.inputs.length === 0) ||
-        BlockManager.previousBlock.name === "image" ||
-        BlockManager.previousBlock.name === "gallery"
+        BlockManager.previousBlock &&
+        (BlockManager.previousBlock.inputs.length === 0 ||
+          BlockManager.previousBlock.name === "image" ||
+          BlockManager.previousBlock.name === "gallery")
       ) {
         /** If previous block doesn't contain inputs, remove it */
         BlockManager.removeBlock(index - 1);
@@ -551,8 +555,8 @@ export default class BlockEvents extends Module {
    */
   private needToolbarClosing(event: KeyboardEvent): boolean {
     const toolboxItemSelected =
-        event.keyCode === _.keyCodes.ENTER &&
-        this.Editor.Toolbar.toolbox.opened,
+      event.keyCode === _.keyCodes.ENTER &&
+      this.Editor.Toolbar.toolbox.opened,
       blockSettingsItemSelected =
         event.keyCode === _.keyCodes.ENTER && this.Editor.BlockSettings.opened,
       inlineToolbarItemSelected =

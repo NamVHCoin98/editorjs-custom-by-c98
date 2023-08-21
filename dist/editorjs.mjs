@@ -41,7 +41,7 @@ Element.prototype.scrollIntoViewIfNeeded || (Element.prototype.scrollIntoViewIfN
   const e = this.parentNode, t = window.getComputedStyle(e, null), o = parseInt(t.getPropertyValue("border-top-width")), i = parseInt(t.getPropertyValue("border-left-width")), n = this.offsetTop - e.offsetTop < e.scrollTop, r = this.offsetTop - e.offsetTop + this.clientHeight - o > e.scrollTop + e.clientHeight, a = this.offsetLeft - e.offsetLeft < e.scrollLeft, l = this.offsetLeft - e.offsetLeft + this.clientWidth - i > e.scrollLeft + e.clientWidth, c = n && !r;
   (n || r) && s && (e.scrollTop = this.offsetTop - e.offsetTop - e.clientHeight / 2 - o + this.clientHeight / 2), (a || l) && s && (e.scrollLeft = this.offsetLeft - e.offsetLeft - e.clientWidth / 2 - i + this.clientWidth / 2), (n || r || a || l) && !s && this.scrollIntoView(c);
 });
-let At = (s = 21) => crypto.getRandomValues(new Uint8Array(s)).reduce((e, t) => (t &= 63, t < 36 ? e += t.toString(36) : t < 62 ? e += (t - 26).toString(36).toUpperCase() : t > 62 ? e += "-" : e += "_", e), "");
+let _t = (s = 21) => crypto.getRandomValues(new Uint8Array(s)).reduce((e, t) => (t &= 63, t < 36 ? e += t.toString(36) : t < 62 ? e += (t - 26).toString(36).toUpperCase() : t > 62 ? e += "-" : e += "_", e), "");
 var et = /* @__PURE__ */ ((s) => (s.VERBOSE = "VERBOSE", s.INFO = "INFO", s.WARN = "WARN", s.ERROR = "ERROR", s))(et || {});
 const B = {
   BACKSPACE: 8,
@@ -58,7 +58,7 @@ const B = {
   RIGHT: 39,
   DELETE: 46,
   META: 91
-}, Ot = {
+}, At = {
   LEFT: 0,
   WHEEL: 1,
   RIGHT: 2,
@@ -84,7 +84,7 @@ function ge(s, e, t = "log", o, i = "color: inherit") {
       break;
   }
   o && r.push(o);
-  const a = "Editor.js 1.0.12", l = `line-height: 1em;
+  const a = "Editor.js 1.0.23", l = `line-height: 1em;
             color: #006FEA;
             display: inline-block;
             font-size: 11px;
@@ -101,7 +101,7 @@ function ge(s, e, t = "log", o, i = "color: inherit") {
   }
 }
 ge.logLevel = "VERBOSE";
-function _t(s) {
+function Ot(s) {
   ge.logLevel = s;
 }
 const S = ge.bind(window, !1), K = ge.bind(window, !0);
@@ -111,7 +111,7 @@ function te(s) {
 function D(s) {
   return te(s) === "function" || te(s) === "asyncfunction";
 }
-function j(s) {
+function U(s) {
   return te(s) === "object";
 }
 function J(s) {
@@ -203,9 +203,9 @@ function Ce(s, ...e) {
   if (!e.length)
     return s;
   const t = e.shift();
-  if (j(s) && j(t))
+  if (U(s) && U(t))
     for (const o in t)
-      j(t[o]) ? (s[o] || Object.assign(s, { [o]: {} }), Ce(s[o], t[o])) : Object.assign(s, { [o]: t[o] });
+      U(t[o]) ? (s[o] || Object.assign(s, { [o]: {} }), Ce(s[o], t[o])) : Object.assign(s, { [o]: t[o] });
   return Ce(s, ...e);
 }
 function nt(s) {
@@ -220,12 +220,12 @@ function Ht(s) {
   return s.substring(0, 2) === "//" ? window.location.protocol + s : window.location.origin + s;
 }
 function zt() {
-  return At(10);
+  return _t(10);
 }
-function jt(s) {
+function Ut(s) {
   window.open(s, "_blank");
 }
-function Ut(s = "") {
+function jt(s = "") {
   return `${s}${Math.floor(Math.random() * 1e8).toString(16)}`;
 }
 function Ie(s, e, t) {
@@ -250,7 +250,7 @@ function ee() {
 }
 const Ge = typeof window < "u" && window.navigator && window.navigator.platform && (/iP(ad|hone|od)/.test(window.navigator.platform) || window.navigator.platform === "MacIntel" && window.navigator.maxTouchPoints > 1);
 function $t(s, e) {
-  const t = Array.isArray(s) || j(s), o = Array.isArray(e) || j(e);
+  const t = Array.isArray(s) || U(s), o = Array.isArray(e) || U(e);
   return t || o ? JSON.stringify(s) === JSON.stringify(e) : s === e;
 }
 class d {
@@ -925,7 +925,7 @@ class Re {
    * @param {boolean|AddEventListenerOptions} options - useCapture or {capture, passive, once}
    */
   on(e, t, o, i = !1) {
-    const n = Ut("l"), r = {
+    const n = jt("l"), r = {
       id: n,
       element: e,
       eventType: t,
@@ -1419,12 +1419,12 @@ class F extends we {
       !c && !u && this.detectToolRootChange(l);
       let h;
       c || u ? h = !0 : h = !(l.length > 0 && l.every((v) => {
-        const { addedNodes: p, removedNodes: k, target: O } = v;
+        const { addedNodes: p, removedNodes: k, target: A } = v;
         return [
           ...Array.from(p),
           ...Array.from(k),
-          O
-        ].some((_) => d.isElement(_) ? _.dataset.mutationFree === "true" : !1);
+          A
+        ].some((O) => d.isElement(O) ? O.dataset.mutationFree === "true" : !1);
       })), h && (this.dropInputsCache(), this.updateCurrentInput(), this.call(
         "updated"
         /* UPDATED */
@@ -2401,8 +2401,8 @@ var Le = {}, to = {
           if (typeof E == "function")
             return E();
           if (g[E] === void 0) {
-            var T = function(A) {
-              return document.querySelector(A);
+            var T = function(_) {
+              return document.querySelector(_);
             }.call(this, E);
             if (window.HTMLIFrameElement && T instanceof window.HTMLIFrameElement)
               try {
@@ -2417,29 +2417,29 @@ var Le = {}, to = {
       }(), u = null, h = 0, f = [], v = i(5);
       function p(b, g) {
         for (var E = 0; E < b.length; E++) {
-          var T = b[E], A = a[T.id];
-          if (A) {
-            A.refs++;
-            for (var I = 0; I < A.parts.length; I++)
-              A.parts[I](T.parts[I]);
+          var T = b[E], _ = a[T.id];
+          if (_) {
+            _.refs++;
+            for (var I = 0; I < _.parts.length; I++)
+              _.parts[I](T.parts[I]);
             for (; I < T.parts.length; I++)
-              A.parts.push(x(T.parts[I], g));
+              _.parts.push(x(T.parts[I], g));
           } else {
-            var H = [];
+            var z = [];
             for (I = 0; I < T.parts.length; I++)
-              H.push(x(T.parts[I], g));
-            a[T.id] = { id: T.id, refs: 1, parts: H };
+              z.push(x(T.parts[I], g));
+            a[T.id] = { id: T.id, refs: 1, parts: z };
           }
         }
       }
       function k(b, g) {
-        for (var E = [], T = {}, A = 0; A < b.length; A++) {
-          var I = b[A], H = g.base ? I[0] + g.base : I[0], L = { css: I[1], media: I[2], sourceMap: I[3] };
-          T[H] ? T[H].parts.push(L) : E.push(T[H] = { id: H, parts: [L] });
+        for (var E = [], T = {}, _ = 0; _ < b.length; _++) {
+          var I = b[_], z = g.base ? I[0] + g.base : I[0], L = { css: I[1], media: I[2], sourceMap: I[3] };
+          T[z] ? T[z].parts.push(L) : E.push(T[z] = { id: z, parts: [L] });
         }
         return E;
       }
-      function O(b, g) {
+      function A(b, g) {
         var E = c(b.insertInto);
         if (!E)
           throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
@@ -2456,8 +2456,8 @@ var Le = {}, to = {
  Must be 'top', 'bottom', or Object.
  (https://github.com/webpack-contrib/style-loader#insertat)
 `);
-          var A = c(b.insertInto + " " + b.insertAt.before);
-          E.insertBefore(g, A);
+          var _ = c(b.insertInto + " " + b.insertAt.before);
+          E.insertBefore(g, _);
         }
       }
       function N(b) {
@@ -2467,9 +2467,9 @@ var Le = {}, to = {
         var g = f.indexOf(b);
         g >= 0 && f.splice(g, 1);
       }
-      function _(b) {
+      function O(b) {
         var g = document.createElement("style");
-        return b.attrs.type === void 0 && (b.attrs.type = "text/css"), y(g, b.attrs), O(b, g), g;
+        return b.attrs.type === void 0 && (b.attrs.type = "text/css"), y(g, b.attrs), A(b, g), g;
       }
       function y(b, g) {
         Object.keys(g).forEach(function(E) {
@@ -2477,7 +2477,7 @@ var Le = {}, to = {
         });
       }
       function x(b, g) {
-        var E, T, A, I;
+        var E, T, _, I;
         if (g.transform && b.css) {
           if (!(I = g.transform(b.css)))
             return function() {
@@ -2485,21 +2485,21 @@ var Le = {}, to = {
           b.css = I;
         }
         if (g.singleton) {
-          var H = h++;
-          E = u || (u = _(g)), T = R.bind(null, E, H, !1), A = R.bind(null, E, H, !0);
+          var z = h++;
+          E = u || (u = O(g)), T = R.bind(null, E, z, !1), _ = R.bind(null, E, z, !0);
         } else
           b.sourceMap && typeof URL == "function" && typeof URL.createObjectURL == "function" && typeof URL.revokeObjectURL == "function" && typeof Blob == "function" && typeof btoa == "function" ? (E = function(L) {
             var W = document.createElement("link");
-            return L.attrs.type === void 0 && (L.attrs.type = "text/css"), L.attrs.rel = "stylesheet", y(W, L.attrs), O(L, W), W;
+            return L.attrs.type === void 0 && (L.attrs.type = "text/css"), L.attrs.rel = "stylesheet", y(W, L.attrs), A(L, W), W;
           }(g), T = function(L, W, le) {
             var Q = le.css, Ee = le.sourceMap, It = W.convertToAbsoluteUrls === void 0 && Ee;
             (W.convertToAbsoluteUrls || It) && (Q = v(Q)), Ee && (Q += `
 /*# sourceMappingURL=data:application/json;base64,` + btoa(unescape(encodeURIComponent(JSON.stringify(Ee)))) + " */");
             var Mt = new Blob([Q], { type: "text/css" }), Xe = L.href;
             L.href = URL.createObjectURL(Mt), Xe && URL.revokeObjectURL(Xe);
-          }.bind(null, E, g), A = function() {
+          }.bind(null, E, g), _ = function() {
             N(E), E.href && URL.revokeObjectURL(E.href);
-          }) : (E = _(g), T = function(L, W) {
+          }) : (E = O(g), T = function(L, W) {
             var le = W.css, Q = W.media;
             if (Q && L.setAttribute("media", Q), L.styleSheet)
               L.styleSheet.cssText = le;
@@ -2508,7 +2508,7 @@ var Le = {}, to = {
                 L.removeChild(L.firstChild);
               L.appendChild(document.createTextNode(le));
             }
-          }.bind(null, E), A = function() {
+          }.bind(null, E), _ = function() {
             N(E);
           });
         return T(b), function(L) {
@@ -2517,7 +2517,7 @@ var Le = {}, to = {
               return;
             T(b = L);
           } else
-            A();
+            _();
         };
       }
       t.exports = function(b, g) {
@@ -2526,13 +2526,13 @@ var Le = {}, to = {
         (g = g || {}).attrs = typeof g.attrs == "object" ? g.attrs : {}, g.singleton || typeof g.singleton == "boolean" || (g.singleton = l()), g.insertInto || (g.insertInto = "head"), g.insertAt || (g.insertAt = "bottom");
         var E = k(b, g);
         return p(E, g), function(T) {
-          for (var A = [], I = 0; I < E.length; I++) {
-            var H = E[I];
-            (L = a[H.id]).refs--, A.push(L);
+          for (var _ = [], I = 0; I < E.length; I++) {
+            var z = E[I];
+            (L = a[z.id]).refs--, _.push(L);
           }
-          for (T && p(k(T, g), g), I = 0; I < A.length; I++) {
+          for (T && p(k(T, g), g), I = 0; I < _.length; I++) {
             var L;
-            if ((L = A[I]).refs === 0) {
+            if ((L = _[I]).refs === 0) {
               for (var W = 0; W < L.parts.length; W++)
                 L.parts[W]();
               delete a[L.id];
@@ -2545,12 +2545,12 @@ var Le = {}, to = {
 `);
       });
       function R(b, g, E, T) {
-        var A = E ? "" : T.css;
+        var _ = E ? "" : T.css;
         if (b.styleSheet)
-          b.styleSheet.cssText = M(g, A);
+          b.styleSheet.cssText = M(g, _);
         else {
-          var I = document.createTextNode(A), H = b.childNodes;
-          H[g] && b.removeChild(H[g]), H.length ? b.insertBefore(I, H[g]) : b.appendChild(I);
+          var I = document.createTextNode(_), z = b.childNodes;
+          z[g] && b.removeChild(z[g]), z.length ? b.insertBefore(I, z[g]) : b.appendChild(I);
         }
       }
     }, function(t, o) {
@@ -2573,16 +2573,16 @@ var Le = {}, to = {
     }, function(t, o, i) {
       var n, r, a, l, c, u, h, f, v;
       t.exports = (n = "cdx-notifies", r = "cdx-notify", a = "cdx-notify__cross", l = "cdx-notify__button--confirm", c = "cdx-notify__button--cancel", u = "cdx-notify__input", h = "cdx-notify__button", f = "cdx-notify__btns-wrapper", { alert: v = function(p) {
-        var k = document.createElement("DIV"), O = document.createElement("DIV"), N = p.message, _ = p.style;
-        return k.classList.add(r), _ && k.classList.add(r + "--" + _), k.innerHTML = N, O.classList.add(a), O.addEventListener("click", k.remove.bind(k)), k.appendChild(O), k;
+        var k = document.createElement("DIV"), A = document.createElement("DIV"), N = p.message, O = p.style;
+        return k.classList.add(r), O && k.classList.add(r + "--" + O), k.innerHTML = N, A.classList.add(a), A.addEventListener("click", k.remove.bind(k)), k.appendChild(A), k;
       }, confirm: function(p) {
-        var k = v(p), O = document.createElement("div"), N = document.createElement("button"), _ = document.createElement("button"), y = k.querySelector("." + a), x = p.cancelHandler, w = p.okHandler;
-        return O.classList.add(f), N.innerHTML = p.okText || "Confirm", _.innerHTML = p.cancelText || "Cancel", N.classList.add(h), _.classList.add(h), N.classList.add(l), _.classList.add(c), x && typeof x == "function" && (_.addEventListener("click", x), y.addEventListener("click", x)), w && typeof w == "function" && N.addEventListener("click", w), N.addEventListener("click", k.remove.bind(k)), _.addEventListener("click", k.remove.bind(k)), O.appendChild(N), O.appendChild(_), k.appendChild(O), k;
+        var k = v(p), A = document.createElement("div"), N = document.createElement("button"), O = document.createElement("button"), y = k.querySelector("." + a), x = p.cancelHandler, w = p.okHandler;
+        return A.classList.add(f), N.innerHTML = p.okText || "Confirm", O.innerHTML = p.cancelText || "Cancel", N.classList.add(h), O.classList.add(h), N.classList.add(l), O.classList.add(c), x && typeof x == "function" && (O.addEventListener("click", x), y.addEventListener("click", x)), w && typeof w == "function" && N.addEventListener("click", w), N.addEventListener("click", k.remove.bind(k)), O.addEventListener("click", k.remove.bind(k)), A.appendChild(N), A.appendChild(O), k.appendChild(A), k;
       }, prompt: function(p) {
-        var k = v(p), O = document.createElement("div"), N = document.createElement("button"), _ = document.createElement("input"), y = k.querySelector("." + a), x = p.cancelHandler, w = p.okHandler;
-        return O.classList.add(f), N.innerHTML = p.okText || "Ok", N.classList.add(h), N.classList.add(l), _.classList.add(u), p.placeholder && _.setAttribute("placeholder", p.placeholder), p.default && (_.value = p.default), p.inputType && (_.type = p.inputType), x && typeof x == "function" && y.addEventListener("click", x), w && typeof w == "function" && N.addEventListener("click", function() {
-          w(_.value);
-        }), N.addEventListener("click", k.remove.bind(k)), O.appendChild(_), O.appendChild(N), k.appendChild(O), k;
+        var k = v(p), A = document.createElement("div"), N = document.createElement("button"), O = document.createElement("input"), y = k.querySelector("." + a), x = p.cancelHandler, w = p.okHandler;
+        return A.classList.add(f), N.innerHTML = p.okText || "Ok", N.classList.add(h), N.classList.add(l), O.classList.add(u), p.placeholder && O.setAttribute("placeholder", p.placeholder), p.default && (O.value = p.default), p.inputType && (O.type = p.inputType), x && typeof x == "function" && y.addEventListener("click", x), w && typeof w == "function" && N.addEventListener("click", function() {
+          w(O.value);
+        }), N.addEventListener("click", k.remove.bind(k)), A.appendChild(O), A.appendChild(N), k.appendChild(A), k;
       }, getWrapper: function() {
         var p = document.createElement("DIV");
         return p.classList.add(n), p;
@@ -2659,12 +2659,12 @@ class so extends C {
     return this.Editor.ReadOnly.isEnabled;
   }
 }
-var Ae = {}, ro = {
+var _e = {}, ro = {
   get exports() {
-    return Ae;
+    return _e;
   },
   set exports(s) {
-    Ae = s;
+    _e = s;
   }
 };
 (function(s, e) {
@@ -2706,10 +2706,10 @@ var Ae = {}, ro = {
             f.removeChild(p), this._sanitize(h, f);
             break;
           }
-          var k = r(p), O;
-          k && (O = Array.prototype.some.call(p.childNodes, i));
-          var N = !!f.parentNode, _ = i(f) && i(p) && N, y = p.nodeName.toLowerCase(), x = l(this.config, y, p), w = k && O;
-          if (w || c(p, x) || !this.config.keepNestedBlockElements && _) {
+          var k = r(p), A;
+          k && (A = Array.prototype.some.call(p.childNodes, i));
+          var N = !!f.parentNode, O = i(f) && i(p) && N, y = p.nodeName.toLowerCase(), x = l(this.config, y, p), w = k && A;
+          if (w || c(p, x) || !this.config.keepNestedBlockElements && O) {
             if (!(p.nodeName === "SCRIPT" || p.nodeName === "STYLE"))
               for (; p.childNodes.length > 0; )
                 f.insertBefore(p.childNodes[0], p);
@@ -2744,7 +2744,7 @@ var Ae = {}, ro = {
     return t;
   });
 })(ro);
-const ao = Ae;
+const ao = _e;
 function ht(s, e) {
   return s.map((t) => {
     const o = D(e) ? e(t.tool) : e;
@@ -2758,7 +2758,7 @@ function Z(s, e = {}) {
   return new ao(t).clean(s);
 }
 function Pe(s, e) {
-  return Array.isArray(s) ? lo(s, e) : j(s) ? co(s, e) : J(s) ? ho(s, e) : s;
+  return Array.isArray(s) ? lo(s, e) : U(s) ? co(s, e) : J(s) ? ho(s, e) : s;
 }
 function lo(s, e) {
   return s.map((t) => Pe(t, e));
@@ -2774,10 +2774,10 @@ function co(s, e) {
   return t;
 }
 function ho(s, e) {
-  return j(e) ? Z(s, e) : e === !1 ? Z(s, {}) : s;
+  return U(e) ? Z(s, e) : e === !1 ? Z(s, {}) : s;
 }
 function uo(s) {
-  return j(s) || Nt(s) || D(s);
+  return U(s) || Nt(s) || D(s);
 }
 class po extends C {
   /**
@@ -2933,12 +2933,12 @@ class mo extends C {
     e ?? !this.Editor.Toolbar.toolbox.opened ? (this.Editor.Toolbar.moveAndOpen(), this.Editor.Toolbar.toolbox.open()) : this.Editor.Toolbar.toolbox.close();
   }
 }
-var Oe = {}, ko = {
+var Ae = {}, ko = {
   get exports() {
-    return Oe;
+    return Ae;
   },
   set exports(s) {
-    Oe = s;
+    Ae = s;
   }
 };
 /*!
@@ -3095,7 +3095,7 @@ var Oe = {}, ko = {
     }]).default;
   });
 })(ko);
-const vo = /* @__PURE__ */ xe(Oe);
+const vo = /* @__PURE__ */ xe(Ae);
 class Fe {
   constructor() {
     this.lib = new vo();
@@ -3222,7 +3222,7 @@ class wo extends C {
 function ut(s, e) {
   const t = {};
   return Object.entries(s).forEach(([o, i]) => {
-    if (j(i)) {
+    if (U(i)) {
       const n = e ? `${e}.${o}` : o;
       Object.values(i).every((a) => J(a)) ? t[o] = n : t[o] = ut(i, n);
       return;
@@ -3238,7 +3238,7 @@ function yo(s, e) {
     i !== void 0 ? t[i] = s[o] : t[o] = s[o];
   }), t;
 }
-const Eo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 12L9 7.1C9 7.04477 9.04477 7 9.1 7H10.4C11.5 7 14 7.1 14 9.5C14 9.5 14 12 11 12M9 12V16.8C9 16.9105 9.08954 17 9.2 17H12.5C14 17 15 16 15 14.5C15 11.7046 11 12 11 12M9 12H11"/></svg>', pt = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 10L11.8586 14.8586C11.9367 14.9367 12.0633 14.9367 12.1414 14.8586L17 10"/></svg>', Bo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 15L11.8586 10.1414C11.9367 10.0633 12.0633 10.0633 12.1414 10.1414L17 15"/></svg>', To = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 8L12 12M12 12L16 16M12 12L16 8M12 12L8 16"/></svg>', So = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/></svg>', Co = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M13.34 10C12.4223 12.7337 11 17 11 17"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M14.21 7H14.2"/></svg>', qe = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7.69998 12.6L7.67896 12.62C6.53993 13.7048 6.52012 15.5155 7.63516 16.625V16.625C8.72293 17.7073 10.4799 17.7102 11.5712 16.6314L13.0263 15.193C14.0703 14.1609 14.2141 12.525 13.3662 11.3266L13.22 11.12"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M16.22 11.12L16.3564 10.9805C17.2895 10.0265 17.3478 8.5207 16.4914 7.49733V7.49733C15.5691 6.39509 13.9269 6.25143 12.8271 7.17675L11.3901 8.38588C10.0935 9.47674 9.95706 11.4241 11.0888 12.6852L11.12 12.72"/></svg>', Io = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 7.29999H9.4"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 7.29999H14.59"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.30999 12H9.3"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 12H14.59"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 16.7H9.4"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 16.7H14.59"/></svg>', Mo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M12 7V12M12 17V12M17 12H12M12 12H7"/></svg>', Lo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5" stroke="currentColor" stroke-width="2"/><line x1="15.4142" x2="19" y1="15" y2="18.5858" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>', Ao = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M15.7795 11.5C15.7795 11.5 16.053 11.1962 16.5497 10.6722C17.4442 9.72856 17.4701 8.2475 16.5781 7.30145V7.30145C15.6482 6.31522 14.0873 6.29227 13.1288 7.25073L11.8796 8.49999"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8.24517 12.3883C8.24517 12.3883 7.97171 12.6922 7.47504 13.2161C6.58051 14.1598 6.55467 15.6408 7.44666 16.5869V16.5869C8.37653 17.5731 9.93744 17.5961 10.8959 16.6376L12.1452 15.3883"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M17.7802 15.1032L16.597 14.9422C16.0109 14.8624 15.4841 15.3059 15.4627 15.8969L15.4199 17.0818"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6.39064 9.03238L7.58432 9.06668C8.17551 9.08366 8.6522 8.58665 8.61056 7.99669L8.5271 6.81397"/><line x1="12.1142" x2="11.7" y1="12.2" y2="11.7858" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>';
+const Eo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 12L9 7.1C9 7.04477 9.04477 7 9.1 7H10.4C11.5 7 14 7.1 14 9.5C14 9.5 14 12 11 12M9 12V16.8C9 16.9105 9.08954 17 9.2 17H12.5C14 17 15 16 15 14.5C15 11.7046 11 12 11 12M9 12H11"/></svg>', pt = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 10L11.8586 14.8586C11.9367 14.9367 12.0633 14.9367 12.1414 14.8586L17 10"/></svg>', Bo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 15L11.8586 10.1414C11.9367 10.0633 12.0633 10.0633 12.1414 10.1414L17 15"/></svg>', To = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 8L12 12M12 12L16 16M12 12L16 8M12 12L8 16"/></svg>', So = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/></svg>', Co = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M13.34 10C12.4223 12.7337 11 17 11 17"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M14.21 7H14.2"/></svg>', qe = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7.69998 12.6L7.67896 12.62C6.53993 13.7048 6.52012 15.5155 7.63516 16.625V16.625C8.72293 17.7073 10.4799 17.7102 11.5712 16.6314L13.0263 15.193C14.0703 14.1609 14.2141 12.525 13.3662 11.3266L13.22 11.12"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M16.22 11.12L16.3564 10.9805C17.2895 10.0265 17.3478 8.5207 16.4914 7.49733V7.49733C15.5691 6.39509 13.9269 6.25143 12.8271 7.17675L11.3901 8.38588C10.0935 9.47674 9.95706 11.4241 11.0888 12.6852L11.12 12.72"/></svg>', Io = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 7.29999H9.4"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 7.29999H14.59"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.30999 12H9.3"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 12H14.59"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 16.7H9.4"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 16.7H14.59"/></svg>', Mo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M12 7V12M12 17V12M17 12H12M12 12H7"/></svg>', Lo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5" stroke="currentColor" stroke-width="2"/><line x1="15.4142" x2="19" y1="15" y2="18.5858" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>', _o = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M15.7795 11.5C15.7795 11.5 16.053 11.1962 16.5497 10.6722C17.4442 9.72856 17.4701 8.2475 16.5781 7.30145V7.30145C15.6482 6.31522 14.0873 6.29227 13.1288 7.25073L11.8796 8.49999"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8.24517 12.3883C8.24517 12.3883 7.97171 12.6922 7.47504 13.2161C6.58051 14.1598 6.55467 15.6408 7.44666 16.5869V16.5869C8.37653 17.5731 9.93744 17.5961 10.8959 16.6376L12.1452 15.3883"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M17.7802 15.1032L16.597 14.9422C16.0109 14.8624 15.4841 15.3059 15.4627 15.8969L15.4199 17.0818"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6.39064 9.03238L7.58432 9.06668C8.17551 9.08366 8.6522 8.58665 8.61056 7.99669L8.5271 6.81397"/><line x1="12.1142" x2="11.7" y1="12.2" y2="11.7858" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>';
 class P {
   /**
    * Constructs popover item instance
@@ -3254,7 +3254,10 @@ class P {
     }, this.removeSpecialHoverBehavior = () => {
       this.nodes.root.classList.remove(P.CSS.noHover);
     }, this.onErrorAnimationEnd = () => {
-      this.nodes.icon.classList.remove(P.CSS.wobbleAnimation), this.nodes.icon.removeEventListener("animationend", this.onErrorAnimationEnd);
+      this.nodes.icon.classList.remove(P.CSS.wobbleAnimation), this.nodes.icon.removeEventListener(
+        "animationend",
+        this.onErrorAnimationEnd
+      );
     }, this.params = e, this.nodes.root = this.make(e);
   }
   /**
@@ -3268,6 +3271,12 @@ class P {
    */
   get toggle() {
     return this.params.toggle;
+  }
+  /**
+   * Item secondaryLabel
+   */
+  get secondaryLabel() {
+    return this.params.secondaryLabel;
   }
   /**
    * Item title
@@ -3363,13 +3372,21 @@ class P {
    */
   make(e) {
     const t = d.make("div", P.CSS.container);
-    return e.name && (t.dataset.itemName = e.name), this.nodes.icon = d.make("div", P.CSS.icon, {
+    e.name && (t.dataset.itemName = e.name), this.nodes.icon = d.make("div", P.CSS.icon, {
       innerHTML: e.icon || So
-    }), t.appendChild(this.nodes.icon), t.appendChild(d.make("div", P.CSS.title, {
+    }), t.appendChild(this.nodes.icon);
+    const o = d.make("div", P.CSS.title, {
       innerHTML: e.title || ""
-    })), e.secondaryLabel && t.appendChild(d.make("div", P.CSS.secondaryTitle, {
-      textContent: e.secondaryLabel
-    })), e.isActive && t.classList.add(P.CSS.active), e.isDisabled && t.classList.add(P.CSS.disabled), t;
+    });
+    return e.description && o.appendChild(
+      d.make("div", P.CSS.secondaryTitle, {
+        textContent: e.description
+      })
+    ), t.appendChild(o), e.secondaryLabel && t.appendChild(
+      d.make("div", P.CSS.secondaryTitle, {
+        textContent: e.secondaryLabel
+      })
+    ), e.isActive && t.classList.add(P.CSS.active), e.isDisabled && t.classList.add(P.CSS.disabled), t;
   }
   /**
    * Activates confirmation mode for the item.
@@ -3396,13 +3413,20 @@ class P {
    * This is needed to prevent item from being highlighted as hovered/focused just after click.
    */
   enableSpecialHoverAndFocusBehavior() {
-    this.nodes.root.classList.add(P.CSS.noHover), this.nodes.root.classList.add(P.CSS.noFocus), this.nodes.root.addEventListener("mouseleave", this.removeSpecialHoverBehavior, { once: !0 });
+    this.nodes.root.classList.add(P.CSS.noHover), this.nodes.root.classList.add(P.CSS.noFocus), this.nodes.root.addEventListener(
+      "mouseleave",
+      this.removeSpecialHoverBehavior,
+      { once: !0 }
+    );
   }
   /**
    * Disables special focus and hover behavior
    */
   disableSpecialHoverAndFocusBehavior() {
-    this.removeSpecialFocusBehavior(), this.removeSpecialHoverBehavior(), this.nodes.root.removeEventListener("mouseleave", this.removeSpecialHoverBehavior);
+    this.removeSpecialFocusBehavior(), this.removeSpecialHoverBehavior(), this.nodes.root.removeEventListener(
+      "mouseleave",
+      this.removeSpecialHoverBehavior
+    );
   }
   /**
    * Executes item's onActivate callback if the item has no confirmation configured
@@ -3755,12 +3779,12 @@ ft.CSS = {
   scrollLocked: "ce-scroll-locked",
   scrollLockedHard: "ce-scroll-locked--hard"
 };
-var Oo = Object.defineProperty, _o = Object.getOwnPropertyDescriptor, No = (s, e, t, o) => {
-  for (var i = o > 1 ? void 0 : o ? _o(e, t) : e, n = s.length - 1, r; n >= 0; n--)
+var Ao = Object.defineProperty, Oo = Object.getOwnPropertyDescriptor, No = (s, e, t, o) => {
+  for (var i = o > 1 ? void 0 : o ? Oo(e, t) : e, n = s.length - 1, r; n >= 0; n--)
     (r = s[n]) && (i = (o ? r(e, t, i) : r(i)) || i);
-  return o && i && Oo(e, t, i), i;
+  return o && i && Ao(e, t, i), i;
 }, fe = /* @__PURE__ */ ((s) => (s.Close = "close", s))(fe || {});
-const z = class extends we {
+const H = class extends we {
   /**
    * Constructs the instance
    *
@@ -3782,7 +3806,7 @@ const z = class extends we {
     }, this.items = s.items.map((e) => new P(e)), s.scopeElement !== void 0 && (this.scopeElement = s.scopeElement), s.messages && (this.messages = {
       ...this.messages,
       ...s.messages
-    }), s.customContentFlippableItems && (this.customContentFlippableItems = s.customContentFlippableItems), this.make(), s.customContent && this.addCustomContent(s.customContent), s.searchable && this.addSearch(), this.initializeFlipper();
+    }), s.customContentFlippableItems && (this.customContentFlippableItems = s.customContentFlippableItems), this.make(), s.customContent && this.addCustomContent(s.customContent), this.initializeFlipper();
   }
   /**
    * Popover CSS classes
@@ -3799,7 +3823,8 @@ const z = class extends we {
       customContentHidden: "ce-popover__custom-content--hidden",
       items: "ce-popover__items",
       overlay: "ce-popover__overlay",
-      overlayHidden: "ce-popover__overlay--hidden"
+      overlayHidden: "ce-popover__overlay--hidden",
+      titleType: "ce-popover__title-type"
     };
   }
   /**
@@ -3818,7 +3843,7 @@ const z = class extends we {
    * Open popover
    */
   show() {
-    this.shouldOpenBottom || (this.nodes.popover.style.setProperty("--popover-height", this.height + "px"), this.nodes.popover.classList.add(z.CSS.popoverOpenTop)), this.nodes.overlay.classList.remove(z.CSS.overlayHidden), this.nodes.popover.classList.add(z.CSS.popoverOpened), this.flipper.activate(this.flippableElements), this.search !== void 0 && setTimeout(() => {
+    this.shouldOpenBottom || (this.nodes.popover.style.setProperty("--popover-height", this.height + "px"), this.nodes.popover.classList.add(H.CSS.popoverOpenTop)), this.nodes.overlay.classList.remove(H.CSS.overlayHidden), this.nodes.popover.classList.add(H.CSS.popoverOpened), this.flipper.activate(this.flippableElements), this.search !== void 0 && setTimeout(() => {
       this.search.focus();
     }, 100), ee() && this.scrollLocker.lock();
   }
@@ -3826,7 +3851,7 @@ const z = class extends we {
    * Closes popover
    */
   hide() {
-    this.nodes.popover.classList.remove(z.CSS.popoverOpened), this.nodes.popover.classList.remove(z.CSS.popoverOpenTop), this.nodes.overlay.classList.add(z.CSS.overlayHidden), this.flipper.deactivate(), this.items.forEach((s) => s.reset()), this.search !== void 0 && this.search.clear(), ee() && this.scrollLocker.unlock(), this.emit(
+    this.nodes.popover.classList.remove(H.CSS.popoverOpened), this.nodes.popover.classList.remove(H.CSS.popoverOpenTop), this.nodes.overlay.classList.add(H.CSS.overlayHidden), this.flipper.deactivate(), this.items.forEach((s) => s.reset()), this.search !== void 0 && this.search.clear(), ee() && this.scrollLocker.unlock(), this.emit(
       "close"
       /* Close */
     );
@@ -3841,14 +3866,18 @@ const z = class extends we {
    * Constructs HTML element corresponding to popover
    */
   make() {
-    this.nodes.popover = d.make("div", [z.CSS.popover]), this.nodes.nothingFoundMessage = d.make("div", [z.CSS.nothingFoundMessage], {
+    this.nodes.popover = d.make("div", [H.CSS.popover]), this.nodes.nothingFoundMessage = d.make("div", [H.CSS.nothingFoundMessage], {
       textContent: this.messages.nothingFound
-    }), this.nodes.popover.appendChild(this.nodes.nothingFoundMessage), this.nodes.items = d.make("div", [z.CSS.items]), this.items.forEach((s) => {
+    }), this.nodes.popover.appendChild(this.nodes.nothingFoundMessage), this.nodes.items = d.make("div", [H.CSS.items]), this.items.forEach((s, e) => {
+      if (e === 0 || e === 7) {
+        const t = d.make("div", [H.CSS.titleType]);
+        t.innerHTML = e === 0 ? "Text Blocks" : "Media", e === 7 && t.classList.add("divider"), this.nodes.items.appendChild(t);
+      }
       this.nodes.items.appendChild(s.getElement());
     }), this.nodes.popover.appendChild(this.nodes.items), this.listeners.on(this.nodes.popover, "click", (s) => {
       const e = this.getTargetItem(s);
       e !== void 0 && this.handleItemClick(e);
-    }), this.nodes.wrapper = d.make("div"), this.nodes.overlay = d.make("div", [z.CSS.overlay, z.CSS.overlayHidden]), this.listeners.on(this.nodes.overlay, "click", () => {
+    }), this.nodes.wrapper = d.make("div"), this.nodes.overlay = d.make("div", [H.CSS.overlay, H.CSS.overlayHidden]), this.listeners.on(this.nodes.overlay, "click", () => {
       this.hide();
     }), this.nodes.wrapper.appendChild(this.nodes.overlay), this.nodes.wrapper.appendChild(this.nodes.popover);
   }
@@ -3869,7 +3898,7 @@ const z = class extends we {
       }
     });
     const s = this.search.getElement();
-    s.classList.add(z.CSS.search), this.nodes.popover.insertBefore(s, this.nodes.popover.firstChild);
+    s.classList.add(H.CSS.search), this.nodes.popover.insertBefore(s, this.nodes.popover.firstChild);
   }
   /**
    * Adds custom html content to the popover
@@ -3877,7 +3906,7 @@ const z = class extends we {
    * @param content - html content to append
    */
   addCustomContent(s) {
-    this.nodes.customContent = s, this.nodes.customContent.classList.add(z.CSS.customContent), this.nodes.popover.insertBefore(s, this.nodes.popover.firstChild);
+    this.nodes.customContent = s, this.nodes.customContent.classList.add(H.CSS.customContent), this.nodes.popover.insertBefore(s, this.nodes.popover.firstChild);
   }
   /**
    * Retrieves popover item that is the target of the specified event
@@ -3923,7 +3952,7 @@ const z = class extends we {
     if (this.nodes.popover === null)
       return s;
     const e = this.nodes.popover.cloneNode(!0);
-    return e.style.visibility = "hidden", e.style.position = "absolute", e.style.top = "-1000px", e.classList.add(z.CSS.popoverOpened), document.body.appendChild(e), s = e.offsetHeight, e.remove(), s;
+    return e.style.visibility = "hidden", e.style.position = "absolute", e.style.top = "-1000px", e.classList.add(H.CSS.popoverOpened), document.body.appendChild(e), s = e.offsetHeight, e.remove(), s;
   }
   /**
    * Checks if popover should be opened bottom.
@@ -3939,7 +3968,7 @@ const z = class extends we {
    * @param isDisplayed - true if the message should be displayed
    */
   toggleNothingFoundMessage(s) {
-    this.nodes.nothingFoundMessage.classList.toggle(z.CSS.nothingFoundMessageDisplayed, s);
+    this.nodes.nothingFoundMessage.classList.toggle(H.CSS.nothingFoundMessageDisplayed, s);
   }
   /**
    * Toggles custom content visibility
@@ -3948,7 +3977,7 @@ const z = class extends we {
    */
   toggleCustomContent(s) {
     var e;
-    (e = this.nodes.customContent) == null || e.classList.toggle(z.CSS.customContentHidden, s);
+    (e = this.nodes.customContent) == null || e.classList.toggle(H.CSS.customContentHidden, s);
   }
   /**
    * - Toggles item active state, if clicked popover item has property 'toggle' set to true.
@@ -3971,7 +4000,7 @@ const z = class extends we {
     }
   }
 };
-let He = z;
+let He = H;
 No([
   ae
 ], He.prototype, "height", 1);
@@ -4247,12 +4276,12 @@ class Y extends C {
     });
   }
 }
-var _e = {}, Do = {
+var Oe = {}, Do = {
   get exports() {
-    return _e;
+    return Oe;
   },
   set exports(s) {
-    _e = s;
+    Oe = s;
   }
 };
 /*!
@@ -4353,7 +4382,7 @@ var _e = {}, Do = {
     }]).default;
   });
 })(Do);
-const Po = /* @__PURE__ */ xe(_e);
+const Po = /* @__PURE__ */ xe(Oe);
 class Fo {
   constructor() {
     this.registeredShortcuts = /* @__PURE__ */ new Map();
@@ -4519,7 +4548,8 @@ const bt = class extends we {
       onActivate: () => {
         this.toolButtonActivated(t.name, e.data);
       },
-      secondaryLabel: t.shortcut ? nt(t.shortcut) : ""
+      secondaryLabel: t.shortcut ? nt(t.shortcut) : "",
+      description: e.description || ""
     });
     return this.toolsToBeDisplayed.reduce((e, t) => (Array.isArray(t.toolbox) ? t.toolbox.forEach((o) => {
       e.push(s(o, t));
@@ -4597,7 +4627,7 @@ gt([
   ae
 ], ze.prototype, "toolboxItemsToBeDisplayed", 1);
 const mt = "block hovered";
-class jo extends C {
+class Uo extends C {
   /**
    * @class
    * @param moduleConfiguration - Module Configuration
@@ -4834,8 +4864,8 @@ class jo extends C {
     this.removeAllNodes(), this.toolboxInstance && this.toolboxInstance.destroy(), this.tooltip.destroy();
   }
 }
-var ye = /* @__PURE__ */ ((s) => (s[s.Block = 0] = "Block", s[s.Inline = 1] = "Inline", s[s.Tune = 2] = "Tune", s))(ye || {}), me = /* @__PURE__ */ ((s) => (s.Shortcut = "shortcut", s.Toolbox = "toolbox", s.EnabledInlineTools = "inlineToolbar", s.EnabledBlockTunes = "tunes", s.Config = "config", s))(me || {}), kt = /* @__PURE__ */ ((s) => (s.Shortcut = "shortcut", s.SanitizeConfig = "sanitize", s))(kt || {}), se = /* @__PURE__ */ ((s) => (s.IsEnabledLineBreaks = "enableLineBreaks", s.Toolbox = "toolbox", s.ConversionConfig = "conversionConfig", s.IsReadOnlySupported = "isReadOnlySupported", s.PasteConfig = "pasteConfig", s))(se || {}), je = /* @__PURE__ */ ((s) => (s.IsInline = "isInline", s.Title = "title", s))(je || {}), vt = /* @__PURE__ */ ((s) => (s.IsTune = "isTune", s))(vt || {});
-class Ue {
+var ye = /* @__PURE__ */ ((s) => (s[s.Block = 0] = "Block", s[s.Inline = 1] = "Inline", s[s.Tune = 2] = "Tune", s))(ye || {}), me = /* @__PURE__ */ ((s) => (s.Shortcut = "shortcut", s.Toolbox = "toolbox", s.EnabledInlineTools = "inlineToolbar", s.EnabledBlockTunes = "tunes", s.Config = "config", s))(me || {}), kt = /* @__PURE__ */ ((s) => (s.Shortcut = "shortcut", s.SanitizeConfig = "sanitize", s))(kt || {}), se = /* @__PURE__ */ ((s) => (s.IsEnabledLineBreaks = "enableLineBreaks", s.Toolbox = "toolbox", s.ConversionConfig = "conversionConfig", s.IsReadOnlySupported = "isReadOnlySupported", s.PasteConfig = "pasteConfig", s))(se || {}), Ue = /* @__PURE__ */ ((s) => (s.IsInline = "isInline", s.Title = "title", s))(Ue || {}), vt = /* @__PURE__ */ ((s) => (s.IsTune = "isTune", s))(vt || {});
+class je {
   /**
    * @class
    * @param {ConstructorOptions} options - Constructor options
@@ -4907,7 +4937,7 @@ class Ue {
     return this.type === 2;
   }
 }
-class Uo extends C {
+class jo extends C {
   /**
    * @class
    * @param moduleConfiguration - Module Configuration
@@ -4960,7 +4990,7 @@ class Uo extends C {
       e && this.close();
       return;
     }
-    i || this.move(o), this.open(t, !1), this.Editor.Toolbar.close();
+    i || this.move(o), this.open(t, !1), this.checkToolsState(), this.Editor.Toolbar.close();
   }
   /**
    * Move Toolbar to the selected text
@@ -5230,7 +5260,8 @@ class Uo extends C {
     });
   }
 }
-class $o extends C {
+const $o = ["paragraph", "list", "header", "header01", "header02", "header03"];
+class Wo extends C {
   /**
    * All keydowns on Block
    *
@@ -5345,11 +5376,19 @@ class $o extends C {
     if (t.currentBlock.tool.isLineBreaksEnabled || o.someToolbarOpened && o.someFlipperButtonFocused || e.shiftKey)
       return;
     let n = this.Editor.BlockManager.currentBlock;
-    this.Editor.Caret.isAtStart && !this.Editor.BlockManager.currentBlock.hasMedia ? this.Editor.BlockManager.insertDefaultBlockAtIndex(
-      this.Editor.BlockManager.currentBlockIndex
-    ) : this.Editor.Caret.isAtEnd ? n = this.Editor.BlockManager.insertDefaultBlockAtIndex(
-      this.Editor.BlockManager.currentBlockIndex + 1
-    ) : n = this.Editor.BlockManager.split(), this.Editor.Caret.setToBlock(n), this.Editor.Toolbar.moveAndOpen(n), e.preventDefault();
+    if (this.Editor.Caret.isAtStart && !this.Editor.BlockManager.currentBlock.hasMedia)
+      this.Editor.BlockManager.insertDefaultBlockAtIndex(
+        this.Editor.BlockManager.currentBlockIndex
+      );
+    else if (this.Editor.Caret.isAtEnd)
+      n = this.Editor.BlockManager.insertDefaultBlockAtIndex(
+        this.Editor.BlockManager.currentBlockIndex + 1
+      );
+    else {
+      const r = t.blocks[t.currentBlockIndex].name;
+      n = this.Editor.BlockManager.split($o.includes(r) ? r : "paragraph");
+    }
+    this.Editor.Caret.setToBlock(n), this.Editor.Toolbar.moveAndOpen(n), e.preventDefault();
   }
   /**
    * Handle backspace keydown on Block
@@ -5361,7 +5400,7 @@ class $o extends C {
     if (n.selected || n.isEmpty && n.currentInput === n.firstInput) {
       e.preventDefault();
       const c = t.currentBlockIndex;
-      t.previousBlock && t.previousBlock.inputs.length === 0 || t.previousBlock.name === "image" || t.previousBlock.name === "gallery" ? t.removeBlock(c - 1) : t.removeBlock(), i.setToBlock(
+      t.previousBlock && (t.previousBlock.inputs.length === 0 || t.previousBlock.name === "image" || t.previousBlock.name === "gallery") ? t.removeBlock(c - 1) : t.removeBlock(), i.setToBlock(
         t.currentBlock,
         c ? i.positions.END : i.positions.START
       ), this.Editor.Toolbar.close(), o.clearSelection(e);
@@ -5627,8 +5666,8 @@ class Te {
     });
   }
 }
-const Je = "block-removed", Qe = "block-added", Wo = "block-moved", Yo = "block-changed";
-class Ko extends C {
+const Je = "block-removed", Qe = "block-added", Yo = "block-moved", Ko = "block-changed";
+class Xo extends C {
   constructor() {
     super(...arguments), this._currentBlockIndex = -1, this._blocks = null;
   }
@@ -5870,10 +5909,10 @@ class Ko extends C {
    * @returns {Block} inserted Block
    */
   insertDefaultBlockAtIndex(e, t = !1) {
-    const o = this.composeBlock({ tool: this.config.defaultBlock });
-    return this._blocks[e] = o, this.blockDidMutated(Qe, o, {
+    const o = this.blocks[e - 1].name === "list" ? "list" : this.config.defaultBlock, i = this.composeBlock({ tool: o });
+    return this._blocks[e] = i, this.blockDidMutated(Qe, i, {
       index: e
-    }), t ? this.currentBlockIndex = e : e <= this.currentBlockIndex && this.currentBlockIndex++, o;
+    }), t ? this.currentBlockIndex = e : e <= this.currentBlockIndex && this.currentBlockIndex++, i;
   }
   /**
    * Always inserts at the end
@@ -5940,13 +5979,13 @@ class Ko extends C {
    *
    * @returns {Block}
    */
-  split() {
-    const e = this.Editor.Caret.extractFragmentFromCaretPosition(), t = d.make("div");
-    t.appendChild(e);
-    const o = {
-      text: d.isEmpty(t) ? "" : t.innerHTML
+  split(e) {
+    const t = this.Editor.Caret.extractFragmentFromCaretPosition(), o = d.make("div");
+    o.appendChild(t);
+    const i = {
+      text: d.isEmpty(o) ? "" : o.innerHTML
     };
-    return this.insert({ data: o });
+    return this.insert({ data: i, tool: e });
   }
   /**
    * Returns Block by passed index
@@ -6064,7 +6103,7 @@ class Ko extends C {
       );
       return;
     }
-    this._blocks.move(e, t), this.currentBlockIndex = e, this.blockDidMutated(Wo, this.currentBlock, {
+    this._blocks.move(e, t), this.currentBlockIndex = e, this.blockDidMutated(Yo, this.currentBlock, {
       fromIndex: t,
       toIndex: e
     });
@@ -6126,7 +6165,7 @@ class Ko extends C {
       (o) => {
         t.dragLeave(o);
       }
-    ), e.on("didMutated", (o) => this.blockDidMutated(Yo, o, {
+    ), e.on("didMutated", (o) => this.blockDidMutated(Ko, o, {
       index: this.getBlockIndex(o)
     }));
   }
@@ -6176,7 +6215,7 @@ class Ko extends C {
     }), t;
   }
 }
-class Xo extends C {
+class Vo extends C {
   constructor() {
     super(...arguments), this.anyBlockSelectedCache = null, this.needToSelectAll = !1, this.nativeInputSelected = !1, this.readyToBlockSelection = !1;
   }
@@ -6660,7 +6699,7 @@ class ve extends C {
     return i;
   }
 }
-class Vo extends C {
+class Zo extends C {
   constructor() {
     super(...arguments), this.onMouseUp = () => {
       this.listeners.off(document, "mouseover", this.onMouseOver), this.listeners.off(document, "mouseup", this.onMouseUp);
@@ -6695,7 +6734,7 @@ class Vo extends C {
    * @param {MouseEvent} event - mouse down event
    */
   watchSelection(e) {
-    if (e.button !== Ot.LEFT)
+    if (e.button !== At.LEFT)
       return;
     const { BlockManager: t } = this.Editor;
     this.firstSelectedBlock = t.getBlock(
@@ -6782,7 +6821,7 @@ class Vo extends C {
     }
   }
 }
-class Zo extends C {
+class Go extends C {
   constructor() {
     super(...arguments), this.isStartedAtEditor = !1;
   }
@@ -6855,7 +6894,7 @@ class Zo extends C {
     e.preventDefault();
   }
 }
-class Go extends C {
+class qo extends C {
   /**
    * Prepare the module
    *
@@ -6979,7 +7018,7 @@ const xt = class extends C {
       }
     e && r.trim() && a.trim() && (a = "<p>" + (a.trim() ? a : r) + "</p>");
     const l = Object.keys(this.toolsTags).reduce((h, f) => (h[f.toLowerCase()] = this.toolsTags[f].sanitizationConfig ?? {}, h), {}), c = Object.assign({}, l, t.getAllInlineToolsSanitizeConfig(), { br: {} }), u = Z(a, c);
-    !u.trim() || u.trim() === r || !d.isHTMLString(u) ? await this.processText(r) : await this.processText(u, !0);
+    console.log(r), !u.trim() || u.trim() === r || !d.isHTMLString(u) ? await this.processText(r) : await this.processText(u, !0);
   }
   /**
    * Process pasted text and divide them into Blocks
@@ -7026,7 +7065,7 @@ const xt = class extends C {
    * @returns {string[]} array of tags.
    */
   collectTagNames(s) {
-    return J(s) ? [s] : j(s) ? Object.keys(s) : [];
+    return J(s) ? [s] : U(s) ? Object.keys(s) : [];
   }
   /**
    * Get tags to substitute by Tool
@@ -7047,7 +7086,7 @@ const xt = class extends C {
           );
           return;
         }
-        const r = j(o) ? o[n] : null;
+        const r = U(o) ? o[n] : null;
         this.toolsTags[n.toUpperCase()] = {
           tool: s,
           sanitizationConfig: r
@@ -7156,8 +7195,8 @@ const xt = class extends C {
           break;
       }
       const { tags: l } = r.pasteConfig || { tags: [] }, c = l.reduce((f, v) => (this.collectTagNames(v).forEach((k) => {
-        const O = j(v) ? v[k] : null;
-        f[k.toLowerCase()] = O || {};
+        const A = U(v) ? v[k] : null;
+        f[k.toLowerCase()] = A || {};
       }), f), {}), u = Object.assign({}, c, r.baseSanitizeConfig);
       if (n.tagName.toLowerCase() === "table") {
         const f = Z(n.outerHTML, u);
@@ -7365,7 +7404,7 @@ const xt = class extends C {
 };
 let wt = xt;
 wt.PATTERN_PROCESSING_MAX_LENGTH = 450;
-class qo extends C {
+class Jo extends C {
   constructor() {
     super(...arguments), this.toolsDontSupportReadOnly = [], this.readOnlyEnabled = !1;
   }
@@ -7562,15 +7601,10 @@ class pe extends C {
    * Handle mouse up
    */
   processMouseUp(e) {
-    this.clearSelection(), this.endSelection();
-    const t = this.Editor.InlineToolbar.containsNode(
-      e.target
-    );
-    this.Editor.BlockSelection.selectedBlocks.length > 1 && this.Editor.InlineToolbar.tryToShow(
+    this.clearSelection(), this.endSelection(), this.Editor.BlockSelection.selectedBlocks.length > 1 && this.Editor.InlineToolbar.tryToShow(
       !1,
       !0,
-      e,
-      t
+      e
     );
   }
   /**
@@ -7715,7 +7749,7 @@ class pe extends C {
       ), this.stackOfSelected.pop(), v--;
   }
 }
-class Jo extends C {
+class Qo extends C {
   /**
    * @typedef {object} RendererBlocks
    * @property {string} type - tool name
@@ -7799,7 +7833,7 @@ class Jo extends C {
     }
   }
 }
-class Qo extends C {
+class ei extends C {
   /**
    * Composes new chain of Promises to fire them alternatelly
    *
@@ -7862,11 +7896,11 @@ class Qo extends C {
     }), S("Total", "log", t), S(void 0, "groupEnd"), {
       time: +/* @__PURE__ */ new Date(),
       blocks: o,
-      version: "1.0.12"
+      version: "1.0.23"
     };
   }
 }
-var Ne = {}, ei = {
+var Ne = {}, ti = {
   get exports() {
     return Ne;
   },
@@ -7946,8 +7980,8 @@ var Ne = {}, ei = {
         for (var w = {}, M = [], R = 0; R < y.length; R++) {
           var b = y[R], g = x.base ? b[0] + x.base : b[0], E = w[g] || 0, T = "".concat(g, " ").concat(E);
           w[g] = E + 1;
-          var A = c(T), I = { css: b[1], media: b[2], sourceMap: b[3] };
-          A !== -1 ? (l[A].references++, l[A].updater(I)) : l.push({ identifier: T, updater: _(I, x), references: 1 }), M.push(T);
+          var _ = c(T), I = { css: b[1], media: b[2], sourceMap: b[3] };
+          _ !== -1 ? (l[_].references++, l[_].updater(I)) : l.push({ identifier: T, updater: O(I, x), references: 1 }), M.push(T);
         }
         return M;
       }
@@ -7993,12 +8027,12 @@ var Ne = {}, ei = {
           y.appendChild(document.createTextNode(M));
         }
       }
-      var O = null, N = 0;
-      function _(y, x) {
+      var A = null, N = 0;
+      function O(y, x) {
         var w, M, R;
         if (x.singleton) {
           var b = N++;
-          w = O || (O = h(x)), M = p.bind(null, w, b, !1), R = p.bind(null, w, b, !0);
+          w = A || (A = h(x)), M = p.bind(null, w, b, !1), R = p.bind(null, w, b, !0);
         } else
           w = h(x), M = k.bind(null, w, x), R = function() {
             (function(g) {
@@ -8074,13 +8108,13 @@ var Ne = {}, ei = {
               if (!f)
                 return h;
               if (u && typeof btoa == "function") {
-                var v = (k = f, O = btoa(unescape(encodeURIComponent(JSON.stringify(k)))), N = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(O), "/*# ".concat(N, " */")), p = f.sources.map(function(_) {
-                  return "/*# sourceURL=".concat(f.sourceRoot || "").concat(_, " */");
+                var v = (k = f, A = btoa(unescape(encodeURIComponent(JSON.stringify(k)))), N = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(A), "/*# ".concat(N, " */")), p = f.sources.map(function(O) {
+                  return "/*# sourceURL=".concat(f.sourceRoot || "").concat(O, " */");
                 });
                 return [h].concat(p).concat([v]).join(`
 `);
               }
-              var k, O, N;
+              var k, A, N;
               return [h].join(`
 `);
             }(a, n);
@@ -8167,8 +8201,8 @@ var Ne = {}, ei = {
       }();
     }]).default;
   });
-})(ei);
-const ti = /* @__PURE__ */ xe(Ne);
+})(ti);
+const oi = /* @__PURE__ */ xe(Ne);
 class $e {
   /**
    * Create button for Inline Toolbar
@@ -8373,7 +8407,7 @@ class Ye {
   checkState() {
     const e = this.selection.findParentTag("A");
     if (e) {
-      this.nodes.button.innerHTML = Ao, this.nodes.button.classList.add(this.CSS.buttonUnlink), this.nodes.button.classList.add(this.CSS.buttonActive), this.openActions();
+      this.nodes.button.innerHTML = _o, this.nodes.button.classList.add(this.CSS.buttonUnlink), this.nodes.button.classList.add(this.CSS.buttonActive), this.openActions();
       const t = e.getAttribute("href");
       this.nodes.input.value = t !== "null" ? t : "", this.selection.save();
     } else
@@ -8530,7 +8564,7 @@ class yt {
   }
 }
 yt.isReadOnlySupported = !0;
-class oi extends Ue {
+class ii extends je {
   constructor() {
     super(...arguments), this.type = ye.Inline;
   }
@@ -8538,7 +8572,7 @@ class oi extends Ue {
    * Returns title for Inline Tool if specified by user
    */
   get title() {
-    return this.constructable[je.Title];
+    return this.constructable[Ue.Title];
   }
   /**
    * Constructs new InlineTool instance from constructable
@@ -8550,7 +8584,7 @@ class oi extends Ue {
     });
   }
 }
-class ii extends Ue {
+class ni extends je {
   constructor() {
     super(...arguments), this.type = ye.Tune;
   }
@@ -8569,51 +8603,51 @@ class ii extends Ue {
     });
   }
 }
-class U extends Map {
+class j extends Map {
   /**
    * Returns Block Tools collection
    */
   get blockTools() {
     const e = Array.from(this.entries()).filter(([, t]) => t.isBlock());
-    return new U(e);
+    return new j(e);
   }
   /**
    * Returns Inline Tools collection
    */
   get inlineTools() {
     const e = Array.from(this.entries()).filter(([, t]) => t.isInline());
-    return new U(e);
+    return new j(e);
   }
   /**
    * Returns Block Tunes collection
    */
   get blockTunes() {
     const e = Array.from(this.entries()).filter(([, t]) => t.isTune());
-    return new U(e);
+    return new j(e);
   }
   /**
    * Returns internal Tools collection
    */
   get internalTools() {
     const e = Array.from(this.entries()).filter(([, t]) => t.isInternal);
-    return new U(e);
+    return new j(e);
   }
   /**
    * Returns Tools collection provided by user
    */
   get externalTools() {
     const e = Array.from(this.entries()).filter(([, t]) => !t.isInternal);
-    return new U(e);
+    return new j(e);
   }
 }
-var ni = Object.defineProperty, si = Object.getOwnPropertyDescriptor, Et = (s, e, t, o) => {
-  for (var i = o > 1 ? void 0 : o ? si(e, t) : e, n = s.length - 1, r; n >= 0; n--)
+var si = Object.defineProperty, ri = Object.getOwnPropertyDescriptor, Et = (s, e, t, o) => {
+  for (var i = o > 1 ? void 0 : o ? ri(e, t) : e, n = s.length - 1, r; n >= 0; n--)
     (r = s[n]) && (i = (o ? r(e, t, i) : r(i)) || i);
-  return o && i && ni(e, t, i), i;
+  return o && i && si(e, t, i), i;
 };
-class Ke extends Ue {
+class Ke extends je {
   constructor() {
-    super(...arguments), this.type = ye.Block, this.inlineTools = new U(), this.tunes = new U();
+    super(...arguments), this.type = ye.Block, this.inlineTools = new j(), this.tunes = new j();
   }
   /**
    * Creates new Tool instance
@@ -8704,7 +8738,7 @@ class Ke extends Ue {
     for (const i in e)
       if (Object.prototype.hasOwnProperty.call(e, i)) {
         const n = e[i];
-        j(n) ? o[i] = Object.assign({}, t, n) : o[i] = n;
+        U(n) ? o[i] = Object.assign({}, t, n) : o[i] = n;
       }
     return o;
   }
@@ -8719,7 +8753,7 @@ Et([
 Et([
   ae
 ], Ke.prototype, "baseSanitizeConfig", 1);
-class ri {
+class ai {
   /**
    * @class
    * @param config - tools config
@@ -8753,10 +8787,10 @@ class ri {
    */
   getConstructor(e) {
     switch (!0) {
-      case e[je.IsInline]:
-        return oi;
-      case e[vt.IsTune]:
+      case e[Ue.IsInline]:
         return ii;
+      case e[vt.IsTune]:
+        return ni;
       default:
         return Ke;
     }
@@ -8863,14 +8897,14 @@ class St {
   }
 }
 St.isTune = !0;
-var ai = Object.defineProperty, li = Object.getOwnPropertyDescriptor, ci = (s, e, t, o) => {
-  for (var i = o > 1 ? void 0 : o ? li(e, t) : e, n = s.length - 1, r; n >= 0; n--)
+var li = Object.defineProperty, ci = Object.getOwnPropertyDescriptor, di = (s, e, t, o) => {
+  for (var i = o > 1 ? void 0 : o ? ci(e, t) : e, n = s.length - 1, r; n >= 0; n--)
     (r = s[n]) && (i = (o ? r(e, t, i) : r(i)) || i);
-  return o && i && ai(e, t, i), i;
+  return o && i && li(e, t, i), i;
 };
 class Ct extends C {
   constructor() {
-    super(...arguments), this.stubTool = "stub", this.toolsAvailable = new U(), this.toolsUnavailable = new U();
+    super(...arguments), this.stubTool = "stub", this.toolsAvailable = new j(), this.toolsUnavailable = new j();
   }
   /**
    * Returns available Tools
@@ -8925,7 +8959,7 @@ class Ct extends C {
     if (this.validateTools(), this.config.tools = Ce({}, this.internalTools, this.config.tools), !Object.prototype.hasOwnProperty.call(this.config, "tools") || Object.keys(this.config.tools).length === 0)
       throw Error("Can't start without tools");
     const e = this.prepareConfig();
-    this.factory = new ri(e, this.config, this.Editor.API);
+    this.factory = new ai(e, this.config, this.Editor.API);
     const t = this.getListOfPrepareFunctions(e);
     if (t.length === 0)
       return Promise.resolve();
@@ -8968,7 +9002,7 @@ class Ct extends C {
         isInternal: !0
       },
       paragraph: {
-        class: ti,
+        class: oi,
         inlineToolbar: !0,
         isInternal: !0
       },
@@ -9054,12 +9088,12 @@ class Ct extends C {
   assignInlineToolsToBlockTool(e) {
     if (this.config.inlineToolbar !== !1) {
       if (e.enabledInlineTools === !0) {
-        e.inlineTools = new U(
+        e.inlineTools = new j(
           Array.isArray(this.config.inlineToolbar) ? this.config.inlineToolbar.map((t) => [t, this.inlineTools.get(t)]) : Array.from(this.inlineTools.entries())
         );
         return;
       }
-      Array.isArray(e.enabledInlineTools) && (e.inlineTools = new U(
+      Array.isArray(e.enabledInlineTools) && (e.inlineTools = new j(
         e.enabledInlineTools.map((t) => [t, this.inlineTools.get(t)])
       ));
     }
@@ -9072,17 +9106,17 @@ class Ct extends C {
   assignBlockTunesToBlockTool(e) {
     if (e.enabledBlockTunes !== !1) {
       if (Array.isArray(e.enabledBlockTunes)) {
-        const t = new U(
+        const t = new j(
           e.enabledBlockTunes.map((o) => [o, this.blockTunes.get(o)])
         );
-        e.tunes = new U([...t, ...this.blockTunes.internalTools]);
+        e.tunes = new j([...t, ...this.blockTunes.internalTools]);
         return;
       }
       if (Array.isArray(this.config.tunes)) {
-        const t = new U(
+        const t = new j(
           this.config.tunes.map((o) => [o, this.blockTunes.get(o)])
         );
-        e.tunes = new U([...t, ...this.blockTunes.internalTools]);
+        e.tunes = new j([...t, ...this.blockTunes.internalTools]);
         return;
       }
       e.tunes = this.blockTunes.internalTools;
@@ -9109,16 +9143,16 @@ class Ct extends C {
   prepareConfig() {
     const e = {};
     for (const t in this.config.tools)
-      j(this.config.tools[t]) ? e[t] = this.config.tools[t] : e[t] = { class: this.config.tools[t] };
+      U(this.config.tools[t]) ? e[t] = this.config.tools[t] : e[t] = { class: this.config.tools[t] };
     return e;
   }
 }
-ci([
+di([
   ae
 ], Ct.prototype, "getAllInlineToolsSanitizeConfig", 1);
-const di = `:root{--selectionColor: #e1f2ff;--inlineSelectionColor: #d4ecff;--bg-light: #eff2f5;--grayText: #707684;--color-dark: #1D202B;--color-active-icon: #388AE5;--color-gray-border: rgba(201, 201, 204, .48);--content-width: 650px;--narrow-mode-right-padding: 50px;--toolbox-buttons-size: 26px;--toolbox-buttons-size--mobile: 36px;--icon-size: 20px;--icon-size--mobile: 28px;--block-padding-vertical: .4em;--color-line-gray: #EFF0F1 }.codex-editor{position:relative;-webkit-box-sizing:border-box;box-sizing:border-box;z-index:1}.codex-editor .hide,.codex-editor__redactor--hidden{display:none}.codex-editor__redactor [contenteditable]:empty:after{content:"\\feff"}@media (min-width: 651px){.codex-editor--narrow .codex-editor__redactor{margin-right:50px}}@media (min-width: 651px){.codex-editor--narrow.codex-editor--rtl .codex-editor__redactor{margin-left:50px;margin-right:0}}@media (min-width: 651px){.codex-editor--narrow .ce-toolbar__actions{right:-5px}}.codex-editor__loader{position:relative;height:30vh}.codex-editor__loader:before{content:"";position:absolute;left:50%;top:50%;width:30px;height:30px;margin-top:-15px;margin-left:-15px;border-radius:50%;border:2px solid rgba(201,201,204,.48);border-top-color:transparent;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-animation:editor-loader-spin .8s infinite linear;animation:editor-loader-spin .8s infinite linear;will-change:transform}.codex-editor-copyable{position:absolute;height:1px;width:1px;top:-400%;opacity:.001}.codex-editor-overlay{position:fixed;top:0px;left:0px;right:0px;bottom:0px;z-index:999;pointer-events:none;overflow:hidden}.codex-editor-overlay__container{position:relative;pointer-events:auto;z-index:0}.codex-editor-overlay__rectangle{position:absolute;pointer-events:none;background-color:#2eaadc33;border:1px solid transparent}.codex-editor svg{max-height:100%}.codex-editor path{stroke:currentColor}::-moz-selection{background-color:#d4ecff}::selection{background-color:#d4ecff}.codex-editor--toolbox-opened [contentEditable=true][data-placeholder]:focus:before{opacity:0!important}@-webkit-keyframes editor-loader-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes editor-loader-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.ce-scroll-locked{overflow:hidden}.ce-scroll-locked--hard{overflow:hidden;top:calc(-1 * var(--window-scroll-offset));position:fixed;width:100%}.ce-toolbar{position:absolute;left:0;right:0;top:0;-webkit-transition:opacity .1s ease;transition:opacity .1s ease;will-change:opacity,top;display:none}.ce-toolbar--opened{display:block}.ce-toolbar__content{max-width:650px;margin:0 auto;position:relative}.ce-toolbar__plus{color:#1d202b;cursor:pointer;width:26px;height:26px;border-radius:7px;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-ms-flex-negative:0;flex-shrink:0}@media (max-width: 650px){.ce-toolbar__plus{width:36px;height:36px}}@media (hover: hover){.ce-toolbar__plus:hover{background-color:#eff2f5}}.ce-toolbar__plus--active{background-color:#eff2f5;-webkit-animation:bounceIn .75s 1;animation:bounceIn .75s 1;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards}.ce-toolbar__plus-shortcut{opacity:.6;word-spacing:-2px;margin-top:5px}@media (max-width: 650px){.ce-toolbar__plus{position:absolute;background-color:#fff;border:1px solid #E8E8EB;-webkit-box-shadow:0 3px 15px -3px rgba(13,20,33,.13);box-shadow:0 3px 15px -3px #0d142121;border-radius:6px;z-index:2;position:static}.ce-toolbar__plus--left-oriented:before{left:15px;margin-left:0}.ce-toolbar__plus--right-oriented:before{left:auto;right:15px;margin-left:0}}.ce-toolbar__actions{position:absolute;right:100%;opacity:0;display:-webkit-box;display:-ms-flexbox;display:flex;padding-right:5px}.ce-toolbar__actions--opened{opacity:1}@media (max-width: 650px){.ce-toolbar__actions{right:auto}}.ce-toolbar__settings-btn{color:#1d202b;width:26px;height:26px;border-radius:7px;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;margin-left:3px;cursor:pointer;user-select:none}@media (max-width: 650px){.ce-toolbar__settings-btn{width:36px;height:36px}}@media (hover: hover){.ce-toolbar__settings-btn:hover{background-color:#eff2f5}}.ce-toolbar__settings-btn--active{background-color:#eff2f5;-webkit-animation:bounceIn .75s 1;animation:bounceIn .75s 1;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards}@media (min-width: 651px){.ce-toolbar__settings-btn{width:24px}}.ce-toolbar__settings-btn--hidden{display:none}@media (max-width: 650px){.ce-toolbar__settings-btn{position:absolute;background-color:#fff;border:1px solid #E8E8EB;-webkit-box-shadow:0 3px 15px -3px rgba(13,20,33,.13);box-shadow:0 3px 15px -3px #0d142121;border-radius:6px;z-index:2;position:static}.ce-toolbar__settings-btn--left-oriented:before{left:15px;margin-left:0}.ce-toolbar__settings-btn--right-oriented:before{left:auto;right:15px;margin-left:0}}.ce-toolbar__plus svg,.ce-toolbar__settings-btn svg{width:24px;height:24px}@media (min-width: 651px){.codex-editor--narrow .ce-toolbar__plus{left:5px}}@media (min-width: 651px){.codex-editor--narrow .ce-toolbox .ce-popover{right:0;left:auto;left:initial}}.ce-inline-toolbar{--y-offset: 8px;position:absolute;background-color:#fff;border:1px solid #E8E8EB;-webkit-box-shadow:0 3px 15px -3px rgba(13,20,33,.13);box-shadow:0 3px 15px -3px #0d142121;border-radius:6px;z-index:2;-webkit-transform:translateX(-50%) translateY(8px) scale(.94);transform:translate(-50%) translateY(8px) scale(.94);opacity:0;visibility:hidden;-webkit-transition:opacity .25s ease,-webkit-transform .15s ease;transition:opacity .25s ease,-webkit-transform .15s ease;transition:transform .15s ease,opacity .25s ease;transition:transform .15s ease,opacity .25s ease,-webkit-transform .15s ease;will-change:transform,opacity;top:0;left:0;z-index:3}.ce-inline-toolbar--left-oriented:before{left:15px;margin-left:0}.ce-inline-toolbar--right-oriented:before{left:auto;right:15px;margin-left:0}.ce-inline-toolbar--showed{opacity:1;visibility:visible;-webkit-transform:translateX(-50%);transform:translate(-50%)}.ce-inline-toolbar--fixed{position:fixed!important}.ce-inline-toolbar--left-oriented{-webkit-transform:translateX(-23px) translateY(8px) scale(.94);transform:translate(-23px) translateY(8px) scale(.94)}.ce-inline-toolbar--left-oriented.ce-inline-toolbar--showed{-webkit-transform:translateX(-23px);transform:translate(-23px)}.ce-inline-toolbar--right-oriented{-webkit-transform:translateX(-100%) translateY(8px) scale(.94);transform:translate(-100%) translateY(8px) scale(.94);margin-left:23px}.ce-inline-toolbar--right-oriented.ce-inline-toolbar--showed{-webkit-transform:translateX(-100%);transform:translate(-100%)}.ce-inline-toolbar [hidden]{display:none!important}.ce-inline-toolbar__toggler-and-button-wrapper{display:-webkit-box;display:-ms-flexbox;display:flex;width:100%;padding:0 6px}.ce-inline-toolbar__buttons{display:-webkit-box;display:-ms-flexbox;display:flex}.ce-inline-toolbar__dropdown{display:-webkit-box;display:-ms-flexbox;display:flex;padding:6px;margin:0 6px 0 -6px;-webkit-box-align:center;-ms-flex-align:center;align-items:center;cursor:pointer;border-right:1px solid rgba(201,201,204,.48);-webkit-box-sizing:border-box;box-sizing:border-box}@media (hover: hover){.ce-inline-toolbar__dropdown:hover{background:#eff2f5}}.ce-inline-toolbar__dropdown--hidden{display:none}.ce-inline-toolbar__dropdown-content,.ce-inline-toolbar__dropdown-arrow{display:-webkit-box;display:-ms-flexbox;display:flex}.ce-inline-toolbar__dropdown-content svg,.ce-inline-toolbar__dropdown-arrow svg{width:20px;height:20px}.ce-inline-toolbar__shortcut{opacity:.6;word-spacing:-3px;margin-top:3px}.ce-inline-tool{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;padding:6px 1px;cursor:pointer;border:0;outline:none;background-color:transparent;vertical-align:bottom;color:inherit;margin:0;border-radius:0;line-height:normal}.ce-inline-tool svg{width:20px;height:20px}@media (max-width: 650px){.ce-inline-tool svg{width:28px;height:28px}}@media (hover: hover){.ce-inline-tool:hover{background-color:#eff2f5}}.ce-inline-tool--active{color:#388ae5}.ce-inline-tool--focused{background:rgba(34,186,255,.08)!important}.ce-inline-tool--focused{-webkit-box-shadow:inset 0 0 0px 1px rgba(7,161,227,.08);box-shadow:inset 0 0 0 1px #07a1e314}.ce-inline-tool--focused-animated{-webkit-animation-name:buttonClicked;animation-name:buttonClicked;-webkit-animation-duration:.25s;animation-duration:.25s}.ce-inline-tool--link .icon--unlink,.ce-inline-tool--unlink .icon--link{display:none}.ce-inline-tool--unlink .icon--unlink{display:inline-block;margin-bottom:-1px}.ce-inline-tool-input{outline:none;border:0;border-radius:0 0 4px 4px;margin:0;font-size:13px;padding:10px;width:100%;-webkit-box-sizing:border-box;box-sizing:border-box;display:none;font-weight:500;border-top:1px solid rgba(201,201,204,.48);-webkit-appearance:none;font-family:inherit}@media (max-width: 650px){.ce-inline-tool-input{font-size:15px;font-weight:500}}.ce-inline-tool-input::-webkit-input-placeholder{color:#707684}.ce-inline-tool-input::-moz-placeholder{color:#707684}.ce-inline-tool-input:-ms-input-placeholder{color:#707684}.ce-inline-tool-input::-ms-input-placeholder{color:#707684}.ce-inline-tool-input::placeholder{color:#707684}.ce-inline-tool-input--showed{display:block}.ce-conversion-toolbar{position:absolute;background-color:#fff;border:1px solid #E8E8EB;-webkit-box-shadow:0 3px 15px -3px rgba(13,20,33,.13);box-shadow:0 3px 15px -3px #0d142121;border-radius:6px;z-index:2;opacity:0;visibility:hidden;will-change:transform,opacity;-webkit-transition:opacity .1s ease,-webkit-transform .1s ease;transition:opacity .1s ease,-webkit-transform .1s ease;transition:transform .1s ease,opacity .1s ease;transition:transform .1s ease,opacity .1s ease,-webkit-transform .1s ease;-webkit-transform:translateY(-8px);transform:translateY(-8px);left:-1px;width:150px;margin-top:5px;-webkit-box-sizing:content-box;box-sizing:content-box}.ce-conversion-toolbar--left-oriented:before{left:15px;margin-left:0}.ce-conversion-toolbar--right-oriented:before{left:auto;right:15px;margin-left:0}.ce-conversion-toolbar--showed{opacity:1;visibility:visible;-webkit-transform:none;transform:none}.ce-conversion-toolbar [hidden]{display:none!important}.ce-conversion-toolbar__buttons{display:-webkit-box;display:-ms-flexbox;display:flex}.ce-conversion-toolbar__label{color:#707684;font-size:11px;font-weight:500;letter-spacing:.33px;padding:10px 10px 5px;text-transform:uppercase}.ce-conversion-tool{display:-webkit-box;display:-ms-flexbox;display:flex;padding:5px 10px;font-size:14px;line-height:20px;font-weight:500;cursor:pointer;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.ce-conversion-tool--hidden{display:none}.ce-conversion-tool--focused{background:rgba(34,186,255,.08)!important}.ce-conversion-tool--focused{-webkit-box-shadow:inset 0 0 0px 1px rgba(7,161,227,.08);box-shadow:inset 0 0 0 1px #07a1e314}.ce-conversion-tool--focused-animated{-webkit-animation-name:buttonClicked;animation-name:buttonClicked;-webkit-animation-duration:.25s;animation-duration:.25s}.ce-conversion-tool:hover{background:#eff2f5}.ce-conversion-tool__icon{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;width:26px;height:26px;-webkit-box-shadow:0 0 0 1px rgba(201,201,204,.48);box-shadow:0 0 0 1px #c9c9cc7a;border-radius:5px;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;background:#fff;-webkit-box-sizing:content-box;box-sizing:content-box;-ms-flex-negative:0;flex-shrink:0;margin-right:10px}.ce-conversion-tool__icon svg{width:20px;height:20px}@media (max-width: 650px){.ce-conversion-tool__icon{width:36px;height:36px;border-radius:8px}.ce-conversion-tool__icon svg{width:28px;height:28px}}.ce-conversion-tool--last{margin-right:0!important}.ce-conversion-tool--active{color:#388ae5!important}.ce-conversion-tool--active{-webkit-animation:bounceIn .75s 1;animation:bounceIn .75s 1;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards}.ce-settings__button{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;padding:6px 1px;border-radius:3px;cursor:pointer;border:0;outline:none;background-color:transparent;vertical-align:bottom;color:inherit;margin:0;line-height:32px}.ce-settings__button svg{width:20px;height:20px}@media (max-width: 650px){.ce-settings__button svg{width:28px;height:28px}}@media (hover: hover){.ce-settings__button:hover{background-color:#eff2f5}}.ce-settings__button--active{color:#388ae5}.ce-settings__button--focused{background:rgba(34,186,255,.08)!important}.ce-settings__button--focused{-webkit-box-shadow:inset 0 0 0px 1px rgba(7,161,227,.08);box-shadow:inset 0 0 0 1px #07a1e314}.ce-settings__button--focused-animated{-webkit-animation-name:buttonClicked;animation-name:buttonClicked;-webkit-animation-duration:.25s;animation-duration:.25s}.ce-settings__button:not(:nth-child(3n+3)){margin-right:3px}.ce-settings__button:nth-child(n+4){margin-top:3px}.ce-settings__button--disabled{cursor:not-allowed!important}.ce-settings__button--disabled{opacity:.3}.ce-settings__button--selected{color:#388ae5}@media (min-width: 651px){.codex-editor--narrow .ce-settings .ce-popover{right:0;left:auto;left:initial}}@-webkit-keyframes fade-in{0%{opacity:0}to{opacity:1}}@keyframes fade-in{0%{opacity:0}to{opacity:1}}.ce-block{-webkit-animation:fade-in .3s ease;animation:fade-in .3s ease;-webkit-animation-fill-mode:none;animation-fill-mode:none;-webkit-animation-fill-mode:initial;animation-fill-mode:initial}.ce-block:first-of-type{margin-top:0}.ce-block--selected .ce-block__content{background:#e1f2ff}.ce-block--selected .ce-block__content [contenteditable]{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.ce-block--selected .ce-block__content img,.ce-block--selected .ce-block__content .ce-stub{opacity:.55}.ce-block--stretched .ce-block__content{max-width:none}.ce-block__content{position:relative;max-width:650px;margin:0 auto;-webkit-transition:background-color .15s ease;transition:background-color .15s ease}.ce-block--drop-target .ce-block__content:before{content:"";position:absolute;top:100%;left:-20px;margin-top:-1px;height:8px;width:8px;border:solid #388AE5;border-width:1px 1px 0 0;-webkit-transform-origin:right;transform-origin:right;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.ce-block--drop-target .ce-block__content:after{content:"";position:absolute;top:100%;height:1px;width:100%;color:#388ae5;background:repeating-linear-gradient(90deg,#388AE5,#388AE5 1px,#fff 1px,#fff 6px)}.ce-block a{cursor:pointer;-webkit-text-decoration:underline;text-decoration:underline}.ce-block b{font-weight:700}.ce-block i{font-style:italic}@media (min-width: 651px){.codex-editor--narrow .ce-block--focused{margin-right:-50px;padding-right:50px}}@-webkit-keyframes bounceIn{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:scale3d(.9,.9,.9);transform:scale3d(.9,.9,.9)}20%{-webkit-transform:scale3d(1.03,1.03,1.03);transform:scale3d(1.03,1.03,1.03)}60%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}@keyframes bounceIn{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:scale3d(.9,.9,.9);transform:scale3d(.9,.9,.9)}20%{-webkit-transform:scale3d(1.03,1.03,1.03);transform:scale3d(1.03,1.03,1.03)}60%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}@-webkit-keyframes selectionBounce{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}50%{-webkit-transform:scale3d(1.01,1.01,1.01);transform:scale3d(1.01,1.01,1.01)}70%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}@keyframes selectionBounce{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}50%{-webkit-transform:scale3d(1.01,1.01,1.01);transform:scale3d(1.01,1.01,1.01)}70%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}@-webkit-keyframes buttonClicked{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:scale3d(.95,.95,.95);transform:scale3d(.95,.95,.95)}60%{-webkit-transform:scale3d(1.02,1.02,1.02);transform:scale3d(1.02,1.02,1.02)}80%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}@keyframes buttonClicked{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:scale3d(.95,.95,.95);transform:scale3d(.95,.95,.95)}60%{-webkit-transform:scale3d(1.02,1.02,1.02);transform:scale3d(1.02,1.02,1.02)}80%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}.cdx-block{padding:.4em 0}.cdx-block::-webkit-input-placeholder{line-height:normal!important}.cdx-input{border:1px solid rgba(201,201,204,.48);-webkit-box-shadow:inset 0 1px 2px 0 rgba(35,44,72,.06);box-shadow:inset 0 1px 2px #232c480f;border-radius:3px;padding:10px 12px;outline:none;width:100%;-webkit-box-sizing:border-box;box-sizing:border-box}.cdx-input[data-placeholder]:before{position:static!important}.cdx-input[data-placeholder]:before{display:inline-block;width:0;white-space:nowrap;pointer-events:none}.cdx-settings-button{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;padding:6px 1px;border-radius:3px;cursor:pointer;border:0;outline:none;background-color:transparent;vertical-align:bottom;color:inherit;margin:0;min-width:26px;min-height:26px}.cdx-settings-button svg{width:20px;height:20px}@media (max-width: 650px){.cdx-settings-button svg{width:28px;height:28px}}@media (hover: hover){.cdx-settings-button:hover{background-color:#eff2f5}}.cdx-settings-button--focused{background:rgba(34,186,255,.08)!important}.cdx-settings-button--focused{-webkit-box-shadow:inset 0 0 0px 1px rgba(7,161,227,.08);box-shadow:inset 0 0 0 1px #07a1e314}.cdx-settings-button--focused-animated{-webkit-animation-name:buttonClicked;animation-name:buttonClicked;-webkit-animation-duration:.25s;animation-duration:.25s}.cdx-settings-button--active{color:#388ae5}.cdx-settings-button svg{width:auto;height:auto}@media (max-width: 650px){.cdx-settings-button{width:36px;height:36px;border-radius:8px}}.cdx-loader{position:relative;border:1px solid rgba(201,201,204,.48)}.cdx-loader:before{content:"";position:absolute;left:50%;top:50%;width:18px;height:18px;margin:-11px 0 0 -11px;border:2px solid rgba(201,201,204,.48);border-left-color:#388ae5;border-radius:50%;-webkit-animation:cdxRotation 1.2s infinite linear;animation:cdxRotation 1.2s infinite linear}@-webkit-keyframes cdxRotation{0%{-webkit-transform:rotate(0deg);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes cdxRotation{0%{-webkit-transform:rotate(0deg);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.cdx-button{padding:13px;border-radius:3px;border:1px solid rgba(201,201,204,.48);font-size:14.9px;background:#fff;-webkit-box-shadow:0 2px 2px 0 rgba(18,30,57,.04);box-shadow:0 2px 2px #121e390a;color:#707684;text-align:center;cursor:pointer}@media (hover: hover){.cdx-button:hover{background:#FBFCFE;-webkit-box-shadow:0 1px 3px 0 rgba(18,30,57,.08);box-shadow:0 1px 3px #121e3914}}.cdx-button svg{height:20px;margin-right:.2em;margin-top:-2px}.ce-stub{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;padding:3.5em 0;margin:17px 0;border-radius:3px;background:#fcf7f7;color:#b46262}.ce-stub__info{margin-left:20px}.ce-stub__title{margin-bottom:3px;font-weight:600;font-size:18px;text-transform:capitalize}.ce-stub__subtitle{font-size:16px}.codex-editor.codex-editor--rtl{direction:rtl}.codex-editor.codex-editor--rtl .cdx-list{padding-left:0;padding-right:40px}.codex-editor.codex-editor--rtl .ce-toolbar__plus{right:-26px;left:auto}.codex-editor.codex-editor--rtl .ce-toolbar__actions{right:auto;left:-26px}@media (max-width: 650px){.codex-editor.codex-editor--rtl .ce-toolbar__actions{margin-left:0;margin-right:auto;padding-right:0;padding-left:10px}}.codex-editor.codex-editor--rtl .ce-settings{left:5px;right:auto}.codex-editor.codex-editor--rtl .ce-settings:before{right:auto;left:25px}.codex-editor.codex-editor--rtl .ce-settings__button:not(:nth-child(3n+3)){margin-left:3px;margin-right:0}.codex-editor.codex-editor--rtl .ce-conversion-tool__icon{margin-right:0;margin-left:10px}.codex-editor.codex-editor--rtl .ce-inline-toolbar__dropdown{border-right:0px solid transparent;border-left:1px solid rgba(201,201,204,.48);margin:0 -6px 0 6px}.codex-editor.codex-editor--rtl .ce-inline-toolbar__dropdown .icon--toggler-down{margin-left:0;margin-right:4px}@media (min-width: 651px){.codex-editor--narrow.codex-editor--rtl .ce-toolbar__plus{left:0px;right:5px}}@media (min-width: 651px){.codex-editor--narrow.codex-editor--rtl .ce-toolbar__actions{left:-5px}}.cdx-search-field{--icon-margin-right: 10px;background:rgba(232,232,235,.49);border:1px solid rgba(226,226,229,.2);border-radius:6px;padding:2px;display:grid;grid-template-columns:auto auto 1fr;grid-template-rows:auto}.cdx-search-field__icon{width:26px;height:26px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;margin-right:var(--icon-margin-right)}.cdx-search-field__icon svg{width:20px;height:20px;color:#707684}.cdx-search-field__input{font-size:14px;outline:none;font-weight:500;font-family:inherit;border:0;background:transparent;margin:0;padding:0;line-height:22px;min-width:calc(100% - 26px - var(--icon-margin-right))}.cdx-search-field__input::-webkit-input-placeholder{color:#707684;font-weight:500}.cdx-search-field__input::-moz-placeholder{color:#707684;font-weight:500}.cdx-search-field__input:-ms-input-placeholder{color:#707684;font-weight:500}.cdx-search-field__input::-ms-input-placeholder{color:#707684;font-weight:500}.cdx-search-field__input::placeholder{color:#707684;font-weight:500}.ce-popover{--border-radius: 6px;--width: 200px;--max-height: 270px;--padding: 6px;--offset-from-target: 8px;--color-border: #e8e8eb;--color-shadow: rgba(13,20,33,.13);--color-background: white;--color-text-primary: black;--color-text-secondary: #707684;--color-border-icon: rgba(201, 201, 204, .48);--color-border-icon-disabled: #EFF0F1;--color-text-icon-active: #388AE5;--color-background-icon-active: rgba(56, 138, 229, .1);--color-background-item-focus: rgba(34, 186, 255, .08);--color-shadow-item-focus: rgba(7, 161, 227, .08);--color-background-item-hover: #eff2f5;--color-background-item-confirm: #E24A4A;--color-background-item-confirm-hover: #CE4343;min-width:var(--width);width:var(--width);max-height:var(--max-height);border-radius:var(--border-radius);overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-box-shadow:0 3px 15px -3px var(--color-shadow);box-shadow:0 3px 15px -3px var(--color-shadow);position:absolute;left:0;top:calc(100% + var(--offset-from-target));background:var(--color-background);display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;z-index:4;opacity:0;max-height:0;pointer-events:none;padding:0;border:none}.ce-popover--opened{opacity:1;padding:var(--padding);max-height:var(--max-height);pointer-events:auto;-webkit-animation:panelShowing .1s ease;animation:panelShowing .1s ease;border:1px solid var(--color-border)}@media (max-width: 650px){.ce-popover--opened{-webkit-animation:panelShowingMobile .25s ease;animation:panelShowingMobile .25s ease}}.ce-popover__items{overflow-y:auto;-ms-scroll-chaining:none;overscroll-behavior:contain}@media (max-width: 650px){.ce-popover__overlay{position:fixed;top:0;bottom:0;left:0;right:0;background:#1D202B;z-index:3;opacity:.5;-webkit-transition:opacity .12s ease-in;transition:opacity .12s ease-in;will-change:opacity;visibility:visible}}.ce-popover__overlay--hidden{display:none}.ce-popover--open-top{top:calc(-1 * (var(--offset-from-target) + var(--popover-height)))}@media (max-width: 650px){.ce-popover{--offset: 5px;position:fixed;max-width:none;min-width:calc(100% - var(--offset) * 2);left:var(--offset);right:var(--offset);bottom:calc(var(--offset) + env(safe-area-inset-bottom));top:auto;border-radius:10px}.ce-popover .ce-popover__search{display:none}}.ce-popover__search,.ce-popover__custom-content:not(:empty){margin-bottom:5px}.ce-popover__nothing-found-message{color:#707684;display:none;cursor:default;padding:3px;font-size:14px;line-height:20px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ce-popover__nothing-found-message--displayed{display:block}.ce-popover__custom-content:not(:empty){padding:4px}@media (min-width: 651px){.ce-popover__custom-content:not(:empty){padding:0}}.ce-popover__custom-content--hidden{display:none}.ce-popover-item{--border-radius: 6px;--icon-size: 20px;--icon-size-mobile: 28px;border-radius:var(--border-radius);display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;padding:3px;color:var(--color-text-primary);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}@media (max-width: 650px){.ce-popover-item{padding:4px}}.ce-popover-item:not(:last-of-type){margin-bottom:1px}.ce-popover-item__icon{border-radius:5px;width:26px;height:26px;-webkit-box-shadow:0 0 0 1px var(--color-border-icon);box-shadow:0 0 0 1px var(--color-border-icon);background:#fff;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;margin-right:10px}.ce-popover-item__icon svg{width:20px;height:20px}@media (max-width: 650px){.ce-popover-item__icon{width:36px;height:36px;border-radius:8px}.ce-popover-item__icon svg{width:var(--icon-size-mobile);height:var(--icon-size-mobile)}}.ce-popover-item__title{font-size:14px;line-height:20px;font-weight:500;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}@media (max-width: 650px){.ce-popover-item__title{font-size:16px}}.ce-popover-item__secondary-title{color:var(--color-text-secondary);font-size:12px;margin-left:auto;white-space:nowrap;letter-spacing:-.1em;padding-right:5px;margin-bottom:-2px;opacity:.6}@media (max-width: 650px){.ce-popover-item__secondary-title{display:none}}.ce-popover-item--active{background:var(--color-background-icon-active);color:var(--color-text-icon-active)}.ce-popover-item--active .ce-popover-item__icon{-webkit-box-shadow:none;box-shadow:none}.ce-popover-item--disabled{color:var(--color-text-secondary);cursor:default;pointer-events:none}.ce-popover-item--disabled .ce-popover-item__icon{-webkit-box-shadow:0 0 0 1px var(--color-border-icon-disabled);box-shadow:0 0 0 1px var(--color-border-icon-disabled)}.ce-popover-item--focused:not(.ce-popover-item--no-focus){background:var(--color-background-item-focus)!important}.ce-popover-item--focused:not(.ce-popover-item--no-focus){-webkit-box-shadow:inset 0 0 0px 1px var(--color-shadow-item-focus);box-shadow:inset 0 0 0 1px var(--color-shadow-item-focus)}.ce-popover-item--hidden{display:none}@media (hover: hover){.ce-popover-item:hover{cursor:pointer}.ce-popover-item:hover:not(.ce-popover-item--no-hover){background-color:var(--color-background-item-hover)}.ce-popover-item:hover .ce-popover-item__icon{-webkit-box-shadow:none;box-shadow:none}}.ce-popover-item--confirmation{background:var(--color-background-item-confirm)}.ce-popover-item--confirmation .ce-popover-item__icon{color:var(--color-background-item-confirm)}.ce-popover-item--confirmation .ce-popover-item__title{color:#fff}@media (hover: hover){.ce-popover-item--confirmation:not(.ce-popover-item--no-hover):hover{background:var(--color-background-item-confirm-hover)}}.ce-popover-item--confirmation:not(.ce-popover-item--no-focus).ce-popover-item--focused{background:var(--color-background-item-confirm-hover)!important}.ce-popover-item--confirmation .ce-popover-item__icon,.ce-popover-item--active .ce-popover-item__icon,.ce-popover-item--focused .ce-popover-item__icon{-webkit-box-shadow:none;box-shadow:none}@-webkit-keyframes panelShowing{0%{opacity:0;-webkit-transform:translateY(-8px) scale(.9);transform:translateY(-8px) scale(.9)}70%{opacity:1;-webkit-transform:translateY(2px);transform:translateY(2px)}to{-webkit-transform:translateY(0);transform:translateY(0)}}@keyframes panelShowing{0%{opacity:0;-webkit-transform:translateY(-8px) scale(.9);transform:translateY(-8px) scale(.9)}70%{opacity:1;-webkit-transform:translateY(2px);transform:translateY(2px)}to{-webkit-transform:translateY(0);transform:translateY(0)}}@-webkit-keyframes panelShowingMobile{0%{opacity:0;-webkit-transform:translateY(14px) scale(.98);transform:translateY(14px) scale(.98)}70%{opacity:1;-webkit-transform:translateY(-4px);transform:translateY(-4px)}to{-webkit-transform:translateY(0);transform:translateY(0)}}@keyframes panelShowingMobile{0%{opacity:0;-webkit-transform:translateY(14px) scale(.98);transform:translateY(14px) scale(.98)}70%{opacity:1;-webkit-transform:translateY(-4px);transform:translateY(-4px)}to{-webkit-transform:translateY(0);transform:translateY(0)}}.wobble{-webkit-animation-name:wobble;animation-name:wobble;-webkit-animation-duration:.4s;animation-duration:.4s}@-webkit-keyframes wobble{0%{-webkit-transform:translate3d(0,0,0);transform:translateZ(0)}15%{-webkit-transform:translate3d(-9%,0,0);transform:translate3d(-9%,0,0)}30%{-webkit-transform:translate3d(9%,0,0);transform:translate3d(9%,0,0)}45%{-webkit-transform:translate3d(-4%,0,0);transform:translate3d(-4%,0,0)}60%{-webkit-transform:translate3d(4%,0,0);transform:translate3d(4%,0,0)}75%{-webkit-transform:translate3d(-1%,0,0);transform:translate3d(-1%,0,0)}to{-webkit-transform:translate3d(0,0,0);transform:translateZ(0)}}@keyframes wobble{0%{-webkit-transform:translate3d(0,0,0);transform:translateZ(0)}15%{-webkit-transform:translate3d(-9%,0,0);transform:translate3d(-9%,0,0)}30%{-webkit-transform:translate3d(9%,0,0);transform:translate3d(9%,0,0)}45%{-webkit-transform:translate3d(-4%,0,0);transform:translate3d(-4%,0,0)}60%{-webkit-transform:translate3d(4%,0,0);transform:translate3d(4%,0,0)}75%{-webkit-transform:translate3d(-1%,0,0);transform:translate3d(-1%,0,0)}to{-webkit-transform:translate3d(0,0,0);transform:translateZ(0)}}
+const hi = `:root{--selectionColor: #e1f2ff;--inlineSelectionColor: #d4ecff;--bg-light: #eff2f5;--grayText: #707684;--color-dark: #1D202B;--color-active-icon: #388AE5;--color-gray-border: rgba(201, 201, 204, .48);--content-width: 650px;--narrow-mode-right-padding: 50px;--toolbox-buttons-size: 26px;--toolbox-buttons-size--mobile: 36px;--icon-size: 20px;--icon-size--mobile: 28px;--block-padding-vertical: .4em;--color-line-gray: #EFF0F1 }.codex-editor{position:relative;-webkit-box-sizing:border-box;box-sizing:border-box;z-index:1}.codex-editor .hide,.codex-editor__redactor--hidden{display:none}.codex-editor__redactor [contenteditable]:empty:after{content:"\\feff"}@media (min-width: 651px){.codex-editor--narrow .codex-editor__redactor{margin-right:50px}}@media (min-width: 651px){.codex-editor--narrow.codex-editor--rtl .codex-editor__redactor{margin-left:50px;margin-right:0}}@media (min-width: 651px){.codex-editor--narrow .ce-toolbar__actions{right:-5px}}.codex-editor__loader{position:relative;height:30vh}.codex-editor__loader:before{content:"";position:absolute;left:50%;top:50%;width:30px;height:30px;margin-top:-15px;margin-left:-15px;border-radius:50%;border:2px solid rgba(201,201,204,.48);border-top-color:transparent;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-animation:editor-loader-spin .8s infinite linear;animation:editor-loader-spin .8s infinite linear;will-change:transform}.codex-editor-copyable{position:absolute;height:1px;width:1px;top:-400%;opacity:.001}.codex-editor-overlay{position:fixed;top:0px;left:0px;right:0px;bottom:0px;z-index:999;pointer-events:none;overflow:hidden}.codex-editor-overlay__container{position:relative;pointer-events:auto;z-index:0}.codex-editor-overlay__rectangle{position:absolute;pointer-events:none;background-color:#2eaadc33;border:1px solid transparent}.codex-editor svg{max-height:100%}.codex-editor path{stroke:currentColor}::-moz-selection{background-color:#d4ecff}::selection{background-color:#d4ecff}.codex-editor--toolbox-opened [contentEditable=true][data-placeholder]:focus:before{opacity:0!important}@-webkit-keyframes editor-loader-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes editor-loader-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.ce-scroll-locked{overflow:hidden}.ce-scroll-locked--hard{overflow:hidden;top:calc(-1 * var(--window-scroll-offset));position:fixed;width:100%}.ce-toolbar{position:absolute;left:0;right:0;top:0;-webkit-transition:opacity .1s ease;transition:opacity .1s ease;will-change:opacity,top;display:none}.ce-toolbar--opened{display:block}.ce-toolbar__content{max-width:650px;margin:0 auto;position:relative}.ce-toolbar__plus{color:#1d202b;cursor:pointer;width:26px;height:26px;border-radius:7px;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-ms-flex-negative:0;flex-shrink:0}@media (max-width: 650px){.ce-toolbar__plus{width:36px;height:36px}}@media (hover: hover){.ce-toolbar__plus:hover{background-color:#eff2f5}}.ce-toolbar__plus--active{background-color:#eff2f5;-webkit-animation:bounceIn .75s 1;animation:bounceIn .75s 1;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards}.ce-toolbar__plus-shortcut{opacity:.6;word-spacing:-2px;margin-top:5px}@media (max-width: 650px){.ce-toolbar__plus{position:absolute;background-color:#fff;border:1px solid #E8E8EB;-webkit-box-shadow:0 3px 15px -3px rgba(13,20,33,.13);box-shadow:0 3px 15px -3px #0d142121;border-radius:6px;z-index:2;position:static}.ce-toolbar__plus--left-oriented:before{left:15px;margin-left:0}.ce-toolbar__plus--right-oriented:before{left:auto;right:15px;margin-left:0}}.ce-toolbar__actions{position:absolute;right:100%;opacity:0;display:-webkit-box;display:-ms-flexbox;display:flex;padding-right:5px}.ce-toolbar__actions--opened{opacity:1}@media (max-width: 650px){.ce-toolbar__actions{right:auto}}.ce-toolbar__settings-btn{color:#1d202b;width:26px;height:26px;border-radius:7px;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;margin-left:3px;cursor:pointer;user-select:none}@media (max-width: 650px){.ce-toolbar__settings-btn{width:36px;height:36px}}@media (hover: hover){.ce-toolbar__settings-btn:hover{background-color:#eff2f5}}.ce-toolbar__settings-btn--active{background-color:#eff2f5;-webkit-animation:bounceIn .75s 1;animation:bounceIn .75s 1;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards}@media (min-width: 651px){.ce-toolbar__settings-btn{width:24px}}.ce-toolbar__settings-btn--hidden{display:none}@media (max-width: 650px){.ce-toolbar__settings-btn{position:absolute;background-color:#fff;border:1px solid #E8E8EB;-webkit-box-shadow:0 3px 15px -3px rgba(13,20,33,.13);box-shadow:0 3px 15px -3px #0d142121;border-radius:6px;z-index:2;position:static}.ce-toolbar__settings-btn--left-oriented:before{left:15px;margin-left:0}.ce-toolbar__settings-btn--right-oriented:before{left:auto;right:15px;margin-left:0}}.ce-toolbar__plus svg,.ce-toolbar__settings-btn svg{width:24px;height:24px}@media (min-width: 651px){.codex-editor--narrow .ce-toolbar__plus{left:5px}}@media (min-width: 651px){.codex-editor--narrow .ce-toolbox .ce-popover{right:0;left:auto;left:initial}}.ce-inline-toolbar{--y-offset: 8px;position:absolute;background-color:#fff;border:1px solid #E8E8EB;-webkit-box-shadow:0 3px 15px -3px rgba(13,20,33,.13);box-shadow:0 3px 15px -3px #0d142121;border-radius:6px;z-index:2;-webkit-transform:translateX(-50%) translateY(8px) scale(.94);transform:translate(-50%) translateY(8px) scale(.94);opacity:0;visibility:hidden;-webkit-transition:opacity .25s ease,-webkit-transform .15s ease;transition:opacity .25s ease,-webkit-transform .15s ease;transition:transform .15s ease,opacity .25s ease;transition:transform .15s ease,opacity .25s ease,-webkit-transform .15s ease;will-change:transform,opacity;top:0;left:0;z-index:3}.ce-inline-toolbar--left-oriented:before{left:15px;margin-left:0}.ce-inline-toolbar--right-oriented:before{left:auto;right:15px;margin-left:0}.ce-inline-toolbar--showed{opacity:1;visibility:visible;-webkit-transform:translateX(-50%);transform:translate(-50%)}.ce-inline-toolbar--fixed{position:fixed!important}.ce-inline-toolbar--left-oriented{-webkit-transform:translateX(-23px) translateY(8px) scale(.94);transform:translate(-23px) translateY(8px) scale(.94)}.ce-inline-toolbar--left-oriented.ce-inline-toolbar--showed{-webkit-transform:translateX(-23px);transform:translate(-23px)}.ce-inline-toolbar--right-oriented{-webkit-transform:translateX(-100%) translateY(8px) scale(.94);transform:translate(-100%) translateY(8px) scale(.94);margin-left:23px}.ce-inline-toolbar--right-oriented.ce-inline-toolbar--showed{-webkit-transform:translateX(-100%);transform:translate(-100%)}.ce-inline-toolbar [hidden]{display:none!important}.ce-inline-toolbar__toggler-and-button-wrapper{display:-webkit-box;display:-ms-flexbox;display:flex;width:100%;padding:0 6px}.ce-inline-toolbar__buttons{display:-webkit-box;display:-ms-flexbox;display:flex}.ce-inline-toolbar__dropdown{display:-webkit-box;display:-ms-flexbox;display:flex;padding:6px;margin:0 6px 0 -6px;-webkit-box-align:center;-ms-flex-align:center;align-items:center;cursor:pointer;border-right:1px solid rgba(201,201,204,.48);-webkit-box-sizing:border-box;box-sizing:border-box}@media (hover: hover){.ce-inline-toolbar__dropdown:hover{background:#eff2f5}}.ce-inline-toolbar__dropdown--hidden{display:none}.ce-inline-toolbar__dropdown-content,.ce-inline-toolbar__dropdown-arrow{display:-webkit-box;display:-ms-flexbox;display:flex}.ce-inline-toolbar__dropdown-content svg,.ce-inline-toolbar__dropdown-arrow svg{width:20px;height:20px}.ce-inline-toolbar__shortcut{opacity:.6;word-spacing:-3px;margin-top:3px}.ce-inline-tool{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;padding:6px 1px;cursor:pointer;border:0;outline:none;background-color:transparent;vertical-align:bottom;color:inherit;margin:0;border-radius:0;line-height:normal}.ce-inline-tool svg{width:20px;height:20px}@media (max-width: 650px){.ce-inline-tool svg{width:28px;height:28px}}@media (hover: hover){.ce-inline-tool:hover{background-color:#eff2f5}}.ce-inline-tool--active{color:#388ae5}.ce-inline-tool--focused{background:rgba(34,186,255,.08)!important}.ce-inline-tool--focused{-webkit-box-shadow:inset 0 0 0px 1px rgba(7,161,227,.08);box-shadow:inset 0 0 0 1px #07a1e314}.ce-inline-tool--focused-animated{-webkit-animation-name:buttonClicked;animation-name:buttonClicked;-webkit-animation-duration:.25s;animation-duration:.25s}.ce-inline-tool--link .icon--unlink,.ce-inline-tool--unlink .icon--link{display:none}.ce-inline-tool--unlink .icon--unlink{display:inline-block;margin-bottom:-1px}.ce-inline-tool-input{outline:none;border:0;border-radius:0 0 4px 4px;margin:0;font-size:13px;padding:10px;width:100%;-webkit-box-sizing:border-box;box-sizing:border-box;display:none;font-weight:500;border-top:1px solid rgba(201,201,204,.48);-webkit-appearance:none;font-family:inherit}@media (max-width: 650px){.ce-inline-tool-input{font-size:15px;font-weight:500}}.ce-inline-tool-input::-webkit-input-placeholder{color:#707684}.ce-inline-tool-input::-moz-placeholder{color:#707684}.ce-inline-tool-input:-ms-input-placeholder{color:#707684}.ce-inline-tool-input::-ms-input-placeholder{color:#707684}.ce-inline-tool-input::placeholder{color:#707684}.ce-inline-tool-input--showed{display:block}.ce-conversion-toolbar{position:absolute;background-color:#fff;border:1px solid #E8E8EB;-webkit-box-shadow:0 3px 15px -3px rgba(13,20,33,.13);box-shadow:0 3px 15px -3px #0d142121;border-radius:6px;z-index:2;opacity:0;visibility:hidden;will-change:transform,opacity;-webkit-transition:opacity .1s ease,-webkit-transform .1s ease;transition:opacity .1s ease,-webkit-transform .1s ease;transition:transform .1s ease,opacity .1s ease;transition:transform .1s ease,opacity .1s ease,-webkit-transform .1s ease;-webkit-transform:translateY(-8px);transform:translateY(-8px);left:-1px;width:150px;margin-top:5px;-webkit-box-sizing:content-box;box-sizing:content-box}.ce-conversion-toolbar--left-oriented:before{left:15px;margin-left:0}.ce-conversion-toolbar--right-oriented:before{left:auto;right:15px;margin-left:0}.ce-conversion-toolbar--showed{opacity:1;visibility:visible;-webkit-transform:none;transform:none}.ce-conversion-toolbar [hidden]{display:none!important}.ce-conversion-toolbar__buttons{display:-webkit-box;display:-ms-flexbox;display:flex}.ce-conversion-toolbar__label{color:#707684;font-size:11px;font-weight:500;letter-spacing:.33px;padding:10px 10px 5px;text-transform:uppercase}.ce-conversion-tool{display:-webkit-box;display:-ms-flexbox;display:flex;padding:5px 10px;font-size:14px;line-height:20px;font-weight:500;cursor:pointer;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.ce-conversion-tool--hidden{display:none}.ce-conversion-tool--focused{background:rgba(34,186,255,.08)!important}.ce-conversion-tool--focused{-webkit-box-shadow:inset 0 0 0px 1px rgba(7,161,227,.08);box-shadow:inset 0 0 0 1px #07a1e314}.ce-conversion-tool--focused-animated{-webkit-animation-name:buttonClicked;animation-name:buttonClicked;-webkit-animation-duration:.25s;animation-duration:.25s}.ce-conversion-tool:hover{background:#eff2f5}.ce-conversion-tool__icon{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;width:26px;height:26px;-webkit-box-shadow:0 0 0 1px rgba(201,201,204,.48);box-shadow:0 0 0 1px #c9c9cc7a;border-radius:5px;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;background:#fff;-webkit-box-sizing:content-box;box-sizing:content-box;-ms-flex-negative:0;flex-shrink:0;margin-right:10px}.ce-conversion-tool__icon svg{width:20px;height:20px}@media (max-width: 650px){.ce-conversion-tool__icon{width:36px;height:36px;border-radius:8px}.ce-conversion-tool__icon svg{width:28px;height:28px}}.ce-conversion-tool--last{margin-right:0!important}.ce-conversion-tool--active{color:#388ae5!important}.ce-conversion-tool--active{-webkit-animation:bounceIn .75s 1;animation:bounceIn .75s 1;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards}.ce-settings__button{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;padding:6px 1px;border-radius:3px;cursor:pointer;border:0;outline:none;background-color:transparent;vertical-align:bottom;color:inherit;margin:0;line-height:32px}.ce-settings__button svg{width:20px;height:20px}@media (max-width: 650px){.ce-settings__button svg{width:28px;height:28px}}@media (hover: hover){.ce-settings__button:hover{background-color:#eff2f5}}.ce-settings__button--active{color:#388ae5}.ce-settings__button--focused{background:rgba(34,186,255,.08)!important}.ce-settings__button--focused{-webkit-box-shadow:inset 0 0 0px 1px rgba(7,161,227,.08);box-shadow:inset 0 0 0 1px #07a1e314}.ce-settings__button--focused-animated{-webkit-animation-name:buttonClicked;animation-name:buttonClicked;-webkit-animation-duration:.25s;animation-duration:.25s}.ce-settings__button:not(:nth-child(3n+3)){margin-right:3px}.ce-settings__button:nth-child(n+4){margin-top:3px}.ce-settings__button--disabled{cursor:not-allowed!important}.ce-settings__button--disabled{opacity:.3}.ce-settings__button--selected{color:#388ae5}@media (min-width: 651px){.codex-editor--narrow .ce-settings .ce-popover{right:0;left:auto;left:initial}}@-webkit-keyframes fade-in{0%{opacity:0}to{opacity:1}}@keyframes fade-in{0%{opacity:0}to{opacity:1}}.ce-block{-webkit-animation:fade-in .3s ease;animation:fade-in .3s ease;-webkit-animation-fill-mode:none;animation-fill-mode:none;-webkit-animation-fill-mode:initial;animation-fill-mode:initial}.ce-block:first-of-type{margin-top:0}.ce-block--selected .ce-block__content{background:#e1f2ff}.ce-block--selected .ce-block__content [contenteditable]{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.ce-block--selected .ce-block__content img,.ce-block--selected .ce-block__content .ce-stub{opacity:.55}.ce-block--stretched .ce-block__content{max-width:none}.ce-block__content{position:relative;max-width:650px;margin:0 auto;-webkit-transition:background-color .15s ease;transition:background-color .15s ease}.ce-block--drop-target .ce-block__content:before{content:"";position:absolute;top:100%;left:-20px;margin-top:-1px;height:8px;width:8px;border:solid #388AE5;border-width:1px 1px 0 0;-webkit-transform-origin:right;transform-origin:right;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.ce-block--drop-target .ce-block__content:after{content:"";position:absolute;top:100%;height:1px;width:100%;color:#388ae5;background:repeating-linear-gradient(90deg,#388AE5,#388AE5 1px,#fff 1px,#fff 6px)}.ce-block a{cursor:pointer;-webkit-text-decoration:underline;text-decoration:underline}.ce-block b{font-weight:700}.ce-block i{font-style:italic}@media (min-width: 651px){.codex-editor--narrow .ce-block--focused{margin-right:-50px;padding-right:50px}}@-webkit-keyframes bounceIn{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:scale3d(.9,.9,.9);transform:scale3d(.9,.9,.9)}20%{-webkit-transform:scale3d(1.03,1.03,1.03);transform:scale3d(1.03,1.03,1.03)}60%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}@keyframes bounceIn{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:scale3d(.9,.9,.9);transform:scale3d(.9,.9,.9)}20%{-webkit-transform:scale3d(1.03,1.03,1.03);transform:scale3d(1.03,1.03,1.03)}60%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}@-webkit-keyframes selectionBounce{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}50%{-webkit-transform:scale3d(1.01,1.01,1.01);transform:scale3d(1.01,1.01,1.01)}70%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}@keyframes selectionBounce{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}50%{-webkit-transform:scale3d(1.01,1.01,1.01);transform:scale3d(1.01,1.01,1.01)}70%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}@-webkit-keyframes buttonClicked{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:scale3d(.95,.95,.95);transform:scale3d(.95,.95,.95)}60%{-webkit-transform:scale3d(1.02,1.02,1.02);transform:scale3d(1.02,1.02,1.02)}80%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}@keyframes buttonClicked{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:scale3d(.95,.95,.95);transform:scale3d(.95,.95,.95)}60%{-webkit-transform:scale3d(1.02,1.02,1.02);transform:scale3d(1.02,1.02,1.02)}80%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}.cdx-block{padding:.4em 0}.cdx-block::-webkit-input-placeholder{line-height:normal!important}.cdx-input{border:1px solid rgba(201,201,204,.48);-webkit-box-shadow:inset 0 1px 2px 0 rgba(35,44,72,.06);box-shadow:inset 0 1px 2px #232c480f;border-radius:3px;padding:10px 12px;outline:none;width:100%;-webkit-box-sizing:border-box;box-sizing:border-box}.cdx-input[data-placeholder]:before{position:static!important}.cdx-input[data-placeholder]:before{display:inline-block;width:0;white-space:nowrap;pointer-events:none}.cdx-settings-button{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;padding:6px 1px;border-radius:3px;cursor:pointer;border:0;outline:none;background-color:transparent;vertical-align:bottom;color:inherit;margin:0;min-width:26px;min-height:26px}.cdx-settings-button svg{width:20px;height:20px}@media (max-width: 650px){.cdx-settings-button svg{width:28px;height:28px}}@media (hover: hover){.cdx-settings-button:hover{background-color:#eff2f5}}.cdx-settings-button--focused{background:rgba(34,186,255,.08)!important}.cdx-settings-button--focused{-webkit-box-shadow:inset 0 0 0px 1px rgba(7,161,227,.08);box-shadow:inset 0 0 0 1px #07a1e314}.cdx-settings-button--focused-animated{-webkit-animation-name:buttonClicked;animation-name:buttonClicked;-webkit-animation-duration:.25s;animation-duration:.25s}.cdx-settings-button--active{color:#388ae5}.cdx-settings-button svg{width:auto;height:auto}@media (max-width: 650px){.cdx-settings-button{width:36px;height:36px;border-radius:8px}}.cdx-loader{position:relative;border:1px solid rgba(201,201,204,.48)}.cdx-loader:before{content:"";position:absolute;left:50%;top:50%;width:18px;height:18px;margin:-11px 0 0 -11px;border:2px solid rgba(201,201,204,.48);border-left-color:#388ae5;border-radius:50%;-webkit-animation:cdxRotation 1.2s infinite linear;animation:cdxRotation 1.2s infinite linear}@-webkit-keyframes cdxRotation{0%{-webkit-transform:rotate(0deg);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes cdxRotation{0%{-webkit-transform:rotate(0deg);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.cdx-button{padding:13px;border-radius:3px;border:1px solid rgba(201,201,204,.48);font-size:14.9px;background:#fff;-webkit-box-shadow:0 2px 2px 0 rgba(18,30,57,.04);box-shadow:0 2px 2px #121e390a;color:#707684;text-align:center;cursor:pointer}@media (hover: hover){.cdx-button:hover{background:#FBFCFE;-webkit-box-shadow:0 1px 3px 0 rgba(18,30,57,.08);box-shadow:0 1px 3px #121e3914}}.cdx-button svg{height:20px;margin-right:.2em;margin-top:-2px}.ce-stub{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;padding:3.5em 0;margin:17px 0;border-radius:3px;background:#fcf7f7;color:#b46262}.ce-stub__info{margin-left:20px}.ce-stub__title{margin-bottom:3px;font-weight:600;font-size:18px;text-transform:capitalize}.ce-stub__subtitle{font-size:16px}.codex-editor.codex-editor--rtl{direction:rtl}.codex-editor.codex-editor--rtl .cdx-list{padding-left:0;padding-right:40px}.codex-editor.codex-editor--rtl .ce-toolbar__plus{right:-26px;left:auto}.codex-editor.codex-editor--rtl .ce-toolbar__actions{right:auto;left:-26px}@media (max-width: 650px){.codex-editor.codex-editor--rtl .ce-toolbar__actions{margin-left:0;margin-right:auto;padding-right:0;padding-left:10px}}.codex-editor.codex-editor--rtl .ce-settings{left:5px;right:auto}.codex-editor.codex-editor--rtl .ce-settings:before{right:auto;left:25px}.codex-editor.codex-editor--rtl .ce-settings__button:not(:nth-child(3n+3)){margin-left:3px;margin-right:0}.codex-editor.codex-editor--rtl .ce-conversion-tool__icon{margin-right:0;margin-left:10px}.codex-editor.codex-editor--rtl .ce-inline-toolbar__dropdown{border-right:0px solid transparent;border-left:1px solid rgba(201,201,204,.48);margin:0 -6px 0 6px}.codex-editor.codex-editor--rtl .ce-inline-toolbar__dropdown .icon--toggler-down{margin-left:0;margin-right:4px}@media (min-width: 651px){.codex-editor--narrow.codex-editor--rtl .ce-toolbar__plus{left:0px;right:5px}}@media (min-width: 651px){.codex-editor--narrow.codex-editor--rtl .ce-toolbar__actions{left:-5px}}.cdx-search-field{--icon-margin-right: 10px;background:rgba(232,232,235,.49);border:1px solid rgba(226,226,229,.2);border-radius:6px;padding:2px;display:grid;grid-template-columns:auto auto 1fr;grid-template-rows:auto}.cdx-search-field__icon{width:26px;height:26px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;margin-right:var(--icon-margin-right)}.cdx-search-field__icon svg{width:20px;height:20px;color:#707684}.cdx-search-field__input{font-size:14px;outline:none;font-weight:500;font-family:inherit;border:0;background:transparent;margin:0;padding:0;line-height:22px;min-width:calc(100% - 26px - var(--icon-margin-right))}.cdx-search-field__input::-webkit-input-placeholder{color:#707684;font-weight:500}.cdx-search-field__input::-moz-placeholder{color:#707684;font-weight:500}.cdx-search-field__input:-ms-input-placeholder{color:#707684;font-weight:500}.cdx-search-field__input::-ms-input-placeholder{color:#707684;font-weight:500}.cdx-search-field__input::placeholder{color:#707684;font-weight:500}.ce-popover{--border-radius: 6px;--width: 400px;--max-height: 600px;--padding: 8px;--offset-from-target: 8px;--color-border: #e8e8eb;--color-shadow: rgba(13, 20, 33, .13);--color-background: white;--color-text-primary: black;--color-text-secondary: #808080;--color-border-icon: rgba(201, 201, 204, .48);--color-border-icon-disabled: #eff0f1;--color-text-icon-active: #388ae5;--color-background-icon-active: rgba(56, 138, 229, .1);--color-background-item-focus: rgba(34, 186, 255, .08);--color-shadow-item-focus: rgba(7, 161, 227, .08);--color-background-item-hover: #fafafa;--color-background-item-confirm: #e24a4a;--color-background-item-confirm-hover: #ce4343;min-width:var(--width);width:var(--width);max-height:var(--max-height);border-radius:var(--border-radius);overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-box-shadow:0px 10px 10px -1px rgba(0,0,0,.11),0px 0px 4px 0px rgba(0,0,0,.05);box-shadow:0 10px 10px -1px #0000001c,0 0 4px #0000000d;position:absolute;left:0;top:calc(100% + var(--offset-from-target));background:var(--color-background);display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;z-index:4;opacity:0;max-height:0;pointer-events:none;border:none}.ce-popover--opened{opacity:1;padding:var(--padding);max-height:var(--max-height);pointer-events:auto;-webkit-animation:panelShowing .1s ease;animation:panelShowing .1s ease;border:1px solid var(--color-border)}@media (max-width: 650px){.ce-popover--opened{-webkit-animation:panelShowingMobile .25s ease;animation:panelShowingMobile .25s ease}}.ce-popover__items{overflow-y:auto;-ms-scroll-chaining:none;overscroll-behavior:contain}@media (max-width: 650px){.ce-popover__overlay{position:fixed;top:0;bottom:0;left:0;right:0;background:#1D202B;z-index:3;opacity:.5;-webkit-transition:opacity .12s ease-in;transition:opacity .12s ease-in;will-change:opacity;visibility:visible}}.ce-popover__overlay--hidden{display:none}.ce-popover--open-top{top:calc(-1 * (var(--offset-from-target) + var(--popover-height)))}@media (max-width: 650px){.ce-popover{--offset: 5px;position:fixed;max-width:none;min-width:calc(100% - var(--offset) * 2);left:var(--offset);right:var(--offset);bottom:calc(var(--offset) + env(safe-area-inset-bottom));top:auto;border-radius:10px}.ce-popover .ce-popover__search{display:none}}.ce-popover__search,.ce-popover__custom-content:not(:empty){margin-bottom:5px}.ce-popover__nothing-found-message{color:#707684;display:none;cursor:default;padding:3px;font-size:14px;line-height:20px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ce-popover__nothing-found-message--displayed{display:block}.ce-popover__custom-content:not(:empty){padding:4px}@media (min-width: 651px){.ce-popover__custom-content:not(:empty){padding:0}}.ce-popover__custom-content--hidden{display:none}.ce-popover__title-type{font-size:13px;font-weight:600;line-height:1.5;padding:8px;color:#999}.ce-popover__title-type.divider{border-top:1px solid #d9d9d9;margin-top:8px;padding-top:16px}.ce-popover-item{--border-radius: 6px;--icon-size: 48px;--icon-size-mobile: 28px;border-radius:var(--border-radius);display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;padding:3px;color:var(--color-text-primary);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}@media (max-width: 650px){.ce-popover-item{padding:4px}}.ce-popover-item:not(:last-of-type){margin-bottom:1px}.ce-popover-item__icon{border-radius:5px;width:48px;height:48px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;margin-right:16px}@media (max-width: 650px){.ce-popover-item__icon{width:36px;height:36px;border-radius:8px}.ce-popover-item__icon svg{width:var(--icon-size-mobile);height:var(--icon-size-mobile)}}.ce-popover-item__title{font-size:14px;line-height:1.5;font-weight:500;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}@media (max-width: 650px){.ce-popover-item__title{font-size:16px}}.ce-popover-item__secondary-title{color:var(--color-text-secondary);font-size:12px;font-weight:400;white-space:nowrap;margin-top:4px}@media (max-width: 650px){.ce-popover-item__secondary-title{display:none}}.ce-popover-item--active{background:var(--color-background-icon-active);color:var(--color-text-icon-active)}.ce-popover-item--active .ce-popover-item__icon{-webkit-box-shadow:none;box-shadow:none}.ce-popover-item--disabled{color:var(--color-text-secondary);cursor:default;pointer-events:none}.ce-popover-item--disabled .ce-popover-item__icon{-webkit-box-shadow:0 0 0 1px var(--color-border-icon-disabled);box-shadow:0 0 0 1px var(--color-border-icon-disabled)}.ce-popover-item--focused:not(.ce-popover-item--no-focus){background:var(--color-background-item-focus)!important}.ce-popover-item--focused:not(.ce-popover-item--no-focus){-webkit-box-shadow:inset 0 0 0px 1px var(--color-shadow-item-focus);box-shadow:inset 0 0 0 1px var(--color-shadow-item-focus)}.ce-popover-item--hidden{display:none}@media (hover: hover){.ce-popover-item:hover{cursor:pointer}.ce-popover-item:hover:not(.ce-popover-item--no-hover){background-color:var(--color-background-item-hover)}.ce-popover-item:hover .ce-popover-item__icon{-webkit-box-shadow:none;box-shadow:none}}.ce-popover-item--confirmation{background:var(--color-background-item-confirm)}.ce-popover-item--confirmation .ce-popover-item__icon{color:var(--color-background-item-confirm)}.ce-popover-item--confirmation .ce-popover-item__title{color:#fff}@media (hover: hover){.ce-popover-item--confirmation:not(.ce-popover-item--no-hover):hover{background:var(--color-background-item-confirm-hover)}}.ce-popover-item--confirmation:not(.ce-popover-item--no-focus).ce-popover-item--focused{background:var(--color-background-item-confirm-hover)!important}.ce-popover-item--confirmation .ce-popover-item__icon,.ce-popover-item--active .ce-popover-item__icon,.ce-popover-item--focused .ce-popover-item__icon{-webkit-box-shadow:none;box-shadow:none}@-webkit-keyframes panelShowing{0%{opacity:0;-webkit-transform:translateY(-8px) scale(.9);transform:translateY(-8px) scale(.9)}70%{opacity:1;-webkit-transform:translateY(2px);transform:translateY(2px)}to{-webkit-transform:translateY(0);transform:translateY(0)}}@keyframes panelShowing{0%{opacity:0;-webkit-transform:translateY(-8px) scale(.9);transform:translateY(-8px) scale(.9)}70%{opacity:1;-webkit-transform:translateY(2px);transform:translateY(2px)}to{-webkit-transform:translateY(0);transform:translateY(0)}}@-webkit-keyframes panelShowingMobile{0%{opacity:0;-webkit-transform:translateY(14px) scale(.98);transform:translateY(14px) scale(.98)}70%{opacity:1;-webkit-transform:translateY(-4px);transform:translateY(-4px)}to{-webkit-transform:translateY(0);transform:translateY(0)}}@keyframes panelShowingMobile{0%{opacity:0;-webkit-transform:translateY(14px) scale(.98);transform:translateY(14px) scale(.98)}70%{opacity:1;-webkit-transform:translateY(-4px);transform:translateY(-4px)}to{-webkit-transform:translateY(0);transform:translateY(0)}}.wobble{-webkit-animation-name:wobble;animation-name:wobble;-webkit-animation-duration:.4s;animation-duration:.4s}@-webkit-keyframes wobble{0%{-webkit-transform:translate3d(0,0,0);transform:translateZ(0)}15%{-webkit-transform:translate3d(-9%,0,0);transform:translate3d(-9%,0,0)}30%{-webkit-transform:translate3d(9%,0,0);transform:translate3d(9%,0,0)}45%{-webkit-transform:translate3d(-4%,0,0);transform:translate3d(-4%,0,0)}60%{-webkit-transform:translate3d(4%,0,0);transform:translate3d(4%,0,0)}75%{-webkit-transform:translate3d(-1%,0,0);transform:translate3d(-1%,0,0)}to{-webkit-transform:translate3d(0,0,0);transform:translateZ(0)}}@keyframes wobble{0%{-webkit-transform:translate3d(0,0,0);transform:translateZ(0)}15%{-webkit-transform:translate3d(-9%,0,0);transform:translate3d(-9%,0,0)}30%{-webkit-transform:translate3d(9%,0,0);transform:translate3d(9%,0,0)}45%{-webkit-transform:translate3d(-4%,0,0);transform:translate3d(-4%,0,0)}60%{-webkit-transform:translate3d(4%,0,0);transform:translate3d(4%,0,0)}75%{-webkit-transform:translate3d(-1%,0,0);transform:translate3d(-1%,0,0)}to{-webkit-transform:translate3d(0,0,0);transform:translateZ(0)}}
 `;
-class hi extends C {
+class ui extends C {
   constructor() {
     super(...arguments), this.isMobile = !1, this.contentRectCache = void 0, this.resizeDebouncer = Pt(() => {
       this.windowResize();
@@ -9250,7 +9284,7 @@ class hi extends C {
       return;
     const t = d.make("style", null, {
       id: e,
-      textContent: di.toString()
+      textContent: hi.toString()
     });
     d.prepend(document.head, t);
   }
@@ -9478,7 +9512,7 @@ class hi extends C {
     if (d.isAnchor(i) && n) {
       o();
       const u = i.getAttribute("href"), h = Ht(u);
-      jt(h);
+      Ut(h);
       return;
     }
     const r = this.Editor.BlockManager.getBlockByIndex(-1), a = d.offset(r.holder).bottom, l = e.pageY;
@@ -9514,7 +9548,7 @@ class hi extends C {
     );
   }
 }
-const ui = {
+const pi = {
   // API Modules
   BlocksAPI: Zt,
   CaretAPI: Gt,
@@ -9535,25 +9569,25 @@ const ui = {
   // Toolbar Modules
   BlockSettings: Ro,
   ConversionToolbar: Y,
-  Toolbar: jo,
-  InlineToolbar: Uo,
+  Toolbar: Uo,
+  InlineToolbar: jo,
   // Modules
-  BlockEvents: $o,
-  BlockManager: Ko,
-  BlockSelection: Xo,
+  BlockEvents: Wo,
+  BlockManager: Xo,
+  BlockSelection: Vo,
   Caret: ve,
-  CrossBlockSelection: Vo,
-  DragNDrop: Zo,
-  ModificationsObserver: Go,
+  CrossBlockSelection: Zo,
+  DragNDrop: Go,
+  ModificationsObserver: qo,
   Paste: wt,
-  ReadOnly: qo,
+  ReadOnly: Jo,
   RectangleSelection: pe,
-  Renderer: Jo,
-  Saver: Qo,
+  Renderer: Qo,
+  Saver: ei,
   Tools: Ct,
-  UI: hi
+  UI: ui
 };
-class pi {
+class fi {
   /**
    * @param {EditorConfig} config - user configuration
    */
@@ -9581,11 +9615,11 @@ class pi {
    */
   set configuration(e) {
     var o, i;
-    j(e) ? this.config = {
+    U(e) ? this.config = {
       ...e
     } : this.config = {
       holder: e
-    }, Ie(!!this.config.holderId, "config.holderId", "config.holder"), this.config.holderId && !this.config.holder && (this.config.holder = this.config.holderId, this.config.holderId = null), this.config.holder == null && (this.config.holder = "editorjs"), this.config.logLevel || (this.config.logLevel = et.VERBOSE), _t(this.config.logLevel), Ie(!!this.config.initialBlock, "config.initialBlock", "config.defaultBlock"), this.config.defaultBlock = this.config.defaultBlock || this.config.initialBlock || "paragraph", this.config.minHeight = this.config.minHeight !== void 0 ? this.config.minHeight : 300;
+    }, Ie(!!this.config.holderId, "config.holderId", "config.holder"), this.config.holderId && !this.config.holder && (this.config.holder = this.config.holderId, this.config.holderId = null), this.config.holder == null && (this.config.holder = "editorjs"), this.config.logLevel || (this.config.logLevel = et.VERBOSE), Ot(this.config.logLevel), Ie(!!this.config.initialBlock, "config.initialBlock", "config.defaultBlock"), this.config.defaultBlock = this.config.defaultBlock || this.config.initialBlock || "paragraph", this.config.minHeight = this.config.minHeight !== void 0 ? this.config.minHeight : 300;
     const t = {
       type: this.config.defaultBlock,
       data: {}
@@ -9617,7 +9651,7 @@ class pi {
       throw Error("«holderId» and «holder» param can't assign at the same time.");
     if (J(t) && !d.get(t))
       throw Error(`element with ID «${t}» is missing. Pass correct holder's ID.`);
-    if (t && j(t) && !d.isElement(t))
+    if (t && U(t) && !d.isElement(t))
       throw Error("«holder» value must be an Element node");
   }
   /**
@@ -9668,7 +9702,7 @@ class pi {
    * Make modules instances and save it to the @property this.moduleInstances
    */
   constructModules() {
-    Object.entries(ui).forEach(([e, t]) => {
+    Object.entries(pi).forEach(([e, t]) => {
       try {
         this.moduleInstances[e] = new t({
           config: this.configuration,
@@ -9707,10 +9741,10 @@ class pi {
  * @see Editor.js <https://editorjs.io>
  * @author CodeX Team <https://codex.so>
  */
-class fi {
+class gi {
   /** Editor version */
   static get version() {
-    return "1.0.12";
+    return "1.0.23";
   }
   /**
    * @param {EditorConfig|string|undefined} [configuration] - user configuration
@@ -9718,8 +9752,8 @@ class fi {
   constructor(e) {
     let t = () => {
     };
-    j(e) && D(e.onReady) && (t = e.onReady);
-    const o = new pi(e);
+    U(e) && D(e.onReady) && (t = e.onReady);
+    const o = new fi(e);
     this.isReady = o.isReady.then(() => {
       this.exportAPI(o), t();
     });
@@ -9764,5 +9798,5 @@ class fi {
   }
 }
 export {
-  fi as default
+  gi as default
 };

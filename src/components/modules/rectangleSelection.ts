@@ -310,16 +310,11 @@ export default class RectangleSelection extends Module {
      * Custom by c98
      */
 
-    const isFixedToolbarPosition = this.Editor.InlineToolbar.containsNode(
-      event.target
-    );
-
     if (this.Editor.BlockSelection.selectedBlocks.length > 1) {
       this.Editor.InlineToolbar.tryToShow(
         false,
         true,
-        event,
-        isFixedToolbarPosition
+        event
       );
     }
   }
@@ -462,12 +457,10 @@ export default class RectangleSelection extends Module {
   private shrinkRectangleToPoint(): void {
     this.overlayRectangle.style.left = `${this.startX - window.pageXOffset}px`;
     this.overlayRectangle.style.top = `${this.startY - window.pageYOffset}px`;
-    this.overlayRectangle.style.bottom = `calc(100% - ${
-      this.startY - window.pageYOffset
-    }px`;
-    this.overlayRectangle.style.right = `calc(100% - ${
-      this.startX - window.pageXOffset
-    }px`;
+    this.overlayRectangle.style.bottom = `calc(100% - ${this.startY - window.pageYOffset
+      }px`;
+    this.overlayRectangle.style.right = `calc(100% - ${this.startX - window.pageXOffset
+      }px`;
   }
 
   /**
@@ -500,30 +493,24 @@ export default class RectangleSelection extends Module {
     // change this.e distance from the desired edge of the screen*/
     if (this.mouseY >= this.startY) {
       this.overlayRectangle.style.top = `${this.startY - window.pageYOffset}px`;
-      this.overlayRectangle.style.bottom = `calc(100% - ${
-        this.mouseY - window.pageYOffset
-      }px`;
+      this.overlayRectangle.style.bottom = `calc(100% - ${this.mouseY - window.pageYOffset
+        }px`;
     } else {
-      this.overlayRectangle.style.bottom = `calc(100% - ${
-        this.startY - window.pageYOffset
-      }px`;
+      this.overlayRectangle.style.bottom = `calc(100% - ${this.startY - window.pageYOffset
+        }px`;
       this.overlayRectangle.style.top = `${this.mouseY - window.pageYOffset}px`;
     }
 
     if (this.mouseX >= this.startX) {
-      this.overlayRectangle.style.left = `${
-        this.startX - window.pageXOffset
-      }px`;
-      this.overlayRectangle.style.right = `calc(100% - ${
-        this.mouseX - window.pageXOffset
-      }px`;
+      this.overlayRectangle.style.left = `${this.startX - window.pageXOffset
+        }px`;
+      this.overlayRectangle.style.right = `calc(100% - ${this.mouseX - window.pageXOffset
+        }px`;
     } else {
-      this.overlayRectangle.style.right = `calc(100% - ${
-        this.startX - window.pageXOffset
-      }px`;
-      this.overlayRectangle.style.left = `${
-        this.mouseX - window.pageXOffset
-      }px`;
+      this.overlayRectangle.style.right = `calc(100% - ${this.startX - window.pageXOffset
+        }px`;
+      this.overlayRectangle.style.left = `${this.mouseX - window.pageXOffset
+        }px`;
     }
   }
 
@@ -597,7 +584,7 @@ export default class RectangleSelection extends Module {
 
     const blockNumbersIncrease =
       this.stackOfSelected[sizeStack - 1] -
-        this.stackOfSelected[sizeStack - 2] >
+      this.stackOfSelected[sizeStack - 2] >
       0;
 
     let direction = undef;

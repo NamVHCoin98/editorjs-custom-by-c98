@@ -547,7 +547,7 @@ export default class BlockManager extends Module {
    *
    * @returns {Block}
    */
-  public split(): Block {
+  public split(tool): Block {
     const extractedFragment =
       this.Editor.Caret.extractFragmentFromCaretPosition();
     const wrapper = $.make("div");
@@ -566,7 +566,7 @@ export default class BlockManager extends Module {
      *
      * @type {Block}
      */
-    return this.insert({ data });
+    return this.insert({ data, tool });
   }
 
   /**

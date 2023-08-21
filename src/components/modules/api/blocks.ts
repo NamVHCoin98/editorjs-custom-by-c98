@@ -28,8 +28,8 @@ export default class BlocksAPI extends Module {
         this.move(toIndex, fromIndex),
       getBlockByIndex: (index: number): BlockAPIInterface | undefined =>
         this.getBlockByIndex(index),
-      getBlockSelected: (): void => this.getBlockSelected(),
-      getEditor: (): void => this.getEditor(),
+      getBlockSelected: (): BlockToolData[] => this.getBlockSelected(),
+      getEditor: (): any => this.getEditor(),
       getById: (id: string): BlockAPIInterface | null => this.getById(id),
       getCurrentBlockIndex: (): number => this.getCurrentBlockIndex(),
       getBlockIndex: (id: string): number => this.getBlockIndex(id),
@@ -98,7 +98,7 @@ export default class BlocksAPI extends Module {
   /**
    * Start custom by c98
    */
-  public getBlockSelected(): any {
+  public getBlockSelected(): BlockToolData[] {
     return this.Editor.BlockSelection.selectedBlocks;
   }
 
@@ -136,7 +136,7 @@ export default class BlocksAPI extends Module {
   public swap(fromIndex: number, toIndex: number): void {
     _.log(
       "`blocks.swap()` method is deprecated and will be removed in the next major release. " +
-        "Use `block.move()` method instead",
+      "Use `block.move()` method instead",
       "info"
     );
 
@@ -301,7 +301,7 @@ export default class BlocksAPI extends Module {
   public insertNewBlock(): void {
     _.log(
       "Method blocks.insertNewBlock() is deprecated and it will be removed in the next major release. " +
-        "Use blocks.insert() instead.",
+      "Use blocks.insert() instead.",
       "warn"
     );
     this.insert();
