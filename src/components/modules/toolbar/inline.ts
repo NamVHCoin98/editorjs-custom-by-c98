@@ -67,17 +67,17 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
   public opened = false;
 
   /**
-   * Margin above/below the Toolbar
-   */
-  // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-  private readonly toolbarVerticalMargin: number = _.isMobileScreen() ? 20 : 6;
-
-  /**
    * TODO: Get rid of this
    *
    * Currently visible tools instances
    */
-  private toolsInstances: Map<string, IInlineTool>;
+  public toolsInstances: Map<string, IInlineTool>;
+
+  /**
+   * Margin above/below the Toolbar
+   */
+  // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+  private readonly toolbarVerticalMargin: number = _.isMobileScreen() ? 20 : 6;
 
   /**
    * Buttons List
@@ -332,6 +332,16 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
     this.removeAllNodes();
     this.tooltip.destroy();
   }
+
+  /**
+  * Check Tools` state by selection
+  */
+  public checkToolsState(): void {
+    this.toolsInstances.forEach((toolInstance) => {
+      toolInstance.checkState(SelectionUtils.get());
+    });
+  }
+
 
   /**
    * Making DOM
@@ -760,15 +770,6 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
     if (tool.renderActions !== undefined) {
       this.flipper.deactivate();
     }
-  }
-
-  /**
-   * Check Tools` state by selection
-   */
-  private checkToolsState(): void {
-    this.toolsInstances.forEach((toolInstance) => {
-      toolInstance.checkState(SelectionUtils.get());
-    });
   }
 
   /**

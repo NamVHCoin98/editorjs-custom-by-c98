@@ -84,7 +84,7 @@ function ge(s, e, t = "log", o, i = "color: inherit") {
       break;
   }
   o && r.push(o);
-  const a = "Editor.js 1.0.23", l = `line-height: 1em;
+  const a = "Editor.js 1.0.26", l = `line-height: 1em;
             color: #006FEA;
             display: inline-block;
             font-size: 11px;
@@ -5053,6 +5053,14 @@ class jo extends C {
     this.flipper && (this.flipper.deactivate(), this.flipper = null), this.removeAllNodes(), this.tooltip.destroy();
   }
   /**
+  * Check Tools` state by selection
+  */
+  checkToolsState() {
+    this.toolsInstances.forEach((e) => {
+      e.checkState(m.get());
+    });
+  }
+  /**
    * Making DOM
    */
   make() {
@@ -5228,14 +5236,6 @@ class jo extends C {
   toolClicked(e) {
     const t = m.range;
     e.surround(t), this.checkToolsState(), e.renderActions !== void 0 && this.flipper.deactivate();
-  }
-  /**
-   * Check Tools` state by selection
-   */
-  checkToolsState() {
-    this.toolsInstances.forEach((e) => {
-      e.checkState(m.get());
-    });
   }
   /**
    * Get inline tools tools
@@ -6433,7 +6433,7 @@ class Vo extends C {
    * Each Block has selected setter that makes Block copyable
    */
   selectAllBlocks() {
-    this.selection.save(), m.get().removeAllRanges(), this.allBlocksSelected = !0, this.Editor.InlineToolbar.open(!0, !0);
+    this.selection.save(), m.get().removeAllRanges(), this.allBlocksSelected = !0, this.Editor.InlineToolbar.tryToShow(!0, !0, !0);
   }
 }
 class ve extends C {
@@ -7018,7 +7018,7 @@ const xt = class extends C {
       }
     e && r.trim() && a.trim() && (a = "<p>" + (a.trim() ? a : r) + "</p>");
     const l = Object.keys(this.toolsTags).reduce((h, f) => (h[f.toLowerCase()] = this.toolsTags[f].sanitizationConfig ?? {}, h), {}), c = Object.assign({}, l, t.getAllInlineToolsSanitizeConfig(), { br: {} }), u = Z(a, c);
-    console.log(r), !u.trim() || u.trim() === r || !d.isHTMLString(u) ? await this.processText(r) : await this.processText(u, !0);
+    !u.trim() || u.trim() === r || !d.isHTMLString(u) ? await this.processText(r) : await this.processText(u, !0);
   }
   /**
    * Process pasted text and divide them into Blocks
@@ -7601,10 +7601,15 @@ class pe extends C {
    * Handle mouse up
    */
   processMouseUp(e) {
-    this.clearSelection(), this.endSelection(), this.Editor.BlockSelection.selectedBlocks.length > 1 && this.Editor.InlineToolbar.tryToShow(
+    this.clearSelection(), this.endSelection();
+    const t = this.Editor.InlineToolbar.containsNode(
+      e.target
+    );
+    this.Editor.BlockSelection.selectedBlocks.length > 1 && this.Editor.InlineToolbar.tryToShow(
       !1,
       !0,
-      e
+      e,
+      t
     );
   }
   /**
@@ -7896,7 +7901,7 @@ class ei extends C {
     }), S("Total", "log", t), S(void 0, "groupEnd"), {
       time: +/* @__PURE__ */ new Date(),
       blocks: o,
-      version: "1.0.23"
+      version: "1.0.26"
     };
   }
 }
@@ -9744,7 +9749,7 @@ class fi {
 class gi {
   /** Editor version */
   static get version() {
-    return "1.0.23";
+    return "1.0.26";
   }
   /**
    * @param {EditorConfig|string|undefined} [configuration] - user configuration
