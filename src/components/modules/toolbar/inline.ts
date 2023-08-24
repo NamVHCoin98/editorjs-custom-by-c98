@@ -260,10 +260,13 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
    */
   public open(
     needToShowConversionToolbar = true,
-    isSelectedAll = false
-    // isFixedToolbarPosition = false
+    isSelectedAll = false,
+    allowRecheckState = false,
   ): void {
     if (this.opened) {
+      if (allowRecheckState) {
+        this.checkToolsState();
+      }
       return;
     }
 
@@ -363,8 +366,8 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
 
     // To prevent reset of a selection when click on the wrapper
     this.listeners.on(this.nodes.wrapper, "mousedown", (event) => {
-      event.preventDefault();
-      event.stopImmediatePropagation();
+      // event.preventDefault();
+      // event.stopImmediatePropagation();
       event.stopPropagation();
       const isClickedOnActionsWrapper = (event.target as Element).closest(
         `.${this.CSS.actionsWrapper}`
@@ -373,7 +376,7 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
       // If click is on actions wrapper,
       // do not prevent default behavior because actions might include interactive elements
       if (!isClickedOnActionsWrapper) {
-        event.preventDefault();
+        // event.preventDefault();
       }
     });
 

@@ -118,6 +118,7 @@ export default class BlockEvents extends Module {
     /**
      * Clear blocks selection by tab
      */
+    event.preventDefault();
     this.Editor.BlockSelection.clearSelection(event);
 
     const { BlockManager, InlineToolbar, ConversionToolbar } = this.Editor;

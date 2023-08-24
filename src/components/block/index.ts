@@ -309,7 +309,7 @@ export default class Block extends EventsDispatcher<BlockEvents> {
    * @returns {HTMLElement}
    */
   public get currentInput(): HTMLElement | Node {
-    return this.inputs[this.inputIndex];
+    return this.inputs[this.inputIndex === -1 ? 0 : this.inputIndex];
   }
 
   /**
@@ -541,7 +541,7 @@ export default class Block extends EventsDispatcher<BlockEvents> {
       if (methodName === BlockToolAPI.APPEND_CALLBACK) {
         _.log(
           "`appendCallback` hook is deprecated and will be removed in the next major release. " +
-            "Use `rendered` hook instead",
+          "Use `rendered` hook instead",
           "warn"
         );
       }
