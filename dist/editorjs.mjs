@@ -84,7 +84,7 @@ function ge(s, e, t = "log", o, i = "color: inherit") {
       break;
   }
   o && r.push(o);
-  const a = "Editor.js 1.0.46", l = `line-height: 1em;
+  const a = "Editor.js 1.0.47", l = `line-height: 1em;
             color: #006FEA;
             display: inline-block;
             font-size: 11px;
@@ -3285,6 +3285,12 @@ class P {
     return this.params.title;
   }
   /**
+   * Item title
+   */
+  get dividerType() {
+    return this.params.dividerType;
+  }
+  /**
    * True if popover should close once item is activated
    */
   get closeOnActivate() {
@@ -3869,9 +3875,9 @@ const H = class extends we {
     this.nodes.popover = d.make("div", [H.CSS.popover]), this.nodes.nothingFoundMessage = d.make("div", [H.CSS.nothingFoundMessage], {
       textContent: this.messages.nothingFound
     }), this.nodes.popover.appendChild(this.nodes.nothingFoundMessage), this.nodes.items = d.make("div", [H.CSS.items]), this.items.forEach((s, e) => {
-      if (e === 0 || e === 7) {
+      if (s.dividerType) {
         const t = d.make("div", [H.CSS.titleType]);
-        t.innerHTML = e === 0 ? "Text Blocks" : "Media", e === 7 && t.classList.add("divider"), this.nodes.items.appendChild(t);
+        t.innerHTML = s.dividerType, e !== 0 && t.classList.add("divider"), this.nodes.items.appendChild(t);
       }
       this.nodes.items.appendChild(s.getElement());
     }), this.nodes.popover.appendChild(this.nodes.items), this.listeners.on(this.nodes.popover, "click", (s) => {
@@ -4549,7 +4555,8 @@ const bt = class extends we {
         this.toolButtonActivated(t.name, e.data);
       },
       secondaryLabel: t.shortcut ? nt(t.shortcut) : "",
-      description: e.description || ""
+      description: e.description || "",
+      dividerType: e.dividerType || ""
     });
     return this.toolsToBeDisplayed.reduce((e, t) => (Array.isArray(t.toolbox) ? t.toolbox.forEach((o) => {
       e.push(s(o, t));
@@ -7904,7 +7911,7 @@ class ei extends C {
     }), S("Total", "log", t), S(void 0, "groupEnd"), {
       time: +/* @__PURE__ */ new Date(),
       blocks: o,
-      version: "1.0.46"
+      version: "1.0.47"
     };
   }
 }
@@ -9752,7 +9759,7 @@ class fi {
 class gi {
   /** Editor version */
   static get version() {
-    return "1.0.46";
+    return "1.0.47";
   }
   /**
    * @param {EditorConfig|string|undefined} [configuration] - user configuration

@@ -128,7 +128,7 @@ export default class Popover extends EventsDispatcher<PopoverEventMap> {
     overlay: string;
     overlayHidden: string;
     titleType: string;
-    } {
+  } {
     return {
       popover: 'ce-popover',
       popoverOpenTop: 'ce-popover--open-top',
@@ -241,7 +241,7 @@ export default class Popover extends EventsDispatcher<PopoverEventMap> {
     if (this.search !== undefined) {
       setTimeout(() => {
         this.search.focus();
-      // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
       }, 100);
     }
 
@@ -287,27 +287,28 @@ export default class Popover extends EventsDispatcher<PopoverEventMap> {
    * Constructs HTML element corresponding to popover
    */
   private make(): void {
-    this.nodes.popover = Dom.make('div', [ Popover.CSS.popover ]);
+    this.nodes.popover = Dom.make('div', [Popover.CSS.popover]);
 
-    this.nodes.nothingFoundMessage = Dom.make('div', [ Popover.CSS.nothingFoundMessage ], {
+    this.nodes.nothingFoundMessage = Dom.make('div', [Popover.CSS.nothingFoundMessage], {
       textContent: this.messages.nothingFound,
     });
 
     this.nodes.popover.appendChild(this.nodes.nothingFoundMessage);
-    this.nodes.items = Dom.make('div', [ Popover.CSS.items ]);
+    this.nodes.items = Dom.make('div', [Popover.CSS.items]);
 
     this.items.forEach((item, index) => {
       // Custom by c98
-      if (index === 0 || index === 7) {
-        const titleType = Dom.make('div', [ Popover.CSS.titleType ]);
-        titleType.innerHTML = index === 0 ? "Text Blocks" : "Media";
-        if (index === 7) {
+      if (item.dividerType) {
+        const titleType = Dom.make('div', [Popover.CSS.titleType]);
+
+        titleType.innerHTML = item.dividerType;
+        if (index !== 0) {
           titleType.classList.add("divider");
         }
 
         this.nodes.items.appendChild(titleType);
       }
-      
+
       this.nodes.items.appendChild(item.getElement());
     });
 

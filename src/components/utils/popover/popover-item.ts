@@ -35,6 +35,13 @@ export class PopoverItem {
   }
 
   /**
+   * Item title
+   */
+  public get dividerType(): string | undefined {
+    return this.params.dividerType;
+  }
+
+  /**
    * True if popover should close once item is activated
    */
   public get closeOnActivate(): boolean | undefined {
@@ -62,9 +69,9 @@ export class PopoverItem {
     root: null | HTMLElement;
     icon: null | HTMLElement;
   } = {
-    root: null,
-    icon: null,
-  };
+      root: null,
+      icon: null,
+    };
 
   /**
    * Popover item params

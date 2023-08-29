@@ -46,6 +46,7 @@ interface PopoverItemBase {
   toggle?: boolean | string;
 
   description?: string;
+  dividerType?: string,
 }
 
 /**

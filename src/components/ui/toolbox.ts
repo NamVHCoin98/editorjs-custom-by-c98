@@ -122,7 +122,7 @@ export default class Toolbox extends EventsDispatcher<ToolboxEventMap> {
    * @param options.api - Editor API methods
    * @param options.tools - Tools available to check whether some of them should be displayed at the Toolbox or not
    */
-  constructor({ api, tools, i18nLabels }: {api: API; tools: ToolsCollection<BlockTool>; i18nLabels: Record<ToolboxTextLabelsKeys, string>}) {
+  constructor({ api, tools, i18nLabels }: { api: API; tools: ToolsCollection<BlockTool>; i18nLabels: Record<ToolboxTextLabelsKeys, string> }) {
     super();
 
     this.api = api;
@@ -266,6 +266,7 @@ export default class Toolbox extends EventsDispatcher<ToolboxEventMap> {
         },
         secondaryLabel: tool.shortcut ? _.beautifyShortcut(tool.shortcut) : '',
         description: toolboxItem.description || '',
+        dividerType: toolboxItem.dividerType || '',
       };
     };
 
@@ -275,7 +276,7 @@ export default class Toolbox extends EventsDispatcher<ToolboxEventMap> {
           tool.toolbox.forEach(item => {
             result.push(toPopoverItem(item, tool));
           });
-        } else if (tool.toolbox !== undefined)  {
+        } else if (tool.toolbox !== undefined) {
           result.push(toPopoverItem(tool.toolbox, tool));
         }
 

@@ -28,6 +28,7 @@ export interface ToolboxConfigEntry {
   data?: BlockToolData
 
   description?: string;
+  dividerType?: string;
 }
 
 
