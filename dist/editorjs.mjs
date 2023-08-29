@@ -84,7 +84,7 @@ function ge(s, e, t = "log", o, i = "color: inherit") {
       break;
   }
   o && r.push(o);
-  const a = "Editor.js 1.0.44", l = `line-height: 1em;
+  const a = "Editor.js 1.0.46", l = `line-height: 1em;
             color: #006FEA;
             display: inline-block;
             font-size: 11px;
@@ -515,17 +515,15 @@ class d {
    * @returns {boolean}
    */
   static isEmpty(e) {
-    if (e) {
-      e.normalize();
-      const t = [e];
-      for (; t.length > 0; )
-        if (e = t.shift(), !!e) {
-          if (this.isLeaf(e) && !this.isNodeEmpty(e))
-            return !1;
-          e.childNodes && t.push(...Array.from(e.childNodes));
-        }
-      return !0;
-    }
+    e.normalize();
+    const t = [e];
+    for (; t.length > 0; )
+      if (e = t.shift(), !!e) {
+        if (this.isLeaf(e) && !this.isNodeEmpty(e))
+          return !1;
+        e.childNodes && t.push(...Array.from(e.childNodes));
+      }
+    return !0;
   }
   /**
    * Check if string contains html elements
@@ -1748,12 +1746,11 @@ class F extends we {
    * This method returns the entry that is related to the Block (depended on the Block data)
    */
   async getActiveToolboxEntry() {
-    var i;
-    const e = ((i = this.tool) == null ? void 0 : i.toolbox) || [];
+    const e = this.tool.toolbox;
     if (e.length === 1)
       return Promise.resolve(this.tool.toolbox[0]);
     const t = await this.data;
-    return e.find((n) => Object.entries(n.data).some(([r, a]) => t[r] && $t(t[r], a)));
+    return e.find((i) => Object.entries(i.data).some(([n, r]) => t[n] && $t(t[n], r)));
   }
   /**
    * Make default Block wrappers and put Tool`s content there
@@ -5914,8 +5911,8 @@ class Xo extends C {
    * @returns {Block} inserted Block
    */
   insertDefaultBlockAtIndex(e, t = !1) {
-    var n, r;
-    const o = ((r = (n = this.blocks) == null ? void 0 : n[e - 1]) == null ? void 0 : r.name) === "list" ? "list" : this.config.defaultBlock, i = this.composeBlock({ tool: o });
+    var n, r, a, l;
+    const o = ((r = (n = this.blocks) == null ? void 0 : n[e - 1]) == null ? void 0 : r.name) === "list" && ((l = (a = this.blocks) == null ? void 0 : a[e]) == null ? void 0 : l.name) !== this.config.defaultBlock ? "list" : this.config.defaultBlock, i = this.composeBlock({ tool: o });
     return this._blocks[e] = i, this.blockDidMutated(Qe, i, {
       index: e
     }), t ? this.currentBlockIndex = e : e <= this.currentBlockIndex && this.currentBlockIndex++, i;
@@ -6470,19 +6467,18 @@ class ve extends C {
    * @returns {boolean}
    */
   get isAtStart() {
-    var r;
     const e = m.get(), t = d.getDeepestNode(this.Editor.BlockManager.currentBlock.currentInput);
     let o = e.focusNode;
     if (d.isNativeInput(t))
       return t.selectionEnd === 0;
     if (!e.anchorNode)
       return !1;
-    let i = ((r = o == null ? void 0 : o.textContent) == null ? void 0 : r.search(/\S/)) || 0;
+    let i = o.textContent.search(/\S/);
     i === -1 && (i = 0);
     let n = e.focusOffset;
-    return o.nodeType !== Node.TEXT_NODE && o.childNodes.length && (o.childNodes[n] ? (o = o.childNodes[n], n = 0) : (o = o.childNodes[n - 1], n = o.textContent.length)), (d.isLineBreakTag(t) || d.isEmpty(t)) && this.getHigherLevelSiblings(o, "left").every((c) => {
-      const u = d.isLineBreakTag(c), h = c.children.length === 1 && d.isLineBreakTag(c.children[0]), f = u || h;
-      return d.isEmpty(c) && !f;
+    return o.nodeType !== Node.TEXT_NODE && o.childNodes.length && (o.childNodes[n] ? (o = o.childNodes[n], n = 0) : (o = o.childNodes[n - 1], n = o.textContent.length)), (d.isLineBreakTag(t) || d.isEmpty(t)) && this.getHigherLevelSiblings(o, "left").every((l) => {
+      const c = d.isLineBreakTag(l), u = l.children.length === 1 && d.isLineBreakTag(l.children[0]), h = c || u;
+      return d.isEmpty(l) && !h;
     }) && n === i ? !0 : t === null || o === t && n <= i;
   }
   /**
@@ -7908,7 +7904,7 @@ class ei extends C {
     }), S("Total", "log", t), S(void 0, "groupEnd"), {
       time: +/* @__PURE__ */ new Date(),
       blocks: o,
-      version: "1.0.44"
+      version: "1.0.46"
     };
   }
 }
@@ -9756,7 +9752,7 @@ class fi {
 class gi {
   /** Editor version */
   static get version() {
-    return "1.0.44";
+    return "1.0.46";
   }
   /**
    * @param {EditorConfig|string|undefined} [configuration] - user configuration
