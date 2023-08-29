@@ -84,7 +84,7 @@ function ge(s, e, t = "log", o, i = "color: inherit") {
       break;
   }
   o && r.push(o);
-  const a = "Editor.js 1.0.47", l = `line-height: 1em;
+  const a = "Editor.js 1.0.53", l = `line-height: 1em;
             color: #006FEA;
             display: inline-block;
             font-size: 11px;
@@ -5269,7 +5269,14 @@ class jo extends C {
     });
   }
 }
-const $o = ["paragraph", "list", "header", "header01", "header02", "header03"];
+const $o = [
+  "paragraph",
+  "list",
+  "header",
+  "header01",
+  "header02",
+  "header03"
+];
 class Wo extends C {
   /**
    * All keydowns on Block
@@ -5386,7 +5393,11 @@ class Wo extends C {
       return;
     let n = this.Editor.BlockManager.currentBlock;
     if (this.Editor.Caret.isAtStart && !this.Editor.BlockManager.currentBlock.hasMedia)
-      this.Editor.BlockManager.insertDefaultBlockAtIndex(
+      this.Editor.BlockManager.currentBlock.name === this.config.defaultBlock ? n = this.Editor.BlockManager.insertDefaultBlockAtIndex(
+        this.Editor.BlockManager.currentBlockIndex + 1,
+        !1,
+        this.config.defaultBlock
+      ) : this.Editor.BlockManager.insertDefaultBlockAtIndex(
         this.Editor.BlockManager.currentBlockIndex
       );
     else if (this.Editor.Caret.isAtEnd)
@@ -5395,7 +5406,9 @@ class Wo extends C {
       );
     else {
       const r = t.blocks[t.currentBlockIndex].name;
-      n = this.Editor.BlockManager.split($o.includes(r) ? r : "paragraph");
+      n = this.Editor.BlockManager.split(
+        $o.includes(r) ? r : "paragraph"
+      );
     }
     this.Editor.Caret.setToBlock(n), this.Editor.Toolbar.moveAndOpen(n), e.preventDefault();
   }
@@ -5917,12 +5930,12 @@ class Xo extends C {
    * TODO: Remove method and use insert() with index instead (?)
    * @returns {Block} inserted Block
    */
-  insertDefaultBlockAtIndex(e, t = !1) {
-    var n, r, a, l;
-    const o = ((r = (n = this.blocks) == null ? void 0 : n[e - 1]) == null ? void 0 : r.name) === "list" && ((l = (a = this.blocks) == null ? void 0 : a[e]) == null ? void 0 : l.name) !== this.config.defaultBlock ? "list" : this.config.defaultBlock, i = this.composeBlock({ tool: o });
-    return this._blocks[e] = i, this.blockDidMutated(Qe, i, {
+  insertDefaultBlockAtIndex(e, t = !1, o = "") {
+    var r, a;
+    const i = ((a = (r = this.blocks) == null ? void 0 : r[e - 1]) == null ? void 0 : a.name) === "list" ? "list" : this.config.defaultBlock, n = this.composeBlock({ tool: o || i });
+    return this._blocks[e] = n, this.blockDidMutated(Qe, n, {
       index: e
-    }), t ? this.currentBlockIndex = e : e <= this.currentBlockIndex && this.currentBlockIndex++, i;
+    }), t ? this.currentBlockIndex = e : e <= this.currentBlockIndex && this.currentBlockIndex++, n;
   }
   /**
    * Always inserts at the end
@@ -7911,7 +7924,7 @@ class ei extends C {
     }), S("Total", "log", t), S(void 0, "groupEnd"), {
       time: +/* @__PURE__ */ new Date(),
       blocks: o,
-      version: "1.0.47"
+      version: "1.0.53"
     };
   }
 }
@@ -9759,7 +9772,7 @@ class fi {
 class gi {
   /** Editor version */
   static get version() {
-    return "1.0.47";
+    return "1.0.53";
   }
   /**
    * @param {EditorConfig|string|undefined} [configuration] - user configuration

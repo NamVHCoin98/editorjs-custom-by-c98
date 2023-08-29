@@ -394,9 +394,16 @@ export default class BlockManager extends Module {
    * TODO: Remove method and use insert() with index instead (?)
    * @returns {Block} inserted Block
    */
-  public insertDefaultBlockAtIndex(index: number, needToFocus = false): Block {
-    const newBlockType = (this.blocks?.[index - 1]?.name === 'list' && this.blocks?.[index]?.name !== this.config.defaultBlock) ? 'list' : this.config.defaultBlock;
-    const block = this.composeBlock({ tool: newBlockType });
+  public insertDefaultBlockAtIndex(
+    index: number,
+    needToFocus = false,
+    blockType = ""
+  ): Block {
+    const newBlockType =
+      this.blocks?.[index - 1]?.name === "list"
+        ? "list"
+        : this.config.defaultBlock;
+    const block = this.composeBlock({ tool: blockType || newBlockType });
 
     this._blocks[index] = block;
 

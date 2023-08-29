@@ -6,7 +6,14 @@ import * as _ from "../utils";
 import SelectionUtils from "../selection";
 import Flipper from "../flipper";
 
-export const DEFAULT_TYPE_ACCEPT = ['paragraph', 'list', 'header', 'header01', 'header02', 'header03'];
+export const DEFAULT_TYPE_ACCEPT = [
+  "paragraph",
+  "list",
+  "header",
+  "header01",
+  "header02",
+  "header03",
+];
 /**
  *
  */
@@ -259,9 +266,17 @@ export default class BlockEvents extends Module {
       this.Editor.Caret.isAtStart &&
       !this.Editor.BlockManager.currentBlock.hasMedia
     ) {
-      this.Editor.BlockManager.insertDefaultBlockAtIndex(
-        this.Editor.BlockManager.currentBlockIndex
-      );
+      if (
+        this.Editor.BlockManager.currentBlock.name === this.config.defaultBlock
+      ) {
+        newCurrent = this.Editor.BlockManager.insertDefaultBlockAtIndex(
+          this.Editor.BlockManager.currentBlockIndex + 1, false, this.config.defaultBlock
+        );
+      } else {
+        this.Editor.BlockManager.insertDefaultBlockAtIndex(
+          this.Editor.BlockManager.currentBlockIndex
+        );
+      }
 
       /**
        * If caret is at very end of the block, just append the new block without splitting
@@ -276,9 +291,12 @@ export default class BlockEvents extends Module {
        * Split the Current Block into two blocks
        * Renew local current node after split
        */
-      const newBlockType = BlockManager.blocks[BlockManager.currentBlockIndex].name;
+      const newBlockType =
+        BlockManager.blocks[BlockManager.currentBlockIndex].name;
 
-      newCurrent = this.Editor.BlockManager.split(DEFAULT_TYPE_ACCEPT.includes(newBlockType) ? newBlockType : 'paragraph');
+      newCurrent = this.Editor.BlockManager.split(
+        DEFAULT_TYPE_ACCEPT.includes(newBlockType) ? newBlockType : "paragraph"
+      );
     }
 
     this.Editor.Caret.setToBlock(newCurrent);
@@ -312,7 +330,6 @@ export default class BlockEvents extends Module {
       event.preventDefault();
 
       const index = BlockManager.currentBlockIndex;
-
 
       if (
         BlockManager.previousBlock &&
@@ -556,8 +573,8 @@ export default class BlockEvents extends Module {
    */
   private needToolbarClosing(event: KeyboardEvent): boolean {
     const toolboxItemSelected =
-      event.keyCode === _.keyCodes.ENTER &&
-      this.Editor.Toolbar.toolbox.opened,
+        event.keyCode === _.keyCodes.ENTER &&
+        this.Editor.Toolbar.toolbox.opened,
       blockSettingsItemSelected =
         event.keyCode === _.keyCodes.ENTER && this.Editor.BlockSettings.opened,
       inlineToolbarItemSelected =
