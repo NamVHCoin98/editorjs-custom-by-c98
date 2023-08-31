@@ -84,7 +84,7 @@ function ge(s, e, t = "log", o, i = "color: inherit") {
       break;
   }
   o && r.push(o);
-  const a = "Editor.js 1.0.53", l = `line-height: 1em;
+  const a = "Editor.js 1.0.54", l = `line-height: 1em;
             color: #006FEA;
             display: inline-block;
             font-size: 11px;
@@ -111,7 +111,7 @@ function te(s) {
 function D(s) {
   return te(s) === "function" || te(s) === "asyncfunction";
 }
-function U(s) {
+function j(s) {
   return te(s) === "object";
 }
 function J(s) {
@@ -203,9 +203,9 @@ function Ce(s, ...e) {
   if (!e.length)
     return s;
   const t = e.shift();
-  if (U(s) && U(t))
+  if (j(s) && j(t))
     for (const o in t)
-      U(t[o]) ? (s[o] || Object.assign(s, { [o]: {} }), Ce(s[o], t[o])) : Object.assign(s, { [o]: t[o] });
+      j(t[o]) ? (s[o] || Object.assign(s, { [o]: {} }), Ce(s[o], t[o])) : Object.assign(s, { [o]: t[o] });
   return Ce(s, ...e);
 }
 function nt(s) {
@@ -222,10 +222,10 @@ function Ht(s) {
 function zt() {
   return _t(10);
 }
-function Ut(s) {
+function jt(s) {
   window.open(s, "_blank");
 }
-function jt(s = "") {
+function Ut(s = "") {
   return `${s}${Math.floor(Math.random() * 1e8).toString(16)}`;
 }
 function Ie(s, e, t) {
@@ -250,7 +250,7 @@ function ee() {
 }
 const Ge = typeof window < "u" && window.navigator && window.navigator.platform && (/iP(ad|hone|od)/.test(window.navigator.platform) || window.navigator.platform === "MacIntel" && window.navigator.maxTouchPoints > 1);
 function $t(s, e) {
-  const t = Array.isArray(s) || U(s), o = Array.isArray(e) || U(e);
+  const t = Array.isArray(s) || j(s), o = Array.isArray(e) || j(e);
   return t || o ? JSON.stringify(s) === JSON.stringify(e) : s === e;
 }
 class d {
@@ -925,7 +925,7 @@ class Re {
    * @param {boolean|AddEventListenerOptions} options - useCapture or {capture, passive, once}
    */
   on(e, t, o, i = !1) {
-    const n = jt("l"), r = {
+    const n = Ut("l"), r = {
       id: n,
       element: e,
       eventType: t,
@@ -1418,11 +1418,11 @@ class F extends we {
       const c = l === void 0, u = l instanceof InputEvent;
       !c && !u && this.detectToolRootChange(l);
       let h;
-      c || u ? h = !0 : h = !(l.length > 0 && l.every((v) => {
-        const { addedNodes: p, removedNodes: k, target: A } = v;
+      c || u ? h = !0 : h = !(l.length > 0 && l.every((k) => {
+        const { addedNodes: f, removedNodes: v, target: A } = k;
         return [
-          ...Array.from(p),
-          ...Array.from(k),
+          ...Array.from(f),
+          ...Array.from(v),
           A
         ].some((O) => d.isElement(O) ? O.dataset.mutationFree === "true" : !1);
       })), h && (this.dropInputsCache(), this.updateCurrentInput(), this.call(
@@ -2366,13 +2366,13 @@ var Le = {}, to = {
               if (!h)
                 return u;
               if (c && typeof btoa == "function") {
-                var f = (p = h, "/*# sourceMappingURL=data:application/json;charset=utf-8;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(p)))) + " */"), v = h.sources.map(function(k) {
-                  return "/*# sourceURL=" + h.sourceRoot + k + " */";
+                var p = (f = h, "/*# sourceMappingURL=data:application/json;charset=utf-8;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(f)))) + " */"), k = h.sources.map(function(v) {
+                  return "/*# sourceURL=" + h.sourceRoot + v + " */";
                 });
-                return [u].concat(v).concat([f]).join(`
+                return [u].concat(k).concat([p]).join(`
 `);
               }
-              var p;
+              var f;
               return [u].join(`
 `);
             }(r, i);
@@ -2414,8 +2414,8 @@ var Le = {}, to = {
           }
           return g[E];
         };
-      }(), u = null, h = 0, f = [], v = i(5);
-      function p(b, g) {
+      }(), u = null, h = 0, p = [], k = i(5);
+      function f(b, g) {
         for (var E = 0; E < b.length; E++) {
           var T = b[E], _ = a[T.id];
           if (_) {
@@ -2432,7 +2432,7 @@ var Le = {}, to = {
           }
         }
       }
-      function k(b, g) {
+      function v(b, g) {
         for (var E = [], T = {}, _ = 0; _ < b.length; _++) {
           var I = b[_], z = g.base ? I[0] + g.base : I[0], L = { css: I[1], media: I[2], sourceMap: I[3] };
           T[z] ? T[z].parts.push(L) : E.push(T[z] = { id: z, parts: [L] });
@@ -2443,9 +2443,9 @@ var Le = {}, to = {
         var E = c(b.insertInto);
         if (!E)
           throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
-        var T = f[f.length - 1];
+        var T = p[p.length - 1];
         if (b.insertAt === "top")
-          T ? T.nextSibling ? E.insertBefore(g, T.nextSibling) : E.appendChild(g) : E.insertBefore(g, E.firstChild), f.push(g);
+          T ? T.nextSibling ? E.insertBefore(g, T.nextSibling) : E.appendChild(g) : E.insertBefore(g, E.firstChild), p.push(g);
         else if (b.insertAt === "bottom")
           E.appendChild(g);
         else {
@@ -2464,8 +2464,8 @@ var Le = {}, to = {
         if (b.parentNode === null)
           return !1;
         b.parentNode.removeChild(b);
-        var g = f.indexOf(b);
-        g >= 0 && f.splice(g, 1);
+        var g = p.indexOf(b);
+        g >= 0 && p.splice(g, 1);
       }
       function O(b) {
         var g = document.createElement("style");
@@ -2493,7 +2493,7 @@ var Le = {}, to = {
             return L.attrs.type === void 0 && (L.attrs.type = "text/css"), L.attrs.rel = "stylesheet", y(W, L.attrs), A(L, W), W;
           }(g), T = function(L, W, le) {
             var Q = le.css, Ee = le.sourceMap, It = W.convertToAbsoluteUrls === void 0 && Ee;
-            (W.convertToAbsoluteUrls || It) && (Q = v(Q)), Ee && (Q += `
+            (W.convertToAbsoluteUrls || It) && (Q = k(Q)), Ee && (Q += `
 /*# sourceMappingURL=data:application/json;base64,` + btoa(unescape(encodeURIComponent(JSON.stringify(Ee)))) + " */");
             var Mt = new Blob([Q], { type: "text/css" }), Xe = L.href;
             L.href = URL.createObjectURL(Mt), Xe && URL.revokeObjectURL(Xe);
@@ -2524,13 +2524,13 @@ var Le = {}, to = {
         if (typeof DEBUG < "u" && DEBUG && typeof document != "object")
           throw new Error("The style-loader cannot be used in a non-browser environment");
         (g = g || {}).attrs = typeof g.attrs == "object" ? g.attrs : {}, g.singleton || typeof g.singleton == "boolean" || (g.singleton = l()), g.insertInto || (g.insertInto = "head"), g.insertAt || (g.insertAt = "bottom");
-        var E = k(b, g);
-        return p(E, g), function(T) {
+        var E = v(b, g);
+        return f(E, g), function(T) {
           for (var _ = [], I = 0; I < E.length; I++) {
             var z = E[I];
             (L = a[z.id]).refs--, _.push(L);
           }
-          for (T && p(k(T, g), g), I = 0; I < _.length; I++) {
+          for (T && f(v(T, g), g), I = 0; I < _.length; I++) {
             var L;
             if ((L = _[I]).refs === 0) {
               for (var W = 0; W < L.parts.length; W++)
@@ -2562,30 +2562,30 @@ var Le = {}, to = {
           return i;
         var r = n.protocol + "//" + n.host, a = r + n.pathname.replace(/\/[^\/]*$/, "/");
         return i.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(l, c) {
-          var u, h = c.trim().replace(/^"(.*)"$/, function(f, v) {
-            return v;
-          }).replace(/^'(.*)'$/, function(f, v) {
-            return v;
+          var u, h = c.trim().replace(/^"(.*)"$/, function(p, k) {
+            return k;
+          }).replace(/^'(.*)'$/, function(p, k) {
+            return k;
           });
           return /^(#|data:|http:\/\/|https:\/\/|file:\/\/\/|\s*$)/i.test(h) ? l : (u = h.indexOf("//") === 0 ? h : h.indexOf("/") === 0 ? r + h : a + h.replace(/^\.\//, ""), "url(" + JSON.stringify(u) + ")");
         });
       };
     }, function(t, o, i) {
-      var n, r, a, l, c, u, h, f, v;
-      t.exports = (n = "cdx-notifies", r = "cdx-notify", a = "cdx-notify__cross", l = "cdx-notify__button--confirm", c = "cdx-notify__button--cancel", u = "cdx-notify__input", h = "cdx-notify__button", f = "cdx-notify__btns-wrapper", { alert: v = function(p) {
-        var k = document.createElement("DIV"), A = document.createElement("DIV"), N = p.message, O = p.style;
-        return k.classList.add(r), O && k.classList.add(r + "--" + O), k.innerHTML = N, A.classList.add(a), A.addEventListener("click", k.remove.bind(k)), k.appendChild(A), k;
-      }, confirm: function(p) {
-        var k = v(p), A = document.createElement("div"), N = document.createElement("button"), O = document.createElement("button"), y = k.querySelector("." + a), x = p.cancelHandler, w = p.okHandler;
-        return A.classList.add(f), N.innerHTML = p.okText || "Confirm", O.innerHTML = p.cancelText || "Cancel", N.classList.add(h), O.classList.add(h), N.classList.add(l), O.classList.add(c), x && typeof x == "function" && (O.addEventListener("click", x), y.addEventListener("click", x)), w && typeof w == "function" && N.addEventListener("click", w), N.addEventListener("click", k.remove.bind(k)), O.addEventListener("click", k.remove.bind(k)), A.appendChild(N), A.appendChild(O), k.appendChild(A), k;
-      }, prompt: function(p) {
-        var k = v(p), A = document.createElement("div"), N = document.createElement("button"), O = document.createElement("input"), y = k.querySelector("." + a), x = p.cancelHandler, w = p.okHandler;
-        return A.classList.add(f), N.innerHTML = p.okText || "Ok", N.classList.add(h), N.classList.add(l), O.classList.add(u), p.placeholder && O.setAttribute("placeholder", p.placeholder), p.default && (O.value = p.default), p.inputType && (O.type = p.inputType), x && typeof x == "function" && y.addEventListener("click", x), w && typeof w == "function" && N.addEventListener("click", function() {
+      var n, r, a, l, c, u, h, p, k;
+      t.exports = (n = "cdx-notifies", r = "cdx-notify", a = "cdx-notify__cross", l = "cdx-notify__button--confirm", c = "cdx-notify__button--cancel", u = "cdx-notify__input", h = "cdx-notify__button", p = "cdx-notify__btns-wrapper", { alert: k = function(f) {
+        var v = document.createElement("DIV"), A = document.createElement("DIV"), N = f.message, O = f.style;
+        return v.classList.add(r), O && v.classList.add(r + "--" + O), v.innerHTML = N, A.classList.add(a), A.addEventListener("click", v.remove.bind(v)), v.appendChild(A), v;
+      }, confirm: function(f) {
+        var v = k(f), A = document.createElement("div"), N = document.createElement("button"), O = document.createElement("button"), y = v.querySelector("." + a), x = f.cancelHandler, w = f.okHandler;
+        return A.classList.add(p), N.innerHTML = f.okText || "Confirm", O.innerHTML = f.cancelText || "Cancel", N.classList.add(h), O.classList.add(h), N.classList.add(l), O.classList.add(c), x && typeof x == "function" && (O.addEventListener("click", x), y.addEventListener("click", x)), w && typeof w == "function" && N.addEventListener("click", w), N.addEventListener("click", v.remove.bind(v)), O.addEventListener("click", v.remove.bind(v)), A.appendChild(N), A.appendChild(O), v.appendChild(A), v;
+      }, prompt: function(f) {
+        var v = k(f), A = document.createElement("div"), N = document.createElement("button"), O = document.createElement("input"), y = v.querySelector("." + a), x = f.cancelHandler, w = f.okHandler;
+        return A.classList.add(p), N.innerHTML = f.okText || "Ok", N.classList.add(h), N.classList.add(l), O.classList.add(u), f.placeholder && O.setAttribute("placeholder", f.placeholder), f.default && (O.value = f.default), f.inputType && (O.type = f.inputType), x && typeof x == "function" && y.addEventListener("click", x), w && typeof w == "function" && N.addEventListener("click", function() {
           w(O.value);
-        }), N.addEventListener("click", k.remove.bind(k)), A.appendChild(O), A.appendChild(N), k.appendChild(A), k;
+        }), N.addEventListener("click", v.remove.bind(v)), A.appendChild(O), A.appendChild(N), v.appendChild(A), v;
       }, getWrapper: function() {
-        var p = document.createElement("DIV");
-        return p.classList.add(n), p;
+        var f = document.createElement("DIV");
+        return f.classList.add(n), f;
       } });
     }]);
   });
@@ -2672,12 +2672,12 @@ var _e = {}, ro = {
     s.exports = o();
   })(Lt, function() {
     function t(h) {
-      var f = h.tags, v = Object.keys(f), p = v.map(function(k) {
-        return typeof f[k];
-      }).every(function(k) {
-        return k === "object" || k === "boolean" || k === "function";
+      var p = h.tags, k = Object.keys(p), f = k.map(function(v) {
+        return typeof p[v];
+      }).every(function(v) {
+        return v === "object" || v === "boolean" || v === "function";
       });
-      if (!p)
+      if (!f)
         throw new Error("The configuration was invalid");
       this.config = h;
     }
@@ -2690,56 +2690,56 @@ var _e = {}, ro = {
       return n.indexOf(h.nodeName) !== -1;
     }
     t.prototype.clean = function(h) {
-      const f = document.implementation.createHTMLDocument(), v = f.createElement("div");
-      return v.innerHTML = h, this._sanitize(f, v), v.innerHTML;
-    }, t.prototype._sanitize = function(h, f) {
-      var v = a(h, f), p = v.firstChild();
-      if (p)
+      const p = document.implementation.createHTMLDocument(), k = p.createElement("div");
+      return k.innerHTML = h, this._sanitize(p, k), k.innerHTML;
+    }, t.prototype._sanitize = function(h, p) {
+      var k = a(h, p), f = k.firstChild();
+      if (f)
         do {
-          if (p.nodeType === Node.TEXT_NODE)
-            if (p.data.trim() === "" && (p.previousElementSibling && i(p.previousElementSibling) || p.nextElementSibling && i(p.nextElementSibling))) {
-              f.removeChild(p), this._sanitize(h, f);
+          if (f.nodeType === Node.TEXT_NODE)
+            if (f.data.trim() === "" && (f.previousElementSibling && i(f.previousElementSibling) || f.nextElementSibling && i(f.nextElementSibling))) {
+              p.removeChild(f), this._sanitize(h, p);
               break;
             } else
               continue;
-          if (p.nodeType === Node.COMMENT_NODE) {
-            f.removeChild(p), this._sanitize(h, f);
+          if (f.nodeType === Node.COMMENT_NODE) {
+            p.removeChild(f), this._sanitize(h, p);
             break;
           }
-          var k = r(p), A;
-          k && (A = Array.prototype.some.call(p.childNodes, i));
-          var N = !!f.parentNode, O = i(f) && i(p) && N, y = p.nodeName.toLowerCase(), x = l(this.config, y, p), w = k && A;
-          if (w || c(p, x) || !this.config.keepNestedBlockElements && O) {
-            if (!(p.nodeName === "SCRIPT" || p.nodeName === "STYLE"))
-              for (; p.childNodes.length > 0; )
-                f.insertBefore(p.childNodes[0], p);
-            f.removeChild(p), this._sanitize(h, f);
+          var v = r(f), A;
+          v && (A = Array.prototype.some.call(f.childNodes, i));
+          var N = !!p.parentNode, O = i(p) && i(f) && N, y = f.nodeName.toLowerCase(), x = l(this.config, y, f), w = v && A;
+          if (w || c(f, x) || !this.config.keepNestedBlockElements && O) {
+            if (!(f.nodeName === "SCRIPT" || f.nodeName === "STYLE"))
+              for (; f.childNodes.length > 0; )
+                p.insertBefore(f.childNodes[0], f);
+            p.removeChild(f), this._sanitize(h, p);
             break;
           }
-          for (var M = 0; M < p.attributes.length; M += 1) {
-            var R = p.attributes[M];
-            u(R, x, p) && (p.removeAttribute(R.name), M = M - 1);
+          for (var M = 0; M < f.attributes.length; M += 1) {
+            var R = f.attributes[M];
+            u(R, x, f) && (f.removeAttribute(R.name), M = M - 1);
           }
-          this._sanitize(h, p);
-        } while (p = v.nextSibling());
+          this._sanitize(h, f);
+        } while (f = k.nextSibling());
     };
-    function a(h, f) {
+    function a(h, p) {
       return h.createTreeWalker(
-        f,
+        p,
         NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_COMMENT,
         null,
         !1
       );
     }
-    function l(h, f, v) {
-      return typeof h.tags[f] == "function" ? h.tags[f](v) : h.tags[f];
+    function l(h, p, k) {
+      return typeof h.tags[p] == "function" ? h.tags[p](k) : h.tags[p];
     }
-    function c(h, f) {
-      return typeof f > "u" ? !0 : typeof f == "boolean" ? !f : !1;
+    function c(h, p) {
+      return typeof p > "u" ? !0 : typeof p == "boolean" ? !p : !1;
     }
-    function u(h, f, v) {
-      var p = h.name.toLowerCase();
-      return f === !0 ? !1 : typeof f[p] == "function" ? !f[p](h.value, v) : typeof f[p] > "u" || f[p] === !1 ? !0 : typeof f[p] == "string" ? f[p] !== h.value : !1;
+    function u(h, p, k) {
+      var f = h.name.toLowerCase();
+      return p === !0 ? !1 : typeof p[f] == "function" ? !p[f](h.value, k) : typeof p[f] > "u" || p[f] === !1 ? !0 : typeof p[f] == "string" ? p[f] !== h.value : !1;
     }
     return t;
   });
@@ -2758,7 +2758,7 @@ function Z(s, e = {}) {
   return new ao(t).clean(s);
 }
 function Pe(s, e) {
-  return Array.isArray(s) ? lo(s, e) : U(s) ? co(s, e) : J(s) ? ho(s, e) : s;
+  return Array.isArray(s) ? lo(s, e) : j(s) ? co(s, e) : J(s) ? ho(s, e) : s;
 }
 function lo(s, e) {
   return s.map((t) => Pe(t, e));
@@ -2774,10 +2774,10 @@ function co(s, e) {
   return t;
 }
 function ho(s, e) {
-  return U(e) ? Z(s, e) : e === !1 ? Z(s, {}) : s;
+  return j(e) ? Z(s, e) : e === !1 ? Z(s, {}) : s;
 }
 function uo(s) {
-  return U(s) || Nt(s) || D(s);
+  return j(s) || Nt(s) || D(s);
 }
 class po extends C {
   /**
@@ -3222,7 +3222,7 @@ class wo extends C {
 function ut(s, e) {
   const t = {};
   return Object.entries(s).forEach(([o, i]) => {
-    if (U(i)) {
+    if (j(i)) {
       const n = e ? `${e}.${o}` : o;
       Object.values(i).every((a) => J(a)) ? t[o] = n : t[o] = ut(i, n);
       return;
@@ -4347,8 +4347,8 @@ var Oe = {}, Do = {
       var a = function() {
         function l(c) {
           var u = this;
-          (function(h, f) {
-            if (!(h instanceof f))
+          (function(h, p) {
+            if (!(h instanceof p))
               throw new TypeError("Cannot call a class as a function");
           })(this, l), this.commands = {}, this.keys = {}, this.name = c.name, this.parseShortcutName(c.name), this.element = c.on, this.callback = c.callback, this.executeShortcut = function(h) {
             u.execute(h);
@@ -4363,23 +4363,23 @@ var Oe = {}, Do = {
           for (var u = 0; u < c.length; u++) {
             c[u] = c[u].toUpperCase();
             var h = !1;
-            for (var f in l.supportedCommands)
-              if (l.supportedCommands[f].includes(c[u])) {
-                h = this.commands[f] = !0;
+            for (var p in l.supportedCommands)
+              if (l.supportedCommands[p].includes(c[u])) {
+                h = this.commands[p] = !0;
                 break;
               }
             h || (this.keys[c[u]] = !0);
           }
-          for (var v in l.supportedCommands)
-            this.commands[v] || (this.commands[v] = !1);
+          for (var k in l.supportedCommands)
+            this.commands[k] || (this.commands[k] = !1);
         } }, { key: "execute", value: function(c) {
-          var u, h = { CMD: c.ctrlKey || c.metaKey, SHIFT: c.shiftKey, ALT: c.altKey }, f = !0;
+          var u, h = { CMD: c.ctrlKey || c.metaKey, SHIFT: c.shiftKey, ALT: c.altKey }, p = !0;
           for (u in this.commands)
-            this.commands[u] !== h[u] && (f = !1);
-          var v, p = !0;
-          for (v in this.keys)
-            p = p && c.keyCode === l.keyCodes[v];
-          f && p && this.callback(c);
+            this.commands[u] !== h[u] && (p = !1);
+          var k, f = !0;
+          for (k in this.keys)
+            f = f && c.keyCode === l.keyCodes[k];
+          p && f && this.callback(c);
         } }, { key: "remove", value: function() {
           this.element.removeEventListener("keydown", this.executeShortcut);
         } }]), l;
@@ -4634,7 +4634,7 @@ gt([
   ae
 ], ze.prototype, "toolboxItemsToBeDisplayed", 1);
 const mt = "block hovered";
-class Uo extends C {
+class jo extends C {
   /**
    * @class
    * @param moduleConfiguration - Module Configuration
@@ -4871,8 +4871,8 @@ class Uo extends C {
     this.removeAllNodes(), this.toolboxInstance && this.toolboxInstance.destroy(), this.tooltip.destroy();
   }
 }
-var ye = /* @__PURE__ */ ((s) => (s[s.Block = 0] = "Block", s[s.Inline = 1] = "Inline", s[s.Tune = 2] = "Tune", s))(ye || {}), me = /* @__PURE__ */ ((s) => (s.Shortcut = "shortcut", s.Toolbox = "toolbox", s.EnabledInlineTools = "inlineToolbar", s.EnabledBlockTunes = "tunes", s.Config = "config", s))(me || {}), kt = /* @__PURE__ */ ((s) => (s.Shortcut = "shortcut", s.SanitizeConfig = "sanitize", s))(kt || {}), se = /* @__PURE__ */ ((s) => (s.IsEnabledLineBreaks = "enableLineBreaks", s.Toolbox = "toolbox", s.ConversionConfig = "conversionConfig", s.IsReadOnlySupported = "isReadOnlySupported", s.PasteConfig = "pasteConfig", s))(se || {}), Ue = /* @__PURE__ */ ((s) => (s.IsInline = "isInline", s.Title = "title", s))(Ue || {}), vt = /* @__PURE__ */ ((s) => (s.IsTune = "isTune", s))(vt || {});
-class je {
+var ye = /* @__PURE__ */ ((s) => (s[s.Block = 0] = "Block", s[s.Inline = 1] = "Inline", s[s.Tune = 2] = "Tune", s))(ye || {}), me = /* @__PURE__ */ ((s) => (s.Shortcut = "shortcut", s.Toolbox = "toolbox", s.EnabledInlineTools = "inlineToolbar", s.EnabledBlockTunes = "tunes", s.Config = "config", s))(me || {}), kt = /* @__PURE__ */ ((s) => (s.Shortcut = "shortcut", s.SanitizeConfig = "sanitize", s))(kt || {}), se = /* @__PURE__ */ ((s) => (s.IsEnabledLineBreaks = "enableLineBreaks", s.Toolbox = "toolbox", s.ConversionConfig = "conversionConfig", s.IsReadOnlySupported = "isReadOnlySupported", s.PasteConfig = "pasteConfig", s))(se || {}), je = /* @__PURE__ */ ((s) => (s.IsInline = "isInline", s.Title = "title", s))(je || {}), vt = /* @__PURE__ */ ((s) => (s.IsTune = "isTune", s))(vt || {});
+class Ue {
   /**
    * @class
    * @param {ConstructorOptions} options - Constructor options
@@ -4944,7 +4944,7 @@ class je {
     return this.type === 2;
   }
 }
-class jo extends C {
+class Uo extends C {
   /**
    * @class
    * @param moduleConfiguration - Module Configuration
@@ -7039,9 +7039,14 @@ const xt = class extends C {
         return;
       } catch {
       }
-    e && r.trim() && a.trim() && (a = "<p>" + (a.trim() ? a : r) + "</p>");
-    const l = Object.keys(this.toolsTags).reduce((h, f) => (h[f.toLowerCase()] = this.toolsTags[f].sanitizationConfig ?? {}, h), {}), c = Object.assign({}, l, t.getAllInlineToolsSanitizeConfig(), { br: {} }), u = Z(a, c);
-    !u.trim() || u.trim() === r || !d.isHTMLString(u) ? await this.processText(r) : await this.processText(u, !0);
+    a = r.split(" ").map((p) => p.startsWith("http:") || p.startsWith("https:") ? `<a href="${p}">${p}</a>` : p).join(" "), e && r.trim() && a.trim() && (a = "<p>" + (a.trim() ? a : r) + "</p>");
+    const c = Object.keys(this.toolsTags).reduce((p, k) => (p[k.toLowerCase()] = this.toolsTags[k].sanitizationConfig ?? {}, p), {}), u = Object.assign(
+      {},
+      c,
+      t.getAllInlineToolsSanitizeConfig(),
+      { br: {} }
+    ), h = Z(a, u);
+    !h.trim() || h.trim() === r || !d.isHTMLString(h) ? await this.processText(r) : await this.processText(h, !0);
   }
   /**
    * Process pasted text and divide them into Blocks
@@ -7066,13 +7071,21 @@ const xt = class extends C {
    * Set onPaste callback handler
    */
   setCallback() {
-    this.listeners.on(this.Editor.UI.nodes.holder, "paste", this.handlePasteEvent);
+    this.listeners.on(
+      this.Editor.UI.nodes.holder,
+      "paste",
+      this.handlePasteEvent
+    );
   }
   /**
    * Unset onPaste callback handler
    */
   unsetCallback() {
-    this.listeners.off(this.Editor.UI.nodes.holder, "paste", this.handlePasteEvent);
+    this.listeners.off(
+      this.Editor.UI.nodes.holder,
+      "paste",
+      this.handlePasteEvent
+    );
   }
   /**
    * Get and process tool`s paste configs
@@ -7088,7 +7101,7 @@ const xt = class extends C {
    * @returns {string[]} array of tags.
    */
   collectTagNames(s) {
-    return J(s) ? [s] : U(s) ? Object.keys(s) : [];
+    return J(s) ? [s] : j(s) ? Object.keys(s) : [];
   }
   /**
    * Get tags to substitute by Tool
@@ -7109,7 +7122,7 @@ const xt = class extends C {
           );
           return;
         }
-        const r = U(o) ? o[n] : null;
+        const r = j(o) ? o[n] : null;
         this.toolsTags[n.toUpperCase()] = {
           tool: s,
           sanitizationConfig: r
@@ -7127,7 +7140,14 @@ const xt = class extends C {
       return;
     const { files: e = {} } = s.pasteConfig;
     let { extensions: t, mimeTypes: o } = e;
-    !t && !o || (t && !Array.isArray(t) && (S(`«extensions» property of the onDrop config for «${s.name}» Tool should be an array`), t = []), o && !Array.isArray(o) && (S(`«mimeTypes» property of the onDrop config for «${s.name}» Tool should be an array`), o = []), o && (o = o.filter((i) => Dt(i) ? !0 : (S(`MIME type value «${i}» for the «${s.name}» Tool is not a valid MIME type`, "warn"), !1))), this.toolsFiles[s.name] = {
+    !t && !o || (t && !Array.isArray(t) && (S(
+      `«extensions» property of the onDrop config for «${s.name}» Tool should be an array`
+    ), t = []), o && !Array.isArray(o) && (S(
+      `«mimeTypes» property of the onDrop config for «${s.name}» Tool should be an array`
+    ), o = []), o && (o = o.filter((i) => Dt(i) ? !0 : (S(
+      `MIME type value «${i}» for the «${s.name}» Tool is not a valid MIME type`,
+      "warn"
+    ), !1))), this.toolsFiles[s.name] = {
       extensions: t || [],
       mimeTypes: o || []
     });
@@ -7138,16 +7158,18 @@ const xt = class extends C {
    * @param tool - BlockTool object
    */
   getPatternsConfig(s) {
-    s.pasteConfig === !1 || !s.pasteConfig.patterns || V(s.pasteConfig.patterns) || Object.entries(s.pasteConfig.patterns).forEach(([e, t]) => {
-      t instanceof RegExp || S(
-        `Pattern ${t} for «${s.name}» Tool is skipped because it should be a Regexp instance.`,
-        "warn"
-      ), this.toolsPatterns.push({
-        key: e,
-        pattern: t,
-        tool: s
-      });
-    });
+    s.pasteConfig === !1 || !s.pasteConfig.patterns || V(s.pasteConfig.patterns) || Object.entries(s.pasteConfig.patterns).forEach(
+      ([e, t]) => {
+        t instanceof RegExp || S(
+          `Pattern ${t} for «${s.name}» Tool is skipped because it should be a Regexp instance.`,
+          "warn"
+        ), this.toolsPatterns.push({
+          key: e,
+          pattern: t,
+          tool: s
+        });
+      }
+    );
   }
   /**
    * Check if browser behavior suits better
@@ -7170,11 +7192,13 @@ const xt = class extends C {
       Array.from(s).map((n) => this.processFile(n))
     ), t = t.filter((n) => !!n);
     const i = e.currentBlock.tool.isDefault && e.currentBlock.isEmpty;
-    t.forEach(
-      (n, r) => {
-        e.paste(n.type, n.event, r === 0 && i);
-      }
-    );
+    t.forEach((n, r) => {
+      e.paste(
+        n.type,
+        n.event,
+        r === 0 && i
+      );
+    });
   }
   /**
    * Get information about file and find Tool to handle it
@@ -7183,9 +7207,11 @@ const xt = class extends C {
    */
   async processFile(s) {
     const e = Rt(s), t = Object.entries(this.toolsFiles).find(([n, { mimeTypes: r, extensions: a }]) => {
-      const [l, c] = s.type.split("/"), u = a.find((f) => f.toLowerCase() === e.toLowerCase()), h = r.find((f) => {
-        const [v, p] = f.split("/");
-        return v === l && (p === c || p === "*");
+      const [l, c] = s.type.split("/"), u = a.find(
+        (p) => p.toLowerCase() === e.toLowerCase()
+      ), h = r.find((p) => {
+        const [k, f] = p.split("/");
+        return k === l && (f === c || f === "*");
       });
       return !!u || !!h;
     });
@@ -7217,14 +7243,23 @@ const xt = class extends C {
           n = i, a = !0, this.toolsTags[n.tagName] && (r = this.toolsTags[n.tagName].tool);
           break;
       }
-      const { tags: l } = r.pasteConfig || { tags: [] }, c = l.reduce((f, v) => (this.collectTagNames(v).forEach((k) => {
-        const A = U(v) ? v[k] : null;
-        f[k.toLowerCase()] = A || {};
-      }), f), {}), u = Object.assign({}, c, r.baseSanitizeConfig);
+      const { tags: l } = r.pasteConfig || {
+        tags: []
+      }, c = l.reduce(
+        (p, k) => (this.collectTagNames(k).forEach((v) => {
+          const A = j(k) ? k[v] : null;
+          p[v.toLowerCase()] = A || {};
+        }), p),
+        {}
+      ), u = Object.assign(
+        {},
+        c,
+        r.baseSanitizeConfig
+      );
       if (n.tagName.toLowerCase() === "table") {
-        const f = Z(n.outerHTML, u);
+        const p = Z(n.outerHTML, u);
         n = d.make("div", void 0, {
-          innerHTML: f
+          innerHTML: p
         }).firstChild;
       } else
         n.innerHTML = Z(n.innerHTML, u);
@@ -7275,7 +7310,10 @@ const xt = class extends C {
   async processSingleBlock(s) {
     const { Caret: e, BlockManager: t } = this.Editor, { currentBlock: o } = t;
     if (!o || s.tool !== o.name || !d.containsOnlyInlineElements(s.content.innerHTML)) {
-      this.insertBlock(s, (o == null ? void 0 : o.tool.isDefault) && o.isEmpty);
+      this.insertBlock(
+        s,
+        (o == null ? void 0 : o.tool.isDefault) && o.isEmpty
+      );
       return;
     }
     e.insertContentAtCaretPosition(s.content.innerHTML);
@@ -7293,7 +7331,11 @@ const xt = class extends C {
     if (e.currentBlock && e.currentBlock.tool.isDefault && o.textContent.length < xt.PATTERN_PROCESSING_MAX_LENGTH) {
       const n = await this.processPattern(o.textContent);
       if (n) {
-        const r = e.currentBlock && e.currentBlock.tool.isDefault && e.currentBlock.isEmpty, a = e.paste(n.tool, n.event, r);
+        const r = e.currentBlock && e.currentBlock.tool.isDefault && e.currentBlock.isEmpty, a = e.paste(
+          n.tool,
+          n.event,
+          r
+        );
         t.setToBlock(a, t.positions.END);
         return;
       }
@@ -7373,7 +7415,9 @@ const xt = class extends C {
    * @param {Node} destNode - destination node
    */
   processElementNode(s, e, t) {
-    const o = Object.keys(this.toolsTags), i = s, { tool: n } = this.toolsTags[i.tagName] || {}, r = this.tagsByTool[n == null ? void 0 : n.name] || [], a = o.includes(i.tagName), l = d.blockElements.includes(i.tagName.toLowerCase()), c = Array.from(i.children).some(
+    const o = Object.keys(this.toolsTags), i = s, { tool: n } = this.toolsTags[i.tagName] || {}, r = this.tagsByTool[n == null ? void 0 : n.name] || [], a = o.includes(i.tagName), l = d.blockElements.includes(
+      i.tagName.toLowerCase()
+    ), c = Array.from(i.children).some(
       ({ tagName: h }) => o.includes(h) && !r.includes(h)
     ), u = Array.from(i.children).some(
       ({ tagName: h }) => d.blockElements.includes(h.toLowerCase())
@@ -7401,7 +7445,11 @@ const xt = class extends C {
       let a = new DocumentFragment();
       switch (r && d.isFragment(r) && (a = i.pop()), n.nodeType) {
         case Node.ELEMENT_NODE:
-          if (t = this.processElementNode(n, i, a), t)
+          if (t = this.processElementNode(
+            n,
+            i,
+            a
+          ), t)
             return t;
           break;
         case Node.TEXT_NODE:
@@ -7756,25 +7804,25 @@ class pe extends C {
     const a = this.stackOfSelected[o - 1] - this.stackOfSelected[o - 2] > 0;
     let l = r;
     o > 1 && (l = a ? i : n);
-    const c = e > this.stackOfSelected[o - 1] && l === i, u = e < this.stackOfSelected[o - 1] && l === n, f = !(c || u || l === r);
-    if (!f && (e > this.stackOfSelected[o - 1] || this.stackOfSelected[o - 1] === void 0)) {
-      let k = this.stackOfSelected[o - 1] + 1 || e;
-      for (k; k <= e; k++)
-        this.addBlockInSelection(k);
+    const c = e > this.stackOfSelected[o - 1] && l === i, u = e < this.stackOfSelected[o - 1] && l === n, p = !(c || u || l === r);
+    if (!p && (e > this.stackOfSelected[o - 1] || this.stackOfSelected[o - 1] === void 0)) {
+      let v = this.stackOfSelected[o - 1] + 1 || e;
+      for (v; v <= e; v++)
+        this.addBlockInSelection(v);
       return;
     }
-    if (!f && e < this.stackOfSelected[o - 1]) {
-      for (let k = this.stackOfSelected[o - 1] - 1; k >= e; k--)
-        this.addBlockInSelection(k);
+    if (!p && e < this.stackOfSelected[o - 1]) {
+      for (let v = this.stackOfSelected[o - 1] - 1; v >= e; v--)
+        this.addBlockInSelection(v);
       return;
     }
-    if (!f)
+    if (!p)
       return;
-    let v = o - 1, p;
-    for (e > this.stackOfSelected[o - 1] ? p = () => e > this.stackOfSelected[v] : p = () => e < this.stackOfSelected[v]; p(); )
+    let k = o - 1, f;
+    for (e > this.stackOfSelected[o - 1] ? f = () => e > this.stackOfSelected[k] : f = () => e < this.stackOfSelected[k]; f(); )
       this.rectCrossesBlocks && this.Editor.BlockSelection.unSelectBlockByIndex(
-        this.stackOfSelected[v]
-      ), this.stackOfSelected.pop(), v--;
+        this.stackOfSelected[k]
+      ), this.stackOfSelected.pop(), k--;
   }
 }
 class Qo extends C {
@@ -7849,8 +7897,8 @@ class Qo extends C {
         title: i
       };
       if (t.unavailable.has(i)) {
-        const f = (l = t.unavailable.get(i).toolbox[0]) == null ? void 0 : l.title;
-        c.title = f || c.title;
+        const p = (l = t.unavailable.get(i).toolbox[0]) == null ? void 0 : l.title;
+        c.title = p || c.title;
       }
       const u = o.insert({
         id: a,
@@ -7924,7 +7972,7 @@ class ei extends C {
     }), S("Total", "log", t), S(void 0, "groupEnd"), {
       time: +/* @__PURE__ */ new Date(),
       blocks: o,
-      version: "1.0.53"
+      version: "1.0.54"
     };
   }
 }
@@ -8031,20 +8079,20 @@ var Ne = {}, ti = {
         }
         return x;
       }
-      var f, v = (f = [], function(y, x) {
-        return f[y] = x, f.filter(Boolean).join(`
+      var p, k = (p = [], function(y, x) {
+        return p[y] = x, p.filter(Boolean).join(`
 `);
       });
-      function p(y, x, w, M) {
+      function f(y, x, w, M) {
         var R = w ? "" : M.media ? "@media ".concat(M.media, " {").concat(M.css, "}") : M.css;
         if (y.styleSheet)
-          y.styleSheet.cssText = v(x, R);
+          y.styleSheet.cssText = k(x, R);
         else {
           var b = document.createTextNode(R), g = y.childNodes;
           g[x] && y.removeChild(g[x]), g.length ? y.insertBefore(b, g[x]) : y.appendChild(b);
         }
       }
-      function k(y, x, w) {
+      function v(y, x, w) {
         var M = w.css, R = w.media, b = w.sourceMap;
         if (R ? y.setAttribute("media", R) : y.removeAttribute("media"), b && btoa && (M += `
 /*# sourceMappingURL=data:application/json;base64,`.concat(btoa(unescape(encodeURIComponent(JSON.stringify(b)))), " */")), y.styleSheet)
@@ -8060,9 +8108,9 @@ var Ne = {}, ti = {
         var w, M, R;
         if (x.singleton) {
           var b = N++;
-          w = A || (A = h(x)), M = p.bind(null, w, b, !1), R = p.bind(null, w, b, !0);
+          w = A || (A = h(x)), M = f.bind(null, w, b, !1), R = f.bind(null, w, b, !0);
         } else
-          w = h(x), M = k.bind(null, w, x), R = function() {
+          w = h(x), M = v.bind(null, w, x), R = function() {
             (function(g) {
               if (g.parentNode === null)
                 return !1;
@@ -8132,17 +8180,17 @@ var Ne = {}, ti = {
         return r.toString = function() {
           return this.map(function(a) {
             var l = function(c, u) {
-              var h = c[1] || "", f = c[3];
-              if (!f)
+              var h = c[1] || "", p = c[3];
+              if (!p)
                 return h;
               if (u && typeof btoa == "function") {
-                var v = (k = f, A = btoa(unescape(encodeURIComponent(JSON.stringify(k)))), N = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(A), "/*# ".concat(N, " */")), p = f.sources.map(function(O) {
-                  return "/*# sourceURL=".concat(f.sourceRoot || "").concat(O, " */");
+                var k = (v = p, A = btoa(unescape(encodeURIComponent(JSON.stringify(v)))), N = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(A), "/*# ".concat(N, " */")), f = p.sources.map(function(O) {
+                  return "/*# sourceURL=".concat(p.sourceRoot || "").concat(O, " */");
                 });
-                return [h].concat(p).concat([v]).join(`
+                return [h].concat(f).concat([k]).join(`
 `);
               }
-              var k, A, N;
+              var v, A, N;
               return [h].join(`
 `);
             }(a, n);
@@ -8153,12 +8201,12 @@ var Ne = {}, ti = {
           var u = {};
           if (c)
             for (var h = 0; h < this.length; h++) {
-              var f = this[h][0];
-              f != null && (u[f] = !0);
+              var p = this[h][0];
+              p != null && (u[p] = !0);
             }
-          for (var v = 0; v < a.length; v++) {
-            var p = [].concat(a[v]);
-            c && u[p[0]] || (l && (p[2] ? p[2] = "".concat(l, " and ").concat(p[2]) : p[2] = l), r.push(p));
+          for (var k = 0; k < a.length; k++) {
+            var f = [].concat(a[k]);
+            c && u[f[0]] || (l && (f[2] ? f[2] = "".concat(l, " and ").concat(f[2]) : f[2] = l), r.push(f));
           }
         }, r;
       };
@@ -8185,11 +8233,11 @@ var Ne = {}, ti = {
        */
       var a = function() {
         function l(c) {
-          var u = c.data, h = c.config, f = c.api, v = c.readOnly;
-          (function(p, k) {
-            if (!(p instanceof k))
+          var u = c.data, h = c.config, p = c.api, k = c.readOnly;
+          (function(f, v) {
+            if (!(f instanceof v))
               throw new TypeError("Cannot call a class as a function");
-          })(this, l), this.api = f, this.readOnly = v, this._CSS = { block: this.api.styles.block, wrapper: "ce-paragraph" }, this.readOnly || (this.onKeyUp = this.onKeyUp.bind(this)), this._placeholder = h.placeholder ? h.placeholder : l.DEFAULT_PLACEHOLDER, this._data = {}, this._element = this.drawView(), this._preserveBlank = h.preserveBlank !== void 0 && h.preserveBlank, this.data = u;
+          })(this, l), this.api = p, this.readOnly = k, this._CSS = { block: this.api.styles.block, wrapper: "ce-paragraph" }, this.readOnly || (this.onKeyUp = this.onKeyUp.bind(this)), this._placeholder = h.placeholder ? h.placeholder : l.DEFAULT_PLACEHOLDER, this._data = {}, this._element = this.drawView(), this._preserveBlank = h.preserveBlank !== void 0 && h.preserveBlank, this.data = u;
         }
         return r(l, null, [{ key: "DEFAULT_PLACEHOLDER", get: function() {
           return "";
@@ -8592,7 +8640,7 @@ class yt {
   }
 }
 yt.isReadOnlySupported = !0;
-class ii extends je {
+class ii extends Ue {
   constructor() {
     super(...arguments), this.type = ye.Inline;
   }
@@ -8600,7 +8648,7 @@ class ii extends je {
    * Returns title for Inline Tool if specified by user
    */
   get title() {
-    return this.constructable[Ue.Title];
+    return this.constructable[je.Title];
   }
   /**
    * Constructs new InlineTool instance from constructable
@@ -8612,7 +8660,7 @@ class ii extends je {
     });
   }
 }
-class ni extends je {
+class ni extends Ue {
   constructor() {
     super(...arguments), this.type = ye.Tune;
   }
@@ -8631,41 +8679,41 @@ class ni extends je {
     });
   }
 }
-class j extends Map {
+class U extends Map {
   /**
    * Returns Block Tools collection
    */
   get blockTools() {
     const e = Array.from(this.entries()).filter(([, t]) => t.isBlock());
-    return new j(e);
+    return new U(e);
   }
   /**
    * Returns Inline Tools collection
    */
   get inlineTools() {
     const e = Array.from(this.entries()).filter(([, t]) => t.isInline());
-    return new j(e);
+    return new U(e);
   }
   /**
    * Returns Block Tunes collection
    */
   get blockTunes() {
     const e = Array.from(this.entries()).filter(([, t]) => t.isTune());
-    return new j(e);
+    return new U(e);
   }
   /**
    * Returns internal Tools collection
    */
   get internalTools() {
     const e = Array.from(this.entries()).filter(([, t]) => t.isInternal);
-    return new j(e);
+    return new U(e);
   }
   /**
    * Returns Tools collection provided by user
    */
   get externalTools() {
     const e = Array.from(this.entries()).filter(([, t]) => !t.isInternal);
-    return new j(e);
+    return new U(e);
   }
 }
 var si = Object.defineProperty, ri = Object.getOwnPropertyDescriptor, Et = (s, e, t, o) => {
@@ -8673,9 +8721,9 @@ var si = Object.defineProperty, ri = Object.getOwnPropertyDescriptor, Et = (s, e
     (r = s[n]) && (i = (o ? r(e, t, i) : r(i)) || i);
   return o && i && si(e, t, i), i;
 };
-class Ke extends je {
+class Ke extends Ue {
   constructor() {
-    super(...arguments), this.type = ye.Block, this.inlineTools = new j(), this.tunes = new j();
+    super(...arguments), this.type = ye.Block, this.inlineTools = new U(), this.tunes = new U();
   }
   /**
    * Creates new Tool instance
@@ -8766,7 +8814,7 @@ class Ke extends je {
     for (const i in e)
       if (Object.prototype.hasOwnProperty.call(e, i)) {
         const n = e[i];
-        U(n) ? o[i] = Object.assign({}, t, n) : o[i] = n;
+        j(n) ? o[i] = Object.assign({}, t, n) : o[i] = n;
       }
     return o;
   }
@@ -8815,7 +8863,7 @@ class ai {
    */
   getConstructor(e) {
     switch (!0) {
-      case e[Ue.IsInline]:
+      case e[je.IsInline]:
         return ii;
       case e[vt.IsTune]:
         return ni;
@@ -8932,7 +8980,7 @@ var li = Object.defineProperty, ci = Object.getOwnPropertyDescriptor, di = (s, e
 };
 class Ct extends C {
   constructor() {
-    super(...arguments), this.stubTool = "stub", this.toolsAvailable = new j(), this.toolsUnavailable = new j();
+    super(...arguments), this.stubTool = "stub", this.toolsAvailable = new U(), this.toolsUnavailable = new U();
   }
   /**
    * Returns available Tools
@@ -9116,12 +9164,12 @@ class Ct extends C {
   assignInlineToolsToBlockTool(e) {
     if (this.config.inlineToolbar !== !1) {
       if (e.enabledInlineTools === !0) {
-        e.inlineTools = new j(
+        e.inlineTools = new U(
           Array.isArray(this.config.inlineToolbar) ? this.config.inlineToolbar.map((t) => [t, this.inlineTools.get(t)]) : Array.from(this.inlineTools.entries())
         );
         return;
       }
-      Array.isArray(e.enabledInlineTools) && (e.inlineTools = new j(
+      Array.isArray(e.enabledInlineTools) && (e.inlineTools = new U(
         e.enabledInlineTools.map((t) => [t, this.inlineTools.get(t)])
       ));
     }
@@ -9134,17 +9182,17 @@ class Ct extends C {
   assignBlockTunesToBlockTool(e) {
     if (e.enabledBlockTunes !== !1) {
       if (Array.isArray(e.enabledBlockTunes)) {
-        const t = new j(
+        const t = new U(
           e.enabledBlockTunes.map((o) => [o, this.blockTunes.get(o)])
         );
-        e.tunes = new j([...t, ...this.blockTunes.internalTools]);
+        e.tunes = new U([...t, ...this.blockTunes.internalTools]);
         return;
       }
       if (Array.isArray(this.config.tunes)) {
-        const t = new j(
+        const t = new U(
           this.config.tunes.map((o) => [o, this.blockTunes.get(o)])
         );
-        e.tunes = new j([...t, ...this.blockTunes.internalTools]);
+        e.tunes = new U([...t, ...this.blockTunes.internalTools]);
         return;
       }
       e.tunes = this.blockTunes.internalTools;
@@ -9171,7 +9219,7 @@ class Ct extends C {
   prepareConfig() {
     const e = {};
     for (const t in this.config.tools)
-      U(this.config.tools[t]) ? e[t] = this.config.tools[t] : e[t] = { class: this.config.tools[t] };
+      j(this.config.tools[t]) ? e[t] = this.config.tools[t] : e[t] = { class: this.config.tools[t] };
     return e;
   }
 }
@@ -9540,7 +9588,7 @@ class ui extends C {
     if (d.isAnchor(i) && n) {
       o();
       const u = i.getAttribute("href"), h = Ht(u);
-      Ut(h);
+      jt(h);
       return;
     }
     const r = this.Editor.BlockManager.getBlockByIndex(-1), a = d.offset(r.holder).bottom, l = e.pageY;
@@ -9552,8 +9600,8 @@ class ui extends C {
     */
     a < l) {
       o();
-      const { BlockManager: u, Caret: h, Toolbar: f } = this.Editor;
-      (!u.lastBlock.tool.isDefault || !u.lastBlock.isEmpty) && u.insertAtEnd(), h.setToTheLastBlock(), f.moveAndOpen(u.lastBlock);
+      const { BlockManager: u, Caret: h, Toolbar: p } = this.Editor;
+      (!u.lastBlock.tool.isDefault || !u.lastBlock.isEmpty) && u.insertAtEnd(), h.setToTheLastBlock(), p.moveAndOpen(u.lastBlock);
     }
   }
   /**
@@ -9597,8 +9645,8 @@ const pi = {
   // Toolbar Modules
   BlockSettings: Ro,
   ConversionToolbar: Y,
-  Toolbar: Uo,
-  InlineToolbar: jo,
+  Toolbar: jo,
+  InlineToolbar: Uo,
   // Modules
   BlockEvents: Wo,
   BlockManager: Xo,
@@ -9643,7 +9691,7 @@ class fi {
    */
   set configuration(e) {
     var o, i;
-    U(e) ? this.config = {
+    j(e) ? this.config = {
       ...e
     } : this.config = {
       holder: e
@@ -9679,7 +9727,7 @@ class fi {
       throw Error("«holderId» and «holder» param can't assign at the same time.");
     if (J(t) && !d.get(t))
       throw Error(`element with ID «${t}» is missing. Pass correct holder's ID.`);
-    if (t && U(t) && !d.isElement(t))
+    if (t && j(t) && !d.isElement(t))
       throw Error("«holder» value must be an Element node");
   }
   /**
@@ -9772,7 +9820,7 @@ class fi {
 class gi {
   /** Editor version */
   static get version() {
-    return "1.0.53";
+    return "1.0.54";
   }
   /**
    * @param {EditorConfig|string|undefined} [configuration] - user configuration
@@ -9780,7 +9828,7 @@ class gi {
   constructor(e) {
     let t = () => {
     };
-    U(e) && D(e.onReady) && (t = e.onReady);
+    j(e) && D(e.onReady) && (t = e.onReady);
     const o = new fi(e);
     this.isReady = o.isReady.then(() => {
       this.exportAPI(o), t();
