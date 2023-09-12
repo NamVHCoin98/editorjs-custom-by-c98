@@ -84,7 +84,7 @@ function ge(s, e, t = "log", o, i = "color: inherit") {
       break;
   }
   o && r.push(o);
-  const a = "Editor.js 1.0.54", l = `line-height: 1em;
+  const a = "Editor.js 2.0.0", l = `line-height: 1em;
             color: #006FEA;
             display: inline-block;
             font-size: 11px;
@@ -1102,7 +1102,7 @@ class C {
     return this.config.i18n.direction === "rtl";
   }
 }
-class m {
+class k {
   constructor() {
     this.instance = null, this.selection = null, this.savedSelectionRange = null, this.isFakeBackgroundEnabled = !1, this.commandBackground = "backColor", this.commandRemoveFormat = "removeFormat";
   }
@@ -1164,7 +1164,7 @@ class m {
    * @returns {boolean}
    */
   static get isAtEditor() {
-    return this.isSelectionAtEditor(m.get());
+    return this.isSelectionAtEditor(k.get());
   }
   /**
    * Check if passed selection is at Editor's zone
@@ -1177,7 +1177,7 @@ class m {
     let t = e.anchorNode || e.focusNode;
     t && t.nodeType === Node.TEXT_NODE && (t = t.parentNode);
     let o = null;
-    return t && t instanceof Element && (o = t.closest(`.${m.CSS.editorZone}`)), o ? o.nodeType === Node.ELEMENT_NODE : !1;
+    return t && t instanceof Element && (o = t.closest(`.${k.CSS.editorZone}`)), o ? o.nodeType === Node.ELEMENT_NODE : !1;
   }
   /**
    * Check if passed range at Editor zone
@@ -1190,13 +1190,13 @@ class m {
     let t = e.startContainer;
     t && t.nodeType === Node.TEXT_NODE && (t = t.parentNode);
     let o = null;
-    return t && t instanceof Element && (o = t.closest(`.${m.CSS.editorZone}`)), o ? o.nodeType === Node.ELEMENT_NODE : !1;
+    return t && t instanceof Element && (o = t.closest(`.${k.CSS.editorZone}`)), o ? o.nodeType === Node.ELEMENT_NODE : !1;
   }
   /**
    * Methods return boolean that true if selection exists on the page
    */
   static get isSelectionExists() {
-    return !!m.get().anchorNode;
+    return !!k.get().anchorNode;
   }
   /**
    * Return first range
@@ -1277,14 +1277,14 @@ class m {
    * @param container - where range should be
    */
   static isRangeInsideContainer(e) {
-    const t = m.range;
+    const t = k.range;
     return t === null ? !1 : e.contains(t.startContainer);
   }
   /**
    * Adds fake cursor to the current range
    */
   static addFakeCursor() {
-    const e = m.range;
+    const e = k.range;
     if (e === null)
       return;
     const t = d.make("span", "codex-editor__fake-cursor");
@@ -1323,7 +1323,7 @@ class m {
    * Save SelectionUtils's range
    */
   save() {
-    this.savedSelectionRange = m.range;
+    this.savedSelectionRange = k.range;
   }
   /**
    * Restore saved SelectionUtils's range
@@ -1418,10 +1418,10 @@ class F extends we {
       const c = l === void 0, u = l instanceof InputEvent;
       !c && !u && this.detectToolRootChange(l);
       let h;
-      c || u ? h = !0 : h = !(l.length > 0 && l.every((k) => {
-        const { addedNodes: f, removedNodes: v, target: A } = k;
+      c || u ? h = !0 : h = !(l.length > 0 && l.every((m) => {
+        const { addedNodes: p, removedNodes: v, target: A } = m;
         return [
-          ...Array.from(f),
+          ...Array.from(p),
           ...Array.from(v),
           A
         ].some((O) => d.isElement(O) ? O.dataset.mutationFree === "true" : !1);
@@ -1584,8 +1584,8 @@ class F extends we {
   set selected(e) {
     var i, n;
     this.holder.classList.toggle(F.CSS.selected, e);
-    const t = e === !0 && m.isRangeInsideContainer(this.holder), o = e === !1 && m.isFakeCursorInsideContainer(this.holder);
-    (t || o) && ((i = this.editorEventBus) == null || i.emit(ct, { state: e }), t ? m.addFakeCursor() : m.removeFakeCursor(this.holder), (n = this.editorEventBus) == null || n.emit(dt, { state: e }));
+    const t = e === !0 && k.isRangeInsideContainer(this.holder), o = e === !1 && k.isFakeCursorInsideContainer(this.holder);
+    (t || o) && ((i = this.editorEventBus) == null || i.emit(ct, { state: e }), t ? k.addFakeCursor() : k.removeFakeCursor(this.holder), (n = this.editorEventBus) == null || n.emit(dt, { state: e }));
   }
   /**
    * Returns True if it is Selected
@@ -1726,7 +1726,7 @@ class F extends we {
    * Update current input index with selection anchor node
    */
   updateCurrentInput() {
-    this.currentInput = d.isNativeInput(document.activeElement) || !m.anchorNode ? document.activeElement : m.anchorNode;
+    this.currentInput = d.isNativeInput(document.activeElement) || !k.anchorNode ? document.activeElement : k.anchorNode;
   }
   /**
    * Allows to say Editor that Block was changed. Used to manually trigger Editor's 'onChange' callback
@@ -2366,13 +2366,13 @@ var Le = {}, to = {
               if (!h)
                 return u;
               if (c && typeof btoa == "function") {
-                var p = (f = h, "/*# sourceMappingURL=data:application/json;charset=utf-8;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(f)))) + " */"), k = h.sources.map(function(v) {
+                var f = (p = h, "/*# sourceMappingURL=data:application/json;charset=utf-8;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(p)))) + " */"), m = h.sources.map(function(v) {
                   return "/*# sourceURL=" + h.sourceRoot + v + " */";
                 });
-                return [u].concat(k).concat([p]).join(`
+                return [u].concat(m).concat([f]).join(`
 `);
               }
-              var f;
+              var p;
               return [u].join(`
 `);
             }(r, i);
@@ -2414,8 +2414,8 @@ var Le = {}, to = {
           }
           return g[E];
         };
-      }(), u = null, h = 0, p = [], k = i(5);
-      function f(b, g) {
+      }(), u = null, h = 0, f = [], m = i(5);
+      function p(b, g) {
         for (var E = 0; E < b.length; E++) {
           var T = b[E], _ = a[T.id];
           if (_) {
@@ -2443,9 +2443,9 @@ var Le = {}, to = {
         var E = c(b.insertInto);
         if (!E)
           throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
-        var T = p[p.length - 1];
+        var T = f[f.length - 1];
         if (b.insertAt === "top")
-          T ? T.nextSibling ? E.insertBefore(g, T.nextSibling) : E.appendChild(g) : E.insertBefore(g, E.firstChild), p.push(g);
+          T ? T.nextSibling ? E.insertBefore(g, T.nextSibling) : E.appendChild(g) : E.insertBefore(g, E.firstChild), f.push(g);
         else if (b.insertAt === "bottom")
           E.appendChild(g);
         else {
@@ -2464,8 +2464,8 @@ var Le = {}, to = {
         if (b.parentNode === null)
           return !1;
         b.parentNode.removeChild(b);
-        var g = p.indexOf(b);
-        g >= 0 && p.splice(g, 1);
+        var g = f.indexOf(b);
+        g >= 0 && f.splice(g, 1);
       }
       function O(b) {
         var g = document.createElement("style");
@@ -2493,7 +2493,7 @@ var Le = {}, to = {
             return L.attrs.type === void 0 && (L.attrs.type = "text/css"), L.attrs.rel = "stylesheet", y(W, L.attrs), A(L, W), W;
           }(g), T = function(L, W, le) {
             var Q = le.css, Ee = le.sourceMap, It = W.convertToAbsoluteUrls === void 0 && Ee;
-            (W.convertToAbsoluteUrls || It) && (Q = k(Q)), Ee && (Q += `
+            (W.convertToAbsoluteUrls || It) && (Q = m(Q)), Ee && (Q += `
 /*# sourceMappingURL=data:application/json;base64,` + btoa(unescape(encodeURIComponent(JSON.stringify(Ee)))) + " */");
             var Mt = new Blob([Q], { type: "text/css" }), Xe = L.href;
             L.href = URL.createObjectURL(Mt), Xe && URL.revokeObjectURL(Xe);
@@ -2525,12 +2525,12 @@ var Le = {}, to = {
           throw new Error("The style-loader cannot be used in a non-browser environment");
         (g = g || {}).attrs = typeof g.attrs == "object" ? g.attrs : {}, g.singleton || typeof g.singleton == "boolean" || (g.singleton = l()), g.insertInto || (g.insertInto = "head"), g.insertAt || (g.insertAt = "bottom");
         var E = v(b, g);
-        return f(E, g), function(T) {
+        return p(E, g), function(T) {
           for (var _ = [], I = 0; I < E.length; I++) {
             var z = E[I];
             (L = a[z.id]).refs--, _.push(L);
           }
-          for (T && f(v(T, g), g), I = 0; I < _.length; I++) {
+          for (T && p(v(T, g), g), I = 0; I < _.length; I++) {
             var L;
             if ((L = _[I]).refs === 0) {
               for (var W = 0; W < L.parts.length; W++)
@@ -2562,30 +2562,30 @@ var Le = {}, to = {
           return i;
         var r = n.protocol + "//" + n.host, a = r + n.pathname.replace(/\/[^\/]*$/, "/");
         return i.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(l, c) {
-          var u, h = c.trim().replace(/^"(.*)"$/, function(p, k) {
-            return k;
-          }).replace(/^'(.*)'$/, function(p, k) {
-            return k;
+          var u, h = c.trim().replace(/^"(.*)"$/, function(f, m) {
+            return m;
+          }).replace(/^'(.*)'$/, function(f, m) {
+            return m;
           });
           return /^(#|data:|http:\/\/|https:\/\/|file:\/\/\/|\s*$)/i.test(h) ? l : (u = h.indexOf("//") === 0 ? h : h.indexOf("/") === 0 ? r + h : a + h.replace(/^\.\//, ""), "url(" + JSON.stringify(u) + ")");
         });
       };
     }, function(t, o, i) {
-      var n, r, a, l, c, u, h, p, k;
-      t.exports = (n = "cdx-notifies", r = "cdx-notify", a = "cdx-notify__cross", l = "cdx-notify__button--confirm", c = "cdx-notify__button--cancel", u = "cdx-notify__input", h = "cdx-notify__button", p = "cdx-notify__btns-wrapper", { alert: k = function(f) {
-        var v = document.createElement("DIV"), A = document.createElement("DIV"), N = f.message, O = f.style;
+      var n, r, a, l, c, u, h, f, m;
+      t.exports = (n = "cdx-notifies", r = "cdx-notify", a = "cdx-notify__cross", l = "cdx-notify__button--confirm", c = "cdx-notify__button--cancel", u = "cdx-notify__input", h = "cdx-notify__button", f = "cdx-notify__btns-wrapper", { alert: m = function(p) {
+        var v = document.createElement("DIV"), A = document.createElement("DIV"), N = p.message, O = p.style;
         return v.classList.add(r), O && v.classList.add(r + "--" + O), v.innerHTML = N, A.classList.add(a), A.addEventListener("click", v.remove.bind(v)), v.appendChild(A), v;
-      }, confirm: function(f) {
-        var v = k(f), A = document.createElement("div"), N = document.createElement("button"), O = document.createElement("button"), y = v.querySelector("." + a), x = f.cancelHandler, w = f.okHandler;
-        return A.classList.add(p), N.innerHTML = f.okText || "Confirm", O.innerHTML = f.cancelText || "Cancel", N.classList.add(h), O.classList.add(h), N.classList.add(l), O.classList.add(c), x && typeof x == "function" && (O.addEventListener("click", x), y.addEventListener("click", x)), w && typeof w == "function" && N.addEventListener("click", w), N.addEventListener("click", v.remove.bind(v)), O.addEventListener("click", v.remove.bind(v)), A.appendChild(N), A.appendChild(O), v.appendChild(A), v;
-      }, prompt: function(f) {
-        var v = k(f), A = document.createElement("div"), N = document.createElement("button"), O = document.createElement("input"), y = v.querySelector("." + a), x = f.cancelHandler, w = f.okHandler;
-        return A.classList.add(p), N.innerHTML = f.okText || "Ok", N.classList.add(h), N.classList.add(l), O.classList.add(u), f.placeholder && O.setAttribute("placeholder", f.placeholder), f.default && (O.value = f.default), f.inputType && (O.type = f.inputType), x && typeof x == "function" && y.addEventListener("click", x), w && typeof w == "function" && N.addEventListener("click", function() {
+      }, confirm: function(p) {
+        var v = m(p), A = document.createElement("div"), N = document.createElement("button"), O = document.createElement("button"), y = v.querySelector("." + a), x = p.cancelHandler, w = p.okHandler;
+        return A.classList.add(f), N.innerHTML = p.okText || "Confirm", O.innerHTML = p.cancelText || "Cancel", N.classList.add(h), O.classList.add(h), N.classList.add(l), O.classList.add(c), x && typeof x == "function" && (O.addEventListener("click", x), y.addEventListener("click", x)), w && typeof w == "function" && N.addEventListener("click", w), N.addEventListener("click", v.remove.bind(v)), O.addEventListener("click", v.remove.bind(v)), A.appendChild(N), A.appendChild(O), v.appendChild(A), v;
+      }, prompt: function(p) {
+        var v = m(p), A = document.createElement("div"), N = document.createElement("button"), O = document.createElement("input"), y = v.querySelector("." + a), x = p.cancelHandler, w = p.okHandler;
+        return A.classList.add(f), N.innerHTML = p.okText || "Ok", N.classList.add(h), N.classList.add(l), O.classList.add(u), p.placeholder && O.setAttribute("placeholder", p.placeholder), p.default && (O.value = p.default), p.inputType && (O.type = p.inputType), x && typeof x == "function" && y.addEventListener("click", x), w && typeof w == "function" && N.addEventListener("click", function() {
           w(O.value);
         }), N.addEventListener("click", v.remove.bind(v)), A.appendChild(O), A.appendChild(N), v.appendChild(A), v;
       }, getWrapper: function() {
-        var f = document.createElement("DIV");
-        return f.classList.add(n), f;
+        var p = document.createElement("DIV");
+        return p.classList.add(n), p;
       } });
     }]);
   });
@@ -2672,12 +2672,12 @@ var _e = {}, ro = {
     s.exports = o();
   })(Lt, function() {
     function t(h) {
-      var p = h.tags, k = Object.keys(p), f = k.map(function(v) {
-        return typeof p[v];
+      var f = h.tags, m = Object.keys(f), p = m.map(function(v) {
+        return typeof f[v];
       }).every(function(v) {
         return v === "object" || v === "boolean" || v === "function";
       });
-      if (!f)
+      if (!p)
         throw new Error("The configuration was invalid");
       this.config = h;
     }
@@ -2690,56 +2690,56 @@ var _e = {}, ro = {
       return n.indexOf(h.nodeName) !== -1;
     }
     t.prototype.clean = function(h) {
-      const p = document.implementation.createHTMLDocument(), k = p.createElement("div");
-      return k.innerHTML = h, this._sanitize(p, k), k.innerHTML;
-    }, t.prototype._sanitize = function(h, p) {
-      var k = a(h, p), f = k.firstChild();
-      if (f)
+      const f = document.implementation.createHTMLDocument(), m = f.createElement("div");
+      return m.innerHTML = h, this._sanitize(f, m), m.innerHTML;
+    }, t.prototype._sanitize = function(h, f) {
+      var m = a(h, f), p = m.firstChild();
+      if (p)
         do {
-          if (f.nodeType === Node.TEXT_NODE)
-            if (f.data.trim() === "" && (f.previousElementSibling && i(f.previousElementSibling) || f.nextElementSibling && i(f.nextElementSibling))) {
-              p.removeChild(f), this._sanitize(h, p);
+          if (p.nodeType === Node.TEXT_NODE)
+            if (p.data.trim() === "" && (p.previousElementSibling && i(p.previousElementSibling) || p.nextElementSibling && i(p.nextElementSibling))) {
+              f.removeChild(p), this._sanitize(h, f);
               break;
             } else
               continue;
-          if (f.nodeType === Node.COMMENT_NODE) {
-            p.removeChild(f), this._sanitize(h, p);
+          if (p.nodeType === Node.COMMENT_NODE) {
+            f.removeChild(p), this._sanitize(h, f);
             break;
           }
-          var v = r(f), A;
-          v && (A = Array.prototype.some.call(f.childNodes, i));
-          var N = !!p.parentNode, O = i(p) && i(f) && N, y = f.nodeName.toLowerCase(), x = l(this.config, y, f), w = v && A;
-          if (w || c(f, x) || !this.config.keepNestedBlockElements && O) {
-            if (!(f.nodeName === "SCRIPT" || f.nodeName === "STYLE"))
-              for (; f.childNodes.length > 0; )
-                p.insertBefore(f.childNodes[0], f);
-            p.removeChild(f), this._sanitize(h, p);
+          var v = r(p), A;
+          v && (A = Array.prototype.some.call(p.childNodes, i));
+          var N = !!f.parentNode, O = i(f) && i(p) && N, y = p.nodeName.toLowerCase(), x = l(this.config, y, p), w = v && A;
+          if (w || c(p, x) || !this.config.keepNestedBlockElements && O) {
+            if (!(p.nodeName === "SCRIPT" || p.nodeName === "STYLE"))
+              for (; p.childNodes.length > 0; )
+                f.insertBefore(p.childNodes[0], p);
+            f.removeChild(p), this._sanitize(h, f);
             break;
           }
-          for (var M = 0; M < f.attributes.length; M += 1) {
-            var R = f.attributes[M];
-            u(R, x, f) && (f.removeAttribute(R.name), M = M - 1);
+          for (var M = 0; M < p.attributes.length; M += 1) {
+            var R = p.attributes[M];
+            u(R, x, p) && (p.removeAttribute(R.name), M = M - 1);
           }
-          this._sanitize(h, f);
-        } while (f = k.nextSibling());
+          this._sanitize(h, p);
+        } while (p = m.nextSibling());
     };
-    function a(h, p) {
+    function a(h, f) {
       return h.createTreeWalker(
-        p,
+        f,
         NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_COMMENT,
         null,
         !1
       );
     }
-    function l(h, p, k) {
-      return typeof h.tags[p] == "function" ? h.tags[p](k) : h.tags[p];
+    function l(h, f, m) {
+      return typeof h.tags[f] == "function" ? h.tags[f](m) : h.tags[f];
     }
-    function c(h, p) {
-      return typeof p > "u" ? !0 : typeof p == "boolean" ? !p : !1;
+    function c(h, f) {
+      return typeof f > "u" ? !0 : typeof f == "boolean" ? !f : !1;
     }
-    function u(h, p, k) {
-      var f = h.name.toLowerCase();
-      return p === !0 ? !1 : typeof p[f] == "function" ? !p[f](h.value, k) : typeof p[f] > "u" || p[f] === !1 ? !0 : typeof p[f] == "string" ? p[f] !== h.value : !1;
+    function u(h, f, m) {
+      var p = h.name.toLowerCase();
+      return f === !0 ? !1 : typeof f[p] == "function" ? !f[p](h.value, m) : typeof f[p] > "u" || f[p] === !1 ? !0 : typeof f[p] == "string" ? f[p] !== h.value : !1;
     }
     return t;
   });
@@ -2842,7 +2842,7 @@ class go extends C {
    * @returns {HTMLElement|null}
    */
   findParentTag(e, t) {
-    return new m().findParentTag(e, t);
+    return new k().findParentTag(e, t);
   }
   /**
    * Expand selection to passed tag
@@ -2850,7 +2850,7 @@ class go extends C {
    * @param {HTMLElement} node - tag that should contain selection
    */
   expandToTag(e) {
-    new m().expandToTag(e);
+    new k().expandToTag(e);
   }
 }
 class bo extends C {
@@ -3516,7 +3516,7 @@ const ce = class {
     if (this.items.length === 0)
       return this.cursor;
     let e = this.cursor;
-    return e === -1 ? e = s === ce.directions.RIGHT ? -1 : 0 : this.items[e].classList.remove(this.focusedCssClass), s === ce.directions.RIGHT ? e = (e + 1) % this.items.length : e = (this.items.length + e - 1) % this.items.length, d.canSetCaret(this.items[e]) && oe(() => m.setCursor(this.items[e]), 50)(), this.items[e].classList.add(this.focusedCssClass), e;
+    return e === -1 ? e = s === ce.directions.RIGHT ? -1 : 0 : this.items[e].classList.remove(this.focusedCssClass), s === ce.directions.RIGHT ? e = (e + 1) % this.items.length : e = (this.items.length + e - 1) % this.items.length, d.canSetCaret(this.items[e]) && oe(() => k.setCursor(this.items[e]), 50)(), this.items[e].classList.add(this.focusedCssClass), e;
   }
 };
 let ne = ce;
@@ -4012,7 +4012,7 @@ No([
 ], He.prototype, "height", 1);
 class Ro extends C {
   constructor() {
-    super(...arguments), this.opened = !1, this.selection = new m(), this.onPopoverClose = () => {
+    super(...arguments), this.opened = !1, this.selection = new k(), this.onPopoverClose = () => {
       this.close();
     };
   }
@@ -4088,7 +4088,7 @@ class Ro extends C {
    * Close Block Settings pane
    */
   close() {
-    this.opened = !1, m.isAtEditor || this.selection.restore(), this.selection.clearSaved(), !this.Editor.CrossBlockSelection.isCrossBlockSelectionStarted && this.Editor.BlockManager.currentBlock && (this.Editor.BlockManager.currentBlock.selected = !1), this.eventsDispatcher.emit(this.events.closed), this.popover && (this.popover.off(fe.Close, this.onPopoverClose), this.popover.destroy(), this.popover.getElement().remove(), this.popover = null);
+    this.opened = !1, k.isAtEditor || this.selection.restore(), this.selection.clearSaved(), !this.Editor.CrossBlockSelection.isCrossBlockSelectionStarted && this.Editor.BlockManager.currentBlock && (this.Editor.BlockManager.currentBlock.selected = !1), this.eventsDispatcher.emit(this.events.closed), this.popover && (this.popover.off(fe.Close, this.onPopoverClose), this.popover.destroy(), this.popover.getElement().remove(), this.popover = null);
   }
   /**
    * Returns list of buttons and inputs inside specified container
@@ -4347,8 +4347,8 @@ var Oe = {}, Do = {
       var a = function() {
         function l(c) {
           var u = this;
-          (function(h, p) {
-            if (!(h instanceof p))
+          (function(h, f) {
+            if (!(h instanceof f))
               throw new TypeError("Cannot call a class as a function");
           })(this, l), this.commands = {}, this.keys = {}, this.name = c.name, this.parseShortcutName(c.name), this.element = c.on, this.callback = c.callback, this.executeShortcut = function(h) {
             u.execute(h);
@@ -4363,23 +4363,23 @@ var Oe = {}, Do = {
           for (var u = 0; u < c.length; u++) {
             c[u] = c[u].toUpperCase();
             var h = !1;
-            for (var p in l.supportedCommands)
-              if (l.supportedCommands[p].includes(c[u])) {
-                h = this.commands[p] = !0;
+            for (var f in l.supportedCommands)
+              if (l.supportedCommands[f].includes(c[u])) {
+                h = this.commands[f] = !0;
                 break;
               }
             h || (this.keys[c[u]] = !0);
           }
-          for (var k in l.supportedCommands)
-            this.commands[k] || (this.commands[k] = !1);
+          for (var m in l.supportedCommands)
+            this.commands[m] || (this.commands[m] = !1);
         } }, { key: "execute", value: function(c) {
-          var u, h = { CMD: c.ctrlKey || c.metaKey, SHIFT: c.shiftKey, ALT: c.altKey }, p = !0;
+          var u, h = { CMD: c.ctrlKey || c.metaKey, SHIFT: c.shiftKey, ALT: c.altKey }, f = !0;
           for (u in this.commands)
-            this.commands[u] !== h[u] && (p = !1);
-          var k, f = !0;
-          for (k in this.keys)
-            f = f && c.keyCode === l.keyCodes[k];
-          p && f && this.callback(c);
+            this.commands[u] !== h[u] && (f = !1);
+          var m, p = !0;
+          for (m in this.keys)
+            p = p && c.keyCode === l.keyCodes[m];
+          f && p && this.callback(c);
         } }, { key: "remove", value: function() {
           this.element.removeEventListener("keydown", this.executeShortcut);
         } }]), l;
@@ -4820,7 +4820,7 @@ class jo extends C {
    * Handler for Plus Button
    */
   plusButtonClicked() {
-    m.get().removeAllRanges(), this.Editor.BlockManager.currentBlock = this.hoveredBlock, this.toolboxInstance.toggle(), this.Editor.InlineToolbar.opened && this.Editor.InlineToolbar.close();
+    k.get().removeAllRanges(), this.Editor.BlockManager.currentBlock = this.hoveredBlock, this.toolboxInstance.toggle(), this.Editor.InlineToolbar.opened && this.Editor.InlineToolbar.close();
   }
   /**
    * Enable bindings
@@ -4847,7 +4847,7 @@ class jo extends C {
    * Clicks on the Block Settings toggler
    */
   settingsTogglerClicked() {
-    m.get().removeAllRanges(), this.Editor.BlockManager.currentBlock = this.hoveredBlock, this.Editor.BlockSettings.opened ? this.Editor.BlockSettings.close() : this.Editor.BlockSettings.open(this.hoveredBlock), this.Editor.InlineToolbar.opened && this.Editor.InlineToolbar.close();
+    k.get().removeAllRanges(), this.Editor.BlockManager.currentBlock = this.hoveredBlock, this.Editor.BlockSettings.opened ? this.Editor.BlockSettings.close() : this.Editor.BlockSettings.open(this.hoveredBlock), this.Editor.InlineToolbar.opened && this.Editor.InlineToolbar.close();
   }
   /**
    * Draws Toolbar UI
@@ -5003,7 +5003,7 @@ class Uo extends C {
    * Move Toolbar to the selected text
    */
   move(e = null) {
-    let t = m.rect;
+    let t = k.rect;
     const o = this.Editor.UI.nodes.wrapper.getBoundingClientRect();
     e && (t = e.target.getBoundingClientRect());
     const i = {
@@ -5066,7 +5066,7 @@ class Uo extends C {
   */
   checkToolsState() {
     this.toolsInstances.forEach((e) => {
-      e.checkState(m.get());
+      e.checkState(k.get());
     });
   }
   /**
@@ -5092,7 +5092,7 @@ class Uo extends C {
    * Need to show Inline Toolbar or not
    */
   allowedToShow() {
-    const e = ["IMG", "INPUT"], t = m.get(), o = m.text;
+    const e = ["IMG", "INPUT"], t = k.get(), o = k.text;
     if (!t || !t.anchorNode || t.isCollapsed || o.length < 1)
       return !1;
     const i = d.isElement(t.anchorNode) ? t.anchorNode : t.anchorNode.parentElement;
@@ -5165,7 +5165,7 @@ class Uo extends C {
    * Append only allowed Tools
    */
   addToolsFiltered(e = !1) {
-    const t = m.get(), o = this.Editor.BlockManager.blocks.findIndex(
+    const t = k.get(), o = this.Editor.BlockManager.blocks.findIndex(
       (n) => n.name === "paragraph"
     );
     let i = this.Editor.BlockManager.blocks[o];
@@ -5210,7 +5210,7 @@ class Uo extends C {
     ), ee() === !1 && this.tooltip.onHover(o, n, {
       placement: "top",
       hidingDelay: 100
-    }), t.checkState(m.get());
+    }), t.checkState(k.get());
   }
   /**
    * Get shortcut name for tool
@@ -5243,7 +5243,7 @@ class Uo extends C {
    * @param {InlineTool} tool - Tool's instance
    */
   toolClicked(e) {
-    const t = m.range;
+    const t = k.range;
     e.surround(t), this.checkToolsState(), e.renderActions !== void 0 && this.flipper.deactivate();
   }
   /**
@@ -5332,7 +5332,7 @@ class Wo extends C {
     const { BlockManager: t, InlineToolbar: o, ConversionToolbar: i } = this.Editor, n = t.currentBlock;
     if (!n)
       return;
-    const r = n.isEmpty, a = n.tool.isDefault && r, l = !r && i.opened, c = !r && !m.isCollapsed && o.opened;
+    const r = n.isEmpty, a = n.tool.isDefault && r, l = !r && i.opened, c = !r && !k.isCollapsed && o.opened;
     a ? this.activateToolbox() : !l && !c && this.activateBlockSettings();
   }
   /**
@@ -5431,7 +5431,7 @@ class Wo extends C {
     if (r.isLineBreaksEnabled && !i.isAtStart)
       return;
     const a = t.currentBlockIndex === 0;
-    i.isAtStart && m.isCollapsed && n.currentInput === n.firstInput && !a && (e.preventDefault(), this.mergeBlocks());
+    i.isAtStart && k.isCollapsed && n.currentInput === n.firstInput && !a && (e.preventDefault(), this.mergeBlocks());
   }
   /**
    * Merge current and previous Blocks if they have the same type
@@ -6320,7 +6320,7 @@ class Vo extends C {
    * to select all and copy them
    */
   prepare() {
-    this.selection = new m(), re.add({
+    this.selection = new k(), re.add({
       name: "CMD+A",
       handler: (e) => {
         const { BlockManager: t, ReadOnly: o } = this.Editor;
@@ -6340,7 +6340,7 @@ class Vo extends C {
    *  - Unselect all Blocks
    */
   toggleReadOnly() {
-    m.get().removeAllRanges(), this.allBlocksSelected = !1;
+    k.get().removeAllRanges(), this.allBlocksSelected = !1;
   }
   /**
    * Remove selection of Block
@@ -6362,7 +6362,7 @@ class Vo extends C {
     const { BlockManager: o, Caret: i, RectangleSelection: n } = this.Editor;
     this.needToSelectAll = !1, this.nativeInputSelected = !1, this.readyToBlockSelection = !1;
     const r = e && e instanceof KeyboardEvent, a = r && tt(e.keyCode);
-    if (this.anyBlockSelected && r && a && !m.isSelectionExists) {
+    if (this.anyBlockSelected && r && a && !k.isSelectionExists) {
       const l = o.removeSelectedBlocks();
       o.insertDefaultBlockAtIndex(l, !0), i.setToBlock(o.currentBlock), oe(() => {
         const c = e.key;
@@ -6412,7 +6412,7 @@ class Vo extends C {
     const { BlockManager: t } = this.Editor;
     t.clearFocused();
     let o;
-    isNaN(e) ? o = t.currentBlock : o = t.getBlockByIndex(e), this.selection.save(), m.get().removeAllRanges(), o.selected = !0, this.clearCache();
+    isNaN(e) ? o = t.currentBlock : o = t.getBlockByIndex(e), this.selection.save(), k.get().removeAllRanges(), o.selected = !0, this.clearCache();
   }
   /**
    * Clear anyBlockSelected cache
@@ -6456,7 +6456,7 @@ class Vo extends C {
    * Each Block has selected setter that makes Block copyable
    */
   selectAllBlocks() {
-    this.selection.save(), m.get().removeAllRanges(), this.allBlocksSelected = !0, this.Editor.InlineToolbar.open(!0, !0, !0);
+    this.selection.save(), k.get().removeAllRanges(), this.allBlocksSelected = !0, this.Editor.InlineToolbar.open(!0, !0, !0);
   }
 }
 class ve extends C {
@@ -6487,7 +6487,7 @@ class ve extends C {
    * @returns {boolean}
    */
   get isAtStart() {
-    const e = m.get(), t = d.getDeepestNode(this.Editor.BlockManager.currentBlock.currentInput);
+    const e = k.get(), t = d.getDeepestNode(this.Editor.BlockManager.currentBlock.currentInput);
     let o = e.focusNode;
     if (d.isNativeInput(t))
       return t.selectionEnd === 0;
@@ -6507,7 +6507,7 @@ class ve extends C {
    * @returns {boolean}
    */
   get isAtEnd() {
-    const e = m.get();
+    const e = k.get();
     let t = e.focusNode;
     const o = d.getDeepestNode(this.Editor.BlockManager.currentBlock.currentInput, !0);
     if (d.isNativeInput(o))
@@ -6592,7 +6592,7 @@ class ve extends C {
    * @param {number} offset - offset
    */
   set(e, t = 0) {
-    const { top: o, bottom: i } = m.setCursor(e, t), { innerHeight: n } = window;
+    const { top: o, bottom: i } = k.setCursor(e, t), { innerHeight: n } = window;
     o < 0 && window.scrollBy(0, o), i > n && window.scrollBy(0, i - n);
   }
   /**
@@ -6613,7 +6613,7 @@ class ve extends C {
    * Extract content fragment of current Block from Caret position to the end of the Block
    */
   extractFragmentFromCaretPosition() {
-    const e = m.get();
+    const e = k.get();
     if (e.rangeCount) {
       const t = e.getRangeAt(0), o = this.Editor.BlockManager.currentBlock.currentInput;
       if (t.deleteContents(), o)
@@ -6675,7 +6675,7 @@ class ve extends C {
     const t = e.querySelector(`.${ve.CSS.shadowCaret}`);
     if (!t)
       return;
-    new m().expandToTag(t), setTimeout(() => {
+    new k().expandToTag(t), setTimeout(() => {
       const i = document.createRange();
       i.selectNode(t), i.extractContents();
     }, 50);
@@ -6686,7 +6686,7 @@ class ve extends C {
    * @param {string} content - content to insert
    */
   insertContentAtCaretPosition(e) {
-    const t = document.createDocumentFragment(), o = document.createElement("div"), i = m.get(), n = m.range;
+    const t = document.createDocumentFragment(), o = document.createElement("div"), i = k.get(), n = k.range;
     o.innerHTML = e, Array.from(o.childNodes).forEach((l) => t.appendChild(l)), t.childNodes.length === 0 && t.appendChild(new Text());
     const r = t.lastChild;
     n.deleteContents(), n.insertNode(t);
@@ -6730,7 +6730,7 @@ class Zo extends C {
       const { BlockManager: t, BlockSelection: o } = this.Editor, i = t.getBlockByChildNode(e.relatedTarget) || this.lastSelectedBlock, n = t.getBlockByChildNode(e.target);
       if (!(!i || !n) && n !== i) {
         if (i === this.firstSelectedBlock) {
-          m.get().removeAllRanges(), i.selected = !0, n.selected = !0, o.clearCache();
+          k.get().removeAllRanges(), i.selected = !0, n.selected = !0, o.clearCache();
           return;
         }
         if (n === this.firstSelectedBlock) {
@@ -6778,7 +6778,7 @@ class Zo extends C {
    */
   toggleBlockSelectedState(e = !0) {
     const { BlockManager: t, BlockSelection: o } = this.Editor;
-    this.lastSelectedBlock || (this.lastSelectedBlock = this.firstSelectedBlock = t.currentBlock), this.firstSelectedBlock === this.lastSelectedBlock && (this.firstSelectedBlock.selected = !0, o.clearCache(), m.get().removeAllRanges());
+    this.lastSelectedBlock || (this.lastSelectedBlock = this.firstSelectedBlock = t.currentBlock), this.firstSelectedBlock === this.lastSelectedBlock && (this.firstSelectedBlock.selected = !0, o.clearCache(), k.get().removeAllRanges());
     const i = t.blocks.indexOf(this.lastSelectedBlock) + (e ? 1 : -1), n = t.blocks[i];
     n && (this.lastSelectedBlock.selected !== n.selected ? (n.selected = !0, o.clearCache()) : (this.lastSelectedBlock.selected = !1, o.clearCache()), this.lastSelectedBlock = n, this.Editor.InlineToolbar.close(), n.holder.scrollIntoView({
       block: "nearest"
@@ -6828,7 +6828,7 @@ class Zo extends C {
    */
   enableCrossBlockSelection(e) {
     const { UI: t } = this.Editor;
-    m.isCollapsed || this.Editor.BlockSelection.clearSelection(e), t.nodes.redactor.contains(e.target) ? this.watchSelection(e) : this.Editor.BlockSelection.clearSelection(e);
+    k.isCollapsed || this.Editor.BlockSelection.clearSelection(e), t.nodes.redactor.contains(e.target) ? this.watchSelection(e) : this.Editor.BlockSelection.clearSelection(e);
   }
   /**
    * Change blocks selection state between passed two blocks.
@@ -6894,7 +6894,7 @@ class Go extends C {
     } = this.Editor;
     e.preventDefault(), t.blocks.forEach((r) => {
       r.dropTarget = !1;
-    }), m.isAtEditor && !m.isCollapsed && this.isStartedAtEditor && document.execCommand("delete"), this.isStartedAtEditor = !1;
+    }), k.isAtEditor && !k.isCollapsed && this.isStartedAtEditor && document.execCommand("delete"), this.isStartedAtEditor = !1;
     const n = t.setCurrentBlockByChildNode(e.target);
     if (n)
       this.Editor.Caret.setToBlock(n, o.positions.END);
@@ -6908,7 +6908,7 @@ class Go extends C {
    * Handle drag start event
    */
   processDragStart() {
-    m.isAtEditor && !m.isCollapsed && (this.isStartedAtEditor = !0), this.Editor.InlineToolbar.close();
+    k.isAtEditor && !k.isCollapsed && (this.isStartedAtEditor = !0), this.Editor.InlineToolbar.close();
   }
   /**
    * @param {DragEvent} dragEvent - drag event
@@ -7039,14 +7039,18 @@ const xt = class extends C {
         return;
       } catch {
       }
-    a = r.split(" ").map((p) => p.startsWith("http:") || p.startsWith("https:") ? `<a href="${p}">${p}</a>` : p).join(" "), e && r.trim() && a.trim() && (a = "<p>" + (a.trim() ? a : r) + "</p>");
-    const c = Object.keys(this.toolsTags).reduce((p, k) => (p[k.toLowerCase()] = this.toolsTags[k].sanitizationConfig ?? {}, p), {}), u = Object.assign(
+    const l = r.trim().split(" ").map((m) => m.startsWith("http:") || m.startsWith("https:") ? `<a href="${m}">${m}</a>` : m);
+    l.length === 1 && (a = l.join(" ")), e && r.trim() && a.trim() && (a = "<p>" + (a.trim() ? a : r) + "</p>");
+    const c = Object.keys(this.toolsTags).reduce((m, p) => (m[p.toLowerCase()] = this.toolsTags[p].sanitizationConfig ?? {}, m), {}), u = Object.assign(
       {},
       c,
       t.getAllInlineToolsSanitizeConfig(),
       { br: {} }
-    ), h = Z(a, u);
-    !h.trim() || h.trim() === r || !d.isHTMLString(h) ? await this.processText(r) : await this.processText(h, !0);
+    ), f = Z(a, u).replaceAll("<p>", " <p> ").replaceAll("</p>", " </p> ").trim().split(" ").reduce(
+      (m, p) => m + " " + (p.startsWith("http:") || p.startsWith("https:") ? `<a href="${p}">${p}</a>` : p),
+      ""
+    );
+    !f.trim() || f.trim() === r ? await this.processText(r) : await this.processText(f, !0);
   }
   /**
    * Process pasted text and divide them into Blocks
@@ -7063,9 +7067,7 @@ const xt = class extends C {
       return;
     }
     const r = o.currentBlock && o.currentBlock.tool.isDefault && o.currentBlock.isEmpty;
-    i.map(
-      async (a, l) => this.insertBlock(a, l === 0 && r)
-    ), o.currentBlock && t.setToBlock(o.currentBlock, t.positions.END);
+    i.map(async (a, l) => this.insertBlock(a, l === 0 && r)), o.currentBlock && t.setToBlock(o.currentBlock, t.positions.END);
   }
   /**
    * Set onPaste callback handler
@@ -7208,10 +7210,10 @@ const xt = class extends C {
   async processFile(s) {
     const e = Rt(s), t = Object.entries(this.toolsFiles).find(([n, { mimeTypes: r, extensions: a }]) => {
       const [l, c] = s.type.split("/"), u = a.find(
-        (p) => p.toLowerCase() === e.toLowerCase()
-      ), h = r.find((p) => {
-        const [k, f] = p.split("/");
-        return k === l && (f === c || f === "*");
+        (f) => f.toLowerCase() === e.toLowerCase()
+      ), h = r.find((f) => {
+        const [m, p] = f.split("/");
+        return m === l && (p === c || p === "*");
       });
       return !!u || !!h;
     });
@@ -7246,10 +7248,10 @@ const xt = class extends C {
       const { tags: l } = r.pasteConfig || {
         tags: []
       }, c = l.reduce(
-        (p, k) => (this.collectTagNames(k).forEach((v) => {
-          const A = j(k) ? k[v] : null;
-          p[v.toLowerCase()] = A || {};
-        }), p),
+        (f, m) => (this.collectTagNames(m).forEach((v) => {
+          const A = j(m) ? m[v] : null;
+          f[v.toLowerCase()] = A || {};
+        }), f),
         {}
       ), u = Object.assign(
         {},
@@ -7257,9 +7259,9 @@ const xt = class extends C {
         r.baseSanitizeConfig
       );
       if (n.tagName.toLowerCase() === "table") {
-        const p = Z(n.outerHTML, u);
+        const f = Z(n.outerHTML, u);
         n = d.make("div", void 0, {
-          innerHTML: p
+          innerHTML: f
         }).firstChild;
       } else
         n.innerHTML = Z(n.innerHTML, u);
@@ -7736,7 +7738,7 @@ class pe extends C {
       return;
     e.pageY !== void 0 && (this.mouseX = e.pageX, this.mouseY = e.pageY);
     const { rightPos: t, leftPos: o, index: i } = this.genInfoForMouseSelection(), n = this.startX > t && this.mouseX > t, r = this.startX < o && this.mouseX < o;
-    this.rectCrossesBlocks = !(n || r), this.isRectSelectionActivated || (this.rectCrossesBlocks = !1, this.isRectSelectionActivated = !0, this.shrinkRectangleToPoint(), this.overlayRectangle.style.display = "block"), this.updateRectangleSize(), this.Editor.Toolbar.close(), i !== void 0 && (this.trySelectNextBlock(i), this.inverseSelection(), m.get().removeAllRanges());
+    this.rectCrossesBlocks = !(n || r), this.isRectSelectionActivated || (this.rectCrossesBlocks = !1, this.isRectSelectionActivated = !0, this.shrinkRectangleToPoint(), this.overlayRectangle.style.display = "block"), this.updateRectangleSize(), this.Editor.Toolbar.close(), i !== void 0 && (this.trySelectNextBlock(i), this.inverseSelection(), k.get().removeAllRanges());
   }
   /**
    * Shrink rect to singular point
@@ -7804,25 +7806,25 @@ class pe extends C {
     const a = this.stackOfSelected[o - 1] - this.stackOfSelected[o - 2] > 0;
     let l = r;
     o > 1 && (l = a ? i : n);
-    const c = e > this.stackOfSelected[o - 1] && l === i, u = e < this.stackOfSelected[o - 1] && l === n, p = !(c || u || l === r);
-    if (!p && (e > this.stackOfSelected[o - 1] || this.stackOfSelected[o - 1] === void 0)) {
+    const c = e > this.stackOfSelected[o - 1] && l === i, u = e < this.stackOfSelected[o - 1] && l === n, f = !(c || u || l === r);
+    if (!f && (e > this.stackOfSelected[o - 1] || this.stackOfSelected[o - 1] === void 0)) {
       let v = this.stackOfSelected[o - 1] + 1 || e;
       for (v; v <= e; v++)
         this.addBlockInSelection(v);
       return;
     }
-    if (!p && e < this.stackOfSelected[o - 1]) {
+    if (!f && e < this.stackOfSelected[o - 1]) {
       for (let v = this.stackOfSelected[o - 1] - 1; v >= e; v--)
         this.addBlockInSelection(v);
       return;
     }
-    if (!p)
+    if (!f)
       return;
-    let k = o - 1, f;
-    for (e > this.stackOfSelected[o - 1] ? f = () => e > this.stackOfSelected[k] : f = () => e < this.stackOfSelected[k]; f(); )
+    let m = o - 1, p;
+    for (e > this.stackOfSelected[o - 1] ? p = () => e > this.stackOfSelected[m] : p = () => e < this.stackOfSelected[m]; p(); )
       this.rectCrossesBlocks && this.Editor.BlockSelection.unSelectBlockByIndex(
-        this.stackOfSelected[k]
-      ), this.stackOfSelected.pop(), k--;
+        this.stackOfSelected[m]
+      ), this.stackOfSelected.pop(), m--;
   }
 }
 class Qo extends C {
@@ -7897,8 +7899,8 @@ class Qo extends C {
         title: i
       };
       if (t.unavailable.has(i)) {
-        const p = (l = t.unavailable.get(i).toolbox[0]) == null ? void 0 : l.title;
-        c.title = p || c.title;
+        const f = (l = t.unavailable.get(i).toolbox[0]) == null ? void 0 : l.title;
+        c.title = f || c.title;
       }
       const u = o.insert({
         id: a,
@@ -7972,7 +7974,7 @@ class ei extends C {
     }), S("Total", "log", t), S(void 0, "groupEnd"), {
       time: +/* @__PURE__ */ new Date(),
       blocks: o,
-      version: "1.0.54"
+      version: "2.0.0"
     };
   }
 }
@@ -8079,14 +8081,14 @@ var Ne = {}, ti = {
         }
         return x;
       }
-      var p, k = (p = [], function(y, x) {
-        return p[y] = x, p.filter(Boolean).join(`
+      var f, m = (f = [], function(y, x) {
+        return f[y] = x, f.filter(Boolean).join(`
 `);
       });
-      function f(y, x, w, M) {
+      function p(y, x, w, M) {
         var R = w ? "" : M.media ? "@media ".concat(M.media, " {").concat(M.css, "}") : M.css;
         if (y.styleSheet)
-          y.styleSheet.cssText = k(x, R);
+          y.styleSheet.cssText = m(x, R);
         else {
           var b = document.createTextNode(R), g = y.childNodes;
           g[x] && y.removeChild(g[x]), g.length ? y.insertBefore(b, g[x]) : y.appendChild(b);
@@ -8108,7 +8110,7 @@ var Ne = {}, ti = {
         var w, M, R;
         if (x.singleton) {
           var b = N++;
-          w = A || (A = h(x)), M = f.bind(null, w, b, !1), R = f.bind(null, w, b, !0);
+          w = A || (A = h(x)), M = p.bind(null, w, b, !1), R = p.bind(null, w, b, !0);
         } else
           w = h(x), M = v.bind(null, w, x), R = function() {
             (function(g) {
@@ -8180,14 +8182,14 @@ var Ne = {}, ti = {
         return r.toString = function() {
           return this.map(function(a) {
             var l = function(c, u) {
-              var h = c[1] || "", p = c[3];
-              if (!p)
+              var h = c[1] || "", f = c[3];
+              if (!f)
                 return h;
               if (u && typeof btoa == "function") {
-                var k = (v = p, A = btoa(unescape(encodeURIComponent(JSON.stringify(v)))), N = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(A), "/*# ".concat(N, " */")), f = p.sources.map(function(O) {
-                  return "/*# sourceURL=".concat(p.sourceRoot || "").concat(O, " */");
+                var m = (v = f, A = btoa(unescape(encodeURIComponent(JSON.stringify(v)))), N = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(A), "/*# ".concat(N, " */")), p = f.sources.map(function(O) {
+                  return "/*# sourceURL=".concat(f.sourceRoot || "").concat(O, " */");
                 });
-                return [h].concat(f).concat([k]).join(`
+                return [h].concat(p).concat([m]).join(`
 `);
               }
               var v, A, N;
@@ -8201,12 +8203,12 @@ var Ne = {}, ti = {
           var u = {};
           if (c)
             for (var h = 0; h < this.length; h++) {
-              var p = this[h][0];
-              p != null && (u[p] = !0);
+              var f = this[h][0];
+              f != null && (u[f] = !0);
             }
-          for (var k = 0; k < a.length; k++) {
-            var f = [].concat(a[k]);
-            c && u[f[0]] || (l && (f[2] ? f[2] = "".concat(l, " and ").concat(f[2]) : f[2] = l), r.push(f));
+          for (var m = 0; m < a.length; m++) {
+            var p = [].concat(a[m]);
+            c && u[p[0]] || (l && (p[2] ? p[2] = "".concat(l, " and ").concat(p[2]) : p[2] = l), r.push(p));
           }
         }, r;
       };
@@ -8233,11 +8235,11 @@ var Ne = {}, ti = {
        */
       var a = function() {
         function l(c) {
-          var u = c.data, h = c.config, p = c.api, k = c.readOnly;
-          (function(f, v) {
-            if (!(f instanceof v))
+          var u = c.data, h = c.config, f = c.api, m = c.readOnly;
+          (function(p, v) {
+            if (!(p instanceof v))
               throw new TypeError("Cannot call a class as a function");
-          })(this, l), this.api = p, this.readOnly = k, this._CSS = { block: this.api.styles.block, wrapper: "ce-paragraph" }, this.readOnly || (this.onKeyUp = this.onKeyUp.bind(this)), this._placeholder = h.placeholder ? h.placeholder : l.DEFAULT_PLACEHOLDER, this._data = {}, this._element = this.drawView(), this._preserveBlank = h.preserveBlank !== void 0 && h.preserveBlank, this.data = u;
+          })(this, l), this.api = f, this.readOnly = m, this._CSS = { block: this.api.styles.block, wrapper: "ce-paragraph" }, this.readOnly || (this.onKeyUp = this.onKeyUp.bind(this)), this._placeholder = h.placeholder ? h.placeholder : l.DEFAULT_PLACEHOLDER, this._data = {}, this._element = this.drawView(), this._preserveBlank = h.preserveBlank !== void 0 && h.preserveBlank, this.data = u;
         }
         return r(l, null, [{ key: "DEFAULT_PLACEHOLDER", get: function() {
           return "";
@@ -8430,7 +8432,7 @@ class Ye {
     }, this.nodes = {
       button: null,
       input: null
-    }, this.inputOpened = !1, this.toolbar = e.toolbar, this.inlineToolbar = e.inlineToolbar, this.notifier = e.notifier, this.i18n = e.i18n, this.selection = new m();
+    }, this.inputOpened = !1, this.toolbar = e.toolbar, this.inlineToolbar = e.inlineToolbar, this.notifier = e.notifier, this.i18n = e.i18n, this.selection = new k();
   }
   /**
    * Sanitizer Rule
@@ -8522,7 +8524,7 @@ class Ye {
    */
   closeActions(e = !0) {
     if (this.selection.isFakeBackgroundEnabled) {
-      const t = new m();
+      const t = new k();
       t.save(), this.selection.restore(), this.selection.removeFakeBackground(), t.restore();
     }
     this.nodes.input.classList.remove(this.CSS.inputShowed), this.nodes.input.value = "", e && this.selection.clearSaved(), this.inputOpened = !1;
@@ -9493,7 +9495,7 @@ class ui extends C {
    */
   backspacePressed(e) {
     const { BlockManager: t, BlockSelection: o, Caret: i } = this.Editor;
-    if (o.anyBlockSelected && !m.isSelectionExists) {
+    if (o.anyBlockSelected && !k.isSelectionExists) {
       const n = t.removeSelectedBlocks();
       i.setToBlock(
         t.insertDefaultBlockAtIndex(n, !0),
@@ -9517,7 +9519,7 @@ class ui extends C {
    */
   enterPressed(e) {
     const { BlockManager: t, BlockSelection: o } = this.Editor, i = t.currentBlockIndex >= 0;
-    if (o.anyBlockSelected && !m.isSelectionExists) {
+    if (o.anyBlockSelected && !k.isSelectionExists) {
       o.clearSelection(e), e.preventDefault(), e.stopImmediatePropagation(), e.stopPropagation();
       return;
     }
@@ -9536,7 +9538,7 @@ class ui extends C {
     if (!e.isTrusted)
       return;
     const t = e.target;
-    this.nodes.holder.contains(t) || m.isAtEditor || (this.Editor.BlockManager.dropPointer(), this.Editor.Toolbar.close());
+    this.nodes.holder.contains(t) || k.isAtEditor || (this.Editor.BlockManager.dropPointer(), this.Editor.Toolbar.close());
     const i = this.Editor.BlockSettings.nodes.wrapper.contains(t), n = this.Editor.Toolbar.nodes.settingsToggler.contains(t), r = i || n;
     if (this.Editor.BlockSettings.opened && !r) {
       this.Editor.BlockSettings.close();
@@ -9580,7 +9582,7 @@ class ui extends C {
    */
   redactorClicked(e) {
     const { BlockSelection: t } = this.Editor;
-    if (!m.isCollapsed)
+    if (!k.isCollapsed)
       return;
     const o = () => {
       e.stopImmediatePropagation(), e.stopPropagation();
@@ -9600,8 +9602,8 @@ class ui extends C {
     */
     a < l) {
       o();
-      const { BlockManager: u, Caret: h, Toolbar: p } = this.Editor;
-      (!u.lastBlock.tool.isDefault || !u.lastBlock.isEmpty) && u.insertAtEnd(), h.setToTheLastBlock(), p.moveAndOpen(u.lastBlock);
+      const { BlockManager: u, Caret: h, Toolbar: f } = this.Editor;
+      (!u.lastBlock.tool.isDefault || !u.lastBlock.isEmpty) && u.insertAtEnd(), h.setToTheLastBlock(), f.moveAndOpen(u.lastBlock);
     }
   }
   /**
@@ -9609,8 +9611,8 @@ class ui extends C {
    * Uses for showing the Inline Toolbar
    */
   selectionChanged() {
-    const { CrossBlockSelection: e, BlockSelection: t } = this.Editor, o = m.anchorElement;
-    if (e.isCrossBlockSelectionStarted && t.anyBlockSelected && m.get().removeAllRanges(), !o)
+    const { CrossBlockSelection: e, BlockSelection: t } = this.Editor, o = k.anchorElement;
+    if (e.isCrossBlockSelectionStarted && t.anyBlockSelected && k.get().removeAllRanges(), !o)
       return;
     const i = o.closest(`.${F.CSS.content}`) === null;
     if (i && (this.Editor.InlineToolbar.containsNode(o) || this.Editor.BlockSelection.anyBlockSelected || this.Editor.InlineToolbar.close(), !(o.dataset.inlineToolbar === "true")))
@@ -9820,7 +9822,7 @@ class fi {
 class gi {
   /** Editor version */
   static get version() {
-    return "1.0.54";
+    return "2.0.0";
   }
   /**
    * @param {EditorConfig|string|undefined} [configuration] - user configuration

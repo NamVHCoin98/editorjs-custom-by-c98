@@ -205,13 +205,18 @@ export default class Paste extends Module {
      */
 
     // Creates an <a> tag for links within plain texts
-    const values = plainData.split(` `).map((word) => {
-      return word.startsWith(`http:`) || word.startsWith(`https:`)
-        ? `<a href="${word}">${word}</a>`
-        : word;
-    });
+    const values = plainData
+      .trim()
+      .split(` `)
+      .map((word) => {
+        return word.startsWith(`http:`) || word.startsWith(`https:`)
+          ? `<a href="${word}">${word}</a>`
+          : word;
+      });
 
-    htmlData = values.join(` `);
+    if (values.length === 1) {
+      htmlData = values.join(` `);
+    }
 
     if (isDragNDrop && plainData.trim() && htmlData.trim()) {
       htmlData = "<p>" + (htmlData.trim() ? htmlData : plainData) + "</p>";
@@ -234,17 +239,30 @@ export default class Paste extends Module {
       Tools.getAllInlineToolsSanitizeConfig(),
       { br: {} }
     );
+
     const cleanData = clean(htmlData, customConfig);
 
+    const newCleanData = cleanData
+      .replaceAll("<p>", " <p> ")
+      .replaceAll("</p>", " </p> ")
+      .trim()
+      .split(` `)
+      .reduce(
+        (pre, word) =>
+          pre +
+          " " +
+          (word.startsWith(`http:`) || word.startsWith(`https:`)
+            ? `<a href="${word}">${word}</a>`
+            : word),
+
+        ""
+      );
+
     /** If there is no HTML or HTML string is equal to plain one, process it as plain text */
-    if (
-      !cleanData.trim() ||
-      cleanData.trim() === plainData ||
-      !$.isHTMLString(cleanData)
-    ) {
+    if (!newCleanData.trim() || newCleanData.trim() === plainData) {
       await this.processText(plainData);
     } else {
-      await this.processText(cleanData, true);
+      await this.processText(newCleanData, true);
     }
   }
 
@@ -279,9 +297,9 @@ export default class Paste extends Module {
     const needToReplaceCurrentBlock =
       isCurrentBlockDefault && BlockManager.currentBlock.isEmpty;
 
-    dataToInsert.map(async (content, i) =>
-      this.insertBlock(content, i === 0 && needToReplaceCurrentBlock)
-    );
+    dataToInsert.map(async (content, i) => {
+      return this.insertBlock(content, i === 0 && needToReplaceCurrentBlock);
+    });
 
     if (BlockManager.currentBlock) {
       Caret.setToBlock(BlockManager.currentBlock, Caret.positions.END);
