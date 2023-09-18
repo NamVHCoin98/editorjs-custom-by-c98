@@ -41,7 +41,7 @@ Element.prototype.scrollIntoViewIfNeeded || (Element.prototype.scrollIntoViewIfN
   const e = this.parentNode, t = window.getComputedStyle(e, null), o = parseInt(t.getPropertyValue("border-top-width")), i = parseInt(t.getPropertyValue("border-left-width")), n = this.offsetTop - e.offsetTop < e.scrollTop, r = this.offsetTop - e.offsetTop + this.clientHeight - o > e.scrollTop + e.clientHeight, a = this.offsetLeft - e.offsetLeft < e.scrollLeft, l = this.offsetLeft - e.offsetLeft + this.clientWidth - i > e.scrollLeft + e.clientWidth, c = n && !r;
   (n || r) && s && (e.scrollTop = this.offsetTop - e.offsetTop - e.clientHeight / 2 - o + this.clientHeight / 2), (a || l) && s && (e.scrollLeft = this.offsetLeft - e.offsetLeft - e.clientWidth / 2 - i + this.clientWidth / 2), (n || r || a || l) && !s && this.scrollIntoView(c);
 });
-let _t = (s = 21) => crypto.getRandomValues(new Uint8Array(s)).reduce((e, t) => (t &= 63, t < 36 ? e += t.toString(36) : t < 62 ? e += (t - 26).toString(36).toUpperCase() : t > 62 ? e += "-" : e += "_", e), "");
+let At = (s = 21) => crypto.getRandomValues(new Uint8Array(s)).reduce((e, t) => (t &= 63, t < 36 ? e += t.toString(36) : t < 62 ? e += (t - 26).toString(36).toUpperCase() : t > 62 ? e += "-" : e += "_", e), "");
 var et = /* @__PURE__ */ ((s) => (s.VERBOSE = "VERBOSE", s.INFO = "INFO", s.WARN = "WARN", s.ERROR = "ERROR", s))(et || {});
 const B = {
   BACKSPACE: 8,
@@ -58,7 +58,7 @@ const B = {
   RIGHT: 39,
   DELETE: 46,
   META: 91
-}, At = {
+}, _t = {
   LEFT: 0,
   WHEEL: 1,
   RIGHT: 2,
@@ -84,7 +84,7 @@ function ge(s, e, t = "log", o, i = "color: inherit") {
       break;
   }
   o && r.push(o);
-  const a = "Editor.js 2.0.0", l = `line-height: 1em;
+  const a = "Editor.js 2.0.1", l = `line-height: 1em;
             color: #006FEA;
             display: inline-block;
             font-size: 11px;
@@ -220,7 +220,7 @@ function Ht(s) {
   return s.substring(0, 2) === "//" ? window.location.protocol + s : window.location.origin + s;
 }
 function zt() {
-  return _t(10);
+  return At(10);
 }
 function jt(s) {
   window.open(s, "_blank");
@@ -287,10 +287,7 @@ class d {
    * @returns {boolean}
    */
   static isLineBreakTag(e) {
-    return e && e.tagName && [
-      "BR",
-      "WBR"
-    ].includes(e.tagName);
+    return e && e.tagName && ["BR", "WBR"].includes(e.tagName);
   }
   /**
    * Helper for making Elements with class name and attributes
@@ -382,7 +379,15 @@ class d {
    * Returns CSS selector for all text inputs
    */
   static get allInputsSelector() {
-    return "[contenteditable=true], textarea, input:not([type]), " + ["text", "password", "email", "number", "search", "tel", "url"].map((t) => `input[type="${t}"]`).join(", ");
+    return "[contenteditable=true], textarea, input:not([type]), " + [
+      "text",
+      "password",
+      "email",
+      "number",
+      "search",
+      "tel",
+      "url"
+    ].map((t) => `input[type="${t}"]`).join(", ");
   }
   /**
    * Find all contenteditable, textarea and editable input elements passed holder contains
@@ -454,10 +459,7 @@ class d {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static isNativeInput(e) {
-    const t = [
-      "INPUT",
-      "TEXTAREA"
-    ];
+    const t = ["INPUT", "TEXTAREA"];
     return e && e.tagName ? t.includes(e.tagName) : !1;
   }
   /**
@@ -515,13 +517,16 @@ class d {
    * @returns {boolean}
    */
   static isEmpty(e) {
+    const t = e;
+    if (t.tagName === "IFRAME" && t.getAttribute("src"))
+      return !1;
     e.normalize();
-    const t = [e];
-    for (; t.length > 0; )
-      if (e = t.shift(), !!e) {
+    const o = [e];
+    for (; o.length > 0; )
+      if (e = o.shift(), !!e) {
         if (this.isLeaf(e) && !this.isNodeEmpty(e))
           return !1;
-        e.childNodes && t.push(...Array.from(e.childNodes));
+        e.childNodes && o.push(...Array.from(e.childNodes));
       }
     return !0;
   }
@@ -611,7 +616,10 @@ class d {
    * @returns {HTMLElement[]}
    */
   static getDeepestBlockElements(e) {
-    return d.containsOnlyInlineElements(e) ? [e] : Array.from(e.children).reduce((t, o) => [...t, ...d.getDeepestBlockElements(o)], []);
+    return d.containsOnlyInlineElements(e) ? [e] : Array.from(e.children).reduce((t, o) => [
+      ...t,
+      ...d.getDeepestBlockElements(o)
+    ], []);
   }
   /**
    * Helper for get holder from {string} or return HTMLElement
@@ -1419,11 +1427,11 @@ class F extends we {
       !c && !u && this.detectToolRootChange(l);
       let h;
       c || u ? h = !0 : h = !(l.length > 0 && l.every((m) => {
-        const { addedNodes: p, removedNodes: v, target: A } = m;
+        const { addedNodes: p, removedNodes: v, target: _ } = m;
         return [
           ...Array.from(p),
           ...Array.from(v),
-          A
+          _
         ].some((O) => d.isElement(O) ? O.dataset.mutationFree === "true" : !1);
       })), h && (this.dropInputsCache(), this.updateCurrentInput(), this.call(
         "updated"
@@ -2401,8 +2409,8 @@ var Le = {}, to = {
           if (typeof E == "function")
             return E();
           if (g[E] === void 0) {
-            var T = function(_) {
-              return document.querySelector(_);
+            var T = function(A) {
+              return document.querySelector(A);
             }.call(this, E);
             if (window.HTMLIFrameElement && T instanceof window.HTMLIFrameElement)
               try {
@@ -2417,13 +2425,13 @@ var Le = {}, to = {
       }(), u = null, h = 0, f = [], m = i(5);
       function p(b, g) {
         for (var E = 0; E < b.length; E++) {
-          var T = b[E], _ = a[T.id];
-          if (_) {
-            _.refs++;
-            for (var I = 0; I < _.parts.length; I++)
-              _.parts[I](T.parts[I]);
+          var T = b[E], A = a[T.id];
+          if (A) {
+            A.refs++;
+            for (var I = 0; I < A.parts.length; I++)
+              A.parts[I](T.parts[I]);
             for (; I < T.parts.length; I++)
-              _.parts.push(x(T.parts[I], g));
+              A.parts.push(x(T.parts[I], g));
           } else {
             var z = [];
             for (I = 0; I < T.parts.length; I++)
@@ -2433,13 +2441,13 @@ var Le = {}, to = {
         }
       }
       function v(b, g) {
-        for (var E = [], T = {}, _ = 0; _ < b.length; _++) {
-          var I = b[_], z = g.base ? I[0] + g.base : I[0], L = { css: I[1], media: I[2], sourceMap: I[3] };
+        for (var E = [], T = {}, A = 0; A < b.length; A++) {
+          var I = b[A], z = g.base ? I[0] + g.base : I[0], L = { css: I[1], media: I[2], sourceMap: I[3] };
           T[z] ? T[z].parts.push(L) : E.push(T[z] = { id: z, parts: [L] });
         }
         return E;
       }
-      function A(b, g) {
+      function _(b, g) {
         var E = c(b.insertInto);
         if (!E)
           throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
@@ -2456,8 +2464,8 @@ var Le = {}, to = {
  Must be 'top', 'bottom', or Object.
  (https://github.com/webpack-contrib/style-loader#insertat)
 `);
-          var _ = c(b.insertInto + " " + b.insertAt.before);
-          E.insertBefore(g, _);
+          var A = c(b.insertInto + " " + b.insertAt.before);
+          E.insertBefore(g, A);
         }
       }
       function N(b) {
@@ -2469,7 +2477,7 @@ var Le = {}, to = {
       }
       function O(b) {
         var g = document.createElement("style");
-        return b.attrs.type === void 0 && (b.attrs.type = "text/css"), y(g, b.attrs), A(b, g), g;
+        return b.attrs.type === void 0 && (b.attrs.type = "text/css"), y(g, b.attrs), _(b, g), g;
       }
       function y(b, g) {
         Object.keys(g).forEach(function(E) {
@@ -2477,7 +2485,7 @@ var Le = {}, to = {
         });
       }
       function x(b, g) {
-        var E, T, _, I;
+        var E, T, A, I;
         if (g.transform && b.css) {
           if (!(I = g.transform(b.css)))
             return function() {
@@ -2486,18 +2494,18 @@ var Le = {}, to = {
         }
         if (g.singleton) {
           var z = h++;
-          E = u || (u = O(g)), T = R.bind(null, E, z, !1), _ = R.bind(null, E, z, !0);
+          E = u || (u = O(g)), T = R.bind(null, E, z, !1), A = R.bind(null, E, z, !0);
         } else
           b.sourceMap && typeof URL == "function" && typeof URL.createObjectURL == "function" && typeof URL.revokeObjectURL == "function" && typeof Blob == "function" && typeof btoa == "function" ? (E = function(L) {
             var W = document.createElement("link");
-            return L.attrs.type === void 0 && (L.attrs.type = "text/css"), L.attrs.rel = "stylesheet", y(W, L.attrs), A(L, W), W;
+            return L.attrs.type === void 0 && (L.attrs.type = "text/css"), L.attrs.rel = "stylesheet", y(W, L.attrs), _(L, W), W;
           }(g), T = function(L, W, le) {
             var Q = le.css, Ee = le.sourceMap, It = W.convertToAbsoluteUrls === void 0 && Ee;
             (W.convertToAbsoluteUrls || It) && (Q = m(Q)), Ee && (Q += `
 /*# sourceMappingURL=data:application/json;base64,` + btoa(unescape(encodeURIComponent(JSON.stringify(Ee)))) + " */");
             var Mt = new Blob([Q], { type: "text/css" }), Xe = L.href;
             L.href = URL.createObjectURL(Mt), Xe && URL.revokeObjectURL(Xe);
-          }.bind(null, E, g), _ = function() {
+          }.bind(null, E, g), A = function() {
             N(E), E.href && URL.revokeObjectURL(E.href);
           }) : (E = O(g), T = function(L, W) {
             var le = W.css, Q = W.media;
@@ -2508,7 +2516,7 @@ var Le = {}, to = {
                 L.removeChild(L.firstChild);
               L.appendChild(document.createTextNode(le));
             }
-          }.bind(null, E), _ = function() {
+          }.bind(null, E), A = function() {
             N(E);
           });
         return T(b), function(L) {
@@ -2517,7 +2525,7 @@ var Le = {}, to = {
               return;
             T(b = L);
           } else
-            _();
+            A();
         };
       }
       t.exports = function(b, g) {
@@ -2526,13 +2534,13 @@ var Le = {}, to = {
         (g = g || {}).attrs = typeof g.attrs == "object" ? g.attrs : {}, g.singleton || typeof g.singleton == "boolean" || (g.singleton = l()), g.insertInto || (g.insertInto = "head"), g.insertAt || (g.insertAt = "bottom");
         var E = v(b, g);
         return p(E, g), function(T) {
-          for (var _ = [], I = 0; I < E.length; I++) {
+          for (var A = [], I = 0; I < E.length; I++) {
             var z = E[I];
-            (L = a[z.id]).refs--, _.push(L);
+            (L = a[z.id]).refs--, A.push(L);
           }
-          for (T && p(v(T, g), g), I = 0; I < _.length; I++) {
+          for (T && p(v(T, g), g), I = 0; I < A.length; I++) {
             var L;
-            if ((L = _[I]).refs === 0) {
+            if ((L = A[I]).refs === 0) {
               for (var W = 0; W < L.parts.length; W++)
                 L.parts[W]();
               delete a[L.id];
@@ -2545,11 +2553,11 @@ var Le = {}, to = {
 `);
       });
       function R(b, g, E, T) {
-        var _ = E ? "" : T.css;
+        var A = E ? "" : T.css;
         if (b.styleSheet)
-          b.styleSheet.cssText = M(g, _);
+          b.styleSheet.cssText = M(g, A);
         else {
-          var I = document.createTextNode(_), z = b.childNodes;
+          var I = document.createTextNode(A), z = b.childNodes;
           z[g] && b.removeChild(z[g]), z.length ? b.insertBefore(I, z[g]) : b.appendChild(I);
         }
       }
@@ -2573,16 +2581,16 @@ var Le = {}, to = {
     }, function(t, o, i) {
       var n, r, a, l, c, u, h, f, m;
       t.exports = (n = "cdx-notifies", r = "cdx-notify", a = "cdx-notify__cross", l = "cdx-notify__button--confirm", c = "cdx-notify__button--cancel", u = "cdx-notify__input", h = "cdx-notify__button", f = "cdx-notify__btns-wrapper", { alert: m = function(p) {
-        var v = document.createElement("DIV"), A = document.createElement("DIV"), N = p.message, O = p.style;
-        return v.classList.add(r), O && v.classList.add(r + "--" + O), v.innerHTML = N, A.classList.add(a), A.addEventListener("click", v.remove.bind(v)), v.appendChild(A), v;
+        var v = document.createElement("DIV"), _ = document.createElement("DIV"), N = p.message, O = p.style;
+        return v.classList.add(r), O && v.classList.add(r + "--" + O), v.innerHTML = N, _.classList.add(a), _.addEventListener("click", v.remove.bind(v)), v.appendChild(_), v;
       }, confirm: function(p) {
-        var v = m(p), A = document.createElement("div"), N = document.createElement("button"), O = document.createElement("button"), y = v.querySelector("." + a), x = p.cancelHandler, w = p.okHandler;
-        return A.classList.add(f), N.innerHTML = p.okText || "Confirm", O.innerHTML = p.cancelText || "Cancel", N.classList.add(h), O.classList.add(h), N.classList.add(l), O.classList.add(c), x && typeof x == "function" && (O.addEventListener("click", x), y.addEventListener("click", x)), w && typeof w == "function" && N.addEventListener("click", w), N.addEventListener("click", v.remove.bind(v)), O.addEventListener("click", v.remove.bind(v)), A.appendChild(N), A.appendChild(O), v.appendChild(A), v;
+        var v = m(p), _ = document.createElement("div"), N = document.createElement("button"), O = document.createElement("button"), y = v.querySelector("." + a), x = p.cancelHandler, w = p.okHandler;
+        return _.classList.add(f), N.innerHTML = p.okText || "Confirm", O.innerHTML = p.cancelText || "Cancel", N.classList.add(h), O.classList.add(h), N.classList.add(l), O.classList.add(c), x && typeof x == "function" && (O.addEventListener("click", x), y.addEventListener("click", x)), w && typeof w == "function" && N.addEventListener("click", w), N.addEventListener("click", v.remove.bind(v)), O.addEventListener("click", v.remove.bind(v)), _.appendChild(N), _.appendChild(O), v.appendChild(_), v;
       }, prompt: function(p) {
-        var v = m(p), A = document.createElement("div"), N = document.createElement("button"), O = document.createElement("input"), y = v.querySelector("." + a), x = p.cancelHandler, w = p.okHandler;
-        return A.classList.add(f), N.innerHTML = p.okText || "Ok", N.classList.add(h), N.classList.add(l), O.classList.add(u), p.placeholder && O.setAttribute("placeholder", p.placeholder), p.default && (O.value = p.default), p.inputType && (O.type = p.inputType), x && typeof x == "function" && y.addEventListener("click", x), w && typeof w == "function" && N.addEventListener("click", function() {
+        var v = m(p), _ = document.createElement("div"), N = document.createElement("button"), O = document.createElement("input"), y = v.querySelector("." + a), x = p.cancelHandler, w = p.okHandler;
+        return _.classList.add(f), N.innerHTML = p.okText || "Ok", N.classList.add(h), N.classList.add(l), O.classList.add(u), p.placeholder && O.setAttribute("placeholder", p.placeholder), p.default && (O.value = p.default), p.inputType && (O.type = p.inputType), x && typeof x == "function" && y.addEventListener("click", x), w && typeof w == "function" && N.addEventListener("click", function() {
           w(O.value);
-        }), N.addEventListener("click", v.remove.bind(v)), A.appendChild(O), A.appendChild(N), v.appendChild(A), v;
+        }), N.addEventListener("click", v.remove.bind(v)), _.appendChild(O), _.appendChild(N), v.appendChild(_), v;
       }, getWrapper: function() {
         var p = document.createElement("DIV");
         return p.classList.add(n), p;
@@ -2659,12 +2667,12 @@ class so extends C {
     return this.Editor.ReadOnly.isEnabled;
   }
 }
-var _e = {}, ro = {
+var Ae = {}, ro = {
   get exports() {
-    return _e;
+    return Ae;
   },
   set exports(s) {
-    _e = s;
+    Ae = s;
   }
 };
 (function(s, e) {
@@ -2706,9 +2714,9 @@ var _e = {}, ro = {
             f.removeChild(p), this._sanitize(h, f);
             break;
           }
-          var v = r(p), A;
-          v && (A = Array.prototype.some.call(p.childNodes, i));
-          var N = !!f.parentNode, O = i(f) && i(p) && N, y = p.nodeName.toLowerCase(), x = l(this.config, y, p), w = v && A;
+          var v = r(p), _;
+          v && (_ = Array.prototype.some.call(p.childNodes, i));
+          var N = !!f.parentNode, O = i(f) && i(p) && N, y = p.nodeName.toLowerCase(), x = l(this.config, y, p), w = v && _;
           if (w || c(p, x) || !this.config.keepNestedBlockElements && O) {
             if (!(p.nodeName === "SCRIPT" || p.nodeName === "STYLE"))
               for (; p.childNodes.length > 0; )
@@ -2744,7 +2752,7 @@ var _e = {}, ro = {
     return t;
   });
 })(ro);
-const ao = _e;
+const ao = Ae;
 function ht(s, e) {
   return s.map((t) => {
     const o = D(e) ? e(t.tool) : e;
@@ -2933,12 +2941,12 @@ class mo extends C {
     e ?? !this.Editor.Toolbar.toolbox.opened ? (this.Editor.Toolbar.moveAndOpen(), this.Editor.Toolbar.toolbox.open()) : this.Editor.Toolbar.toolbox.close();
   }
 }
-var Ae = {}, ko = {
+var _e = {}, ko = {
   get exports() {
-    return Ae;
+    return _e;
   },
   set exports(s) {
-    Ae = s;
+    _e = s;
   }
 };
 /*!
@@ -3095,7 +3103,7 @@ var Ae = {}, ko = {
     }]).default;
   });
 })(ko);
-const vo = /* @__PURE__ */ xe(Ae);
+const vo = /* @__PURE__ */ xe(_e);
 class Fe {
   constructor() {
     this.lib = new vo();
@@ -3238,7 +3246,7 @@ function yo(s, e) {
     i !== void 0 ? t[i] = s[o] : t[o] = s[o];
   }), t;
 }
-const Eo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 12L9 7.1C9 7.04477 9.04477 7 9.1 7H10.4C11.5 7 14 7.1 14 9.5C14 9.5 14 12 11 12M9 12V16.8C9 16.9105 9.08954 17 9.2 17H12.5C14 17 15 16 15 14.5C15 11.7046 11 12 11 12M9 12H11"/></svg>', pt = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 10L11.8586 14.8586C11.9367 14.9367 12.0633 14.9367 12.1414 14.8586L17 10"/></svg>', Bo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 15L11.8586 10.1414C11.9367 10.0633 12.0633 10.0633 12.1414 10.1414L17 15"/></svg>', To = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 8L12 12M12 12L16 16M12 12L16 8M12 12L8 16"/></svg>', So = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/></svg>', Co = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M13.34 10C12.4223 12.7337 11 17 11 17"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M14.21 7H14.2"/></svg>', qe = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7.69998 12.6L7.67896 12.62C6.53993 13.7048 6.52012 15.5155 7.63516 16.625V16.625C8.72293 17.7073 10.4799 17.7102 11.5712 16.6314L13.0263 15.193C14.0703 14.1609 14.2141 12.525 13.3662 11.3266L13.22 11.12"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M16.22 11.12L16.3564 10.9805C17.2895 10.0265 17.3478 8.5207 16.4914 7.49733V7.49733C15.5691 6.39509 13.9269 6.25143 12.8271 7.17675L11.3901 8.38588C10.0935 9.47674 9.95706 11.4241 11.0888 12.6852L11.12 12.72"/></svg>', Io = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 7.29999H9.4"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 7.29999H14.59"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.30999 12H9.3"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 12H14.59"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 16.7H9.4"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 16.7H14.59"/></svg>', Mo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M12 7V12M12 17V12M17 12H12M12 12H7"/></svg>', Lo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5" stroke="currentColor" stroke-width="2"/><line x1="15.4142" x2="19" y1="15" y2="18.5858" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>', _o = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M15.7795 11.5C15.7795 11.5 16.053 11.1962 16.5497 10.6722C17.4442 9.72856 17.4701 8.2475 16.5781 7.30145V7.30145C15.6482 6.31522 14.0873 6.29227 13.1288 7.25073L11.8796 8.49999"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8.24517 12.3883C8.24517 12.3883 7.97171 12.6922 7.47504 13.2161C6.58051 14.1598 6.55467 15.6408 7.44666 16.5869V16.5869C8.37653 17.5731 9.93744 17.5961 10.8959 16.6376L12.1452 15.3883"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M17.7802 15.1032L16.597 14.9422C16.0109 14.8624 15.4841 15.3059 15.4627 15.8969L15.4199 17.0818"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6.39064 9.03238L7.58432 9.06668C8.17551 9.08366 8.6522 8.58665 8.61056 7.99669L8.5271 6.81397"/><line x1="12.1142" x2="11.7" y1="12.2" y2="11.7858" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>';
+const Eo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 12L9 7.1C9 7.04477 9.04477 7 9.1 7H10.4C11.5 7 14 7.1 14 9.5C14 9.5 14 12 11 12M9 12V16.8C9 16.9105 9.08954 17 9.2 17H12.5C14 17 15 16 15 14.5C15 11.7046 11 12 11 12M9 12H11"/></svg>', pt = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 10L11.8586 14.8586C11.9367 14.9367 12.0633 14.9367 12.1414 14.8586L17 10"/></svg>', Bo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 15L11.8586 10.1414C11.9367 10.0633 12.0633 10.0633 12.1414 10.1414L17 15"/></svg>', To = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 8L12 12M12 12L16 16M12 12L16 8M12 12L8 16"/></svg>', So = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/></svg>', Co = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M13.34 10C12.4223 12.7337 11 17 11 17"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M14.21 7H14.2"/></svg>', qe = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7.69998 12.6L7.67896 12.62C6.53993 13.7048 6.52012 15.5155 7.63516 16.625V16.625C8.72293 17.7073 10.4799 17.7102 11.5712 16.6314L13.0263 15.193C14.0703 14.1609 14.2141 12.525 13.3662 11.3266L13.22 11.12"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M16.22 11.12L16.3564 10.9805C17.2895 10.0265 17.3478 8.5207 16.4914 7.49733V7.49733C15.5691 6.39509 13.9269 6.25143 12.8271 7.17675L11.3901 8.38588C10.0935 9.47674 9.95706 11.4241 11.0888 12.6852L11.12 12.72"/></svg>', Io = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 7.29999H9.4"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 7.29999H14.59"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.30999 12H9.3"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 12H14.59"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 16.7H9.4"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 16.7H14.59"/></svg>', Mo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M12 7V12M12 17V12M17 12H12M12 12H7"/></svg>', Lo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5" stroke="currentColor" stroke-width="2"/><line x1="15.4142" x2="19" y1="15" y2="18.5858" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>', Ao = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M15.7795 11.5C15.7795 11.5 16.053 11.1962 16.5497 10.6722C17.4442 9.72856 17.4701 8.2475 16.5781 7.30145V7.30145C15.6482 6.31522 14.0873 6.29227 13.1288 7.25073L11.8796 8.49999"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8.24517 12.3883C8.24517 12.3883 7.97171 12.6922 7.47504 13.2161C6.58051 14.1598 6.55467 15.6408 7.44666 16.5869V16.5869C8.37653 17.5731 9.93744 17.5961 10.8959 16.6376L12.1452 15.3883"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M17.7802 15.1032L16.597 14.9422C16.0109 14.8624 15.4841 15.3059 15.4627 15.8969L15.4199 17.0818"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6.39064 9.03238L7.58432 9.06668C8.17551 9.08366 8.6522 8.58665 8.61056 7.99669L8.5271 6.81397"/><line x1="12.1142" x2="11.7" y1="12.2" y2="11.7858" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>';
 class P {
   /**
    * Constructs popover item instance
@@ -3785,10 +3793,10 @@ ft.CSS = {
   scrollLocked: "ce-scroll-locked",
   scrollLockedHard: "ce-scroll-locked--hard"
 };
-var Ao = Object.defineProperty, Oo = Object.getOwnPropertyDescriptor, No = (s, e, t, o) => {
+var _o = Object.defineProperty, Oo = Object.getOwnPropertyDescriptor, No = (s, e, t, o) => {
   for (var i = o > 1 ? void 0 : o ? Oo(e, t) : e, n = s.length - 1, r; n >= 0; n--)
     (r = s[n]) && (i = (o ? r(e, t, i) : r(i)) || i);
-  return o && i && Ao(e, t, i), i;
+  return o && i && _o(e, t, i), i;
 }, fe = /* @__PURE__ */ ((s) => (s.Close = "close", s))(fe || {});
 const H = class extends we {
   /**
@@ -6757,7 +6765,7 @@ class Zo extends C {
    * @param {MouseEvent} event - mouse down event
    */
   watchSelection(e) {
-    if (e.button !== At.LEFT)
+    if (e.button !== _t.LEFT)
       return;
     const { BlockManager: t } = this.Editor;
     this.firstSelectedBlock = t.getBlock(
@@ -7249,8 +7257,8 @@ const xt = class extends C {
         tags: []
       }, c = l.reduce(
         (f, m) => (this.collectTagNames(m).forEach((v) => {
-          const A = j(m) ? m[v] : null;
-          f[v.toLowerCase()] = A || {};
+          const _ = j(m) ? m[v] : null;
+          f[v.toLowerCase()] = _ || {};
         }), f),
         {}
       ), u = Object.assign(
@@ -7974,7 +7982,7 @@ class ei extends C {
     }), S("Total", "log", t), S(void 0, "groupEnd"), {
       time: +/* @__PURE__ */ new Date(),
       blocks: o,
-      version: "2.0.0"
+      version: "2.0.1"
     };
   }
 }
@@ -8058,8 +8066,8 @@ var Ne = {}, ti = {
         for (var w = {}, M = [], R = 0; R < y.length; R++) {
           var b = y[R], g = x.base ? b[0] + x.base : b[0], E = w[g] || 0, T = "".concat(g, " ").concat(E);
           w[g] = E + 1;
-          var _ = c(T), I = { css: b[1], media: b[2], sourceMap: b[3] };
-          _ !== -1 ? (l[_].references++, l[_].updater(I)) : l.push({ identifier: T, updater: O(I, x), references: 1 }), M.push(T);
+          var A = c(T), I = { css: b[1], media: b[2], sourceMap: b[3] };
+          A !== -1 ? (l[A].references++, l[A].updater(I)) : l.push({ identifier: T, updater: O(I, x), references: 1 }), M.push(T);
         }
         return M;
       }
@@ -8105,12 +8113,12 @@ var Ne = {}, ti = {
           y.appendChild(document.createTextNode(M));
         }
       }
-      var A = null, N = 0;
+      var _ = null, N = 0;
       function O(y, x) {
         var w, M, R;
         if (x.singleton) {
           var b = N++;
-          w = A || (A = h(x)), M = p.bind(null, w, b, !1), R = p.bind(null, w, b, !0);
+          w = _ || (_ = h(x)), M = p.bind(null, w, b, !1), R = p.bind(null, w, b, !0);
         } else
           w = h(x), M = v.bind(null, w, x), R = function() {
             (function(g) {
@@ -8186,13 +8194,13 @@ var Ne = {}, ti = {
               if (!f)
                 return h;
               if (u && typeof btoa == "function") {
-                var m = (v = f, A = btoa(unescape(encodeURIComponent(JSON.stringify(v)))), N = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(A), "/*# ".concat(N, " */")), p = f.sources.map(function(O) {
+                var m = (v = f, _ = btoa(unescape(encodeURIComponent(JSON.stringify(v)))), N = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(_), "/*# ".concat(N, " */")), p = f.sources.map(function(O) {
                   return "/*# sourceURL=".concat(f.sourceRoot || "").concat(O, " */");
                 });
                 return [h].concat(p).concat([m]).join(`
 `);
               }
-              var v, A, N;
+              var v, _, N;
               return [h].join(`
 `);
             }(a, n);
@@ -8485,7 +8493,7 @@ class Ye {
   checkState() {
     const e = this.selection.findParentTag("A");
     if (e) {
-      this.nodes.button.innerHTML = _o, this.nodes.button.classList.add(this.CSS.buttonUnlink), this.nodes.button.classList.add(this.CSS.buttonActive), this.openActions();
+      this.nodes.button.innerHTML = Ao, this.nodes.button.classList.add(this.CSS.buttonUnlink), this.nodes.button.classList.add(this.CSS.buttonActive), this.openActions();
       const t = e.getAttribute("href");
       this.nodes.input.value = t !== "null" ? t : "", this.selection.save();
     } else
@@ -9822,7 +9830,7 @@ class fi {
 class gi {
   /** Editor version */
   static get version() {
-    return "2.0.0";
+    return "2.0.1";
   }
   /**
    * @param {EditorConfig|string|undefined} [configuration] - user configuration
