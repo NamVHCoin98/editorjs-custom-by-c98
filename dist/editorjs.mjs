@@ -84,7 +84,7 @@ function ge(s, e, t = "log", o, i = "color: inherit") {
       break;
   }
   o && r.push(o);
-  const a = "Editor.js 2.0.1", l = `line-height: 1em;
+  const a = "Editor.js 2.0.2", l = `line-height: 1em;
             color: #006FEA;
             display: inline-block;
             font-size: 11px;
@@ -7054,7 +7054,7 @@ const xt = class extends C {
       c,
       t.getAllInlineToolsSanitizeConfig(),
       { br: {} }
-    ), f = Z(a, u).replaceAll("<p>", " <p> ").replaceAll("</p>", " </p> ").trim().split(" ").reduce(
+    ), f = Z(a, u).replaceAll("<p>", " <p> ").replaceAll("</p>", " </p> ").replaceAll("<li>", " <li> ").replaceAll("</li>", " </li> ").trim().split(" ").reduce(
       (m, p) => m + " " + (p.startsWith("http:") || p.startsWith("https:") ? `<a href="${p}">${p}</a>` : p),
       ""
     );
@@ -7982,7 +7982,7 @@ class ei extends C {
     }), S("Total", "log", t), S(void 0, "groupEnd"), {
       time: +/* @__PURE__ */ new Date(),
       blocks: o,
-      version: "2.0.1"
+      version: "2.0.2"
     };
   }
 }
@@ -9830,7 +9830,7 @@ class fi {
 class gi {
   /** Editor version */
   static get version() {
-    return "2.0.1";
+    return "2.0.2";
   }
   /**
    * @param {EditorConfig|string|undefined} [configuration] - user configuration

@@ -245,6 +245,8 @@ export default class Paste extends Module {
     const newCleanData = cleanData
       .replaceAll("<p>", " <p> ")
       .replaceAll("</p>", " </p> ")
+      .replaceAll("<li>", " <li> ")
+      .replaceAll("</li>", " </li> ")
       .trim()
       .split(` `)
       .reduce(
