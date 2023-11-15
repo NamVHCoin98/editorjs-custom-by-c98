@@ -84,7 +84,7 @@ function ge(s, e, t = "log", o, i = "color: inherit") {
       break;
   }
   o && r.push(o);
-  const a = "Editor.js 2.0.2", l = `line-height: 1em;
+  const a = "Editor.js 2.0.3", l = `line-height: 1em;
             color: #006FEA;
             display: inline-block;
             font-size: 11px;
@@ -5016,7 +5016,7 @@ class Uo extends C {
     e && (t = e.target.getBoundingClientRect());
     const i = {
       x: t.x - o.left,
-      y: t.y + t.height - o.top + this.toolbarVerticalMargin
+      y: t.y + (t.bottom < o.bottom ? t.height : t.height - 300) - o.top + this.toolbarVerticalMargin
     };
     t.width && (i.x += Math.floor(t.width / 2));
     const n = i.x - this.width / 2, r = i.x + this.width / 2;
@@ -5070,8 +5070,8 @@ class Uo extends C {
     this.flipper && (this.flipper.deactivate(), this.flipper = null), this.removeAllNodes(), this.tooltip.destroy();
   }
   /**
-  * Check Tools` state by selection
-  */
+   * Check Tools` state by selection
+   */
   checkToolsState() {
     this.toolsInstances.forEach((e) => {
       e.checkState(k.get());
@@ -6378,7 +6378,7 @@ class Vo extends C {
       }, 20)();
     }
     if (this.Editor.CrossBlockSelection.clear(e), !this.anyBlockSelected || n.isRectActivated()) {
-      this.Editor.RectangleSelection.clearSelection();
+      this.Editor.RectangleSelection.clearSelection(), this.Editor.InlineToolbar.close();
       return;
     }
     t && this.selection.restore(), this.allBlocksSelected = !1;
@@ -7982,7 +7982,7 @@ class ei extends C {
     }), S("Total", "log", t), S(void 0, "groupEnd"), {
       time: +/* @__PURE__ */ new Date(),
       blocks: o,
-      version: "2.0.2"
+      version: "2.0.3"
     };
   }
 }
@@ -9830,7 +9830,7 @@ class fi {
 class gi {
   /** Editor version */
   static get version() {
-    return "2.0.2";
+    return "2.0.3";
   }
   /**
    * @param {EditorConfig|string|undefined} [configuration] - user configuration

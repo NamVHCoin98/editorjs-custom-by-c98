@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
+import { IconChevronDown } from "@codexteam/icons";
+import { InlineTool as IInlineTool } from "../../../../types";
+import { ModuleConfig } from "../../../types-internal/module-config";
 import Module from "../../__module";
 import $ from "../../dom";
-import SelectionUtils from "../../selection";
-import * as _ from "../../utils";
-import { InlineTool as IInlineTool } from "../../../../types";
 import Flipper from "../../flipper";
 import I18n from "../../i18n";
 import { I18nInternalNS } from "../../i18n/namespace-internal";
+import SelectionUtils from "../../selection";
+import { CommonInternalSettings } from "../../tools/base";
+import InlineTool from "../../tools/inline";
+import * as _ from "../../utils";
 import Shortcuts from "../../utils/shortcuts";
 import Tooltip from "../../utils/tooltip";
-import { ModuleConfig } from "../../../types-internal/module-config";
-import InlineTool from "../../tools/inline";
-import { CommonInternalSettings } from "../../tools/base";
-import { IconChevronDown } from "@codexteam/icons";
 
 /**
  * Inline Toolbar elements
@@ -180,7 +180,9 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
       x: selectionRect.x - wrapperOffset.left,
       y:
         selectionRect.y +
-        selectionRect.height -
+        (selectionRect.bottom < wrapperOffset.bottom
+          ? selectionRect.height
+          : selectionRect.height - 300) -
         wrapperOffset.top +
         this.toolbarVerticalMargin,
     };
@@ -261,7 +263,7 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
   public open(
     needToShowConversionToolbar = true,
     isSelectedAll = false,
-    allowRecheckState = false,
+    allowRecheckState = false
   ): void {
     if (this.opened) {
       if (allowRecheckState) {
@@ -337,14 +339,13 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
   }
 
   /**
-  * Check Tools` state by selection
-  */
+   * Check Tools` state by selection
+   */
   public checkToolsState(): void {
     this.toolsInstances.forEach((toolInstance) => {
       toolInstance.checkState(SelectionUtils.get());
     });
   }
-
 
   /**
    * Making DOM
@@ -657,7 +658,7 @@ export default class InlineToolbar extends Module<InlineToolbarNodes> {
     if (shortcut) {
       try {
         this.enableShortcuts(instance, shortcut);
-      } catch (e) { }
+      } catch (e) {}
     }
 
     /**

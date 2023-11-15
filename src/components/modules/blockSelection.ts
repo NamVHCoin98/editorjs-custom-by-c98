@@ -270,6 +270,7 @@ export default class BlockSelection extends Module {
 
     if (!this.anyBlockSelected || RectangleSelection.isRectActivated()) {
       this.Editor.RectangleSelection.clearSelection();
+      this.Editor.InlineToolbar.close();
 
       return;
     }
