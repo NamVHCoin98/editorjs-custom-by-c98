@@ -266,9 +266,7 @@ export default class BlockEvents extends Module {
       this.Editor.Caret.isAtStart &&
       !this.Editor.BlockManager.currentBlock.hasMedia
     ) {
-      if (
-        this.Editor.BlockManager.currentBlock.name === this.config.defaultBlock
-      ) {
+      if (this.Editor.BlockManager.currentBlock.name === 'list') {
         newCurrent = this.Editor.BlockManager.insertDefaultBlockAtIndex(
           this.Editor.BlockManager.currentBlockIndex + 1, false, this.config.defaultBlock
         );

@@ -84,7 +84,7 @@ function ge(s, e, t = "log", o, i = "color: inherit") {
       break;
   }
   o && r.push(o);
-  const a = "Editor.js 2.0.3", l = `line-height: 1em;
+  const a = "Editor.js 2.0.4", l = `line-height: 1em;
             color: #006FEA;
             display: inline-block;
             font-size: 11px;
@@ -4303,7 +4303,7 @@ var Oe = {}, Do = {
  * @copyright CodeX (https://codex.so)
  * @license MIT
  * @author CodeX (https://codex.so)
- * @version 1.2.0
+ * @version 1.1.1
  */
 (function(s, e) {
   (function(t, o) {
@@ -4365,7 +4365,7 @@ var Oe = {}, Do = {
         return r(l, null, [{ key: "supportedCommands", get: function() {
           return { SHIFT: ["SHIFT"], CMD: ["CMD", "CONTROL", "COMMAND", "WINDOWS", "CTRL"], ALT: ["ALT", "OPTION"] };
         } }, { key: "keyCodes", get: function() {
-          return { 0: 48, 1: 49, 2: 50, 3: 51, 4: 52, 5: 53, 6: 54, 7: 55, 8: 56, 9: 57, A: 65, B: 66, C: 67, D: 68, E: 69, F: 70, G: 71, H: 72, I: 73, J: 74, K: 75, L: 76, M: 77, N: 78, O: 79, P: 80, Q: 81, R: 82, S: 83, T: 84, U: 85, V: 86, W: 87, X: 88, Y: 89, Z: 90, BACKSPACE: 8, ENTER: 13, ESCAPE: 27, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40, INSERT: 45, DELETE: 46, ".": 190 };
+          return { 0: 48, 1: 49, 2: 50, 3: 51, 4: 52, 5: 53, 6: 54, 7: 55, 8: 56, 9: 57, A: 65, B: 66, C: 67, D: 68, E: 69, F: 70, G: 71, H: 72, I: 73, J: 74, K: 75, L: 76, M: 77, N: 78, O: 79, P: 80, Q: 81, R: 82, S: 83, T: 84, U: 85, V: 86, W: 87, X: 88, Y: 89, Z: 90, BACKSPACE: 8, ENTER: 13, ESCAPE: 27, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40, INSERT: 45, DELETE: 46 };
         } }]), r(l, [{ key: "parseShortcutName", value: function(c) {
           c = c.split("+");
           for (var u = 0; u < c.length; u++) {
@@ -5401,7 +5401,7 @@ class Wo extends C {
       return;
     let n = this.Editor.BlockManager.currentBlock;
     if (this.Editor.Caret.isAtStart && !this.Editor.BlockManager.currentBlock.hasMedia)
-      this.Editor.BlockManager.currentBlock.name === this.config.defaultBlock ? n = this.Editor.BlockManager.insertDefaultBlockAtIndex(
+      this.Editor.BlockManager.currentBlock.name === "list" ? n = this.Editor.BlockManager.insertDefaultBlockAtIndex(
         this.Editor.BlockManager.currentBlockIndex + 1,
         !1,
         this.config.defaultBlock
@@ -7982,7 +7982,7 @@ class ei extends C {
     }), S("Total", "log", t), S(void 0, "groupEnd"), {
       time: +/* @__PURE__ */ new Date(),
       blocks: o,
-      version: "2.0.3"
+      version: "2.0.4"
     };
   }
 }
@@ -9830,7 +9830,7 @@ class fi {
 class gi {
   /** Editor version */
   static get version() {
-    return "2.0.3";
+    return "2.0.4";
   }
   /**
    * @param {EditorConfig|string|undefined} [configuration] - user configuration
