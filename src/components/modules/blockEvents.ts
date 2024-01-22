@@ -42,11 +42,101 @@ export default class BlockEvents extends Module {
         break;
 
       case _.keyCodes.DOWN:
+        if (event.shiftKey && event.metaKey) {
+          const currentBlockIndex =
+            this.Editor.BlocksAPI.getCurrentBlockIndex();
+          const currentBlock =
+            this.Editor.BlocksAPI.getBlockByIndex(currentBlockIndex);
+          if (currentBlock.name === "image") {
+            const nextBlock = this.Editor.BlocksAPI.getBlockByIndex(
+              currentBlockIndex + 1
+            );
+
+            // If Block is last do nothing
+            if (!nextBlock) {
+              throw new Error(
+                "Unable to move Block down since it is already the last"
+              );
+            }
+
+            const nextBlockElement = nextBlock.holder;
+            const nextBlockCoords = nextBlockElement.getBoundingClientRect();
+
+            let scrollOffset = Math.abs(
+              window.innerHeight - nextBlockElement.offsetHeight
+            );
+
+            /**
+             * Next block ends on screen.
+             * Increment scroll by next block's height to save element onscreen-position
+             */
+            if (nextBlockCoords.top < window.innerHeight) {
+              scrollOffset = window.scrollY + nextBlockElement.offsetHeight;
+            }
+
+            window.scrollTo(0, scrollOffset);
+
+            /** Change blocks positions */
+            this.Editor.BlocksAPI.move(currentBlockIndex + 1);
+          }
+        }
+        break;
+
       case _.keyCodes.RIGHT:
         this.arrowRightAndDown(event);
         break;
 
       case _.keyCodes.UP:
+        if (event.shiftKey && event.metaKey) {
+          const currentBlockIndex =
+            this.Editor.BlocksAPI.getCurrentBlockIndex();
+          const currentBlock =
+            this.Editor.BlocksAPI.getBlockByIndex(currentBlockIndex);
+          if (currentBlock.name === "image") {
+            const previousBlock = this.Editor.BlocksAPI.getBlockByIndex(
+              currentBlockIndex - 1
+            );
+
+            if (currentBlockIndex === 0 || !currentBlock || !previousBlock) {
+              throw new Error(
+                "Unable to move Block up since it is already the first"
+              );
+            }
+
+            const currentBlockElement = currentBlock.holder;
+            const previousBlockElement = previousBlock.holder;
+
+            /**
+             * Here is two cases:
+             *  - when previous block has negative offset and part of it is visible on window, then we scroll
+             *  by window's height and add offset which is mathematically difference between two blocks
+             *
+             *  - when previous block is visible and has offset from the window,
+             *      than we scroll window to the difference between this offsets.
+             */
+            const currentBlockCoords =
+                currentBlockElement.getBoundingClientRect(),
+              previousBlockCoords =
+                previousBlockElement.getBoundingClientRect();
+
+            let scrollUpOffset;
+
+            if (previousBlockCoords.top > 0) {
+              scrollUpOffset =
+                Math.abs(currentBlockCoords.top) -
+                Math.abs(previousBlockCoords.top);
+            } else {
+              scrollUpOffset =
+                Math.abs(currentBlockCoords.top) + previousBlockCoords.height;
+            }
+
+            window.scrollBy(0, -1 * scrollUpOffset);
+
+            /** Change blocks positions */
+            this.Editor.BlocksAPI.move(currentBlockIndex - 1);
+          }
+        }
+        break;
       case _.keyCodes.LEFT:
         this.arrowLeftAndUp(event);
         break;
@@ -266,9 +356,11 @@ export default class BlockEvents extends Module {
       this.Editor.Caret.isAtStart &&
       !this.Editor.BlockManager.currentBlock.hasMedia
     ) {
-      if (this.Editor.BlockManager.currentBlock.name === 'list') {
+      if (this.Editor.BlockManager.currentBlock.name === "list") {
         newCurrent = this.Editor.BlockManager.insertDefaultBlockAtIndex(
-          this.Editor.BlockManager.currentBlockIndex + 1, false, this.config.defaultBlock
+          this.Editor.BlockManager.currentBlockIndex + 1,
+          false,
+          this.config.defaultBlock
         );
       } else {
         this.Editor.BlockManager.insertDefaultBlockAtIndex(
