@@ -374,7 +374,7 @@ SOFTWARE.
 ---
 
 Name: @codexteam/shortcuts
-Version: 1.1.1
+Version: 1.2.0
 License: MIT
 Private: false
 Description: Library for handling keyboard shortcuts

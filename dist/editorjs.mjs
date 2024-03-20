@@ -2,11 +2,11 @@ var Lt = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : t
 function xe(s) {
   return s && s.__esModule && Object.prototype.hasOwnProperty.call(s, "default") ? s.default : s;
 }
-function Be() {
+function Ee() {
 }
-Object.assign(Be, {
-  default: Be,
-  register: Be,
+Object.assign(Ee, {
+  default: Ee,
+  register: Ee,
   revert: function() {
   },
   __esModule: !0
@@ -43,7 +43,7 @@ Element.prototype.scrollIntoViewIfNeeded || (Element.prototype.scrollIntoViewIfN
 });
 let At = (s = 21) => crypto.getRandomValues(new Uint8Array(s)).reduce((e, t) => (t &= 63, t < 36 ? e += t.toString(36) : t < 62 ? e += (t - 26).toString(36).toUpperCase() : t > 62 ? e += "-" : e += "_", e), "");
 var et = /* @__PURE__ */ ((s) => (s.VERBOSE = "VERBOSE", s.INFO = "INFO", s.WARN = "WARN", s.ERROR = "ERROR", s))(et || {});
-const B = {
+const E = {
   BACKSPACE: 8,
   TAB: 9,
   ENTER: 13,
@@ -84,7 +84,7 @@ function ge(s, e, t = "log", o, i = "color: inherit") {
       break;
   }
   o && r.push(o);
-  const a = "Editor.js 2.0.4", l = `line-height: 1em;
+  const a = "Editor.js 2.0.8", l = `line-height: 1em;
             color: #006FEA;
             display: inline-block;
             font-size: 11px;
@@ -104,14 +104,14 @@ ge.logLevel = "VERBOSE";
 function Ot(s) {
   ge.logLevel = s;
 }
-const S = ge.bind(window, !1), K = ge.bind(window, !0);
+const C = ge.bind(window, !1), K = ge.bind(window, !0);
 function te(s) {
   return Object.prototype.toString.call(s).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
 }
 function D(s) {
   return te(s) === "function" || te(s) === "asyncfunction";
 }
-function j(s) {
+function z(s) {
   return te(s) === "object";
 }
 function J(s) {
@@ -174,7 +174,7 @@ function Pt(s, e, t) {
     window.clearTimeout(o), o = window.setTimeout(r, e), a && s.apply(n, i);
   };
 }
-function Se(s, e, t = void 0) {
+function Ce(s, e, t = void 0) {
   let o, i, n, r = null, a = 0;
   t || (t = {});
   const l = function() {
@@ -199,14 +199,14 @@ function Ft() {
 function ke(s) {
   return s[0].toUpperCase() + s.slice(1);
 }
-function Ce(s, ...e) {
+function Se(s, ...e) {
   if (!e.length)
     return s;
   const t = e.shift();
-  if (j(s) && j(t))
+  if (z(s) && z(t))
     for (const o in t)
-      j(t[o]) ? (s[o] || Object.assign(s, { [o]: {} }), Ce(s[o], t[o])) : Object.assign(s, { [o]: t[o] });
-  return Ce(s, ...e);
+      z(t[o]) ? (s[o] || Object.assign(s, { [o]: {} }), Se(s[o], t[o])) : Object.assign(s, { [o]: t[o] });
+  return Se(s, ...e);
 }
 function nt(s) {
   const e = Ft();
@@ -219,13 +219,13 @@ function Ht(s) {
   }
   return s.substring(0, 2) === "//" ? window.location.protocol + s : window.location.origin + s;
 }
-function zt() {
+function Ut() {
   return At(10);
 }
-function jt(s) {
+function zt(s) {
   window.open(s, "_blank");
 }
-function Ut(s = "") {
+function jt(s = "") {
   return `${s}${Math.floor(Math.random() * 1e8).toString(16)}`;
 }
 function Ie(s, e, t) {
@@ -250,7 +250,7 @@ function ee() {
 }
 const Ge = typeof window < "u" && window.navigator && window.navigator.platform && (/iP(ad|hone|od)/.test(window.navigator.platform) || window.navigator.platform === "MacIntel" && window.navigator.maxTouchPoints > 1);
 function $t(s, e) {
-  const t = Array.isArray(s) || j(s), o = Array.isArray(e) || j(e);
+  const t = Array.isArray(s) || z(s), o = Array.isArray(e) || z(e);
   return t || o ? JSON.stringify(s) === JSON.stringify(e) : s === e;
 }
 class d {
@@ -933,7 +933,7 @@ class Re {
    * @param {boolean|AddEventListenerOptions} options - useCapture or {capture, passive, once}
    */
   on(e, t, o, i = !1) {
-    const n = Ut("l"), r = {
+    const n = jt("l"), r = {
       id: n,
       element: e,
       eventType: t,
@@ -1052,7 +1052,7 @@ class Re {
     return this.allListeners.find((t) => t.id === e);
   }
 }
-class C {
+class S {
   /**
    * @class
    * @param options - Module options
@@ -1082,7 +1082,7 @@ class C {
           this.listeners.offById(o);
         this.mutableListenerIds = [];
       }
-    }, this.mutableListenerIds = [], new.target === C)
+    }, this.mutableListenerIds = [], new.target === S)
       throw new TypeError("Constructors for abstract class Module are not allowed.");
     this.config = e, this.eventsDispatcher = t;
   }
@@ -1237,9 +1237,9 @@ class k {
     if (e && e.type !== "Control")
       return e = e, t = e.createRange(), o.x = t.boundingLeft, o.y = t.boundingTop, o.width = t.boundingWidth, o.height = t.boundingHeight, o;
     if (!window.getSelection)
-      return S("Method window.getSelection is not supported", "warn"), o;
+      return C("Method window.getSelection is not supported", "warn"), o;
     if (e = window.getSelection(), e.rangeCount === null || isNaN(e.rangeCount))
-      return S("Method SelectionUtils.rangeCount is not supported", "warn"), o;
+      return C("Method SelectionUtils.rangeCount is not supported", "warn"), o;
     if (e.rangeCount === 0)
       return o;
     if (t = e.getRangeAt(0).cloneRange(), t.getBoundingClientRect && (o = t.getBoundingClientRect()), o.x === 0 && o.y === 0) {
@@ -1413,7 +1413,7 @@ class F extends we {
    * @param [eventBus] - Editor common event bus. Allows to subscribe on some Editor events. Could be omitted when "virtual" Block is created. See BlocksAPI@composeBlockData.
    */
   constructor({
-    id: e = zt(),
+    id: e = Ut(),
     data: t,
     tool: o,
     api: i,
@@ -1645,14 +1645,14 @@ class F extends we {
    */
   call(e, t) {
     if (D(this.toolInstance[e])) {
-      e === "appendCallback" && S(
+      e === "appendCallback" && C(
         "`appendCallback` hook is deprecated and will be removed in the next major release. Use `rendered` hook instead",
         "warn"
       );
       try {
         this.toolInstance[e].call(this.toolInstance, t);
       } catch (o) {
-        S(`Error during '${e}' call: ${o.message}`, "error");
+        C(`Error during '${e}' call: ${o.message}`, "error");
       }
     }
   }
@@ -1682,7 +1682,7 @@ class F extends we {
         try {
           t[n] = r.save();
         } catch (a) {
-          S(
+          C(
             `Tune ${r.constructor.name} save method throws an Error %o`,
             "warn",
             a
@@ -1698,7 +1698,7 @@ class F extends we {
       tunes: t,
       time: i - o
     })).catch((n) => {
-      S(
+      C(
         `Saving process for ${this.name} tool failed due to the ${n}`,
         "log",
         "red"
@@ -1777,7 +1777,7 @@ class F extends we {
         try {
           i = n.wrap(i);
         } catch (r) {
-          S(
+          C(
             `Tune ${n.constructor.name} wrap method throws an Error %o`,
             "warn",
             r
@@ -1865,7 +1865,7 @@ class F extends we {
     this.cachedInputs = [];
   }
 }
-class Zt extends C {
+class Zt extends S {
   constructor() {
     super(...arguments), this.insert = (e = this.config.defaultBlock, t = {}, o = {}, i, n, r, a) => {
       const l = this.Editor.BlockManager.insert({
@@ -1889,7 +1889,7 @@ class Zt extends C {
     }, this.update = (e, t, o) => {
       const { BlockManager: i } = this.Editor, n = i.getBlockById(e);
       if (!n) {
-        S("blocks.update(): Block with passed id was not found", "warn");
+        C("blocks.update(): Block with passed id was not found", "warn");
         return;
       }
       const r = i.getBlockIndex(n);
@@ -2002,7 +2002,7 @@ class Zt extends C {
    * @deprecated — use 'move' instead
    */
   swap(e, t) {
-    S(
+    C(
       "`blocks.swap()` method is deprecated and will be removed in the next major release. Use `block.move()` method instead",
       "info"
     ), this.Editor.BlockManager.swap(e, t);
@@ -2076,13 +2076,13 @@ class Zt extends C {
    * @deprecated with insert() method
    */
   insertNewBlock() {
-    S(
+    C(
       "Method blocks.insertNewBlock() is deprecated and it will be removed in the next major release. Use blocks.insert() instead.",
       "warn"
     ), this.insert();
   }
 }
-class Gt extends C {
+class Gt extends S {
   constructor() {
     super(...arguments), this.setToFirstBlock = (e = this.Editor.Caret.positions.DEFAULT, t = 0) => this.Editor.BlockManager.firstBlock ? (this.Editor.Caret.setToBlock(this.Editor.BlockManager.firstBlock, e, t), !0) : !1, this.setToLastBlock = (e = this.Editor.Caret.positions.DEFAULT, t = 0) => this.Editor.BlockManager.lastBlock ? (this.Editor.Caret.setToBlock(this.Editor.BlockManager.lastBlock, e, t), !0) : !1, this.setToPreviousBlock = (e = this.Editor.Caret.positions.DEFAULT, t = 0) => this.Editor.BlockManager.previousBlock ? (this.Editor.Caret.setToBlock(this.Editor.BlockManager.previousBlock, e, t), !0) : !1, this.setToNextBlock = (e = this.Editor.Caret.positions.DEFAULT, t = 0) => this.Editor.BlockManager.nextBlock ? (this.Editor.Caret.setToBlock(this.Editor.BlockManager.nextBlock, e, t), !0) : !1, this.setToBlock = (e, t = this.Editor.Caret.positions.DEFAULT, o = 0) => this.Editor.BlockManager.blocks[e] ? (this.Editor.Caret.setToBlock(this.Editor.BlockManager.blocks[e], t, o), !0) : !1, this.focus = (e = !1) => e ? this.setToLastBlock(this.Editor.Caret.positions.END) : this.setToFirstBlock(this.Editor.Caret.positions.START);
   }
@@ -2102,7 +2102,7 @@ class Gt extends C {
     };
   }
 }
-class qt extends C {
+class qt extends S {
   /**
    * Available methods
    *
@@ -2143,7 +2143,7 @@ class qt extends C {
     this.eventsDispatcher.off(e, t);
   }
 }
-class De extends C {
+class De extends S {
   /**
    * Return namespace section for tool or block tune
    *
@@ -2176,7 +2176,7 @@ class De extends C {
     );
   }
 }
-class Jt extends C {
+class Jt extends S {
   /**
    * Editor.js Core API modules
    */
@@ -2213,7 +2213,7 @@ class Jt extends C {
     );
   }
 }
-class Qt extends C {
+class Qt extends S {
   /**
    * Available methods
    *
@@ -2238,7 +2238,7 @@ class Qt extends C {
     this.Editor.InlineToolbar.close();
   }
 }
-class eo extends C {
+class eo extends S {
   /**
    * Available methods
    *
@@ -2405,27 +2405,27 @@ var Le = {}, to = {
         return r === void 0 && (r = n.apply(this, arguments)), r;
       }), c = function(b) {
         var g = {};
-        return function(E) {
-          if (typeof E == "function")
-            return E();
-          if (g[E] === void 0) {
+        return function(B) {
+          if (typeof B == "function")
+            return B();
+          if (g[B] === void 0) {
             var T = function(A) {
               return document.querySelector(A);
-            }.call(this, E);
+            }.call(this, B);
             if (window.HTMLIFrameElement && T instanceof window.HTMLIFrameElement)
               try {
                 T = T.contentDocument.head;
               } catch {
                 T = null;
               }
-            g[E] = T;
+            g[B] = T;
           }
-          return g[E];
+          return g[B];
         };
       }(), u = null, h = 0, f = [], m = i(5);
       function p(b, g) {
-        for (var E = 0; E < b.length; E++) {
-          var T = b[E], A = a[T.id];
+        for (var B = 0; B < b.length; B++) {
+          var T = b[B], A = a[T.id];
           if (A) {
             A.refs++;
             for (var I = 0; I < A.parts.length; I++)
@@ -2433,29 +2433,29 @@ var Le = {}, to = {
             for (; I < T.parts.length; I++)
               A.parts.push(x(T.parts[I], g));
           } else {
-            var z = [];
+            var U = [];
             for (I = 0; I < T.parts.length; I++)
-              z.push(x(T.parts[I], g));
-            a[T.id] = { id: T.id, refs: 1, parts: z };
+              U.push(x(T.parts[I], g));
+            a[T.id] = { id: T.id, refs: 1, parts: U };
           }
         }
       }
       function v(b, g) {
-        for (var E = [], T = {}, A = 0; A < b.length; A++) {
-          var I = b[A], z = g.base ? I[0] + g.base : I[0], L = { css: I[1], media: I[2], sourceMap: I[3] };
-          T[z] ? T[z].parts.push(L) : E.push(T[z] = { id: z, parts: [L] });
+        for (var B = [], T = {}, A = 0; A < b.length; A++) {
+          var I = b[A], U = g.base ? I[0] + g.base : I[0], L = { css: I[1], media: I[2], sourceMap: I[3] };
+          T[U] ? T[U].parts.push(L) : B.push(T[U] = { id: U, parts: [L] });
         }
-        return E;
+        return B;
       }
       function _(b, g) {
-        var E = c(b.insertInto);
-        if (!E)
+        var B = c(b.insertInto);
+        if (!B)
           throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
         var T = f[f.length - 1];
         if (b.insertAt === "top")
-          T ? T.nextSibling ? E.insertBefore(g, T.nextSibling) : E.appendChild(g) : E.insertBefore(g, E.firstChild), f.push(g);
+          T ? T.nextSibling ? B.insertBefore(g, T.nextSibling) : B.appendChild(g) : B.insertBefore(g, B.firstChild), f.push(g);
         else if (b.insertAt === "bottom")
-          E.appendChild(g);
+          B.appendChild(g);
         else {
           if (typeof b.insertAt != "object" || !b.insertAt.before)
             throw new Error(`[Style Loader]
@@ -2465,7 +2465,7 @@ var Le = {}, to = {
  (https://github.com/webpack-contrib/style-loader#insertat)
 `);
           var A = c(b.insertInto + " " + b.insertAt.before);
-          E.insertBefore(g, A);
+          B.insertBefore(g, A);
         }
       }
       function N(b) {
@@ -2480,12 +2480,12 @@ var Le = {}, to = {
         return b.attrs.type === void 0 && (b.attrs.type = "text/css"), y(g, b.attrs), _(b, g), g;
       }
       function y(b, g) {
-        Object.keys(g).forEach(function(E) {
-          b.setAttribute(E, g[E]);
+        Object.keys(g).forEach(function(B) {
+          b.setAttribute(B, g[B]);
         });
       }
       function x(b, g) {
-        var E, T, A, I;
+        var B, T, A, I;
         if (g.transform && b.css) {
           if (!(I = g.transform(b.css)))
             return function() {
@@ -2493,21 +2493,21 @@ var Le = {}, to = {
           b.css = I;
         }
         if (g.singleton) {
-          var z = h++;
-          E = u || (u = O(g)), T = R.bind(null, E, z, !1), A = R.bind(null, E, z, !0);
+          var U = h++;
+          B = u || (u = O(g)), T = R.bind(null, B, U, !1), A = R.bind(null, B, U, !0);
         } else
-          b.sourceMap && typeof URL == "function" && typeof URL.createObjectURL == "function" && typeof URL.revokeObjectURL == "function" && typeof Blob == "function" && typeof btoa == "function" ? (E = function(L) {
+          b.sourceMap && typeof URL == "function" && typeof URL.createObjectURL == "function" && typeof URL.revokeObjectURL == "function" && typeof Blob == "function" && typeof btoa == "function" ? (B = function(L) {
             var W = document.createElement("link");
             return L.attrs.type === void 0 && (L.attrs.type = "text/css"), L.attrs.rel = "stylesheet", y(W, L.attrs), _(L, W), W;
           }(g), T = function(L, W, le) {
-            var Q = le.css, Ee = le.sourceMap, It = W.convertToAbsoluteUrls === void 0 && Ee;
-            (W.convertToAbsoluteUrls || It) && (Q = m(Q)), Ee && (Q += `
-/*# sourceMappingURL=data:application/json;base64,` + btoa(unescape(encodeURIComponent(JSON.stringify(Ee)))) + " */");
+            var Q = le.css, Be = le.sourceMap, It = W.convertToAbsoluteUrls === void 0 && Be;
+            (W.convertToAbsoluteUrls || It) && (Q = m(Q)), Be && (Q += `
+/*# sourceMappingURL=data:application/json;base64,` + btoa(unescape(encodeURIComponent(JSON.stringify(Be)))) + " */");
             var Mt = new Blob([Q], { type: "text/css" }), Xe = L.href;
             L.href = URL.createObjectURL(Mt), Xe && URL.revokeObjectURL(Xe);
-          }.bind(null, E, g), A = function() {
-            N(E), E.href && URL.revokeObjectURL(E.href);
-          }) : (E = O(g), T = function(L, W) {
+          }.bind(null, B, g), A = function() {
+            N(B), B.href && URL.revokeObjectURL(B.href);
+          }) : (B = O(g), T = function(L, W) {
             var le = W.css, Q = W.media;
             if (Q && L.setAttribute("media", Q), L.styleSheet)
               L.styleSheet.cssText = le;
@@ -2516,8 +2516,8 @@ var Le = {}, to = {
                 L.removeChild(L.firstChild);
               L.appendChild(document.createTextNode(le));
             }
-          }.bind(null, E), A = function() {
-            N(E);
+          }.bind(null, B), A = function() {
+            N(B);
           });
         return T(b), function(L) {
           if (L) {
@@ -2532,11 +2532,11 @@ var Le = {}, to = {
         if (typeof DEBUG < "u" && DEBUG && typeof document != "object")
           throw new Error("The style-loader cannot be used in a non-browser environment");
         (g = g || {}).attrs = typeof g.attrs == "object" ? g.attrs : {}, g.singleton || typeof g.singleton == "boolean" || (g.singleton = l()), g.insertInto || (g.insertInto = "head"), g.insertAt || (g.insertAt = "bottom");
-        var E = v(b, g);
-        return p(E, g), function(T) {
-          for (var A = [], I = 0; I < E.length; I++) {
-            var z = E[I];
-            (L = a[z.id]).refs--, A.push(L);
+        var B = v(b, g);
+        return p(B, g), function(T) {
+          for (var A = [], I = 0; I < B.length; I++) {
+            var U = B[I];
+            (L = a[U.id]).refs--, A.push(L);
           }
           for (T && p(v(T, g), g), I = 0; I < A.length; I++) {
             var L;
@@ -2552,13 +2552,13 @@ var Le = {}, to = {
         return w[b] = g, w.filter(Boolean).join(`
 `);
       });
-      function R(b, g, E, T) {
-        var A = E ? "" : T.css;
+      function R(b, g, B, T) {
+        var A = B ? "" : T.css;
         if (b.styleSheet)
           b.styleSheet.cssText = M(g, A);
         else {
-          var I = document.createTextNode(A), z = b.childNodes;
-          z[g] && b.removeChild(z[g]), z.length ? b.insertBefore(I, z[g]) : b.appendChild(I);
+          var I = document.createTextNode(A), U = b.childNodes;
+          U[g] && b.removeChild(U[g]), U.length ? b.insertBefore(I, U[g]) : b.appendChild(I);
         }
       }
     }, function(t, o) {
@@ -2609,7 +2609,7 @@ class io {
     oo.show(e);
   }
 }
-class no extends C {
+class no extends S {
   /**
    * @param moduleConfiguration - Module Configuration
    * @param moduleConfiguration.config - Editor's config
@@ -2638,7 +2638,7 @@ class no extends C {
     return this.notifier.show(e);
   }
 }
-class so extends C {
+class so extends S {
   /**
    * Available methods
    */
@@ -2766,7 +2766,7 @@ function Z(s, e = {}) {
   return new ao(t).clean(s);
 }
 function Pe(s, e) {
-  return Array.isArray(s) ? lo(s, e) : j(s) ? co(s, e) : J(s) ? ho(s, e) : s;
+  return Array.isArray(s) ? lo(s, e) : z(s) ? co(s, e) : J(s) ? ho(s, e) : s;
 }
 function lo(s, e) {
   return s.map((t) => Pe(t, e));
@@ -2782,12 +2782,12 @@ function co(s, e) {
   return t;
 }
 function ho(s, e) {
-  return j(e) ? Z(s, e) : e === !1 ? Z(s, {}) : s;
+  return z(e) ? Z(s, e) : e === !1 ? Z(s, {}) : s;
 }
 function uo(s) {
-  return j(s) || Nt(s) || D(s);
+  return z(s) || Nt(s) || D(s);
 }
-class po extends C {
+class po extends S {
   /**
    * Available methods
    *
@@ -2809,7 +2809,7 @@ class po extends C {
     return Z(e, t);
   }
 }
-class fo extends C {
+class fo extends S {
   /**
    * Available methods
    *
@@ -2830,7 +2830,7 @@ class fo extends C {
     return this.Editor.ReadOnly.isEnabled ? (K(e, "warn"), Promise.reject(new Error(e))) : this.Editor.Saver.save();
   }
 }
-class go extends C {
+class go extends S {
   /**
    * Available methods
    *
@@ -2861,7 +2861,7 @@ class go extends C {
     new k().expandToTag(e);
   }
 }
-class bo extends C {
+class bo extends S {
   /**
    * Exported classes
    */
@@ -2890,7 +2890,7 @@ class bo extends C {
     };
   }
 }
-class mo extends C {
+class mo extends S {
   /**
    * Available methods
    *
@@ -3143,7 +3143,7 @@ class Fe {
     this.lib.onHover(e, t, o);
   }
 }
-class xo extends C {
+class xo extends S {
   /**
    * @class
    * @param moduleConfiguration - Module Configuration
@@ -3199,7 +3199,7 @@ class xo extends C {
     this.tooltip.onHover(e, t, o);
   }
 }
-class wo extends C {
+class wo extends S {
   /**
    * Available methods / getters
    */
@@ -3230,7 +3230,7 @@ class wo extends C {
 function ut(s, e) {
   const t = {};
   return Object.entries(s).forEach(([o, i]) => {
-    if (j(i)) {
+    if (z(i)) {
       const n = e ? `${e}.${o}` : o;
       Object.values(i).every((a) => J(a)) ? t[o] = n : t[o] = ut(i, n);
       return;
@@ -3246,7 +3246,7 @@ function yo(s, e) {
     i !== void 0 ? t[i] = s[o] : t[o] = s[o];
   }), t;
 }
-const Eo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 12L9 7.1C9 7.04477 9.04477 7 9.1 7H10.4C11.5 7 14 7.1 14 9.5C14 9.5 14 12 11 12M9 12V16.8C9 16.9105 9.08954 17 9.2 17H12.5C14 17 15 16 15 14.5C15 11.7046 11 12 11 12M9 12H11"/></svg>', pt = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 10L11.8586 14.8586C11.9367 14.9367 12.0633 14.9367 12.1414 14.8586L17 10"/></svg>', Bo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 15L11.8586 10.1414C11.9367 10.0633 12.0633 10.0633 12.1414 10.1414L17 15"/></svg>', To = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 8L12 12M12 12L16 16M12 12L16 8M12 12L8 16"/></svg>', So = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/></svg>', Co = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M13.34 10C12.4223 12.7337 11 17 11 17"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M14.21 7H14.2"/></svg>', qe = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7.69998 12.6L7.67896 12.62C6.53993 13.7048 6.52012 15.5155 7.63516 16.625V16.625C8.72293 17.7073 10.4799 17.7102 11.5712 16.6314L13.0263 15.193C14.0703 14.1609 14.2141 12.525 13.3662 11.3266L13.22 11.12"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M16.22 11.12L16.3564 10.9805C17.2895 10.0265 17.3478 8.5207 16.4914 7.49733V7.49733C15.5691 6.39509 13.9269 6.25143 12.8271 7.17675L11.3901 8.38588C10.0935 9.47674 9.95706 11.4241 11.0888 12.6852L11.12 12.72"/></svg>', Io = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 7.29999H9.4"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 7.29999H14.59"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.30999 12H9.3"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 12H14.59"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 16.7H9.4"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 16.7H14.59"/></svg>', Mo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M12 7V12M12 17V12M17 12H12M12 12H7"/></svg>', Lo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5" stroke="currentColor" stroke-width="2"/><line x1="15.4142" x2="19" y1="15" y2="18.5858" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>', Ao = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M15.7795 11.5C15.7795 11.5 16.053 11.1962 16.5497 10.6722C17.4442 9.72856 17.4701 8.2475 16.5781 7.30145V7.30145C15.6482 6.31522 14.0873 6.29227 13.1288 7.25073L11.8796 8.49999"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8.24517 12.3883C8.24517 12.3883 7.97171 12.6922 7.47504 13.2161C6.58051 14.1598 6.55467 15.6408 7.44666 16.5869V16.5869C8.37653 17.5731 9.93744 17.5961 10.8959 16.6376L12.1452 15.3883"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M17.7802 15.1032L16.597 14.9422C16.0109 14.8624 15.4841 15.3059 15.4627 15.8969L15.4199 17.0818"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6.39064 9.03238L7.58432 9.06668C8.17551 9.08366 8.6522 8.58665 8.61056 7.99669L8.5271 6.81397"/><line x1="12.1142" x2="11.7" y1="12.2" y2="11.7858" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>';
+const Bo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 12L9 7.1C9 7.04477 9.04477 7 9.1 7H10.4C11.5 7 14 7.1 14 9.5C14 9.5 14 12 11 12M9 12V16.8C9 16.9105 9.08954 17 9.2 17H12.5C14 17 15 16 15 14.5C15 11.7046 11 12 11 12M9 12H11"/></svg>', pt = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 10L11.8586 14.8586C11.9367 14.9367 12.0633 14.9367 12.1414 14.8586L17 10"/></svg>', Eo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 15L11.8586 10.1414C11.9367 10.0633 12.0633 10.0633 12.1414 10.1414L17 15"/></svg>', To = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 8L12 12M12 12L16 16M12 12L16 8M12 12L8 16"/></svg>', Co = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/></svg>', So = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M13.34 10C12.4223 12.7337 11 17 11 17"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M14.21 7H14.2"/></svg>', qe = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7.69998 12.6L7.67896 12.62C6.53993 13.7048 6.52012 15.5155 7.63516 16.625V16.625C8.72293 17.7073 10.4799 17.7102 11.5712 16.6314L13.0263 15.193C14.0703 14.1609 14.2141 12.525 13.3662 11.3266L13.22 11.12"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M16.22 11.12L16.3564 10.9805C17.2895 10.0265 17.3478 8.5207 16.4914 7.49733V7.49733C15.5691 6.39509 13.9269 6.25143 12.8271 7.17675L11.3901 8.38588C10.0935 9.47674 9.95706 11.4241 11.0888 12.6852L11.12 12.72"/></svg>', Io = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 7.29999H9.4"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 7.29999H14.59"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.30999 12H9.3"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 12H14.59"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 16.7H9.4"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 16.7H14.59"/></svg>', Mo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M12 7V12M12 17V12M17 12H12M12 12H7"/></svg>', Lo = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5" stroke="currentColor" stroke-width="2"/><line x1="15.4142" x2="19" y1="15" y2="18.5858" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>', Ao = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M15.7795 11.5C15.7795 11.5 16.053 11.1962 16.5497 10.6722C17.4442 9.72856 17.4701 8.2475 16.5781 7.30145V7.30145C15.6482 6.31522 14.0873 6.29227 13.1288 7.25073L11.8796 8.49999"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8.24517 12.3883C8.24517 12.3883 7.97171 12.6922 7.47504 13.2161C6.58051 14.1598 6.55467 15.6408 7.44666 16.5869V16.5869C8.37653 17.5731 9.93744 17.5961 10.8959 16.6376L12.1452 15.3883"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M17.7802 15.1032L16.597 14.9422C16.0109 14.8624 15.4841 15.3059 15.4627 15.8969L15.4199 17.0818"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6.39064 9.03238L7.58432 9.06668C8.17551 9.08366 8.6522 8.58665 8.61056 7.99669L8.5271 6.81397"/><line x1="12.1142" x2="11.7" y1="12.2" y2="11.7858" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>';
 class P {
   /**
    * Constructs popover item instance
@@ -3387,7 +3387,7 @@ class P {
   make(e) {
     const t = d.make("div", P.CSS.container);
     e.name && (t.dataset.itemName = e.name), this.nodes.icon = d.make("div", P.CSS.icon, {
-      innerHTML: e.icon || So
+      innerHTML: e.icon || Co
     }), t.appendChild(this.nodes.icon);
     const o = d.make("div", P.CSS.title, {
       innerHTML: e.title || ""
@@ -3540,18 +3540,18 @@ class G {
     this.iterator = null, this.activated = !1, this.flipCallbacks = [], this.onKeyDown = (t) => {
       if (this.isEventReadyForHandling(t))
         switch (G.usedKeys.includes(t.keyCode) && t.preventDefault(), t.keyCode) {
-          case B.TAB:
+          case E.TAB:
             this.handleTabPress(t);
             break;
-          case B.LEFT:
-          case B.UP:
+          case E.LEFT:
+          case E.UP:
             this.flipLeft();
             break;
-          case B.RIGHT:
-          case B.DOWN:
+          case E.RIGHT:
+          case E.DOWN:
             this.flipRight();
             break;
-          case B.ENTER:
+          case E.ENTER:
             this.handleEnterPress(t);
             break;
         }
@@ -3571,12 +3571,12 @@ class G {
    */
   static get usedKeys() {
     return [
-      B.TAB,
-      B.LEFT,
-      B.RIGHT,
-      B.ENTER,
-      B.UP,
-      B.DOWN
+      E.TAB,
+      E.LEFT,
+      E.RIGHT,
+      E.ENTER,
+      E.UP,
+      E.DOWN
     ];
   }
   /**
@@ -3946,10 +3946,10 @@ const H = class extends we {
       items: this.flippableElements,
       focusedItemClass: P.CSS.focused,
       allowedKeys: [
-        B.TAB,
-        B.UP,
-        B.DOWN,
-        B.ENTER
+        E.TAB,
+        E.UP,
+        E.DOWN,
+        E.ENTER
       ]
     }), this.flipper.onFlip(this.onFlip);
   }
@@ -4018,7 +4018,7 @@ let He = H;
 No([
   ae
 ], He.prototype, "height", 1);
-class Ro extends C {
+class Ro extends S {
   constructor() {
     super(...arguments), this.opened = !1, this.selection = new k(), this.onPopoverClose = () => {
       this.close();
@@ -4119,7 +4119,7 @@ class Ro extends C {
     return e.confirmation && (t.confirmation = this.resolveTuneAliases(e.confirmation)), t;
   }
 }
-class Y extends C {
+class Y extends S {
   constructor() {
     super(...arguments), this.opened = !1, this.tools = [], this.flipper = null, this.togglingCallback = null;
   }
@@ -4202,7 +4202,7 @@ class Y extends C {
     else if (J(l))
       a = n[l];
     else {
-      S("Conversion «export» property must be a string or function. String means key of saved data object to export. Function should export processed string to export.");
+      C("Conversion «export» property must be a string or function. String means key of saved data object to export. Function should export processed string to export.");
       return;
     }
     const c = Z(
@@ -4216,7 +4216,7 @@ class Y extends C {
     else if (J(h))
       u[h] = c;
     else {
-      S("Conversion «import» property must be a string or function. String means key of tool data to import. Function accepts a imported string and return composed tool data.");
+      C("Conversion «import» property must be a string or function. String means key of tool data to import. Function accepts a imported string and return composed tool data.");
       return;
     }
     t && (u = Object.assign(u, t)), this.Editor.BlockManager.replace({
@@ -4303,7 +4303,7 @@ var Oe = {}, Do = {
  * @copyright CodeX (https://codex.so)
  * @license MIT
  * @author CodeX (https://codex.so)
- * @version 1.1.1
+ * @version 1.2.0
  */
 (function(s, e) {
   (function(t, o) {
@@ -4365,7 +4365,7 @@ var Oe = {}, Do = {
         return r(l, null, [{ key: "supportedCommands", get: function() {
           return { SHIFT: ["SHIFT"], CMD: ["CMD", "CONTROL", "COMMAND", "WINDOWS", "CTRL"], ALT: ["ALT", "OPTION"] };
         } }, { key: "keyCodes", get: function() {
-          return { 0: 48, 1: 49, 2: 50, 3: 51, 4: 52, 5: 53, 6: 54, 7: 55, 8: 56, 9: 57, A: 65, B: 66, C: 67, D: 68, E: 69, F: 70, G: 71, H: 72, I: 73, J: 74, K: 75, L: 76, M: 77, N: 78, O: 79, P: 80, Q: 81, R: 82, S: 83, T: 84, U: 85, V: 86, W: 87, X: 88, Y: 89, Z: 90, BACKSPACE: 8, ENTER: 13, ESCAPE: 27, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40, INSERT: 45, DELETE: 46 };
+          return { 0: 48, 1: 49, 2: 50, 3: 51, 4: 52, 5: 53, 6: 54, 7: 55, 8: 56, 9: 57, A: 65, B: 66, C: 67, D: 68, E: 69, F: 70, G: 71, H: 72, I: 73, J: 74, K: 75, L: 76, M: 77, N: 78, O: 79, P: 80, Q: 81, R: 82, S: 83, T: 84, U: 85, V: 86, W: 87, X: 88, Y: 89, Z: 90, BACKSPACE: 8, ENTER: 13, ESCAPE: 27, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40, INSERT: 45, DELETE: 46, ".": 190 };
         } }]), r(l, [{ key: "parseShortcutName", value: function(c) {
           c = c.split("+");
           for (var u = 0; u < c.length; u++) {
@@ -4444,8 +4444,8 @@ class Fo {
   }
 }
 const re = new Fo();
-var Ho = Object.defineProperty, zo = Object.getOwnPropertyDescriptor, gt = (s, e, t, o) => {
-  for (var i = o > 1 ? void 0 : o ? zo(e, t) : e, n = s.length - 1, r; n >= 0; n--)
+var Ho = Object.defineProperty, Uo = Object.getOwnPropertyDescriptor, gt = (s, e, t, o) => {
+  for (var i = o > 1 ? void 0 : o ? Uo(e, t) : e, n = s.length - 1, r; n >= 0; n--)
     (r = s[n]) && (i = (o ? r(e, t, i) : r(i)) || i);
   return o && i && Ho(e, t, i), i;
 }, be = /* @__PURE__ */ ((s) => (s.Opened = "toolbox-opened", s.Closed = "toolbox-closed", s.BlockAdded = "toolbox-block-added", s))(be || {});
@@ -4634,15 +4634,15 @@ const bt = class extends we {
     }), this.api.toolbar.close();
   }
 };
-let ze = bt;
+let Ue = bt;
 gt([
   ae
-], ze.prototype, "toolsToBeDisplayed", 1);
+], Ue.prototype, "toolsToBeDisplayed", 1);
 gt([
   ae
-], ze.prototype, "toolboxItemsToBeDisplayed", 1);
+], Ue.prototype, "toolboxItemsToBeDisplayed", 1);
 const mt = "block hovered";
-class jo extends C {
+class zo extends S {
   /**
    * @class
    * @param moduleConfiguration - Module Configuration
@@ -4804,7 +4804,7 @@ class jo extends C {
    * Creates the Toolbox instance and return it's rendered element
    */
   makeToolbox() {
-    return this.toolboxInstance = new ze({
+    return this.toolboxInstance = new Ue({
       api: this.Editor.API.methods,
       tools: this.Editor.Tools.blockTools,
       i18nLabels: {
@@ -4879,8 +4879,8 @@ class jo extends C {
     this.removeAllNodes(), this.toolboxInstance && this.toolboxInstance.destroy(), this.tooltip.destroy();
   }
 }
-var ye = /* @__PURE__ */ ((s) => (s[s.Block = 0] = "Block", s[s.Inline = 1] = "Inline", s[s.Tune = 2] = "Tune", s))(ye || {}), me = /* @__PURE__ */ ((s) => (s.Shortcut = "shortcut", s.Toolbox = "toolbox", s.EnabledInlineTools = "inlineToolbar", s.EnabledBlockTunes = "tunes", s.Config = "config", s))(me || {}), kt = /* @__PURE__ */ ((s) => (s.Shortcut = "shortcut", s.SanitizeConfig = "sanitize", s))(kt || {}), se = /* @__PURE__ */ ((s) => (s.IsEnabledLineBreaks = "enableLineBreaks", s.Toolbox = "toolbox", s.ConversionConfig = "conversionConfig", s.IsReadOnlySupported = "isReadOnlySupported", s.PasteConfig = "pasteConfig", s))(se || {}), je = /* @__PURE__ */ ((s) => (s.IsInline = "isInline", s.Title = "title", s))(je || {}), vt = /* @__PURE__ */ ((s) => (s.IsTune = "isTune", s))(vt || {});
-class Ue {
+var ye = /* @__PURE__ */ ((s) => (s[s.Block = 0] = "Block", s[s.Inline = 1] = "Inline", s[s.Tune = 2] = "Tune", s))(ye || {}), me = /* @__PURE__ */ ((s) => (s.Shortcut = "shortcut", s.Toolbox = "toolbox", s.EnabledInlineTools = "inlineToolbar", s.EnabledBlockTunes = "tunes", s.Config = "config", s))(me || {}), kt = /* @__PURE__ */ ((s) => (s.Shortcut = "shortcut", s.SanitizeConfig = "sanitize", s))(kt || {}), se = /* @__PURE__ */ ((s) => (s.IsEnabledLineBreaks = "enableLineBreaks", s.Toolbox = "toolbox", s.ConversionConfig = "conversionConfig", s.IsReadOnlySupported = "isReadOnlySupported", s.PasteConfig = "pasteConfig", s))(se || {}), ze = /* @__PURE__ */ ((s) => (s.IsInline = "isInline", s.Title = "title", s))(ze || {}), vt = /* @__PURE__ */ ((s) => (s.IsTune = "isTune", s))(vt || {});
+class je {
   /**
    * @class
    * @param {ConstructorOptions} options - Constructor options
@@ -4952,7 +4952,7 @@ class Ue {
     return this.type === 2;
   }
 }
-class Uo extends C {
+class jo extends S {
   /**
    * @class
    * @param moduleConfiguration - Module Configuration
@@ -5191,7 +5191,7 @@ class Uo extends C {
   addTool(e) {
     const t = e.create(), o = t.render();
     if (!o) {
-      S("Render method must return an instance of Node", "warn", e.name);
+      C("Render method must return an instance of Node", "warn", e.name);
       return;
     }
     if (o.dataset.tool = e.name, this.nodes.buttons.appendChild(o), this.toolsInstances.set(e.name, t), D(t.renderActions)) {
@@ -5273,7 +5273,7 @@ class Uo extends C {
   enableFlipper() {
     this.flipper = new G({
       focusedItemClass: this.CSS.focusedButton,
-      allowedKeys: [B.ENTER, B.TAB]
+      allowedKeys: [E.ENTER, E.TAB]
     });
   }
 }
@@ -5285,7 +5285,7 @@ const $o = [
   "header02",
   "header03"
 ];
-class Wo extends C {
+class Wo extends S {
   /**
    * All keydowns on Block
    *
@@ -5293,21 +5293,53 @@ class Wo extends C {
    */
   keydown(e) {
     switch (this.beforeKeydownProcessing(e), e.keyCode) {
-      case B.BACKSPACE:
+      case E.BACKSPACE:
         this.backspace(e);
         break;
-      case B.ENTER:
+      case E.ENTER:
         this.enter(e);
         break;
-      case B.DOWN:
-      case B.RIGHT:
+      case E.DOWN:
+        if (e.shiftKey && e.metaKey) {
+          const t = this.Editor.BlocksAPI.getCurrentBlockIndex();
+          if (this.Editor.BlocksAPI.getBlockByIndex(t).name === "image") {
+            const i = this.Editor.BlocksAPI.getBlockByIndex(
+              t + 1
+            );
+            if (!i)
+              throw new Error(
+                "Unable to move Block down since it is already the last"
+              );
+            const n = i.holder, r = n.getBoundingClientRect();
+            let a = Math.abs(
+              window.innerHeight - n.offsetHeight
+            );
+            r.top < window.innerHeight && (a = window.scrollY + n.offsetHeight), window.scrollTo(0, a), this.Editor.BlocksAPI.move(t + 1);
+          }
+        }
+      case E.RIGHT:
         this.arrowRightAndDown(e);
         break;
-      case B.UP:
-      case B.LEFT:
+      case E.UP:
+        if (e.shiftKey && e.metaKey) {
+          const t = this.Editor.BlocksAPI.getCurrentBlockIndex(), o = this.Editor.BlocksAPI.getBlockByIndex(t);
+          if (o.name === "image") {
+            const i = this.Editor.BlocksAPI.getBlockByIndex(
+              t - 1
+            );
+            if (t === 0 || !o || !i)
+              throw new Error(
+                "Unable to move Block up since it is already the first"
+              );
+            const n = o.holder, r = i.holder, a = n.getBoundingClientRect(), l = r.getBoundingClientRect();
+            let c;
+            l.top > 0 ? c = Math.abs(a.top) - Math.abs(l.top) : c = Math.abs(a.top) + l.height, window.scrollBy(0, -1 * c), this.Editor.BlocksAPI.move(t - 1);
+          }
+        }
+      case E.LEFT:
         this.arrowLeftAndUp(e);
         break;
-      case B.TAB:
+      case E.TAB:
         this.tabPressed(e);
         break;
     }
@@ -5464,16 +5496,16 @@ class Wo extends C {
    * @param {KeyboardEvent} event - keyboard event
    */
   arrowRightAndDown(e) {
-    const t = G.usedKeys.includes(e.keyCode) && (!e.shiftKey || e.keyCode === B.TAB);
+    const t = G.usedKeys.includes(e.keyCode) && (!e.shiftKey || e.keyCode === E.TAB);
     if (this.Editor.UI.someToolbarOpened && t)
       return;
     this.Editor.BlockManager.clearFocused(), this.Editor.Toolbar.close();
     const o = this.Editor.Caret.isAtEnd || this.Editor.BlockSelection.anyBlockSelected;
-    if (e.shiftKey && e.keyCode === B.DOWN && o) {
+    if (e.shiftKey && e.keyCode === E.DOWN && o) {
       this.Editor.CrossBlockSelection.toggleBlockSelectedState();
       return;
     }
-    (e.keyCode === B.DOWN || e.keyCode === B.RIGHT && !this.isRtl ? this.Editor.Caret.navigateNext() : this.Editor.Caret.navigatePrevious()) ? e.preventDefault() : oe(() => {
+    (e.keyCode === E.DOWN || e.keyCode === E.RIGHT && !this.isRtl ? this.Editor.Caret.navigateNext() : this.Editor.Caret.navigatePrevious()) ? e.preventDefault() : oe(() => {
       this.Editor.BlockManager.currentBlock && this.Editor.BlockManager.currentBlock.updateCurrentInput();
     }, 20)(), this.Editor.BlockSelection.clearSelection(e);
   }
@@ -5484,17 +5516,17 @@ class Wo extends C {
    */
   arrowLeftAndUp(e) {
     if (this.Editor.UI.someToolbarOpened) {
-      if (G.usedKeys.includes(e.keyCode) && (!e.shiftKey || e.keyCode === B.TAB))
+      if (G.usedKeys.includes(e.keyCode) && (!e.shiftKey || e.keyCode === E.TAB))
         return;
       this.Editor.UI.closeAllToolbars();
     }
     this.Editor.BlockManager.clearFocused(), this.Editor.Toolbar.close();
     const t = this.Editor.Caret.isAtStart || this.Editor.BlockSelection.anyBlockSelected;
-    if (e.shiftKey && e.keyCode === B.UP && t) {
+    if (e.shiftKey && e.keyCode === E.UP && t) {
       this.Editor.CrossBlockSelection.toggleBlockSelectedState(!1);
       return;
     }
-    (e.keyCode === B.UP || e.keyCode === B.LEFT && !this.isRtl ? this.Editor.Caret.navigatePrevious() : this.Editor.Caret.navigateNext()) ? e.preventDefault() : oe(() => {
+    (e.keyCode === E.UP || e.keyCode === E.LEFT && !this.isRtl ? this.Editor.Caret.navigatePrevious() : this.Editor.Caret.navigateNext()) ? e.preventDefault() : oe(() => {
       this.Editor.BlockManager.currentBlock && this.Editor.BlockManager.currentBlock.updateCurrentInput();
     }, 20)(), this.Editor.BlockSelection.clearSelection(e);
   }
@@ -5504,7 +5536,7 @@ class Wo extends C {
    * @param {KeyboardEvent} event - keyboard event
    */
   needToolbarClosing(e) {
-    const t = e.keyCode === B.ENTER && this.Editor.Toolbar.toolbox.opened, o = e.keyCode === B.ENTER && this.Editor.BlockSettings.opened, i = e.keyCode === B.ENTER && this.Editor.InlineToolbar.opened, n = e.keyCode === B.ENTER && this.Editor.ConversionToolbar.opened, r = e.keyCode === B.TAB;
+    const t = e.keyCode === E.ENTER && this.Editor.Toolbar.toolbox.opened, o = e.keyCode === E.ENTER && this.Editor.BlockSettings.opened, i = e.keyCode === E.ENTER && this.Editor.InlineToolbar.opened, n = e.keyCode === E.ENTER && this.Editor.ConversionToolbar.opened, r = e.keyCode === E.TAB;
     return !(e.shiftKey || r || t || o || i || n);
   }
   /**
@@ -5697,7 +5729,7 @@ class Te {
   }
 }
 const Je = "block-removed", Qe = "block-added", Yo = "block-moved", Ko = "block-changed";
-class Xo extends C {
+class Xo extends S {
   constructor() {
     super(...arguments), this._currentBlockIndex = -1, this._blocks = null;
   }
@@ -5925,7 +5957,7 @@ class Xo extends C {
     try {
       i.call(q.ON_PASTE, t);
     } catch (n) {
-      S(`${e}: onPaste callback call is failed`, "error", n);
+      C(`${e}: onPaste callback call is failed`, "error", n);
     }
     return i;
   }
@@ -6124,11 +6156,11 @@ class Xo extends C {
    */
   move(e, t = this.currentBlockIndex) {
     if (isNaN(e) || isNaN(t)) {
-      S("Warning during 'move' call: incorrect indices provided.", "warn");
+      C("Warning during 'move' call: incorrect indices provided.", "warn");
       return;
     }
     if (!this.validateIndex(e) || !this.validateIndex(t)) {
-      S(
+      C(
         "Warning during 'move' call: indices cannot be lower than 0 or greater than the amount of blocks.",
         "warn"
       );
@@ -6246,7 +6278,7 @@ class Xo extends C {
     }), t;
   }
 }
-class Vo extends C {
+class Vo extends S {
   constructor() {
     super(...arguments), this.anyBlockSelectedCache = null, this.needToSelectAll = !1, this.nativeInputSelected = !1, this.readyToBlockSelection = !1;
   }
@@ -6467,7 +6499,7 @@ class Vo extends C {
     this.selection.save(), k.get().removeAllRanges(), this.allBlocksSelected = !0, this.Editor.InlineToolbar.open(!0, !0, !0);
   }
 }
-class ve extends C {
+class ve extends S {
   /**
    * Allowed caret positions in input
    *
@@ -6730,7 +6762,7 @@ class ve extends C {
     return i;
   }
 }
-class Zo extends C {
+class Zo extends S {
   constructor() {
     super(...arguments), this.onMouseUp = () => {
       this.listeners.off(document, "mouseover", this.onMouseOver), this.listeners.off(document, "mouseup", this.onMouseUp);
@@ -6802,15 +6834,15 @@ class Zo extends C {
     if (o.anyBlockSelected && n > -1 && r > -1)
       if (e && e instanceof KeyboardEvent)
         switch (e.keyCode) {
-          case B.DOWN:
-          case B.RIGHT:
+          case E.DOWN:
+          case E.RIGHT:
             i.setToBlock(
               t.blocks[Math.max(n, r)],
               i.positions.END
             );
             break;
-          case B.UP:
-          case B.LEFT:
+          case E.UP:
+          case E.LEFT:
             i.setToBlock(
               t.blocks[Math.min(n, r)],
               i.positions.START
@@ -6852,7 +6884,7 @@ class Zo extends C {
     }
   }
 }
-class Go extends C {
+class Go extends S {
   constructor() {
     super(...arguments), this.isStartedAtEditor = !1;
   }
@@ -6925,7 +6957,7 @@ class Go extends C {
     e.preventDefault();
   }
 }
-class qo extends C {
+class qo extends S {
   /**
    * Prepare the module
    *
@@ -6989,7 +7021,7 @@ class qo extends C {
     });
   }
 }
-const xt = class extends C {
+const xt = class extends S {
   constructor() {
     super(...arguments), this.MIME_TYPE = "application/x-editor-js", this.toolsTags = {}, this.tagsByTool = {}, this.toolsPatterns = [], this.toolsFiles = {}, this.exceptionList = [], this.processTool = (s) => {
       try {
@@ -7002,7 +7034,7 @@ const xt = class extends C {
           return;
         this.getTagsConfig(s), this.getFilesConfig(s), this.getPatternsConfig(s);
       } catch (e) {
-        S(
+        C(
           `Paste handling for «${s.name}» Tool hasn't been set up because of the error`,
           "warn",
           e
@@ -7111,7 +7143,7 @@ const xt = class extends C {
    * @returns {string[]} array of tags.
    */
   collectTagNames(s) {
-    return J(s) ? [s] : j(s) ? Object.keys(s) : [];
+    return J(s) ? [s] : z(s) ? Object.keys(s) : [];
   }
   /**
    * Get tags to substitute by Tool
@@ -7126,13 +7158,13 @@ const xt = class extends C {
       const i = this.collectTagNames(o);
       t.push(...i), i.forEach((n) => {
         if (Object.prototype.hasOwnProperty.call(this.toolsTags, n)) {
-          S(
+          C(
             `Paste handler for «${s.name}» Tool on «${n}» tag is skipped because it is already used by «${this.toolsTags[n].tool.name}» Tool.`,
             "warn"
           );
           return;
         }
-        const r = j(o) ? o[n] : null;
+        const r = z(o) ? o[n] : null;
         this.toolsTags[n.toUpperCase()] = {
           tool: s,
           sanitizationConfig: r
@@ -7150,11 +7182,11 @@ const xt = class extends C {
       return;
     const { files: e = {} } = s.pasteConfig;
     let { extensions: t, mimeTypes: o } = e;
-    !t && !o || (t && !Array.isArray(t) && (S(
+    !t && !o || (t && !Array.isArray(t) && (C(
       `«extensions» property of the onDrop config for «${s.name}» Tool should be an array`
-    ), t = []), o && !Array.isArray(o) && (S(
+    ), t = []), o && !Array.isArray(o) && (C(
       `«mimeTypes» property of the onDrop config for «${s.name}» Tool should be an array`
-    ), o = []), o && (o = o.filter((i) => Dt(i) ? !0 : (S(
+    ), o = []), o && (o = o.filter((i) => Dt(i) ? !0 : (C(
       `MIME type value «${i}» for the «${s.name}» Tool is not a valid MIME type`,
       "warn"
     ), !1))), this.toolsFiles[s.name] = {
@@ -7170,7 +7202,7 @@ const xt = class extends C {
   getPatternsConfig(s) {
     s.pasteConfig === !1 || !s.pasteConfig.patterns || V(s.pasteConfig.patterns) || Object.entries(s.pasteConfig.patterns).forEach(
       ([e, t]) => {
-        t instanceof RegExp || S(
+        t instanceof RegExp || C(
           `Pattern ${t} for «${s.name}» Tool is skipped because it should be a Regexp instance.`,
           "warn"
         ), this.toolsPatterns.push({
@@ -7257,7 +7289,7 @@ const xt = class extends C {
         tags: []
       }, c = l.reduce(
         (f, m) => (this.collectTagNames(m).forEach((v) => {
-          const _ = j(m) ? m[v] : null;
+          const _ = z(m) ? m[v] : null;
           f[v.toLowerCase()] = _ || {};
         }), f),
         {}
@@ -7485,7 +7517,7 @@ const xt = class extends C {
 };
 let wt = xt;
 wt.PATTERN_PROCESSING_MAX_LENGTH = 450;
-class Jo extends C {
+class Jo extends S {
   constructor() {
     super(...arguments), this.toolsDontSupportReadOnly = [], this.readOnlyEnabled = !1;
   }
@@ -7530,7 +7562,7 @@ class Jo extends C {
     );
   }
 }
-class pe extends C {
+class pe extends S {
   constructor() {
     super(...arguments), this.clientX = 0, this.clientY = 0, this.isRectSelectionActivated = !1, this.SCROLL_SPEED = 3, this.HEIGHT_OF_SCROLL_ZONE = 40, this.BOTTOM_SCROLL_ZONE = 1, this.TOP_SCROLL_ZONE = 2, this.MAIN_MOUSE_BUTTON = 0, this.mousedown = !1, this.isScrolling = !1, this.inScrollZone = null, this.startX = 0, this.startY = 0, this.mouseX = 0, this.mouseY = 0, this.stackOfSelected = [], this.listenerIds = [];
   }
@@ -7622,7 +7654,7 @@ class pe extends C {
     ), this.listeners.on(
       document.body,
       "mousemove",
-      Se((t) => {
+      Ce((t) => {
         this.processMouseMove(t);
       }, 10),
       {
@@ -7633,7 +7665,7 @@ class pe extends C {
     }), this.listeners.on(
       window,
       "scroll",
-      Se((t) => {
+      Ce((t) => {
         this.processScroll(t);
       }, 10),
       {
@@ -7835,7 +7867,7 @@ class pe extends C {
       ), this.stackOfSelected.pop(), m--;
   }
 }
-class Qo extends C {
+class Qo extends S {
   /**
    * @typedef {object} RendererBlocks
    * @property {string} type - tool name
@@ -7892,7 +7924,7 @@ class Qo extends C {
           tunes: r
         });
       } catch (c) {
-        throw S(`Block «${i}» skipped because of plugins error`, "warn", {
+        throw C(`Block «${i}» skipped because of plugins error`, "warn", {
           data: n,
           error: c
         }), Error(c);
@@ -7915,11 +7947,11 @@ class Qo extends C {
         tool: t.stubTool,
         data: c
       });
-      u.stretched = !0, S(`Tool «${i}» is not found. Check 'tools' property at your initial Editor.js config.`, "warn");
+      u.stretched = !0, C(`Tool «${i}» is not found. Check 'tools' property at your initial Editor.js config.`, "warn");
     }
   }
 }
-class ei extends C {
+class ei extends S {
   /**
    * Composes new chain of Promises to fire them alternatelly
    *
@@ -7959,11 +7991,11 @@ class ei extends C {
   makeOutput(e) {
     let t = 0;
     const o = [];
-    return S("[Editor.js saving]:", "groupCollapsed"), e.forEach(({ id: i, tool: n, data: r, tunes: a, time: l, isValid: c }) => {
-      if (t += l, S(`${n.charAt(0).toUpperCase() + n.slice(1)}`, "group"), c)
-        S(r), S(void 0, "groupEnd");
+    return C("[Editor.js saving]:", "groupCollapsed"), e.forEach(({ id: i, tool: n, data: r, tunes: a, time: l, isValid: c }) => {
+      if (t += l, C(`${n.charAt(0).toUpperCase() + n.slice(1)}`, "group"), c)
+        C(r), C(void 0, "groupEnd");
       else {
-        S(`Block «${n}» skipped because saved data is invalid`), S(void 0, "groupEnd");
+        C(`Block «${n}» skipped because saved data is invalid`), C(void 0, "groupEnd");
         return;
       }
       if (n === this.Editor.Tools.stubTool) {
@@ -7979,10 +8011,10 @@ class ei extends C {
         }
       };
       o.push(u);
-    }), S("Total", "log", t), S(void 0, "groupEnd"), {
+    }), C("Total", "log", t), C(void 0, "groupEnd"), {
       time: +/* @__PURE__ */ new Date(),
       blocks: o,
-      version: "2.0.4"
+      version: "2.0.8"
     };
   }
 }
@@ -8064,8 +8096,8 @@ var Ne = {}, ti = {
       }
       function u(y, x) {
         for (var w = {}, M = [], R = 0; R < y.length; R++) {
-          var b = y[R], g = x.base ? b[0] + x.base : b[0], E = w[g] || 0, T = "".concat(g, " ").concat(E);
-          w[g] = E + 1;
+          var b = y[R], g = x.base ? b[0] + x.base : b[0], B = w[g] || 0, T = "".concat(g, " ").concat(B);
+          w[g] = B + 1;
           var A = c(T), I = { css: b[1], media: b[2], sourceMap: b[3] };
           A !== -1 ? (l[A].references++, l[A].updater(I)) : l.push({ identifier: T, updater: O(I, x), references: 1 }), M.push(T);
         }
@@ -8145,8 +8177,8 @@ var Ne = {}, ti = {
               var b = c(w[R]);
               l[b].references--;
             }
-            for (var g = u(M, x), E = 0; E < w.length; E++) {
-              var T = c(w[E]);
+            for (var g = u(M, x), B = 0; B < w.length; B++) {
+              var T = c(w[B]);
               l[T].references === 0 && (l[T].updater(), l.splice(T, 1));
             }
             w = g;
@@ -8314,7 +8346,7 @@ class $e {
     };
   }
   render() {
-    return this.nodes.button = document.createElement("button"), this.nodes.button.type = "button", this.nodes.button.classList.add(this.CSS.button, this.CSS.buttonModifier), this.nodes.button.innerHTML = Eo, this.nodes.button;
+    return this.nodes.button = document.createElement("button"), this.nodes.button.type = "button", this.nodes.button.classList.add(this.CSS.button, this.CSS.buttonModifier), this.nodes.button.innerHTML = Bo, this.nodes.button;
   }
   /**
    * Wrap range with <b> tag
@@ -8401,7 +8433,7 @@ class We {
    * Create button for Inline Toolbar
    */
   render() {
-    return this.nodes.button = document.createElement("button"), this.nodes.button.type = "button", this.nodes.button.classList.add(this.CSS.button, this.CSS.buttonModifier), this.nodes.button.innerHTML = Co, this.nodes.button;
+    return this.nodes.button = document.createElement("button"), this.nodes.button.type = "button", this.nodes.button.classList.add(this.CSS.button, this.CSS.buttonModifier), this.nodes.button.innerHTML = So, this.nodes.button;
   }
   /**
    * Wrap range with <i> tag
@@ -8552,7 +8584,7 @@ class Ye {
       this.notifier.show({
         message: "Pasted link is not valid.",
         style: "error"
-      }), S("Incorrect Link pasted", "warn", t);
+      }), C("Incorrect Link pasted", "warn", t);
       return;
     }
     t = this.prepareLink(t), this.selection.restore(), this.selection.removeFakeBackground(), this.insertLink(t), e.preventDefault(), e.stopPropagation(), e.stopImmediatePropagation(), this.selection.collapseToEnd(), this.inlineToolbar.close();
@@ -8650,7 +8682,7 @@ class yt {
   }
 }
 yt.isReadOnlySupported = !0;
-class ii extends Ue {
+class ii extends je {
   constructor() {
     super(...arguments), this.type = ye.Inline;
   }
@@ -8658,7 +8690,7 @@ class ii extends Ue {
    * Returns title for Inline Tool if specified by user
    */
   get title() {
-    return this.constructable[je.Title];
+    return this.constructable[ze.Title];
   }
   /**
    * Constructs new InlineTool instance from constructable
@@ -8670,7 +8702,7 @@ class ii extends Ue {
     });
   }
 }
-class ni extends Ue {
+class ni extends je {
   constructor() {
     super(...arguments), this.type = ye.Tune;
   }
@@ -8689,51 +8721,51 @@ class ni extends Ue {
     });
   }
 }
-class U extends Map {
+class j extends Map {
   /**
    * Returns Block Tools collection
    */
   get blockTools() {
     const e = Array.from(this.entries()).filter(([, t]) => t.isBlock());
-    return new U(e);
+    return new j(e);
   }
   /**
    * Returns Inline Tools collection
    */
   get inlineTools() {
     const e = Array.from(this.entries()).filter(([, t]) => t.isInline());
-    return new U(e);
+    return new j(e);
   }
   /**
    * Returns Block Tunes collection
    */
   get blockTunes() {
     const e = Array.from(this.entries()).filter(([, t]) => t.isTune());
-    return new U(e);
+    return new j(e);
   }
   /**
    * Returns internal Tools collection
    */
   get internalTools() {
     const e = Array.from(this.entries()).filter(([, t]) => t.isInternal);
-    return new U(e);
+    return new j(e);
   }
   /**
    * Returns Tools collection provided by user
    */
   get externalTools() {
     const e = Array.from(this.entries()).filter(([, t]) => !t.isInternal);
-    return new U(e);
+    return new j(e);
   }
 }
-var si = Object.defineProperty, ri = Object.getOwnPropertyDescriptor, Et = (s, e, t, o) => {
+var si = Object.defineProperty, ri = Object.getOwnPropertyDescriptor, Bt = (s, e, t, o) => {
   for (var i = o > 1 ? void 0 : o ? ri(e, t) : e, n = s.length - 1, r; n >= 0; n--)
     (r = s[n]) && (i = (o ? r(e, t, i) : r(i)) || i);
   return o && i && si(e, t, i), i;
 };
-class Ke extends Ue {
+class Ke extends je {
   constructor() {
-    super(...arguments), this.type = ye.Block, this.inlineTools = new U(), this.tunes = new U();
+    super(...arguments), this.type = ye.Block, this.inlineTools = new j(), this.tunes = new j();
   }
   /**
    * Creates new Tool instance
@@ -8824,7 +8856,7 @@ class Ke extends Ue {
     for (const i in e)
       if (Object.prototype.hasOwnProperty.call(e, i)) {
         const n = e[i];
-        j(n) ? o[i] = Object.assign({}, t, n) : o[i] = n;
+        z(n) ? o[i] = Object.assign({}, t, n) : o[i] = n;
       }
     return o;
   }
@@ -8833,10 +8865,10 @@ class Ke extends Ue {
     return Array.from(this.inlineTools.values()).forEach((t) => Object.assign(e, t.sanitizeConfig)), Array.from(this.tunes.values()).forEach((t) => Object.assign(e, t.sanitizeConfig)), e;
   }
 }
-Et([
+Bt([
   ae
 ], Ke.prototype, "sanitizeConfig", 1);
-Et([
+Bt([
   ae
 ], Ke.prototype, "baseSanitizeConfig", 1);
 class ai {
@@ -8873,7 +8905,7 @@ class ai {
    */
   getConstructor(e) {
     switch (!0) {
-      case e[je.IsInline]:
+      case e[ze.IsInline]:
         return ii;
       case e[vt.IsTune]:
         return ni;
@@ -8882,7 +8914,7 @@ class ai {
     }
   }
 }
-class Bt {
+class Et {
   /**
    * MoveDownTune constructor
    *
@@ -8916,7 +8948,7 @@ class Bt {
     i.top < window.innerHeight && (n = window.scrollY + o.offsetHeight), window.scrollTo(0, n), this.api.blocks.move(e + 1), this.api.toolbar.toggleBlockSettings(!0);
   }
 }
-Bt.isTune = !0;
+Et.isTune = !0;
 class Tt {
   /**
    * DeleteTune constructor
@@ -8948,7 +8980,7 @@ class Tt {
   }
 }
 Tt.isTune = !0;
-class St {
+class Ct {
   /**
    * MoveUpTune constructor
    *
@@ -8964,7 +8996,7 @@ class St {
    */
   render() {
     return {
-      icon: Bo,
+      icon: Eo,
       title: this.api.i18n.t("Move up"),
       onActivate: () => this.handleClick(),
       name: "move-up"
@@ -8982,15 +9014,15 @@ class St {
     a.top > 0 ? l = Math.abs(r.top) - Math.abs(a.top) : l = Math.abs(r.top) + a.height, window.scrollBy(0, -1 * l), this.api.blocks.move(e - 1), this.api.toolbar.toggleBlockSettings(!0);
   }
 }
-St.isTune = !0;
+Ct.isTune = !0;
 var li = Object.defineProperty, ci = Object.getOwnPropertyDescriptor, di = (s, e, t, o) => {
   for (var i = o > 1 ? void 0 : o ? ci(e, t) : e, n = s.length - 1, r; n >= 0; n--)
     (r = s[n]) && (i = (o ? r(e, t, i) : r(i)) || i);
   return o && i && li(e, t, i), i;
 };
-class Ct extends C {
+class St extends S {
   constructor() {
-    super(...arguments), this.stubTool = "stub", this.toolsAvailable = new U(), this.toolsUnavailable = new U();
+    super(...arguments), this.stubTool = "stub", this.toolsAvailable = new j(), this.toolsUnavailable = new j();
   }
   /**
    * Returns available Tools
@@ -9042,7 +9074,7 @@ class Ct extends C {
    * @returns {Promise<void>}
    */
   async prepare() {
-    if (this.validateTools(), this.config.tools = Ce({}, this.internalTools, this.config.tools), !Object.prototype.hasOwnProperty.call(this.config, "tools") || Object.keys(this.config.tools).length === 0)
+    if (this.validateTools(), this.config.tools = Se({}, this.internalTools, this.config.tools), !Object.prototype.hasOwnProperty.call(this.config, "tools") || Object.keys(this.config.tools).length === 0)
       throw Error("Can't start without tools");
     const e = this.prepareConfig();
     this.factory = new ai(e, this.config, this.Editor.API);
@@ -9097,7 +9129,7 @@ class Ct extends C {
         isInternal: !0
       },
       moveUp: {
-        class: St,
+        class: Ct,
         isInternal: !0
       },
       delete: {
@@ -9105,7 +9137,7 @@ class Ct extends C {
         isInternal: !0
       },
       moveDown: {
-        class: Bt,
+        class: Et,
         isInternal: !0
       }
     };
@@ -9120,7 +9152,7 @@ class Ct extends C {
     if (t.isInline()) {
       const i = ["render", "surround", "checkState"].filter((n) => !t.create()[n]);
       if (i.length) {
-        S(
+        C(
           `Incorrect Inline Tool: ${t.name}. Some of required methods is not implemented %o`,
           "warn",
           i
@@ -9174,12 +9206,12 @@ class Ct extends C {
   assignInlineToolsToBlockTool(e) {
     if (this.config.inlineToolbar !== !1) {
       if (e.enabledInlineTools === !0) {
-        e.inlineTools = new U(
+        e.inlineTools = new j(
           Array.isArray(this.config.inlineToolbar) ? this.config.inlineToolbar.map((t) => [t, this.inlineTools.get(t)]) : Array.from(this.inlineTools.entries())
         );
         return;
       }
-      Array.isArray(e.enabledInlineTools) && (e.inlineTools = new U(
+      Array.isArray(e.enabledInlineTools) && (e.inlineTools = new j(
         e.enabledInlineTools.map((t) => [t, this.inlineTools.get(t)])
       ));
     }
@@ -9192,17 +9224,17 @@ class Ct extends C {
   assignBlockTunesToBlockTool(e) {
     if (e.enabledBlockTunes !== !1) {
       if (Array.isArray(e.enabledBlockTunes)) {
-        const t = new U(
+        const t = new j(
           e.enabledBlockTunes.map((o) => [o, this.blockTunes.get(o)])
         );
-        e.tunes = new U([...t, ...this.blockTunes.internalTools]);
+        e.tunes = new j([...t, ...this.blockTunes.internalTools]);
         return;
       }
       if (Array.isArray(this.config.tunes)) {
-        const t = new U(
+        const t = new j(
           this.config.tunes.map((o) => [o, this.blockTunes.get(o)])
         );
-        e.tunes = new U([...t, ...this.blockTunes.internalTools]);
+        e.tunes = new j([...t, ...this.blockTunes.internalTools]);
         return;
       }
       e.tunes = this.blockTunes.internalTools;
@@ -9229,16 +9261,16 @@ class Ct extends C {
   prepareConfig() {
     const e = {};
     for (const t in this.config.tools)
-      j(this.config.tools[t]) ? e[t] = this.config.tools[t] : e[t] = { class: this.config.tools[t] };
+      z(this.config.tools[t]) ? e[t] = this.config.tools[t] : e[t] = { class: this.config.tools[t] };
     return e;
   }
 }
 di([
   ae
-], Ct.prototype, "getAllInlineToolsSanitizeConfig", 1);
-const hi = `:root{--selectionColor: #e1f2ff;--inlineSelectionColor: #d4ecff;--bg-light: #eff2f5;--grayText: #707684;--color-dark: #1D202B;--color-active-icon: #388AE5;--color-gray-border: rgba(201, 201, 204, .48);--content-width: 650px;--narrow-mode-right-padding: 50px;--toolbox-buttons-size: 26px;--toolbox-buttons-size--mobile: 36px;--icon-size: 20px;--icon-size--mobile: 28px;--block-padding-vertical: .4em;--color-line-gray: #EFF0F1 }.codex-editor{position:relative;-webkit-box-sizing:border-box;box-sizing:border-box;z-index:1}.codex-editor .hide,.codex-editor__redactor--hidden{display:none}.codex-editor__redactor [contenteditable]:empty:after{content:"\\feff"}@media (min-width: 651px){.codex-editor--narrow .codex-editor__redactor{margin-right:50px}}@media (min-width: 651px){.codex-editor--narrow.codex-editor--rtl .codex-editor__redactor{margin-left:50px;margin-right:0}}@media (min-width: 651px){.codex-editor--narrow .ce-toolbar__actions{right:-5px}}.codex-editor__loader{position:relative;height:30vh}.codex-editor__loader:before{content:"";position:absolute;left:50%;top:50%;width:30px;height:30px;margin-top:-15px;margin-left:-15px;border-radius:50%;border:2px solid rgba(201,201,204,.48);border-top-color:transparent;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-animation:editor-loader-spin .8s infinite linear;animation:editor-loader-spin .8s infinite linear;will-change:transform}.codex-editor-copyable{position:absolute;height:1px;width:1px;top:-400%;opacity:.001}.codex-editor-overlay{position:fixed;top:0px;left:0px;right:0px;bottom:0px;z-index:999;pointer-events:none;overflow:hidden}.codex-editor-overlay__container{position:relative;pointer-events:auto;z-index:0}.codex-editor-overlay__rectangle{position:absolute;pointer-events:none;background-color:#2eaadc33;border:1px solid transparent}.codex-editor svg{max-height:100%}.codex-editor path{stroke:currentColor}::-moz-selection{background-color:#d4ecff}::selection{background-color:#d4ecff}.codex-editor--toolbox-opened [contentEditable=true][data-placeholder]:focus:before{opacity:0!important}@-webkit-keyframes editor-loader-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes editor-loader-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.ce-scroll-locked{overflow:hidden}.ce-scroll-locked--hard{overflow:hidden;top:calc(-1 * var(--window-scroll-offset));position:fixed;width:100%}.ce-toolbar{position:absolute;left:0;right:0;top:0;-webkit-transition:opacity .1s ease;transition:opacity .1s ease;will-change:opacity,top;display:none}.ce-toolbar--opened{display:block}.ce-toolbar__content{max-width:650px;margin:0 auto;position:relative}.ce-toolbar__plus{color:#1d202b;cursor:pointer;width:26px;height:26px;border-radius:7px;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-ms-flex-negative:0;flex-shrink:0}@media (max-width: 650px){.ce-toolbar__plus{width:36px;height:36px}}@media (hover: hover){.ce-toolbar__plus:hover{background-color:#eff2f5}}.ce-toolbar__plus--active{background-color:#eff2f5;-webkit-animation:bounceIn .75s 1;animation:bounceIn .75s 1;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards}.ce-toolbar__plus-shortcut{opacity:.6;word-spacing:-2px;margin-top:5px}@media (max-width: 650px){.ce-toolbar__plus{position:absolute;background-color:#fff;border:1px solid #E8E8EB;-webkit-box-shadow:0 3px 15px -3px rgba(13,20,33,.13);box-shadow:0 3px 15px -3px #0d142121;border-radius:6px;z-index:2;position:static}.ce-toolbar__plus--left-oriented:before{left:15px;margin-left:0}.ce-toolbar__plus--right-oriented:before{left:auto;right:15px;margin-left:0}}.ce-toolbar__actions{position:absolute;right:100%;opacity:0;display:-webkit-box;display:-ms-flexbox;display:flex;padding-right:5px}.ce-toolbar__actions--opened{opacity:1}@media (max-width: 650px){.ce-toolbar__actions{right:auto}}.ce-toolbar__settings-btn{color:#1d202b;width:26px;height:26px;border-radius:7px;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;margin-left:3px;cursor:pointer;user-select:none}@media (max-width: 650px){.ce-toolbar__settings-btn{width:36px;height:36px}}@media (hover: hover){.ce-toolbar__settings-btn:hover{background-color:#eff2f5}}.ce-toolbar__settings-btn--active{background-color:#eff2f5;-webkit-animation:bounceIn .75s 1;animation:bounceIn .75s 1;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards}@media (min-width: 651px){.ce-toolbar__settings-btn{width:24px}}.ce-toolbar__settings-btn--hidden{display:none}@media (max-width: 650px){.ce-toolbar__settings-btn{position:absolute;background-color:#fff;border:1px solid #E8E8EB;-webkit-box-shadow:0 3px 15px -3px rgba(13,20,33,.13);box-shadow:0 3px 15px -3px #0d142121;border-radius:6px;z-index:2;position:static}.ce-toolbar__settings-btn--left-oriented:before{left:15px;margin-left:0}.ce-toolbar__settings-btn--right-oriented:before{left:auto;right:15px;margin-left:0}}.ce-toolbar__plus svg,.ce-toolbar__settings-btn svg{width:24px;height:24px}@media (min-width: 651px){.codex-editor--narrow .ce-toolbar__plus{left:5px}}@media (min-width: 651px){.codex-editor--narrow .ce-toolbox .ce-popover{right:0;left:auto;left:initial}}.ce-inline-toolbar{--y-offset: 8px;position:absolute;background-color:#fff;border:1px solid #E8E8EB;-webkit-box-shadow:0 3px 15px -3px rgba(13,20,33,.13);box-shadow:0 3px 15px -3px #0d142121;border-radius:6px;z-index:2;-webkit-transform:translateX(-50%) translateY(8px) scale(.94);transform:translate(-50%) translateY(8px) scale(.94);opacity:0;visibility:hidden;-webkit-transition:opacity .25s ease,-webkit-transform .15s ease;transition:opacity .25s ease,-webkit-transform .15s ease;transition:transform .15s ease,opacity .25s ease;transition:transform .15s ease,opacity .25s ease,-webkit-transform .15s ease;will-change:transform,opacity;top:0;left:0;z-index:3}.ce-inline-toolbar--left-oriented:before{left:15px;margin-left:0}.ce-inline-toolbar--right-oriented:before{left:auto;right:15px;margin-left:0}.ce-inline-toolbar--showed{opacity:1;visibility:visible;-webkit-transform:translateX(-50%);transform:translate(-50%)}.ce-inline-toolbar--fixed{position:fixed!important}.ce-inline-toolbar--left-oriented{-webkit-transform:translateX(-23px) translateY(8px) scale(.94);transform:translate(-23px) translateY(8px) scale(.94)}.ce-inline-toolbar--left-oriented.ce-inline-toolbar--showed{-webkit-transform:translateX(-23px);transform:translate(-23px)}.ce-inline-toolbar--right-oriented{-webkit-transform:translateX(-100%) translateY(8px) scale(.94);transform:translate(-100%) translateY(8px) scale(.94);margin-left:23px}.ce-inline-toolbar--right-oriented.ce-inline-toolbar--showed{-webkit-transform:translateX(-100%);transform:translate(-100%)}.ce-inline-toolbar [hidden]{display:none!important}.ce-inline-toolbar__toggler-and-button-wrapper{display:-webkit-box;display:-ms-flexbox;display:flex;width:100%;padding:0 6px}.ce-inline-toolbar__buttons{display:-webkit-box;display:-ms-flexbox;display:flex}.ce-inline-toolbar__dropdown{display:-webkit-box;display:-ms-flexbox;display:flex;padding:6px;margin:0 6px 0 -6px;-webkit-box-align:center;-ms-flex-align:center;align-items:center;cursor:pointer;border-right:1px solid rgba(201,201,204,.48);-webkit-box-sizing:border-box;box-sizing:border-box}@media (hover: hover){.ce-inline-toolbar__dropdown:hover{background:#eff2f5}}.ce-inline-toolbar__dropdown--hidden{display:none}.ce-inline-toolbar__dropdown-content,.ce-inline-toolbar__dropdown-arrow{display:-webkit-box;display:-ms-flexbox;display:flex}.ce-inline-toolbar__dropdown-content svg,.ce-inline-toolbar__dropdown-arrow svg{width:20px;height:20px}.ce-inline-toolbar__shortcut{opacity:.6;word-spacing:-3px;margin-top:3px}.ce-inline-tool{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;padding:6px 1px;cursor:pointer;border:0;outline:none;background-color:transparent;vertical-align:bottom;color:inherit;margin:0;border-radius:0;line-height:normal}.ce-inline-tool svg{width:20px;height:20px}@media (max-width: 650px){.ce-inline-tool svg{width:28px;height:28px}}@media (hover: hover){.ce-inline-tool:hover{background-color:#eff2f5}}.ce-inline-tool--active{color:#388ae5}.ce-inline-tool--focused{background:rgba(34,186,255,.08)!important}.ce-inline-tool--focused{-webkit-box-shadow:inset 0 0 0px 1px rgba(7,161,227,.08);box-shadow:inset 0 0 0 1px #07a1e314}.ce-inline-tool--focused-animated{-webkit-animation-name:buttonClicked;animation-name:buttonClicked;-webkit-animation-duration:.25s;animation-duration:.25s}.ce-inline-tool--link .icon--unlink,.ce-inline-tool--unlink .icon--link{display:none}.ce-inline-tool--unlink .icon--unlink{display:inline-block;margin-bottom:-1px}.ce-inline-tool-input{outline:none;border:0;border-radius:0 0 4px 4px;margin:0;font-size:13px;padding:10px;width:100%;-webkit-box-sizing:border-box;box-sizing:border-box;display:none;font-weight:500;border-top:1px solid rgba(201,201,204,.48);-webkit-appearance:none;font-family:inherit}@media (max-width: 650px){.ce-inline-tool-input{font-size:15px;font-weight:500}}.ce-inline-tool-input::-webkit-input-placeholder{color:#707684}.ce-inline-tool-input::-moz-placeholder{color:#707684}.ce-inline-tool-input:-ms-input-placeholder{color:#707684}.ce-inline-tool-input::-ms-input-placeholder{color:#707684}.ce-inline-tool-input::placeholder{color:#707684}.ce-inline-tool-input--showed{display:block}.ce-conversion-toolbar{position:absolute;background-color:#fff;border:1px solid #E8E8EB;-webkit-box-shadow:0 3px 15px -3px rgba(13,20,33,.13);box-shadow:0 3px 15px -3px #0d142121;border-radius:6px;z-index:2;opacity:0;visibility:hidden;will-change:transform,opacity;-webkit-transition:opacity .1s ease,-webkit-transform .1s ease;transition:opacity .1s ease,-webkit-transform .1s ease;transition:transform .1s ease,opacity .1s ease;transition:transform .1s ease,opacity .1s ease,-webkit-transform .1s ease;-webkit-transform:translateY(-8px);transform:translateY(-8px);left:-1px;width:150px;margin-top:5px;-webkit-box-sizing:content-box;box-sizing:content-box}.ce-conversion-toolbar--left-oriented:before{left:15px;margin-left:0}.ce-conversion-toolbar--right-oriented:before{left:auto;right:15px;margin-left:0}.ce-conversion-toolbar--showed{opacity:1;visibility:visible;-webkit-transform:none;transform:none}.ce-conversion-toolbar [hidden]{display:none!important}.ce-conversion-toolbar__buttons{display:-webkit-box;display:-ms-flexbox;display:flex}.ce-conversion-toolbar__label{color:#707684;font-size:11px;font-weight:500;letter-spacing:.33px;padding:10px 10px 5px;text-transform:uppercase}.ce-conversion-tool{display:-webkit-box;display:-ms-flexbox;display:flex;padding:5px 10px;font-size:14px;line-height:20px;font-weight:500;cursor:pointer;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.ce-conversion-tool--hidden{display:none}.ce-conversion-tool--focused{background:rgba(34,186,255,.08)!important}.ce-conversion-tool--focused{-webkit-box-shadow:inset 0 0 0px 1px rgba(7,161,227,.08);box-shadow:inset 0 0 0 1px #07a1e314}.ce-conversion-tool--focused-animated{-webkit-animation-name:buttonClicked;animation-name:buttonClicked;-webkit-animation-duration:.25s;animation-duration:.25s}.ce-conversion-tool:hover{background:#eff2f5}.ce-conversion-tool__icon{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;width:26px;height:26px;-webkit-box-shadow:0 0 0 1px rgba(201,201,204,.48);box-shadow:0 0 0 1px #c9c9cc7a;border-radius:5px;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;background:#fff;-webkit-box-sizing:content-box;box-sizing:content-box;-ms-flex-negative:0;flex-shrink:0;margin-right:10px}.ce-conversion-tool__icon svg{width:20px;height:20px}@media (max-width: 650px){.ce-conversion-tool__icon{width:36px;height:36px;border-radius:8px}.ce-conversion-tool__icon svg{width:28px;height:28px}}.ce-conversion-tool--last{margin-right:0!important}.ce-conversion-tool--active{color:#388ae5!important}.ce-conversion-tool--active{-webkit-animation:bounceIn .75s 1;animation:bounceIn .75s 1;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards}.ce-settings__button{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;padding:6px 1px;border-radius:3px;cursor:pointer;border:0;outline:none;background-color:transparent;vertical-align:bottom;color:inherit;margin:0;line-height:32px}.ce-settings__button svg{width:20px;height:20px}@media (max-width: 650px){.ce-settings__button svg{width:28px;height:28px}}@media (hover: hover){.ce-settings__button:hover{background-color:#eff2f5}}.ce-settings__button--active{color:#388ae5}.ce-settings__button--focused{background:rgba(34,186,255,.08)!important}.ce-settings__button--focused{-webkit-box-shadow:inset 0 0 0px 1px rgba(7,161,227,.08);box-shadow:inset 0 0 0 1px #07a1e314}.ce-settings__button--focused-animated{-webkit-animation-name:buttonClicked;animation-name:buttonClicked;-webkit-animation-duration:.25s;animation-duration:.25s}.ce-settings__button:not(:nth-child(3n+3)){margin-right:3px}.ce-settings__button:nth-child(n+4){margin-top:3px}.ce-settings__button--disabled{cursor:not-allowed!important}.ce-settings__button--disabled{opacity:.3}.ce-settings__button--selected{color:#388ae5}@media (min-width: 651px){.codex-editor--narrow .ce-settings .ce-popover{right:0;left:auto;left:initial}}@-webkit-keyframes fade-in{0%{opacity:0}to{opacity:1}}@keyframes fade-in{0%{opacity:0}to{opacity:1}}.ce-block:first-of-type{margin-top:0}.ce-block--selected .ce-block__content{background:#e1f2ff}.ce-block--selected .ce-block__content [contenteditable]{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.ce-block--selected .ce-block__content img,.ce-block--selected .ce-block__content .ce-stub{opacity:.55}.ce-block--stretched .ce-block__content{max-width:none}.ce-block__content{position:relative;max-width:650px;margin:0 auto;-webkit-transition:background-color .15s ease;transition:background-color .15s ease}.ce-block--drop-target .ce-block__content:before{content:"";position:absolute;top:100%;left:-20px;margin-top:-1px;height:8px;width:8px;border:solid #388AE5;border-width:1px 1px 0 0;-webkit-transform-origin:right;transform-origin:right;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.ce-block--drop-target .ce-block__content:after{content:"";position:absolute;top:100%;height:1px;width:100%;color:#388ae5;background:repeating-linear-gradient(90deg,#388AE5,#388AE5 1px,#fff 1px,#fff 6px)}.ce-block a{cursor:pointer;-webkit-text-decoration:underline;text-decoration:underline}.ce-block b{font-weight:700}.ce-block i{font-style:italic}@media (min-width: 651px){.codex-editor--narrow .ce-block--focused{margin-right:-50px;padding-right:50px}}@-webkit-keyframes bounceIn{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:scale3d(.9,.9,.9);transform:scale3d(.9,.9,.9)}20%{-webkit-transform:scale3d(1.03,1.03,1.03);transform:scale3d(1.03,1.03,1.03)}60%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}@keyframes bounceIn{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:scale3d(.9,.9,.9);transform:scale3d(.9,.9,.9)}20%{-webkit-transform:scale3d(1.03,1.03,1.03);transform:scale3d(1.03,1.03,1.03)}60%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}@-webkit-keyframes selectionBounce{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}50%{-webkit-transform:scale3d(1.01,1.01,1.01);transform:scale3d(1.01,1.01,1.01)}70%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}@keyframes selectionBounce{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}50%{-webkit-transform:scale3d(1.01,1.01,1.01);transform:scale3d(1.01,1.01,1.01)}70%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}@-webkit-keyframes buttonClicked{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:scale3d(.95,.95,.95);transform:scale3d(.95,.95,.95)}60%{-webkit-transform:scale3d(1.02,1.02,1.02);transform:scale3d(1.02,1.02,1.02)}80%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}@keyframes buttonClicked{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:scale3d(.95,.95,.95);transform:scale3d(.95,.95,.95)}60%{-webkit-transform:scale3d(1.02,1.02,1.02);transform:scale3d(1.02,1.02,1.02)}80%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}.cdx-block{padding:.4em 0}.cdx-block::-webkit-input-placeholder{line-height:normal!important}.cdx-input{border:1px solid rgba(201,201,204,.48);-webkit-box-shadow:inset 0 1px 2px 0 rgba(35,44,72,.06);box-shadow:inset 0 1px 2px #232c480f;border-radius:3px;padding:10px 12px;outline:none;width:100%;-webkit-box-sizing:border-box;box-sizing:border-box}.cdx-input[data-placeholder]:before{position:static!important}.cdx-input[data-placeholder]:before{display:inline-block;width:0;white-space:nowrap;pointer-events:none}.cdx-settings-button{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;padding:6px 1px;border-radius:3px;cursor:pointer;border:0;outline:none;background-color:transparent;vertical-align:bottom;color:inherit;margin:0;min-width:26px;min-height:26px}.cdx-settings-button svg{width:20px;height:20px}@media (max-width: 650px){.cdx-settings-button svg{width:28px;height:28px}}@media (hover: hover){.cdx-settings-button:hover{background-color:#eff2f5}}.cdx-settings-button--focused{background:rgba(34,186,255,.08)!important}.cdx-settings-button--focused{-webkit-box-shadow:inset 0 0 0px 1px rgba(7,161,227,.08);box-shadow:inset 0 0 0 1px #07a1e314}.cdx-settings-button--focused-animated{-webkit-animation-name:buttonClicked;animation-name:buttonClicked;-webkit-animation-duration:.25s;animation-duration:.25s}.cdx-settings-button--active{color:#388ae5}.cdx-settings-button svg{width:auto;height:auto}@media (max-width: 650px){.cdx-settings-button{width:36px;height:36px;border-radius:8px}}.cdx-loader{position:relative;border:1px solid rgba(201,201,204,.48)}.cdx-loader:before{content:"";position:absolute;left:50%;top:50%;width:18px;height:18px;margin:-11px 0 0 -11px;border:2px solid rgba(201,201,204,.48);border-left-color:#388ae5;border-radius:50%;-webkit-animation:cdxRotation 1.2s infinite linear;animation:cdxRotation 1.2s infinite linear}@-webkit-keyframes cdxRotation{0%{-webkit-transform:rotate(0deg);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes cdxRotation{0%{-webkit-transform:rotate(0deg);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.cdx-button{padding:13px;border-radius:3px;border:1px solid rgba(201,201,204,.48);font-size:14.9px;background:#fff;-webkit-box-shadow:0 2px 2px 0 rgba(18,30,57,.04);box-shadow:0 2px 2px #121e390a;color:#707684;text-align:center;cursor:pointer}@media (hover: hover){.cdx-button:hover{background:#FBFCFE;-webkit-box-shadow:0 1px 3px 0 rgba(18,30,57,.08);box-shadow:0 1px 3px #121e3914}}.cdx-button svg{height:20px;margin-right:.2em;margin-top:-2px}.ce-stub{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;padding:3.5em 0;margin:17px 0;border-radius:3px;background:#fcf7f7;color:#b46262}.ce-stub__info{margin-left:20px}.ce-stub__title{margin-bottom:3px;font-weight:600;font-size:18px;text-transform:capitalize}.ce-stub__subtitle{font-size:16px}.codex-editor.codex-editor--rtl{direction:rtl}.codex-editor.codex-editor--rtl .cdx-list{padding-left:0;padding-right:40px}.codex-editor.codex-editor--rtl .ce-toolbar__plus{right:-26px;left:auto}.codex-editor.codex-editor--rtl .ce-toolbar__actions{right:auto;left:-26px}@media (max-width: 650px){.codex-editor.codex-editor--rtl .ce-toolbar__actions{margin-left:0;margin-right:auto;padding-right:0;padding-left:10px}}.codex-editor.codex-editor--rtl .ce-settings{left:5px;right:auto}.codex-editor.codex-editor--rtl .ce-settings:before{right:auto;left:25px}.codex-editor.codex-editor--rtl .ce-settings__button:not(:nth-child(3n+3)){margin-left:3px;margin-right:0}.codex-editor.codex-editor--rtl .ce-conversion-tool__icon{margin-right:0;margin-left:10px}.codex-editor.codex-editor--rtl .ce-inline-toolbar__dropdown{border-right:0px solid transparent;border-left:1px solid rgba(201,201,204,.48);margin:0 -6px 0 6px}.codex-editor.codex-editor--rtl .ce-inline-toolbar__dropdown .icon--toggler-down{margin-left:0;margin-right:4px}@media (min-width: 651px){.codex-editor--narrow.codex-editor--rtl .ce-toolbar__plus{left:0px;right:5px}}@media (min-width: 651px){.codex-editor--narrow.codex-editor--rtl .ce-toolbar__actions{left:-5px}}.cdx-search-field{--icon-margin-right: 10px;background:rgba(232,232,235,.49);border:1px solid rgba(226,226,229,.2);border-radius:6px;padding:2px;display:grid;grid-template-columns:auto auto 1fr;grid-template-rows:auto}.cdx-search-field__icon{width:26px;height:26px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;margin-right:var(--icon-margin-right)}.cdx-search-field__icon svg{width:20px;height:20px;color:#707684}.cdx-search-field__input{font-size:14px;outline:none;font-weight:500;font-family:inherit;border:0;background:transparent;margin:0;padding:0;line-height:22px;min-width:calc(100% - 26px - var(--icon-margin-right))}.cdx-search-field__input::-webkit-input-placeholder{color:#707684;font-weight:500}.cdx-search-field__input::-moz-placeholder{color:#707684;font-weight:500}.cdx-search-field__input:-ms-input-placeholder{color:#707684;font-weight:500}.cdx-search-field__input::-ms-input-placeholder{color:#707684;font-weight:500}.cdx-search-field__input::placeholder{color:#707684;font-weight:500}.ce-popover{--border-radius: 6px;--width: 400px;--max-height: 600px;--padding: 8px;--offset-from-target: 8px;--color-border: #e8e8eb;--color-shadow: rgba(13, 20, 33, .13);--color-background: white;--color-text-primary: black;--color-text-secondary: #808080;--color-border-icon: rgba(201, 201, 204, .48);--color-border-icon-disabled: #eff0f1;--color-text-icon-active: #388ae5;--color-background-icon-active: rgba(56, 138, 229, .1);--color-background-item-focus: rgba(34, 186, 255, .08);--color-shadow-item-focus: rgba(7, 161, 227, .08);--color-background-item-hover: #fafafa;--color-background-item-confirm: #e24a4a;--color-background-item-confirm-hover: #ce4343;min-width:var(--width);width:var(--width);max-height:var(--max-height);border-radius:var(--border-radius);overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-box-shadow:0px 10px 10px -1px rgba(0,0,0,.11),0px 0px 4px 0px rgba(0,0,0,.05);box-shadow:0 10px 10px -1px #0000001c,0 0 4px #0000000d;position:absolute;left:0;top:calc(100% + var(--offset-from-target));background:var(--color-background);display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;z-index:4;opacity:0;max-height:0;pointer-events:none;border:none}.ce-popover--opened{opacity:1;padding:var(--padding);max-height:var(--max-height);pointer-events:auto;-webkit-animation:panelShowing .1s ease;animation:panelShowing .1s ease;border:1px solid var(--color-border)}@media (max-width: 650px){.ce-popover--opened{-webkit-animation:panelShowingMobile .25s ease;animation:panelShowingMobile .25s ease}}.ce-popover__items{overflow-y:auto;-ms-scroll-chaining:none;overscroll-behavior:contain}@media (max-width: 650px){.ce-popover__overlay{position:fixed;top:0;bottom:0;left:0;right:0;background:#1D202B;z-index:3;opacity:.5;-webkit-transition:opacity .12s ease-in;transition:opacity .12s ease-in;will-change:opacity;visibility:visible}}.ce-popover__overlay--hidden{display:none}.ce-popover--open-top{top:calc(-1 * (var(--offset-from-target) + var(--popover-height)))}@media (max-width: 650px){.ce-popover{--offset: 5px;position:fixed;max-width:none;min-width:calc(100% - var(--offset) * 2);left:var(--offset);right:var(--offset);bottom:calc(var(--offset) + env(safe-area-inset-bottom));top:auto;border-radius:10px}.ce-popover .ce-popover__search{display:none}}.ce-popover__search,.ce-popover__custom-content:not(:empty){margin-bottom:5px}.ce-popover__nothing-found-message{color:#707684;display:none;cursor:default;padding:3px;font-size:14px;line-height:20px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ce-popover__nothing-found-message--displayed{display:block}.ce-popover__custom-content:not(:empty){padding:4px}@media (min-width: 651px){.ce-popover__custom-content:not(:empty){padding:0}}.ce-popover__custom-content--hidden{display:none}.ce-popover__title-type{font-size:13px;font-weight:600;line-height:1.5;padding:8px;color:#999}.ce-popover__title-type.divider{border-top:1px solid #d9d9d9;margin-top:8px;padding-top:16px}.ce-popover-item{--border-radius: 6px;--icon-size: 48px;--icon-size-mobile: 28px;border-radius:var(--border-radius);display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;padding:3px;color:var(--color-text-primary);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}@media (max-width: 650px){.ce-popover-item{padding:4px}}.ce-popover-item:not(:last-of-type){margin-bottom:1px}.ce-popover-item__icon{border-radius:5px;width:48px;height:48px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;margin-right:16px}@media (max-width: 650px){.ce-popover-item__icon{width:36px;height:36px;border-radius:8px}.ce-popover-item__icon svg{width:var(--icon-size-mobile);height:var(--icon-size-mobile)}}.ce-popover-item__title{font-size:14px;line-height:1.5;font-weight:500;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}@media (max-width: 650px){.ce-popover-item__title{font-size:16px}}.ce-popover-item__secondary-title{color:var(--color-text-secondary);font-size:12px;font-weight:400;white-space:nowrap;margin-top:4px}@media (max-width: 650px){.ce-popover-item__secondary-title{display:none}}.ce-popover-item--active{background:var(--color-background-icon-active);color:var(--color-text-icon-active)}.ce-popover-item--active .ce-popover-item__icon{-webkit-box-shadow:none;box-shadow:none}.ce-popover-item--disabled{color:var(--color-text-secondary);cursor:default;pointer-events:none}.ce-popover-item--disabled .ce-popover-item__icon{-webkit-box-shadow:0 0 0 1px var(--color-border-icon-disabled);box-shadow:0 0 0 1px var(--color-border-icon-disabled)}.ce-popover-item--focused:not(.ce-popover-item--no-focus){background:var(--color-background-item-focus)!important}.ce-popover-item--focused:not(.ce-popover-item--no-focus){-webkit-box-shadow:inset 0 0 0px 1px var(--color-shadow-item-focus);box-shadow:inset 0 0 0 1px var(--color-shadow-item-focus)}.ce-popover-item--hidden{display:none}@media (hover: hover){.ce-popover-item:hover{cursor:pointer}.ce-popover-item:hover:not(.ce-popover-item--no-hover){background-color:var(--color-background-item-hover)}.ce-popover-item:hover .ce-popover-item__icon{-webkit-box-shadow:none;box-shadow:none}}.ce-popover-item--confirmation{background:var(--color-background-item-confirm)}.ce-popover-item--confirmation .ce-popover-item__icon{color:var(--color-background-item-confirm)}.ce-popover-item--confirmation .ce-popover-item__title{color:#fff}@media (hover: hover){.ce-popover-item--confirmation:not(.ce-popover-item--no-hover):hover{background:var(--color-background-item-confirm-hover)}}.ce-popover-item--confirmation:not(.ce-popover-item--no-focus).ce-popover-item--focused{background:var(--color-background-item-confirm-hover)!important}.ce-popover-item--confirmation .ce-popover-item__icon,.ce-popover-item--active .ce-popover-item__icon,.ce-popover-item--focused .ce-popover-item__icon{-webkit-box-shadow:none;box-shadow:none}@-webkit-keyframes panelShowing{0%{opacity:0;-webkit-transform:translateY(-8px) scale(.9);transform:translateY(-8px) scale(.9)}70%{opacity:1;-webkit-transform:translateY(2px);transform:translateY(2px)}to{-webkit-transform:translateY(0);transform:translateY(0)}}@keyframes panelShowing{0%{opacity:0;-webkit-transform:translateY(-8px) scale(.9);transform:translateY(-8px) scale(.9)}70%{opacity:1;-webkit-transform:translateY(2px);transform:translateY(2px)}to{-webkit-transform:translateY(0);transform:translateY(0)}}@-webkit-keyframes panelShowingMobile{0%{opacity:0;-webkit-transform:translateY(14px) scale(.98);transform:translateY(14px) scale(.98)}70%{opacity:1;-webkit-transform:translateY(-4px);transform:translateY(-4px)}to{-webkit-transform:translateY(0);transform:translateY(0)}}@keyframes panelShowingMobile{0%{opacity:0;-webkit-transform:translateY(14px) scale(.98);transform:translateY(14px) scale(.98)}70%{opacity:1;-webkit-transform:translateY(-4px);transform:translateY(-4px)}to{-webkit-transform:translateY(0);transform:translateY(0)}}.wobble{-webkit-animation-name:wobble;animation-name:wobble;-webkit-animation-duration:.4s;animation-duration:.4s}@-webkit-keyframes wobble{0%{-webkit-transform:translate3d(0,0,0);transform:translateZ(0)}15%{-webkit-transform:translate3d(-9%,0,0);transform:translate3d(-9%,0,0)}30%{-webkit-transform:translate3d(9%,0,0);transform:translate3d(9%,0,0)}45%{-webkit-transform:translate3d(-4%,0,0);transform:translate3d(-4%,0,0)}60%{-webkit-transform:translate3d(4%,0,0);transform:translate3d(4%,0,0)}75%{-webkit-transform:translate3d(-1%,0,0);transform:translate3d(-1%,0,0)}to{-webkit-transform:translate3d(0,0,0);transform:translateZ(0)}}@keyframes wobble{0%{-webkit-transform:translate3d(0,0,0);transform:translateZ(0)}15%{-webkit-transform:translate3d(-9%,0,0);transform:translate3d(-9%,0,0)}30%{-webkit-transform:translate3d(9%,0,0);transform:translate3d(9%,0,0)}45%{-webkit-transform:translate3d(-4%,0,0);transform:translate3d(-4%,0,0)}60%{-webkit-transform:translate3d(4%,0,0);transform:translate3d(4%,0,0)}75%{-webkit-transform:translate3d(-1%,0,0);transform:translate3d(-1%,0,0)}to{-webkit-transform:translate3d(0,0,0);transform:translateZ(0)}}
+], St.prototype, "getAllInlineToolsSanitizeConfig", 1);
+const hi = `:root{--selectionColor: #e1f2ff;--inlineSelectionColor: #d4ecff;--bg-light: #eff2f5;--grayText: #707684;--color-dark: #1D202B;--color-active-icon: #388AE5;--color-gray-border: rgba(201, 201, 204, .48);--content-width: 650px;--narrow-mode-right-padding: 50px;--toolbox-buttons-size: 26px;--toolbox-buttons-size--mobile: 36px;--icon-size: 20px;--icon-size--mobile: 28px;--block-padding-vertical: .4em;--color-line-gray: #EFF0F1 }.codex-editor{position:relative;-webkit-box-sizing:border-box;box-sizing:border-box;z-index:1}.codex-editor .hide,.codex-editor__redactor--hidden{display:none}.codex-editor__redactor [contenteditable]:empty:after{content:"\\feff"}@media (min-width: 651px){.codex-editor--narrow .codex-editor__redactor{margin-right:50px}}@media (min-width: 651px){.codex-editor--narrow.codex-editor--rtl .codex-editor__redactor{margin-left:50px;margin-right:0}}@media (min-width: 651px){.codex-editor--narrow .ce-toolbar__actions{right:-5px}}.codex-editor__loader{position:relative;height:30vh}.codex-editor__loader:before{content:"";position:absolute;left:50%;top:50%;width:30px;height:30px;margin-top:-15px;margin-left:-15px;border-radius:50%;border:2px solid rgba(201,201,204,.48);border-top-color:transparent;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-animation:editor-loader-spin .8s infinite linear;animation:editor-loader-spin .8s infinite linear;will-change:transform}.codex-editor-copyable{position:absolute;height:1px;width:1px;top:-400%;opacity:.001}.codex-editor-overlay{position:fixed;top:0px;left:0px;right:0px;bottom:0px;z-index:999;pointer-events:none;overflow:hidden}.codex-editor-overlay__container{position:relative;pointer-events:auto;z-index:0}.codex-editor-overlay__rectangle{position:absolute;pointer-events:none;background-color:#2eaadc33;border:1px solid transparent}.codex-editor svg{max-height:100%}.codex-editor path{stroke:currentColor}::-moz-selection{background-color:#d4ecff}::selection{background-color:#d4ecff}.codex-editor--toolbox-opened [contentEditable=true][data-placeholder]:focus:before{opacity:0!important}@-webkit-keyframes editor-loader-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes editor-loader-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.ce-scroll-locked{overflow:hidden}.ce-scroll-locked--hard{overflow:hidden;top:calc(-1 * var(--window-scroll-offset));position:fixed;width:100%}.ce-toolbar{position:absolute;left:0;right:0;top:0;-webkit-transition:opacity .1s ease;transition:opacity .1s ease;will-change:opacity,top;display:none}.ce-toolbar--opened{display:block}.ce-toolbar__content{max-width:650px;margin:0 auto;position:relative}.ce-toolbar__plus{color:#1d202b;cursor:pointer;width:26px;height:26px;border-radius:7px;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-ms-flex-negative:0;flex-shrink:0}@media (max-width: 650px){.ce-toolbar__plus{width:36px;height:36px}}@media (hover: hover){.ce-toolbar__plus:hover{background-color:#eff2f5}}.ce-toolbar__plus--active{background-color:#eff2f5;-webkit-animation:bounceIn .75s 1;animation:bounceIn .75s 1;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards}.ce-toolbar__plus-shortcut{opacity:.6;word-spacing:-2px;margin-top:5px}@media (max-width: 650px){.ce-toolbar__plus{position:absolute;background-color:#fff;border:1px solid #E8E8EB;-webkit-box-shadow:0 3px 15px -3px rgba(13,20,33,.13);box-shadow:0 3px 15px -3px #0d142121;border-radius:6px;z-index:2;position:static}.ce-toolbar__plus--left-oriented:before{left:15px;margin-left:0}.ce-toolbar__plus--right-oriented:before{left:auto;right:15px;margin-left:0}}.ce-toolbar__actions{position:absolute;right:100%;opacity:0;display:-webkit-box;display:-ms-flexbox;display:flex;padding-right:5px}.ce-toolbar__actions--opened{opacity:1}@media (max-width: 650px){.ce-toolbar__actions{right:auto}}.ce-toolbar__settings-btn{color:#1d202b;width:26px;height:26px;border-radius:7px;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;margin-left:3px;cursor:pointer;user-select:none}@media (max-width: 650px){.ce-toolbar__settings-btn{width:36px;height:36px}}@media (hover: hover){.ce-toolbar__settings-btn:hover{background-color:#eff2f5}}.ce-toolbar__settings-btn--active{background-color:#eff2f5;-webkit-animation:bounceIn .75s 1;animation:bounceIn .75s 1;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards}@media (min-width: 651px){.ce-toolbar__settings-btn{width:24px}}.ce-toolbar__settings-btn--hidden{display:none}@media (max-width: 650px){.ce-toolbar__settings-btn{position:absolute;background-color:#fff;border:1px solid #E8E8EB;-webkit-box-shadow:0 3px 15px -3px rgba(13,20,33,.13);box-shadow:0 3px 15px -3px #0d142121;border-radius:6px;z-index:2;position:static}.ce-toolbar__settings-btn--left-oriented:before{left:15px;margin-left:0}.ce-toolbar__settings-btn--right-oriented:before{left:auto;right:15px;margin-left:0}}.ce-toolbar__plus svg,.ce-toolbar__settings-btn svg{width:24px;height:24px}@media (min-width: 651px){.codex-editor--narrow .ce-toolbar__plus{left:5px}}@media (min-width: 651px){.codex-editor--narrow .ce-toolbox .ce-popover{right:0;left:auto;left:initial}}.ce-inline-toolbar{--y-offset: 8px;position:absolute;background-color:#fff;border:1px solid #E8E8EB;-webkit-box-shadow:0 3px 15px -3px rgba(13,20,33,.13);box-shadow:0 3px 15px -3px #0d142121;border-radius:6px;z-index:2;-webkit-transform:translateX(-50%) translateY(8px) scale(.94);transform:translate(-50%) translateY(8px) scale(.94);opacity:0;visibility:hidden;-webkit-transition:opacity .25s ease,-webkit-transform .15s ease;transition:opacity .25s ease,-webkit-transform .15s ease;transition:transform .15s ease,opacity .25s ease;transition:transform .15s ease,opacity .25s ease,-webkit-transform .15s ease;will-change:transform,opacity;top:0;left:0;z-index:3}.ce-inline-toolbar--left-oriented:before{left:15px;margin-left:0}.ce-inline-toolbar--right-oriented:before{left:auto;right:15px;margin-left:0}.ce-inline-toolbar--showed{opacity:1;visibility:visible;-webkit-transform:translateX(-50%);transform:translate(-50%)}.ce-inline-toolbar--fixed{position:fixed!important}.ce-inline-toolbar--left-oriented{-webkit-transform:translateX(-23px) translateY(8px) scale(.94);transform:translate(-23px) translateY(8px) scale(.94)}.ce-inline-toolbar--left-oriented.ce-inline-toolbar--showed{-webkit-transform:translateX(-23px);transform:translate(-23px)}.ce-inline-toolbar--right-oriented{-webkit-transform:translateX(-100%) translateY(8px) scale(.94);transform:translate(-100%) translateY(8px) scale(.94);margin-left:23px}.ce-inline-toolbar--right-oriented.ce-inline-toolbar--showed{-webkit-transform:translateX(-100%);transform:translate(-100%)}.ce-inline-toolbar [hidden]{display:none!important}.ce-inline-toolbar__toggler-and-button-wrapper{display:-webkit-box;display:-ms-flexbox;display:flex;width:100%;padding:0 6px}.ce-inline-toolbar__buttons{display:-webkit-box;display:-ms-flexbox;display:flex}.ce-inline-toolbar__dropdown{display:-webkit-box;display:-ms-flexbox;display:flex;padding:6px;margin:0 6px 0 -6px;-webkit-box-align:center;-ms-flex-align:center;align-items:center;cursor:pointer;border-right:1px solid rgba(201,201,204,.48);-webkit-box-sizing:border-box;box-sizing:border-box}@media (hover: hover){.ce-inline-toolbar__dropdown:hover{background:#eff2f5}}.ce-inline-toolbar__dropdown--hidden{display:none}.ce-inline-toolbar__dropdown-content,.ce-inline-toolbar__dropdown-arrow{display:-webkit-box;display:-ms-flexbox;display:flex}.ce-inline-toolbar__dropdown-content svg,.ce-inline-toolbar__dropdown-arrow svg{width:20px;height:20px}.ce-inline-toolbar__shortcut{opacity:.6;word-spacing:-3px;margin-top:3px}.ce-inline-tool{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;padding:6px 1px;cursor:pointer;border:0;outline:none;background-color:transparent;vertical-align:bottom;color:inherit;margin:0;border-radius:0;line-height:normal}.ce-inline-tool svg{width:20px;height:20px}@media (max-width: 650px){.ce-inline-tool svg{width:28px;height:28px}}@media (hover: hover){.ce-inline-tool:hover{background-color:#eff2f5}}.ce-inline-tool--active{color:#388ae5}.ce-inline-tool--focused{background:rgba(34,186,255,.08)!important}.ce-inline-tool--focused{-webkit-box-shadow:inset 0 0 0px 1px rgba(7,161,227,.08);box-shadow:inset 0 0 0 1px #07a1e314}.ce-inline-tool--focused-animated{-webkit-animation-name:buttonClicked;animation-name:buttonClicked;-webkit-animation-duration:.25s;animation-duration:.25s}.ce-inline-tool--link .icon--unlink,.ce-inline-tool--unlink .icon--link{display:none}.ce-inline-tool--unlink .icon--unlink{display:inline-block;margin-bottom:-1px}.ce-inline-tool-input{outline:none;border:0;border-radius:0 0 4px 4px;margin:0;font-size:13px;padding:10px;width:100%;-webkit-box-sizing:border-box;box-sizing:border-box;display:none;font-weight:500;border-top:1px solid rgba(201,201,204,.48);-webkit-appearance:none;font-family:inherit}@media (max-width: 650px){.ce-inline-tool-input{font-size:15px;font-weight:500}}.ce-inline-tool-input::-webkit-input-placeholder{color:#707684}.ce-inline-tool-input::-moz-placeholder{color:#707684}.ce-inline-tool-input:-ms-input-placeholder{color:#707684}.ce-inline-tool-input::-ms-input-placeholder{color:#707684}.ce-inline-tool-input::placeholder{color:#707684}.ce-inline-tool-input--showed{display:block}.ce-conversion-toolbar{position:absolute;background-color:#fff;border:1px solid #E8E8EB;-webkit-box-shadow:0 3px 15px -3px rgba(13,20,33,.13);box-shadow:0 3px 15px -3px #0d142121;border-radius:6px;z-index:2;opacity:0;visibility:hidden;will-change:transform,opacity;-webkit-transition:opacity .1s ease,-webkit-transform .1s ease;transition:opacity .1s ease,-webkit-transform .1s ease;transition:transform .1s ease,opacity .1s ease;transition:transform .1s ease,opacity .1s ease,-webkit-transform .1s ease;-webkit-transform:translateY(-8px);transform:translateY(-8px);left:-1px;width:150px;margin-top:5px;-webkit-box-sizing:content-box;box-sizing:content-box}.ce-conversion-toolbar--left-oriented:before{left:15px;margin-left:0}.ce-conversion-toolbar--right-oriented:before{left:auto;right:15px;margin-left:0}.ce-conversion-toolbar--showed{opacity:1;visibility:visible;-webkit-transform:none;transform:none}.ce-conversion-toolbar [hidden]{display:none!important}.ce-conversion-toolbar__buttons{display:-webkit-box;display:-ms-flexbox;display:flex}.ce-conversion-toolbar__label{color:#707684;font-size:11px;font-weight:500;letter-spacing:.33px;padding:10px 10px 5px;text-transform:uppercase}.ce-conversion-tool{display:-webkit-box;display:-ms-flexbox;display:flex;padding:5px 10px;font-size:14px;line-height:20px;font-weight:500;cursor:pointer;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.ce-conversion-tool--hidden{display:none}.ce-conversion-tool--focused{background:rgba(34,186,255,.08)!important}.ce-conversion-tool--focused{-webkit-box-shadow:inset 0 0 0px 1px rgba(7,161,227,.08);box-shadow:inset 0 0 0 1px #07a1e314}.ce-conversion-tool--focused-animated{-webkit-animation-name:buttonClicked;animation-name:buttonClicked;-webkit-animation-duration:.25s;animation-duration:.25s}.ce-conversion-tool:hover{background:#eff2f5}.ce-conversion-tool__icon{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;width:26px;height:26px;-webkit-box-shadow:0 0 0 1px rgba(201,201,204,.48);box-shadow:0 0 0 1px #c9c9cc7a;border-radius:5px;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;background:#fff;-webkit-box-sizing:content-box;box-sizing:content-box;-ms-flex-negative:0;flex-shrink:0;margin-right:10px}.ce-conversion-tool__icon svg{width:20px;height:20px}@media (max-width: 650px){.ce-conversion-tool__icon{width:36px;height:36px;border-radius:8px}.ce-conversion-tool__icon svg{width:28px;height:28px}}.ce-conversion-tool--last{margin-right:0!important}.ce-conversion-tool--active{color:#388ae5!important}.ce-conversion-tool--active{-webkit-animation:bounceIn .75s 1;animation:bounceIn .75s 1;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards}.ce-settings__button{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;padding:6px 1px;border-radius:3px;cursor:pointer;border:0;outline:none;background-color:transparent;vertical-align:bottom;color:inherit;margin:0;line-height:32px}.ce-settings__button svg{width:20px;height:20px}@media (max-width: 650px){.ce-settings__button svg{width:28px;height:28px}}@media (hover: hover){.ce-settings__button:hover{background-color:#eff2f5}}.ce-settings__button--active{color:#388ae5}.ce-settings__button--focused{background:rgba(34,186,255,.08)!important}.ce-settings__button--focused{-webkit-box-shadow:inset 0 0 0px 1px rgba(7,161,227,.08);box-shadow:inset 0 0 0 1px #07a1e314}.ce-settings__button--focused-animated{-webkit-animation-name:buttonClicked;animation-name:buttonClicked;-webkit-animation-duration:.25s;animation-duration:.25s}.ce-settings__button:not(:nth-child(3n+3)){margin-right:3px}.ce-settings__button:nth-child(n+4){margin-top:3px}.ce-settings__button--disabled{cursor:not-allowed!important}.ce-settings__button--disabled{opacity:.3}.ce-settings__button--selected{color:#388ae5}@media (min-width: 651px){.codex-editor--narrow .ce-settings .ce-popover{right:0;left:auto;left:initial}}@-webkit-keyframes fade-in{0%{opacity:0}to{opacity:1}}@keyframes fade-in{0%{opacity:0}to{opacity:1}}.ce-block:first-of-type{margin-top:0}.ce-block--selected .ce-block__content{background:#e1f2ff}.ce-block--selected .ce-block__content [contenteditable]{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.ce-block--selected .ce-block__content img,.ce-block--selected .ce-block__content .ce-stub{opacity:.55}.ce-block--stretched .ce-block__content{max-width:none}.ce-block__content{position:relative;max-width:650px;margin:0 auto;-webkit-transition:background-color .15s ease;transition:background-color .15s ease}.ce-block--drop-target .ce-block__content:before{content:"";position:absolute;top:100%;left:-20px;margin-top:-1px;height:8px;width:8px;border:solid #388AE5;border-width:1px 1px 0 0;-webkit-transform-origin:right;transform-origin:right;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.ce-block--drop-target .ce-block__content:after{content:"";position:absolute;top:100%;height:1px;width:100%;color:#388ae5;background:repeating-linear-gradient(90deg,#388AE5,#388AE5 1px,#fff 1px,#fff 6px)}.ce-block a{cursor:pointer;-webkit-text-decoration:underline;text-decoration:underline}.ce-block b{font-weight:700}.ce-block i{font-style:italic}@media (min-width: 651px){.codex-editor--narrow .ce-block--focused{margin-right:-50px;padding-right:50px}}@-webkit-keyframes bounceIn{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:scale3d(.9,.9,.9);transform:scale3d(.9,.9,.9)}20%{-webkit-transform:scale3d(1.03,1.03,1.03);transform:scale3d(1.03,1.03,1.03)}60%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}@keyframes bounceIn{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:scale3d(.9,.9,.9);transform:scale3d(.9,.9,.9)}20%{-webkit-transform:scale3d(1.03,1.03,1.03);transform:scale3d(1.03,1.03,1.03)}60%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}@-webkit-keyframes selectionBounce{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}50%{-webkit-transform:scale3d(1.01,1.01,1.01);transform:scale3d(1.01,1.01,1.01)}70%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}@keyframes selectionBounce{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}50%{-webkit-transform:scale3d(1.01,1.01,1.01);transform:scale3d(1.01,1.01,1.01)}70%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}@-webkit-keyframes buttonClicked{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:scale3d(.95,.95,.95);transform:scale3d(.95,.95,.95)}60%{-webkit-transform:scale3d(1.02,1.02,1.02);transform:scale3d(1.02,1.02,1.02)}80%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}@keyframes buttonClicked{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:scale3d(.95,.95,.95);transform:scale3d(.95,.95,.95)}60%{-webkit-transform:scale3d(1.02,1.02,1.02);transform:scale3d(1.02,1.02,1.02)}80%{-webkit-transform:scale3d(1,1,1);transform:scaleZ(1)}}.cdx-block{padding:.4em 0}.cdx-block::-webkit-input-placeholder{line-height:normal!important}.cdx-input{border:1px solid rgba(201,201,204,.48);-webkit-box-shadow:inset 0 1px 2px 0 rgba(35,44,72,.06);box-shadow:inset 0 1px 2px #232c480f;border-radius:3px;padding:10px 12px;outline:none;width:100%;-webkit-box-sizing:border-box;box-sizing:border-box}.cdx-input[data-placeholder]:before{position:static!important}.cdx-input[data-placeholder]:before{display:inline-block;width:0;white-space:nowrap;pointer-events:none}.cdx-settings-button{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;padding:6px 1px;border-radius:3px;cursor:pointer;border:0;outline:none;background-color:transparent;vertical-align:bottom;color:inherit;margin:0;min-width:26px;min-height:26px}.cdx-settings-button svg{width:20px;height:20px}@media (max-width: 650px){.cdx-settings-button svg{width:28px;height:28px}}@media (hover: hover){.cdx-settings-button:hover{background-color:#eff2f5}}.cdx-settings-button--focused{background:rgba(34,186,255,.08)!important}.cdx-settings-button--focused{-webkit-box-shadow:inset 0 0 0px 1px rgba(7,161,227,.08);box-shadow:inset 0 0 0 1px #07a1e314}.cdx-settings-button--focused-animated{-webkit-animation-name:buttonClicked;animation-name:buttonClicked;-webkit-animation-duration:.25s;animation-duration:.25s}.cdx-settings-button--active{color:#388ae5}.cdx-settings-button svg{width:auto;height:auto}@media (max-width: 650px){.cdx-settings-button{width:36px;height:36px;border-radius:8px}}.cdx-loader{position:relative;border:1px solid rgba(201,201,204,.48)}.cdx-loader:before{content:"";position:absolute;left:50%;top:50%;width:18px;height:18px;margin:-11px 0 0 -11px;border:2px solid rgba(201,201,204,.48);border-left-color:#388ae5;border-radius:50%;-webkit-animation:cdxRotation 1.2s infinite linear;animation:cdxRotation 1.2s infinite linear}@-webkit-keyframes cdxRotation{0%{-webkit-transform:rotate(0deg);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes cdxRotation{0%{-webkit-transform:rotate(0deg);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.cdx-button{padding:13px;border-radius:3px;border:1px solid rgba(201,201,204,.48);font-size:14.9px;background:#fff;-webkit-box-shadow:0 2px 2px 0 rgba(18,30,57,.04);box-shadow:0 2px 2px #121e390a;color:#707684;text-align:center;cursor:pointer}@media (hover: hover){.cdx-button:hover{background:#FBFCFE;-webkit-box-shadow:0 1px 3px 0 rgba(18,30,57,.08);box-shadow:0 1px 3px #121e3914}}.cdx-button svg{height:20px;margin-right:.2em;margin-top:-2px}.ce-stub{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;padding:3.5em 0;margin:17px 0;border-radius:3px;background:#fcf7f7;color:#b46262}.ce-stub__info{margin-left:20px}.ce-stub__title{margin-bottom:3px;font-weight:600;font-size:18px;text-transform:capitalize}.ce-stub__subtitle{font-size:16px}.codex-editor.codex-editor--rtl{direction:rtl}.codex-editor.codex-editor--rtl .cdx-list{padding-left:0;padding-right:40px}.codex-editor.codex-editor--rtl .ce-toolbar__plus{right:-26px;left:auto}.codex-editor.codex-editor--rtl .ce-toolbar__actions{right:auto;left:-26px}@media (max-width: 650px){.codex-editor.codex-editor--rtl .ce-toolbar__actions{margin-left:0;margin-right:auto;padding-right:0;padding-left:10px}}.codex-editor.codex-editor--rtl .ce-settings{left:5px;right:auto}.codex-editor.codex-editor--rtl .ce-settings:before{right:auto;left:25px}.codex-editor.codex-editor--rtl .ce-settings__button:not(:nth-child(3n+3)){margin-left:3px;margin-right:0}.codex-editor.codex-editor--rtl .ce-conversion-tool__icon{margin-right:0;margin-left:10px}.codex-editor.codex-editor--rtl .ce-inline-toolbar__dropdown{border-right:0px solid transparent;border-left:1px solid rgba(201,201,204,.48);margin:0 -6px 0 6px}.codex-editor.codex-editor--rtl .ce-inline-toolbar__dropdown .icon--toggler-down{margin-left:0;margin-right:4px}@media (min-width: 651px){.codex-editor--narrow.codex-editor--rtl .ce-toolbar__plus{left:0px;right:5px}}@media (min-width: 651px){.codex-editor--narrow.codex-editor--rtl .ce-toolbar__actions{left:-5px}}.cdx-search-field{--icon-margin-right: 10px;background:rgba(232,232,235,.49);border:1px solid rgba(226,226,229,.2);border-radius:6px;padding:2px;display:grid;grid-template-columns:auto auto 1fr;grid-template-rows:auto}.cdx-search-field__icon{width:26px;height:26px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;margin-right:var(--icon-margin-right)}.cdx-search-field__icon svg{width:20px;height:20px;color:#707684}.cdx-search-field__input{font-size:14px;outline:none;font-weight:500;font-family:inherit;border:0;background:transparent;margin:0;padding:0;line-height:22px;min-width:calc(100% - 26px - var(--icon-margin-right))}.cdx-search-field__input::-webkit-input-placeholder{color:#707684;font-weight:500}.cdx-search-field__input::-moz-placeholder{color:#707684;font-weight:500}.cdx-search-field__input:-ms-input-placeholder{color:#707684;font-weight:500}.cdx-search-field__input::-ms-input-placeholder{color:#707684;font-weight:500}.cdx-search-field__input::placeholder{color:#707684;font-weight:500}.ce-popover{--border-radius: 6px;--width: 400px;--max-height: 400px;--padding: 8px;--offset-from-target: 8px;--color-border: #e8e8eb;--color-shadow: rgba(13, 20, 33, .13);--color-background: white;--color-text-primary: black;--color-text-secondary: #808080;--color-border-icon: rgba(201, 201, 204, .48);--color-border-icon-disabled: #eff0f1;--color-text-icon-active: #388ae5;--color-background-icon-active: rgba(56, 138, 229, .1);--color-background-item-focus: rgba(34, 186, 255, .08);--color-shadow-item-focus: rgba(7, 161, 227, .08);--color-background-item-hover: #fafafa;--color-background-item-confirm: #e24a4a;--color-background-item-confirm-hover: #ce4343;min-width:var(--width);width:var(--width);max-height:var(--max-height);border-radius:var(--border-radius);overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-box-shadow:0px 10px 10px -1px rgba(0,0,0,.11),0px 0px 4px 0px rgba(0,0,0,.05);box-shadow:0 10px 10px -1px #0000001c,0 0 4px #0000000d;position:absolute;left:0;top:calc(100% + var(--offset-from-target));background:var(--color-background);display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;z-index:4;opacity:0;max-height:0;pointer-events:none;border:none}.ce-popover--opened{opacity:1;padding:var(--padding);max-height:var(--max-height);pointer-events:auto;-webkit-animation:panelShowing .1s ease;animation:panelShowing .1s ease;border:1px solid var(--color-border)}@media (max-width: 650px){.ce-popover--opened{-webkit-animation:panelShowingMobile .25s ease;animation:panelShowingMobile .25s ease}}.ce-popover__items{overflow-y:auto;-ms-scroll-chaining:none;overscroll-behavior:contain}@media (max-width: 650px){.ce-popover__overlay{position:fixed;top:0;bottom:0;left:0;right:0;background:#1D202B;z-index:3;opacity:.5;-webkit-transition:opacity .12s ease-in;transition:opacity .12s ease-in;will-change:opacity;visibility:visible}}.ce-popover__overlay--hidden{display:none}.ce-popover--open-top{top:calc(-1 * (var(--offset-from-target) + var(--popover-height)))}@media (max-width: 650px){.ce-popover{--offset: 5px;position:fixed;max-width:none;min-width:calc(100% - var(--offset) * 2);left:var(--offset);right:var(--offset);bottom:calc(var(--offset) + env(safe-area-inset-bottom));top:auto;border-radius:10px}.ce-popover .ce-popover__search{display:none}}.ce-popover__search,.ce-popover__custom-content:not(:empty){margin-bottom:5px}.ce-popover__nothing-found-message{color:#707684;display:none;cursor:default;padding:3px;font-size:14px;line-height:20px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ce-popover__nothing-found-message--displayed{display:block}.ce-popover__custom-content:not(:empty){padding:4px}@media (min-width: 651px){.ce-popover__custom-content:not(:empty){padding:0}}.ce-popover__custom-content--hidden{display:none}.ce-popover__title-type{font-size:13px;font-weight:600;line-height:1.5;padding:8px;color:#999}.ce-popover__title-type.divider{border-top:1px solid #d9d9d9;margin-top:8px;padding-top:16px}.ce-popover-item{--border-radius: 6px;--icon-size: 48px;--icon-size-mobile: 28px;border-radius:var(--border-radius);display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;padding:3px;color:var(--color-text-primary);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}@media (max-width: 650px){.ce-popover-item{padding:4px}}.ce-popover-item:not(:last-of-type){margin-bottom:1px}.ce-popover-item__icon{border-radius:5px;width:48px;height:48px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;margin-right:16px}@media (max-width: 650px){.ce-popover-item__icon{width:36px;height:36px;border-radius:8px}.ce-popover-item__icon svg{width:var(--icon-size-mobile);height:var(--icon-size-mobile)}}.ce-popover-item__title{font-size:14px;line-height:1.5;font-weight:500;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}@media (max-width: 650px){.ce-popover-item__title{font-size:16px}}.ce-popover-item__secondary-title{color:var(--color-text-secondary);font-size:12px;font-weight:400;white-space:nowrap;margin-top:4px}@media (max-width: 650px){.ce-popover-item__secondary-title{display:none}}.ce-popover-item--active{background:var(--color-background-icon-active);color:var(--color-text-icon-active)}.ce-popover-item--active .ce-popover-item__icon{-webkit-box-shadow:none;box-shadow:none}.ce-popover-item--disabled{color:var(--color-text-secondary);cursor:default;pointer-events:none}.ce-popover-item--disabled .ce-popover-item__icon{-webkit-box-shadow:0 0 0 1px var(--color-border-icon-disabled);box-shadow:0 0 0 1px var(--color-border-icon-disabled)}.ce-popover-item--focused:not(.ce-popover-item--no-focus){background:var(--color-background-item-focus)!important}.ce-popover-item--focused:not(.ce-popover-item--no-focus){-webkit-box-shadow:inset 0 0 0px 1px var(--color-shadow-item-focus);box-shadow:inset 0 0 0 1px var(--color-shadow-item-focus)}.ce-popover-item--hidden{display:none}@media (hover: hover){.ce-popover-item:hover{cursor:pointer}.ce-popover-item:hover:not(.ce-popover-item--no-hover){background-color:var(--color-background-item-hover)}.ce-popover-item:hover .ce-popover-item__icon{-webkit-box-shadow:none;box-shadow:none}}.ce-popover-item--confirmation{background:var(--color-background-item-confirm)}.ce-popover-item--confirmation .ce-popover-item__icon{color:var(--color-background-item-confirm)}.ce-popover-item--confirmation .ce-popover-item__title{color:#fff}@media (hover: hover){.ce-popover-item--confirmation:not(.ce-popover-item--no-hover):hover{background:var(--color-background-item-confirm-hover)}}.ce-popover-item--confirmation:not(.ce-popover-item--no-focus).ce-popover-item--focused{background:var(--color-background-item-confirm-hover)!important}.ce-popover-item--confirmation .ce-popover-item__icon,.ce-popover-item--active .ce-popover-item__icon,.ce-popover-item--focused .ce-popover-item__icon{-webkit-box-shadow:none;box-shadow:none}@-webkit-keyframes panelShowing{0%{opacity:0;-webkit-transform:translateY(-8px) scale(.9);transform:translateY(-8px) scale(.9)}70%{opacity:1;-webkit-transform:translateY(2px);transform:translateY(2px)}to{-webkit-transform:translateY(0);transform:translateY(0)}}@keyframes panelShowing{0%{opacity:0;-webkit-transform:translateY(-8px) scale(.9);transform:translateY(-8px) scale(.9)}70%{opacity:1;-webkit-transform:translateY(2px);transform:translateY(2px)}to{-webkit-transform:translateY(0);transform:translateY(0)}}@-webkit-keyframes panelShowingMobile{0%{opacity:0;-webkit-transform:translateY(14px) scale(.98);transform:translateY(14px) scale(.98)}70%{opacity:1;-webkit-transform:translateY(-4px);transform:translateY(-4px)}to{-webkit-transform:translateY(0);transform:translateY(0)}}@keyframes panelShowingMobile{0%{opacity:0;-webkit-transform:translateY(14px) scale(.98);transform:translateY(14px) scale(.98)}70%{opacity:1;-webkit-transform:translateY(-4px);transform:translateY(-4px)}to{-webkit-transform:translateY(0);transform:translateY(0)}}.wobble{-webkit-animation-name:wobble;animation-name:wobble;-webkit-animation-duration:.4s;animation-duration:.4s}@-webkit-keyframes wobble{0%{-webkit-transform:translate3d(0,0,0);transform:translateZ(0)}15%{-webkit-transform:translate3d(-9%,0,0);transform:translate3d(-9%,0,0)}30%{-webkit-transform:translate3d(9%,0,0);transform:translate3d(9%,0,0)}45%{-webkit-transform:translate3d(-4%,0,0);transform:translate3d(-4%,0,0)}60%{-webkit-transform:translate3d(4%,0,0);transform:translate3d(4%,0,0)}75%{-webkit-transform:translate3d(-1%,0,0);transform:translate3d(-1%,0,0)}to{-webkit-transform:translate3d(0,0,0);transform:translateZ(0)}}@keyframes wobble{0%{-webkit-transform:translate3d(0,0,0);transform:translateZ(0)}15%{-webkit-transform:translate3d(-9%,0,0);transform:translate3d(-9%,0,0)}30%{-webkit-transform:translate3d(9%,0,0);transform:translate3d(9%,0,0)}45%{-webkit-transform:translate3d(-4%,0,0);transform:translate3d(-4%,0,0)}60%{-webkit-transform:translate3d(4%,0,0);transform:translate3d(4%,0,0)}75%{-webkit-transform:translate3d(-1%,0,0);transform:translate3d(-1%,0,0)}to{-webkit-transform:translate3d(0,0,0);transform:translateZ(0)}}
 `;
-class ui extends C {
+class ui extends S {
   constructor() {
     super(...arguments), this.isMobile = !1, this.contentRectCache = void 0, this.resizeDebouncer = Pt(() => {
       this.windowResize();
@@ -9439,7 +9471,7 @@ class ui extends C {
     this.readOnlyMutableListeners.on(
       this.nodes.redactor,
       "mousemove",
-      Se((t) => {
+      Ce((t) => {
         const o = t.target.closest(".ce-block");
         this.Editor.BlockSelection.anyBlockSelected || o && e !== o && (e = o, this.eventsDispatcher.emit(mt, {
           block: this.Editor.BlockManager.getBlockByChildNode(o)
@@ -9469,13 +9501,13 @@ class ui extends C {
    */
   documentKeydown(e) {
     switch (e.keyCode) {
-      case B.ENTER:
+      case E.ENTER:
         this.enterPressed(e);
         break;
-      case B.BACKSPACE:
+      case E.BACKSPACE:
         this.backspacePressed(e);
         break;
-      case B.ESC:
+      case E.ESC:
         this.escapePressed(e);
         break;
       default:
@@ -9598,7 +9630,7 @@ class ui extends C {
     if (d.isAnchor(i) && n) {
       o();
       const u = i.getAttribute("href"), h = Ht(u);
-      jt(h);
+      zt(h);
       return;
     }
     const r = this.Editor.BlockManager.getBlockByIndex(-1), a = d.offset(r.holder).bottom, l = e.pageY;
@@ -9655,8 +9687,8 @@ const pi = {
   // Toolbar Modules
   BlockSettings: Ro,
   ConversionToolbar: Y,
-  Toolbar: jo,
-  InlineToolbar: Uo,
+  Toolbar: zo,
+  InlineToolbar: jo,
   // Modules
   BlockEvents: Wo,
   BlockManager: Xo,
@@ -9670,7 +9702,7 @@ const pi = {
   RectangleSelection: pe,
   Renderer: Qo,
   Saver: ei,
-  Tools: Ct,
+  Tools: St,
   UI: ui
 };
 class fi {
@@ -9691,7 +9723,7 @@ class fi {
         this.moduleInstances.UI.removeLoader(), t();
       }, 500);
     }).catch((i) => {
-      S(`Editor.js is not ready because of ${i}`, "error"), o(i);
+      C(`Editor.js is not ready because of ${i}`, "error"), o(i);
     });
   }
   /**
@@ -9701,7 +9733,7 @@ class fi {
    */
   set configuration(e) {
     var o, i;
-    j(e) ? this.config = {
+    z(e) ? this.config = {
       ...e
     } : this.config = {
       holder: e
@@ -9737,7 +9769,7 @@ class fi {
       throw Error("«holderId» and «holder» param can't assign at the same time.");
     if (J(t) && !d.get(t))
       throw Error(`element with ID «${t}» is missing. Pass correct holder's ID.`);
-    if (t && j(t) && !d.isElement(t))
+    if (t && z(t) && !d.isElement(t))
       throw Error("«holder» value must be an Element node");
   }
   /**
@@ -9772,7 +9804,7 @@ class fi {
         } catch (i) {
           if (i instanceof at)
             throw new Error(i.message);
-          S(`Module ${o} was skipped because of %o`, "warn", i);
+          C(`Module ${o} was skipped because of %o`, "warn", i);
         }
       }),
       Promise.resolve()
@@ -9795,7 +9827,7 @@ class fi {
           eventsDispatcher: this.eventsDispatcher
         });
       } catch (o) {
-        S("[constructModules]", `Module ${e} skipped because`, "error", o);
+        C("[constructModules]", `Module ${e} skipped because`, "error", o);
       }
     });
   }
@@ -9830,7 +9862,7 @@ class fi {
 class gi {
   /** Editor version */
   static get version() {
-    return "2.0.4";
+    return "2.0.8";
   }
   /**
    * @param {EditorConfig|string|undefined} [configuration] - user configuration
@@ -9838,7 +9870,7 @@ class gi {
   constructor(e) {
     let t = () => {
     };
-    j(e) && D(e.onReady) && (t = e.onReady);
+    z(e) && D(e.onReady) && (t = e.onReady);
     const o = new fi(e);
     this.isReady = o.isReady.then(() => {
       this.exportAPI(o), t();

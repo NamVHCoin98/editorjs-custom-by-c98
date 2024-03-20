@@ -80,8 +80,6 @@ export default class BlockEvents extends Module {
             this.Editor.BlocksAPI.move(currentBlockIndex + 1);
           }
         }
-        break;
-
       case _.keyCodes.RIGHT:
         this.arrowRightAndDown(event);
         break;
@@ -136,7 +134,6 @@ export default class BlockEvents extends Module {
             this.Editor.BlocksAPI.move(currentBlockIndex - 1);
           }
         }
-        break;
       case _.keyCodes.LEFT:
         this.arrowLeftAndUp(event);
         break;
