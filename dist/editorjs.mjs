@@ -84,7 +84,7 @@ function ge(s, e, t = "log", o, i = "color: inherit") {
       break;
   }
   o && r.push(o);
-  const a = "Editor.js 2.0.8", l = `line-height: 1em;
+  const a = "Editor.js 2.1.11", l = `line-height: 1em;
             color: #006FEA;
             display: inline-block;
             font-size: 11px;
@@ -1900,7 +1900,8 @@ class Zt extends S {
         index: r,
         replace: !0,
         tunes: n.tunes,
-        reSelectedAfterUpdate: (o == null ? void 0 : o.reSelectedAfterUpdate) || !1
+        reSelectedAfterUpdate: (o == null ? void 0 : o.reSelectedAfterUpdate) || !1,
+        needToFocus: !1
       });
     };
   }
@@ -5462,7 +5463,7 @@ class Wo extends S {
     if (n.selected || n.isEmpty && n.currentInput === n.firstInput) {
       e.preventDefault();
       const c = t.currentBlockIndex;
-      t.previousBlock && (t.previousBlock.inputs.length === 0 || t.previousBlock.name === "image" || t.previousBlock.name === "gallery") ? t.removeBlock(c - 1) : t.removeBlock(), i.setToBlock(
+      t.previousBlock && t.previousBlock.inputs.length === 0 && (t.previousBlock.name === "image" || t.previousBlock.name === "gallery") ? t.removeBlock(c - 1) : t.removeBlock(), i.setToBlock(
         t.currentBlock,
         c ? i.positions.END : i.positions.START
       ), this.Editor.Toolbar.close(), o.clearSelection(e);
@@ -5916,15 +5917,15 @@ class Xo extends S {
       data: o,
       tunes: a
     });
-    return r && this.blockDidMutated(
+    return r ? this.blockDidMutated(
       Je,
       this.getBlockByIndex(c),
       {
         index: c
       }
-    ), this._blocks.insert(c, u, r), this.blockDidMutated(Qe, u, {
+    ) : this.blockDidMutated(Qe, u, {
       index: c
-    }), n ? this.currentBlockIndex = c : c <= this.currentBlockIndex && this.currentBlockIndex++, l && (u.selected = !0), u;
+    }), this._blocks.insert(c, u, r), n ? this.currentBlockIndex = c : c <= this.currentBlockIndex && this.currentBlockIndex++, l && (u.selected = !0), u;
   }
   /**
    * Replace current working block
@@ -8014,7 +8015,7 @@ class ei extends S {
     }), C("Total", "log", t), C(void 0, "groupEnd"), {
       time: +/* @__PURE__ */ new Date(),
       blocks: o,
-      version: "2.0.8"
+      version: "2.1.11"
     };
   }
 }
@@ -9862,7 +9863,7 @@ class fi {
 class gi {
   /** Editor version */
   static get version() {
-    return "2.0.8";
+    return "2.1.11";
   }
   /**
    * @param {EditorConfig|string|undefined} [configuration] - user configuration

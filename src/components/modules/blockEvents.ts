@@ -420,8 +420,8 @@ export default class BlockEvents extends Module {
 
       if (
         BlockManager.previousBlock &&
-        (BlockManager.previousBlock.inputs.length === 0 ||
-          BlockManager.previousBlock.name === "image" ||
+        BlockManager.previousBlock.inputs.length === 0 &&
+        (BlockManager.previousBlock.name === "image" ||
           BlockManager.previousBlock.name === "gallery")
       ) {
         /** If previous block doesn't contain inputs, remove it */

@@ -136,7 +136,7 @@ export default class BlocksAPI extends Module {
   public swap(fromIndex: number, toIndex: number): void {
     _.log(
       "`blocks.swap()` method is deprecated and will be removed in the next major release. " +
-      "Use `block.move()` method instead",
+        "Use `block.move()` method instead",
       "info"
     );
 
@@ -301,7 +301,7 @@ export default class BlocksAPI extends Module {
   public insertNewBlock(): void {
     _.log(
       "Method blocks.insertNewBlock() is deprecated and it will be removed in the next major release. " +
-      "Use blocks.insert() instead.",
+        "Use blocks.insert() instead.",
       "warn"
     );
     this.insert();
@@ -333,6 +333,7 @@ export default class BlocksAPI extends Module {
       replace: true,
       tunes: block.tunes,
       reSelectedAfterUpdate: config?.reSelectedAfterUpdate || false,
+      needToFocus: false,
     });
   };
 }
