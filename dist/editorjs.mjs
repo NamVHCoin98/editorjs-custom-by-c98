@@ -84,7 +84,7 @@ function ge(s, e, t = "log", o, i = "color: inherit") {
       break;
   }
   o && r.push(o);
-  const a = "Editor.js 2.1.11", l = `line-height: 1em;
+  const a = "Editor.js 2.1.42", l = `line-height: 1em;
             color: #006FEA;
             display: inline-block;
             font-size: 11px;
@@ -1900,8 +1900,7 @@ class Zt extends S {
         index: r,
         replace: !0,
         tunes: n.tunes,
-        reSelectedAfterUpdate: (o == null ? void 0 : o.reSelectedAfterUpdate) || !1,
-        needToFocus: !1
+        reSelectedAfterUpdate: (o == null ? void 0 : o.reSelectedAfterUpdate) || !1
       });
     };
   }
@@ -4097,7 +4096,7 @@ class Ro extends S {
    * Close Block Settings pane
    */
   close() {
-    this.opened = !1, k.isAtEditor || this.selection.restore(), this.selection.clearSaved(), !this.Editor.CrossBlockSelection.isCrossBlockSelectionStarted && this.Editor.BlockManager.currentBlock && (this.Editor.BlockManager.currentBlock.selected = !1), this.eventsDispatcher.emit(this.events.closed), this.popover && (this.popover.off(fe.Close, this.onPopoverClose), this.popover.destroy(), this.popover.getElement().remove(), this.popover = null);
+    this.opened = !1, k.isAtEditor || this.selection.restore(), this.selection.clearSaved(), this.eventsDispatcher.emit(this.events.closed), this.popover && (this.popover.off(fe.Close, this.onPopoverClose), this.popover.destroy(), this.popover.getElement().remove(), this.popover = null);
   }
   /**
    * Returns list of buttons and inputs inside specified container
@@ -5917,15 +5916,15 @@ class Xo extends S {
       data: o,
       tunes: a
     });
-    return r ? this.blockDidMutated(
+    return r && this.blockDidMutated(
       Je,
       this.getBlockByIndex(c),
       {
         index: c
       }
-    ) : this.blockDidMutated(Qe, u, {
+    ), this._blocks.insert(c, u, r), this.blockDidMutated(Qe, u, {
       index: c
-    }), this._blocks.insert(c, u, r), n ? this.currentBlockIndex = c : c <= this.currentBlockIndex && this.currentBlockIndex++, l && (u.selected = !0), u;
+    }), n ? this.currentBlockIndex = c : c <= this.currentBlockIndex && this.currentBlockIndex++, l && (u.selected = !0), u;
   }
   /**
    * Replace current working block
@@ -8015,7 +8014,7 @@ class ei extends S {
     }), C("Total", "log", t), C(void 0, "groupEnd"), {
       time: +/* @__PURE__ */ new Date(),
       blocks: o,
-      version: "2.1.11"
+      version: "2.1.42"
     };
   }
 }
@@ -9863,7 +9862,7 @@ class fi {
 class gi {
   /** Editor version */
   static get version() {
-    return "2.1.11";
+    return "2.1.42";
   }
   /**
    * @param {EditorConfig|string|undefined} [configuration] - user configuration

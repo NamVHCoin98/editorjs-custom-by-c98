@@ -333,7 +333,6 @@ export default class BlocksAPI extends Module {
       replace: true,
       tunes: block.tunes,
       reSelectedAfterUpdate: config?.reSelectedAfterUpdate || false,
-      needToFocus: false,
     });
   };
 }
