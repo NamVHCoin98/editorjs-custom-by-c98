@@ -30,6 +30,10 @@ export default class Dom {
         "SOURCE",
         "TRACK",
         "WBR",
+        "IFRAME",
+        "COINGECKO-COIN-TICKER-WIDGET",
+        "COINGECKO-COIN-COMPARE-CHART-WIDGET",
+        "OEMBED"
       ].includes(tag.tagName)
     );
   }
