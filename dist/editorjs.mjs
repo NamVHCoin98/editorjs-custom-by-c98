@@ -84,7 +84,7 @@ function ge(s, e, t = "log", o, i = "color: inherit") {
       break;
   }
   o && r.push(o);
-  const a = "Editor.js 2.1.56", l = `line-height: 1em;
+  const a = "Editor.js 2.1.58", l = `line-height: 1em;
             color: #006FEA;
             display: inline-block;
             font-size: 11px;
@@ -111,7 +111,7 @@ function te(s) {
 function D(s) {
   return te(s) === "function" || te(s) === "asyncfunction";
 }
-function U(s) {
+function z(s) {
   return te(s) === "object";
 }
 function J(s) {
@@ -203,9 +203,9 @@ function Se(s, ...e) {
   if (!e.length)
     return s;
   const t = e.shift();
-  if (U(s) && U(t))
+  if (z(s) && z(t))
     for (const o in t)
-      U(t[o]) ? (s[o] || Object.assign(s, { [o]: {} }), Se(s[o], t[o])) : Object.assign(s, { [o]: t[o] });
+      z(t[o]) ? (s[o] || Object.assign(s, { [o]: {} }), Se(s[o], t[o])) : Object.assign(s, { [o]: t[o] });
   return Se(s, ...e);
 }
 function nt(s) {
@@ -219,10 +219,10 @@ function Ht(s) {
   }
   return s.substring(0, 2) === "//" ? window.location.protocol + s : window.location.origin + s;
 }
-function zt() {
+function Ut() {
   return At(10);
 }
-function Ut(s) {
+function zt(s) {
   window.open(s, "_blank");
 }
 function jt(s = "") {
@@ -250,7 +250,7 @@ function ee() {
 }
 const Ge = typeof window < "u" && window.navigator && window.navigator.platform && (/iP(ad|hone|od)/.test(window.navigator.platform) || window.navigator.platform === "MacIntel" && window.navigator.maxTouchPoints > 1);
 function $t(s, e) {
-  const t = Array.isArray(s) || U(s), o = Array.isArray(e) || U(e);
+  const t = Array.isArray(s) || z(s), o = Array.isArray(e) || z(e);
   return t || o ? JSON.stringify(s) === JSON.stringify(e) : s === e;
 }
 class d {
@@ -1417,7 +1417,7 @@ class F extends we {
    * @param [eventBus] - Editor common event bus. Allows to subscribe on some Editor events. Could be omitted when "virtual" Block is created. See BlocksAPI@composeBlockData.
    */
   constructor({
-    id: e = zt(),
+    id: e = Ut(),
     data: t,
     tool: o,
     api: i,
@@ -2437,17 +2437,17 @@ var Le = {}, to = {
             for (; S < T.parts.length; S++)
               L.parts.push(x(T.parts[S], g));
           } else {
-            var z = [];
+            var U = [];
             for (S = 0; S < T.parts.length; S++)
-              z.push(x(T.parts[S], g));
-            a[T.id] = { id: T.id, refs: 1, parts: z };
+              U.push(x(T.parts[S], g));
+            a[T.id] = { id: T.id, refs: 1, parts: U };
           }
         }
       }
       function v(b, g) {
         for (var B = [], T = {}, L = 0; L < b.length; L++) {
-          var S = b[L], z = g.base ? S[0] + g.base : S[0], M = { css: S[1], media: S[2], sourceMap: S[3] };
-          T[z] ? T[z].parts.push(M) : B.push(T[z] = { id: z, parts: [M] });
+          var S = b[L], U = g.base ? S[0] + g.base : S[0], M = { css: S[1], media: S[2], sourceMap: S[3] };
+          T[U] ? T[U].parts.push(M) : B.push(T[U] = { id: U, parts: [M] });
         }
         return B;
       }
@@ -2497,8 +2497,8 @@ var Le = {}, to = {
           b.css = S;
         }
         if (g.singleton) {
-          var z = h++;
-          B = u || (u = _(g)), T = R.bind(null, B, z, !1), L = R.bind(null, B, z, !0);
+          var U = h++;
+          B = u || (u = _(g)), T = R.bind(null, B, U, !1), L = R.bind(null, B, U, !0);
         } else
           b.sourceMap && typeof URL == "function" && typeof URL.createObjectURL == "function" && typeof URL.revokeObjectURL == "function" && typeof Blob == "function" && typeof btoa == "function" ? (B = function(M) {
             var W = document.createElement("link");
@@ -2539,8 +2539,8 @@ var Le = {}, to = {
         var B = v(b, g);
         return p(B, g), function(T) {
           for (var L = [], S = 0; S < B.length; S++) {
-            var z = B[S];
-            (M = a[z.id]).refs--, L.push(M);
+            var U = B[S];
+            (M = a[U.id]).refs--, L.push(M);
           }
           for (T && p(v(T, g), g), S = 0; S < L.length; S++) {
             var M;
@@ -2561,8 +2561,8 @@ var Le = {}, to = {
         if (b.styleSheet)
           b.styleSheet.cssText = I(g, L);
         else {
-          var S = document.createTextNode(L), z = b.childNodes;
-          z[g] && b.removeChild(z[g]), z.length ? b.insertBefore(S, z[g]) : b.appendChild(S);
+          var S = document.createTextNode(L), U = b.childNodes;
+          U[g] && b.removeChild(U[g]), U.length ? b.insertBefore(S, U[g]) : b.appendChild(S);
         }
       }
     }, function(t, o) {
@@ -2770,7 +2770,7 @@ function Z(s, e = {}) {
   return new ao(t).clean(s);
 }
 function Pe(s, e) {
-  return Array.isArray(s) ? lo(s, e) : U(s) ? co(s, e) : J(s) ? ho(s, e) : s;
+  return Array.isArray(s) ? lo(s, e) : z(s) ? co(s, e) : J(s) ? ho(s, e) : s;
 }
 function lo(s, e) {
   return s.map((t) => Pe(t, e));
@@ -2786,10 +2786,10 @@ function co(s, e) {
   return t;
 }
 function ho(s, e) {
-  return U(e) ? Z(s, e) : e === !1 ? Z(s, {}) : s;
+  return z(e) ? Z(s, e) : e === !1 ? Z(s, {}) : s;
 }
 function uo(s) {
-  return U(s) || Nt(s) || D(s);
+  return z(s) || Nt(s) || D(s);
 }
 class po extends C {
   /**
@@ -3234,7 +3234,7 @@ class wo extends C {
 function ut(s, e) {
   const t = {};
   return Object.entries(s).forEach(([o, i]) => {
-    if (U(i)) {
+    if (z(i)) {
       const n = e ? `${e}.${o}` : o;
       Object.values(i).every((a) => J(a)) ? t[o] = n : t[o] = ut(i, n);
       return;
@@ -4448,8 +4448,8 @@ class Fo {
   }
 }
 const re = new Fo();
-var Ho = Object.defineProperty, zo = Object.getOwnPropertyDescriptor, gt = (s, e, t, o) => {
-  for (var i = o > 1 ? void 0 : o ? zo(e, t) : e, n = s.length - 1, r; n >= 0; n--)
+var Ho = Object.defineProperty, Uo = Object.getOwnPropertyDescriptor, gt = (s, e, t, o) => {
+  for (var i = o > 1 ? void 0 : o ? Uo(e, t) : e, n = s.length - 1, r; n >= 0; n--)
     (r = s[n]) && (i = (o ? r(e, t, i) : r(i)) || i);
   return o && i && Ho(e, t, i), i;
 }, be = /* @__PURE__ */ ((s) => (s.Opened = "toolbox-opened", s.Closed = "toolbox-closed", s.BlockAdded = "toolbox-block-added", s))(be || {});
@@ -4638,15 +4638,15 @@ const bt = class extends we {
     }), this.api.toolbar.close();
   }
 };
-let ze = bt;
+let Ue = bt;
 gt([
   ae
-], ze.prototype, "toolsToBeDisplayed", 1);
+], Ue.prototype, "toolsToBeDisplayed", 1);
 gt([
   ae
-], ze.prototype, "toolboxItemsToBeDisplayed", 1);
+], Ue.prototype, "toolboxItemsToBeDisplayed", 1);
 const mt = "block hovered";
-class Uo extends C {
+class zo extends C {
   /**
    * @class
    * @param moduleConfiguration - Module Configuration
@@ -4808,7 +4808,7 @@ class Uo extends C {
    * Creates the Toolbox instance and return it's rendered element
    */
   makeToolbox() {
-    return this.toolboxInstance = new ze({
+    return this.toolboxInstance = new Ue({
       api: this.Editor.API.methods,
       tools: this.Editor.Tools.blockTools,
       i18nLabels: {
@@ -4883,7 +4883,7 @@ class Uo extends C {
     this.removeAllNodes(), this.toolboxInstance && this.toolboxInstance.destroy(), this.tooltip.destroy();
   }
 }
-var ye = /* @__PURE__ */ ((s) => (s[s.Block = 0] = "Block", s[s.Inline = 1] = "Inline", s[s.Tune = 2] = "Tune", s))(ye || {}), me = /* @__PURE__ */ ((s) => (s.Shortcut = "shortcut", s.Toolbox = "toolbox", s.EnabledInlineTools = "inlineToolbar", s.EnabledBlockTunes = "tunes", s.Config = "config", s))(me || {}), kt = /* @__PURE__ */ ((s) => (s.Shortcut = "shortcut", s.SanitizeConfig = "sanitize", s))(kt || {}), se = /* @__PURE__ */ ((s) => (s.IsEnabledLineBreaks = "enableLineBreaks", s.Toolbox = "toolbox", s.ConversionConfig = "conversionConfig", s.IsReadOnlySupported = "isReadOnlySupported", s.PasteConfig = "pasteConfig", s))(se || {}), Ue = /* @__PURE__ */ ((s) => (s.IsInline = "isInline", s.Title = "title", s))(Ue || {}), vt = /* @__PURE__ */ ((s) => (s.IsTune = "isTune", s))(vt || {});
+var ye = /* @__PURE__ */ ((s) => (s[s.Block = 0] = "Block", s[s.Inline = 1] = "Inline", s[s.Tune = 2] = "Tune", s))(ye || {}), me = /* @__PURE__ */ ((s) => (s.Shortcut = "shortcut", s.Toolbox = "toolbox", s.EnabledInlineTools = "inlineToolbar", s.EnabledBlockTunes = "tunes", s.Config = "config", s))(me || {}), kt = /* @__PURE__ */ ((s) => (s.Shortcut = "shortcut", s.SanitizeConfig = "sanitize", s))(kt || {}), se = /* @__PURE__ */ ((s) => (s.IsEnabledLineBreaks = "enableLineBreaks", s.Toolbox = "toolbox", s.ConversionConfig = "conversionConfig", s.IsReadOnlySupported = "isReadOnlySupported", s.PasteConfig = "pasteConfig", s))(se || {}), ze = /* @__PURE__ */ ((s) => (s.IsInline = "isInline", s.Title = "title", s))(ze || {}), vt = /* @__PURE__ */ ((s) => (s.IsTune = "isTune", s))(vt || {});
 class je {
   /**
    * @class
@@ -7085,12 +7085,9 @@ const xt = class extends C {
       }
     const l = r.trim().split(" ").map((m) => m.startsWith("http:") || m.startsWith("https:") ? `<a href="${m}">${m}</a>` : m);
     l.length === 1 && (a = l.join(" ")), e && r.trim() && a.trim() && (a = "<p>" + (a.trim() ? a : r) + "</p>");
-    const c = Object.keys(this.toolsTags).reduce((m, p) => (m[p.toLowerCase()] = this.toolsTags[p].sanitizationConfig ?? {}, m), {}), u = Object.assign(
-      {},
-      c,
-      t.getAllInlineToolsSanitizeConfig(),
-      { br: {} }
-    ), f = Z(a, u).replaceAll("<p>", " <p> ").replaceAll("</p>", " </p> ").replaceAll("<li>", " <li> ").replaceAll("</li>", " </li> ").trim().split(" ").reduce(
+    const c = Object.keys(this.toolsTags).reduce((m, p) => (m[p.toLowerCase()] = this.toolsTags[p].sanitizationConfig ?? {}, m), {}), u = Object.assign({}, c, t.getAllInlineToolsSanitizeConfig(), {
+      br: {}
+    }), f = Z(a, u).replaceAll("<p>", " <p> ").replaceAll("</p>", " </p> ").replaceAll("<li>", " <li> ").replaceAll("</li>", " </li> ").trim().split(" ").reduce(
       (m, p) => m + " " + (p.startsWith("http:") || p.startsWith("https:") ? `<a href="${p}">${p}</a>` : p),
       ""
     );
@@ -7117,21 +7114,13 @@ const xt = class extends C {
    * Set onPaste callback handler
    */
   setCallback() {
-    this.listeners.on(
-      this.Editor.UI.nodes.holder,
-      "paste",
-      this.handlePasteEvent
-    );
+    this.listeners.on(this.Editor.UI.nodes.holder, "paste", this.handlePasteEvent);
   }
   /**
    * Unset onPaste callback handler
    */
   unsetCallback() {
-    this.listeners.off(
-      this.Editor.UI.nodes.holder,
-      "paste",
-      this.handlePasteEvent
-    );
+    this.listeners.off(this.Editor.UI.nodes.holder, "paste", this.handlePasteEvent);
   }
   /**
    * Get and process tool`s paste configs
@@ -7147,7 +7136,7 @@ const xt = class extends C {
    * @returns {string[]} array of tags.
    */
   collectTagNames(s) {
-    return J(s) ? [s] : U(s) ? Object.keys(s) : [];
+    return J(s) ? [s] : z(s) ? Object.keys(s) : [];
   }
   /**
    * Get tags to substitute by Tool
@@ -7168,7 +7157,7 @@ const xt = class extends C {
           );
           return;
         }
-        const r = U(o) ? o[n] : null;
+        const r = z(o) ? o[n] : null;
         this.toolsTags[n.toUpperCase()] = {
           tool: s,
           sanitizationConfig: r
@@ -7188,9 +7177,7 @@ const xt = class extends C {
     let { extensions: t, mimeTypes: o } = e;
     !t && !o || (t && !Array.isArray(t) && (O(
       `«extensions» property of the onDrop config for «${s.name}» Tool should be an array`
-    ), t = []), o && !Array.isArray(o) && (O(
-      `«mimeTypes» property of the onDrop config for «${s.name}» Tool should be an array`
-    ), o = []), o && (o = o.filter((i) => Dt(i) ? !0 : (O(
+    ), t = []), o && !Array.isArray(o) && (O(`«mimeTypes» property of the onDrop config for «${s.name}» Tool should be an array`), o = []), o && (o = o.filter((i) => Dt(i) ? !0 : (O(
       `MIME type value «${i}» for the «${s.name}» Tool is not a valid MIME type`,
       "warn"
     ), !1))), this.toolsFiles[s.name] = {
@@ -7204,18 +7191,16 @@ const xt = class extends C {
    * @param tool - BlockTool object
    */
   getPatternsConfig(s) {
-    s.pasteConfig === !1 || !s.pasteConfig.patterns || V(s.pasteConfig.patterns) || Object.entries(s.pasteConfig.patterns).forEach(
-      ([e, t]) => {
-        t instanceof RegExp || O(
-          `Pattern ${t} for «${s.name}» Tool is skipped because it should be a Regexp instance.`,
-          "warn"
-        ), this.toolsPatterns.push({
-          key: e,
-          pattern: t,
-          tool: s
-        });
-      }
-    );
+    s.pasteConfig === !1 || !s.pasteConfig.patterns || V(s.pasteConfig.patterns) || Object.entries(s.pasteConfig.patterns).forEach(([e, t]) => {
+      t instanceof RegExp || O(
+        `Pattern ${t} for «${s.name}» Tool is skipped because it should be a Regexp instance.`,
+        "warn"
+      ), this.toolsPatterns.push({
+        key: e,
+        pattern: t,
+        tool: s
+      });
+    });
   }
   /**
    * Check if browser behavior suits better
@@ -7234,16 +7219,10 @@ const xt = class extends C {
   async processFiles(s) {
     const { BlockManager: e } = this.Editor;
     let t;
-    t = await Promise.all(
-      Array.from(s).map((n) => this.processFile(n))
-    ), t = t.filter((n) => !!n);
+    t = await Promise.all(Array.from(s).map((n) => this.processFile(n))), t = t.filter((n) => !!n);
     const i = e.currentBlock.tool.isDefault && e.currentBlock.isEmpty;
     t.forEach((n, r) => {
-      e.paste(
-        n.type,
-        n.event,
-        r === 0 && i
-      );
+      e.paste(n.type, n.event, r === 0 && i);
     });
   }
   /**
@@ -7253,9 +7232,7 @@ const xt = class extends C {
    */
   async processFile(s) {
     const e = Rt(s), t = Object.entries(this.toolsFiles).find(([n, { mimeTypes: r, extensions: a }]) => {
-      const [l, c] = s.type.split("/"), u = a.find(
-        (f) => f.toLowerCase() === e.toLowerCase()
-      ), h = r.find((f) => {
+      const [l, c] = s.type.split("/"), u = a.find((f) => f.toLowerCase() === e.toLowerCase()), h = r.find((f) => {
         const [m, p] = f.split("/");
         return m === l && (p === c || p === "*");
       });
@@ -7291,17 +7268,10 @@ const xt = class extends C {
       }
       const { tags: l } = r.pasteConfig || {
         tags: []
-      }, c = l.reduce(
-        (f, m) => (this.collectTagNames(m).forEach((v) => {
-          const A = U(m) ? m[v] : null;
-          f[v.toLowerCase()] = A || {};
-        }), f),
-        {}
-      ), u = Object.assign(
-        {},
-        c,
-        r.baseSanitizeConfig
-      );
+      }, c = l.reduce((f, m) => (this.collectTagNames(m).forEach((v) => {
+        const A = z(m) ? m[v] : null;
+        f[v.toLowerCase()] = A || {};
+      }), f), {}), u = Object.assign({}, c, r.baseSanitizeConfig);
       if (n.tagName.toLowerCase() === "table") {
         const f = Z(n.outerHTML, u);
         n = d.make("div", void 0, {
@@ -7356,10 +7326,7 @@ const xt = class extends C {
   async processSingleBlock(s) {
     const { Caret: e, BlockManager: t } = this.Editor, { currentBlock: o } = t;
     if (!o || s.tool !== o.name || !d.containsOnlyInlineElements(s.content.innerHTML)) {
-      this.insertBlock(
-        s,
-        (o == null ? void 0 : o.tool.isDefault) && o.isEmpty
-      );
+      this.insertBlock(s, (o == null ? void 0 : o.tool.isDefault) && o.isEmpty);
       return;
     }
     e.insertContentAtCaretPosition(s.content.innerHTML);
@@ -7461,9 +7428,7 @@ const xt = class extends C {
    * @param {Node} destNode - destination node
    */
   processElementNode(s, e, t) {
-    const o = Object.keys(this.toolsTags), i = s, { tool: n } = this.toolsTags[i.tagName] || {}, r = this.tagsByTool[n == null ? void 0 : n.name] || [], a = o.includes(i.tagName), l = d.blockElements.includes(
-      i.tagName.toLowerCase()
-    ), c = Array.from(i.children).some(
+    const o = Object.keys(this.toolsTags), i = s, { tool: n } = this.toolsTags[i.tagName] || {}, r = this.tagsByTool[n == null ? void 0 : n.name] || [], a = o.includes(i.tagName), l = d.blockElements.includes(i.tagName.toLowerCase()), c = Array.from(i.children).some(
       ({ tagName: h }) => o.includes(h) && !r.includes(h)
     ), u = Array.from(i.children).some(
       ({ tagName: h }) => d.blockElements.includes(h.toLowerCase())
@@ -7491,11 +7456,7 @@ const xt = class extends C {
       let a = new DocumentFragment();
       switch (r && d.isFragment(r) && (a = i.pop()), n.nodeType) {
         case Node.ELEMENT_NODE:
-          if (t = this.processElementNode(
-            n,
-            i,
-            a
-          ), t)
+          if (t = this.processElementNode(n, i, a), t)
             return t;
           break;
         case Node.TEXT_NODE:
@@ -7503,7 +7464,8 @@ const xt = class extends C {
         default:
           return [...i, a];
       }
-      return [...i, ...Array.from(n.childNodes).reduce(o, [])];
+      const l = n;
+      return l.tagName === "FIGURE" && l.querySelector("img") ? [...i, n] : [...i, ...Array.from(n.childNodes).reduce(o, [])];
     };
     return e.reduce(o, []);
   }
@@ -8013,7 +7975,7 @@ class ei extends C {
     }), {
       time: +/* @__PURE__ */ new Date(),
       blocks: t,
-      version: "2.1.56"
+      version: "2.1.58"
     };
   }
 }
@@ -8689,7 +8651,7 @@ class ii extends je {
    * Returns title for Inline Tool if specified by user
    */
   get title() {
-    return this.constructable[Ue.Title];
+    return this.constructable[ze.Title];
   }
   /**
    * Constructs new InlineTool instance from constructable
@@ -8855,7 +8817,7 @@ class Ke extends je {
     for (const i in e)
       if (Object.prototype.hasOwnProperty.call(e, i)) {
         const n = e[i];
-        U(n) ? o[i] = Object.assign({}, t, n) : o[i] = n;
+        z(n) ? o[i] = Object.assign({}, t, n) : o[i] = n;
       }
     return o;
   }
@@ -8904,7 +8866,7 @@ class ai {
    */
   getConstructor(e) {
     switch (!0) {
-      case e[Ue.IsInline]:
+      case e[ze.IsInline]:
         return ii;
       case e[vt.IsTune]:
         return ni;
@@ -9260,7 +9222,7 @@ class St extends C {
   prepareConfig() {
     const e = {};
     for (const t in this.config.tools)
-      U(this.config.tools[t]) ? e[t] = this.config.tools[t] : e[t] = { class: this.config.tools[t] };
+      z(this.config.tools[t]) ? e[t] = this.config.tools[t] : e[t] = { class: this.config.tools[t] };
     return e;
   }
 }
@@ -9629,7 +9591,7 @@ class ui extends C {
     if (d.isAnchor(i) && n) {
       o();
       const u = i.getAttribute("href"), h = Ht(u);
-      Ut(h);
+      zt(h);
       return;
     }
     const r = this.Editor.BlockManager.getBlockByIndex(-1), a = d.offset(r.holder).bottom, l = e.pageY;
@@ -9686,7 +9648,7 @@ const pi = {
   // Toolbar Modules
   BlockSettings: Ro,
   ConversionToolbar: Y,
-  Toolbar: Uo,
+  Toolbar: zo,
   InlineToolbar: jo,
   // Modules
   BlockEvents: Wo,
@@ -9732,7 +9694,7 @@ class fi {
    */
   set configuration(e) {
     var o, i;
-    U(e) ? this.config = {
+    z(e) ? this.config = {
       ...e
     } : this.config = {
       holder: e
@@ -9768,7 +9730,7 @@ class fi {
       throw Error("«holderId» and «holder» param can't assign at the same time.");
     if (J(t) && !d.get(t))
       throw Error(`element with ID «${t}» is missing. Pass correct holder's ID.`);
-    if (t && U(t) && !d.isElement(t))
+    if (t && z(t) && !d.isElement(t))
       throw Error("«holder» value must be an Element node");
   }
   /**
@@ -9861,7 +9823,7 @@ class fi {
 class gi {
   /** Editor version */
   static get version() {
-    return "2.1.56";
+    return "2.1.58";
   }
   /**
    * @param {EditorConfig|string|undefined} [configuration] - user configuration
@@ -9869,7 +9831,7 @@ class gi {
   constructor(e) {
     let t = () => {
     };
-    U(e) && D(e.onReady) && (t = e.onReady);
+    z(e) && D(e.onReady) && (t = e.onReady);
     const o = new fi(e);
     this.isReady = o.isReady.then(() => {
       this.exportAPI(o), t();
