@@ -33,7 +33,8 @@ export default class Dom {
         "IFRAME",
         "COINGECKO-COIN-TICKER-WIDGET",
         "COINGECKO-COIN-COMPARE-CHART-WIDGET",
-        "OEMBED"
+        "COINGECKO-COIN-PRICE-CHART-WIDGET",
+        "OEMBED",
       ].includes(tag.tagName)
     );
   }
