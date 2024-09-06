@@ -168,6 +168,7 @@ export default class Paste extends Module {
     dataTransfer: DataTransfer,
     isDragNDrop = false
   ): Promise<void> {
+
     const { Tools } = this.Editor;
     const types = dataTransfer.types;
 
@@ -1071,12 +1072,12 @@ export default class Paste extends Module {
         destNode = nodes.pop();
       }
 
-      const nodeElement = node as HTMLElement;
+      // const nodeElement = node as HTMLElement;
 
-      if (nodeElement.tagName === "P" && nodeElement.querySelector("img")) {
-        const newNode = nodeElement.querySelector("img");
-        return [...nodes, newNode];
-      }
+      // if (nodeElement.tagName === "P" && nodeElement.querySelector("img") && !nodeElement?.innerText) {
+      //   const newNode = nodeElement.querySelector("img");
+      //   return [...nodes, newNode];
+      // }
 
       switch (node.nodeType) {
         /**
@@ -1108,22 +1109,22 @@ export default class Paste extends Module {
           return [...nodes, destNode];
       }
 
-      if (
-        nodeElement.tagName === "FIGURE" &&
-        nodeElement.querySelector("img")
-      ) {
-        // const imageNode = nodeElement.querySelector("img");
-        // const captionNode = nodeElement.querySelector("figcaption");
+      // if (
+      //   nodeElement.tagName === "FIGURE" &&
+      //   nodeElement.querySelector("img")
+      // ) {
+      //   // const imageNode = nodeElement.querySelector("img");
+      //   // const captionNode = nodeElement.querySelector("figcaption");
 
-        // const newNode = document.createElement("figure");
-        // newNode.appendChild(imageNode);
+      //   // const newNode = document.createElement("figure");
+      //   // newNode.appendChild(imageNode);
 
-        // if (captionNode) {
-        //   newNode.appendChild(captionNode);
-        // }
+      //   // if (captionNode) {
+      //   //   newNode.appendChild(captionNode);
+      //   // }
 
-        return [...nodes, node];
-      }
+      //   return [...nodes, node];
+      // }
 
       return [...nodes, ...Array.from(node.childNodes).reduce(reducer, [])];
     };

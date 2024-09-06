@@ -400,7 +400,7 @@ export default class BlockManager extends Module {
     blockType = ""
   ): Block {
     const newBlockType =
-      this.blocks?.[index - 1]?.name === "list"
+      this.blocks?.[index]?.name === "list"
         ? "list"
         : this.config.defaultBlock;
     const block = this.composeBlock({ tool: blockType || newBlockType });

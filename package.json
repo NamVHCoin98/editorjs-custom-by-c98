@@ -1,6 +1,6 @@
 {
   "name": "@namtoonix/editorjs-custom-multiple-selected",
-  "version": "2.2.14",
+  "version": "2.2.22",
   "description": "Editor.js — Native JS, based on API and Open Source",
   "main": "dist/editorjs.umd.js",
   "module": "dist/editorjs.mjs",
@@ -63,6 +63,7 @@
     "postcss-nested": "4.1.2",
     "postcss-preset-env": "^8.3.0",
     "rollup-plugin-license": "^3.0.1",
+    "sass": "^1.77.8",
     "stylelint": "^15.4.0",
     "tslint": "^6.1.1",
     "typescript": "5.0.3",
