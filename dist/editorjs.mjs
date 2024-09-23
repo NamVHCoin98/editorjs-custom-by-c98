@@ -84,7 +84,7 @@ function ge(r, e, t = "log", o, i = "color: inherit") {
       break;
   }
   o && n.push(o);
-  const a = "Editor.js 2.2.21", l = `line-height: 1em;
+  const a = "Editor.js 2.2.27", l = `line-height: 1em;
             color: #006FEA;
             display: inline-block;
             font-size: 11px;
@@ -5415,14 +5415,18 @@ class Zo extends y {
     let s = this.Editor.BlockManager.currentBlock;
     if (this.Editor.Caret.isAtStart && !this.Editor.BlockManager.currentBlock.hasMedia)
       this.Editor.BlockManager.currentBlock.name === "list" ? s = this.Editor.BlockManager.insertDefaultBlockAtIndex(
-        this.Editor.BlockManager.currentBlockIndex + 1,
+        this.Editor.BlockManager.currentBlockIndex,
         !1,
         this.config.defaultBlock
       ) : this.Editor.BlockManager.insertDefaultBlockAtIndex(
         this.Editor.BlockManager.currentBlockIndex
       );
     else if (this.Editor.Caret.isAtEnd)
-      s = this.Editor.BlockManager.insertDefaultBlockAtIndex(
+      this.Editor.BlockManager.currentBlock.name === "list" ? s = this.Editor.BlockManager.insertDefaultBlockAtIndex(
+        this.Editor.BlockManager.currentBlockIndex + 1,
+        !1,
+        "list"
+      ) : s = this.Editor.BlockManager.insertDefaultBlockAtIndex(
         this.Editor.BlockManager.currentBlockIndex + 1
       );
     else {
@@ -5952,8 +5956,8 @@ class Jo extends y {
    * @returns {Block} inserted Block
    */
   insertDefaultBlockAtIndex(e, t = !1, o = "") {
-    var n, a;
-    const i = ((a = (n = this.blocks) == null ? void 0 : n[e]) == null ? void 0 : a.name) === "list" ? "list" : this.config.defaultBlock, s = this.composeBlock({ tool: o || i });
+    var n, a, l, c;
+    const i = ((a = (n = this.blocks) == null ? void 0 : n[e - 1]) == null ? void 0 : a.name) === "list" && !((c = (l = this.blocks) == null ? void 0 : l[e]) != null && c.isEmpty) ? "list" : this.config.defaultBlock, s = this.composeBlock({ tool: o || i });
     return this._blocks[e] = s, this.blockDidMutated(Ve, s, {
       index: e
     }), t ? this.currentBlockIndex = e : e <= this.currentBlockIndex && this.currentBlockIndex++, s;
@@ -7992,7 +7996,7 @@ class ri extends y {
     }), {
       time: +/* @__PURE__ */ new Date(),
       blocks: t,
-      version: "2.2.21"
+      version: "2.2.27"
     };
   }
 }
@@ -9721,7 +9725,7 @@ class vi {
 class wi {
   /** Editor version */
   static get version() {
-    return "2.2.21";
+    return "2.2.27";
   }
   /**
    * @param {EditorConfig|string|undefined} [configuration] - user configuration

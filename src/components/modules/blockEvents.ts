@@ -355,7 +355,7 @@ export default class BlockEvents extends Module {
     ) {
       if (this.Editor.BlockManager.currentBlock.name === "list") {
         newCurrent = this.Editor.BlockManager.insertDefaultBlockAtIndex(
-          this.Editor.BlockManager.currentBlockIndex + 1,
+          this.Editor.BlockManager.currentBlockIndex,
           false,
           this.config.defaultBlock
         );
@@ -370,9 +370,17 @@ export default class BlockEvents extends Module {
        * to prevent unnecessary dom mutation observing
        */
     } else if (this.Editor.Caret.isAtEnd) {
-      newCurrent = this.Editor.BlockManager.insertDefaultBlockAtIndex(
-        this.Editor.BlockManager.currentBlockIndex + 1
-      );
+      if (this.Editor.BlockManager.currentBlock.name === "list") {
+        newCurrent = this.Editor.BlockManager.insertDefaultBlockAtIndex(
+          this.Editor.BlockManager.currentBlockIndex + 1,
+          false,
+          "list"
+        );
+      } else {
+        newCurrent = this.Editor.BlockManager.insertDefaultBlockAtIndex(
+          this.Editor.BlockManager.currentBlockIndex + 1
+        );
+      }
     } else {
       /**
        * Split the Current Block into two blocks
