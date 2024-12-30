@@ -104,4 +104,9 @@ export interface EditorConfig {
    * Common Block Tunes list. Will be added to all the blocks which do not specify their own 'tunes' set
    */
   tunes?: string[];
+
+  /**
+   * Config block name has input in block
+   */
+  blockAcceptInput?: string[];
 }

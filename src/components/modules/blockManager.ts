@@ -400,7 +400,8 @@ export default class BlockManager extends Module {
     blockType = ""
   ): Block {
     const newBlockType =
-      this.blocks?.[index - 1]?.name === "list" && !this.blocks?.[index]?.isEmpty
+      this.blocks?.[index - 1]?.name === "list" &&
+      !this.blocks?.[index]?.isEmpty
         ? "list"
         : this.config.defaultBlock;
 

@@ -5,6 +5,19 @@ import BlockAPI from "../../block/api";
 import Module from "../../__module";
 import Block from "../../block";
 
+const DEFAULT_BLOCK_ACCEPT_INPUT = [
+  "paragraph",
+  "header",
+  "header02",
+  "header03",
+  "list",
+  "quotation",
+  "image",
+  "video",
+  "gallery",
+  "embed",
+];
+
 /**
  * @class BlocksAPI
  * provides with methods working with Block
@@ -179,8 +192,19 @@ export default class BlocksAPI extends Module {
      * After Block deletion currentBlock is updated
      */
     if (this.Editor.BlockManager.currentBlock) {
+      const validateBlock =
+        this.config?.blockAcceptInput || DEFAULT_BLOCK_ACCEPT_INPUT;
+      let cursorToBlock = this.Editor.BlockManager.currentBlock;
+
+      if (!validateBlock.includes(cursorToBlock.name)) {
+        const previousTextBlock = this.Editor.BlockManager.blocks
+          .slice(0, this.Editor.BlockManager.currentBlockIndex)
+          ?.filter((block) => validateBlock.includes(block.name));
+        cursorToBlock = previousTextBlock[previousTextBlock.length - 1];
+      }
+
       this.Editor.Caret.setToBlock(
-        this.Editor.BlockManager.currentBlock,
+        this.Editor.BlockManager.getBlockById(cursorToBlock.id),
         this.Editor.Caret.positions.END
       );
     }
