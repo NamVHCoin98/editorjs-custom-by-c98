@@ -192,19 +192,20 @@ export default class BlocksAPI extends Module {
      * After Block deletion currentBlock is updated
      */
     if (this.Editor.BlockManager.currentBlock) {
-      const validateBlock =
-        this.config?.blockAcceptInput || DEFAULT_BLOCK_ACCEPT_INPUT;
-      let cursorToBlock = this.Editor.BlockManager.currentBlock;
+      // const validateBlock =
+      //   this.config?.blockAcceptInput || DEFAULT_BLOCK_ACCEPT_INPUT;
+      // let cursorToBlock = this.Editor.BlockManager.currentBlock;
 
-      if (!validateBlock.includes(cursorToBlock.name)) {
-        const previousTextBlock = this.Editor.BlockManager.blocks
-          .slice(0, this.Editor.BlockManager.currentBlockIndex)
-          ?.filter((block) => validateBlock.includes(block.name));
-        cursorToBlock = previousTextBlock[previousTextBlock.length - 1];
-      }
+      // if (!validateBlock.includes(cursorToBlock.name)) {
+      //   const previousTextBlock = this.Editor.BlockManager.blocks
+      //     .slice(0, this.Editor.BlockManager.currentBlockIndex)
+      //     ?.filter((block) => validateBlock.includes(block.name));
+      //   cursorToBlock = previousTextBlock[previousTextBlock.length - 1];
+      // }
 
       this.Editor.Caret.setToBlock(
-        this.Editor.BlockManager.getBlockById(cursorToBlock.id),
+        // this.Editor.BlockManager.getBlockById(cursorToBlock.id),
+        this.Editor.BlockManager.currentBlock,
         this.Editor.Caret.positions.END
       );
     }
